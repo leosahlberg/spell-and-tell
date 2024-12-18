@@ -6,7 +6,7 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Button from "../../components/buttons/Button";
 
 const RegistrationPage = () => {
@@ -19,13 +19,13 @@ const RegistrationPage = () => {
 
   return (
     <div className={styles.registration}>
-      <Paper elevation={24} sx={{ padding: 8, maxWidth: 800, width: "100%" }}>
+      <Paper elevation={24} sx={{ padding: 6, maxWidth: 800, maxHeight: "100vh", marginBottom: 20,  border: "2px solid rgb(158, 186, 158)", }}>
         <Typography variant="h4" gutterBottom>
           Skapa ett användarkonto
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
-            sx={{ marginBottom: 4, marginTop: 2 }}
+            sx={{ marginBottom: 4, marginTop: 4 }}
             label="Användarnamn"
             fullWidth
             required
@@ -43,10 +43,18 @@ const RegistrationPage = () => {
             fullWidth
             required
           />
+             <TextField
+            sx={{ marginBottom: 4 }}
+            label="Bekräfta Lösenord"
+            type="password"
+            fullWidth
+            required
+          />
           <FormControlLabel
             control={<Checkbox />}
-            label="Jag accepterar villkoren"
+            label="Jag accepterar villkoren och regler"
           />
+          <p>(läs <Link to="/home"> villkor och regler</Link>)</p>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
               text="Skapa"
