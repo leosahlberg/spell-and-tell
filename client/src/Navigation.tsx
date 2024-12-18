@@ -6,10 +6,12 @@ import RegistrationPage from "./pages/registration/RegistrationPage";
 import CreateStoryPage from "./pages/createStory/CreateStoryPage";
 import ContributeToStoryPage from "./pages/contributeToStory/ContributeToStoryPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import Header from "./components/header/Header";
 
 const Navigation = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/home" element={<HomePage />} />
