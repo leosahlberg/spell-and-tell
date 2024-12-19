@@ -7,11 +7,13 @@ import CreateStoryPage from "./pages/createStory/CreateStoryPage";
 import ContributeToStoryPage from "./pages/contributeToStory/ContributeToStoryPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import Header from "./components/header/Header";
+import NavBar from "./components/navbar/NavBar";
 
 const Navigation = () => {
   return (
     <BrowserRouter>
       <Header />
+      <NavBar/>
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/home" element={<HomePage />} />
