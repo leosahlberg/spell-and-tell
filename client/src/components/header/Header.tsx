@@ -62,7 +62,7 @@ const Header = () => {
         <h1>Spell & Tell</h1>
         <p>Skapa kreativa berättelser tillsammans</p>
       </div>
-      <MenuIcon sx={{ fontSize: "40px" }} onClick={toggleDrawer(true)} />
+      <MenuIcon sx={{ fontSize: "40px", marginLeft: 20, marginRight: 5 }} onClick={toggleDrawer(true)} />
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
