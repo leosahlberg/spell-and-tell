@@ -1,5 +1,3 @@
-
-
 import { BrowserRouter, Routes, Route } from "react-router";
 import StartPage from "./pages/start/StartPage";
 import HomePage from "./pages/home/HomePage";
@@ -11,12 +9,13 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import Header from "./components/header/Header";
 import NavBar from "./components/navbar/NavBar";
 import TermsPage from "./pages/terms/TermsPage";
+import PublicStorysPage from "./pages/publicStorys/PublicStorysPage";
 
 const Navigation = () => {
   return (
     <BrowserRouter>
       <Header />
-      <NavBar/>
+      <NavBar />
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/home" element={<HomePage />} />
@@ -26,6 +25,7 @@ const Navigation = () => {
         <Route path="/contribute" element={<ContributeToStoryPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/terms" element={<TermsPage />} />
+        <Route path="/storys" element={<PublicStorysPage />} />
       </Routes>
     </BrowserRouter>
   );
