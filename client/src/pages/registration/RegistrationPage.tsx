@@ -1,3 +1,5 @@
+
+
 import styles from "./registrationPage.module.scss";
 import {
   TextField,
@@ -52,9 +54,9 @@ const RegistrationPage = () => {
           />
           <FormControlLabel
             control={<Checkbox />}
-            label="Jag accepterar villkoren och regler"
+            label="Jag accepterar villkor och regler"
           />
-          <p>(läs <Link to="/home"> villkor och regler</Link>)</p>
+          <p>(läs <Link to="/terms"> villkor och regler</Link>)</p>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
               text="Skapa"

@@ -1,3 +1,5 @@
+
+
 import { BrowserRouter, Routes, Route } from "react-router";
 import StartPage from "./pages/start/StartPage";
 import HomePage from "./pages/home/HomePage";
@@ -8,6 +10,7 @@ import ContributeToStoryPage from "./pages/contributeToStory/ContributeToStoryPa
 import ProfilePage from "./pages/profile/ProfilePage";
 import Header from "./components/header/Header";
 import NavBar from "./components/navbar/NavBar";
+import TermsPage from "./pages/terms/TermsPage";
 
 const Navigation = () => {
   return (
@@ -22,6 +25,7 @@ const Navigation = () => {
         <Route path="/createstory" element={<CreateStoryPage />} />
         <Route path="/contribute" element={<ContributeToStoryPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/terms" element={<TermsPage />} />
       </Routes>
     </BrowserRouter>
   );
