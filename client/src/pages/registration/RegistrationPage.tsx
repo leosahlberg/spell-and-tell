@@ -21,7 +21,7 @@ const RegistrationPage = () => {
 
   return (
     <div className={styles.registration}>
-      <Paper elevation={24} sx={{ padding: 6, maxWidth: 800, maxHeight: "100vh", marginBottom: 20,  border: "2px solid rgb(158, 186, 158)", }}>
+      <Paper elevation={24} sx={{ padding: 4, maxWidth: 800, maxHeight: "100vh", marginBottom: 20,  border: "2px solid rgb(158, 186, 158)", }}>
         <Typography variant="h4" gutterBottom>
           Skapa ett användarkonto
         </Typography>

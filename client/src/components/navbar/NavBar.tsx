@@ -3,8 +3,26 @@ import styles from "./navbar.module.scss";
 import profileImage from "../../assets/profile.jpg";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setIsScrolled(false);
+      } else {
+        setIsScrolled(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const navList = [
     {
       title: "Elsa",
@@ -30,12 +48,12 @@ const NavBar = () => {
   ];
 
   return (
-    <div className={styles.navbar}>
+    <div className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
       <div className={styles.center}>
         {navList.map((l, index) => (
           <Link className={styles.links} key={index} to={l.path}>
-            <p >{l.img}</p>
-            <p className={styles.icon}>{l.icon}</p>
+            <p>{l.img}</p>
+            <p className={`${styles.icon}`}>{l.icon}</p>
             <p>{l.title}</p>
           </Link>
         ))}
