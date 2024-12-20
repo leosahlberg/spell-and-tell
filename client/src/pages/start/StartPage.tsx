@@ -8,7 +8,7 @@ const StartPage = () => {
   return (
     <div className={style.container}>
       <Typography variant="h1" gutterBottom>
-        Välkommen
+        Välkommen till
       </Typography>
       <img src={imglogo} alt="logo" />
       <button className={style.button} onClick={() => navigate("/login")}>
