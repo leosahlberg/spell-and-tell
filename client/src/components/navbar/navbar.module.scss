@@ -5,7 +5,14 @@
   background-color: #f4f4f4;
   height: 65px;
   border-bottom: 1px solid #ccc;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  transition: background-color 5.5s ease;
 
+  &.scrolled {
+    background-color:   #ccc;
+  }
   .img {
     border-radius: 100%;
     border: 2px solid rgb(7, 7, 58);
@@ -25,7 +32,7 @@
       padding-right: 50px;
       padding-left: 50px;
       text-decoration: none;
-      color: black;
+      color: rgb(7, 7, 58);
       font-size: 22px;
 
       .icon {
