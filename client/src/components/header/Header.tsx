@@ -14,6 +14,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import InfoIcon from "@mui/icons-material/Info";
 import { useNavigate } from "react-router";
 
 const Header = () => {
@@ -29,6 +31,8 @@ const Header = () => {
     { title: "Hem", icon: <HomeIcon />, path: "/home" },
     { title: "Profil", icon: <AccountCircleIcon />, path: "/profile" },
     { title: "Skapa ny story", icon: <AddCircleIcon />, path: "/createstory" },
+    { title: "Alla berättelser", icon: <LibraryBooksIcon />, path: "/storys" },
+    { title: "Regler och villkor", icon: <InfoIcon />, path: "/terms" },
   ];
 
   const DrawerList = (
@@ -62,7 +66,10 @@ const Header = () => {
         <h1>Spell & Tell</h1>
         <p>Skapa kreativa berättelser tillsammans</p>
       </div>
-      <MenuIcon sx={{ fontSize: "40px", marginLeft: 20, marginRight: 5 }} onClick={toggleDrawer(true)} />
+      <MenuIcon
+        sx={{ fontSize: "40px", marginLeft: 20, marginRight: 5 }}
+        onClick={toggleDrawer(true)}
+      />
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
