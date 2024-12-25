@@ -1,0 +1,15 @@
+.list{
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  color: #FFFFFF;
+}
+
+.list:hover{
+    background-color: rgb(189, 134, 67);
+    // background-color:  rgb(179, 98, 27);
+    cursor: pointer;
+    color: white;
+    
+
+}
