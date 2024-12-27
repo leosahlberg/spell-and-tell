@@ -1,12 +1,4 @@
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  TextField,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, List, ListItem, TextField, Typography } from "@mui/material";
 import SixtyFpsSelectIcon from "@mui/icons-material/SixtyFpsSelect";
 import HourglassTopTwoToneIcon from "@mui/icons-material/HourglassTopTwoTone";
 import PeopleTwoToneIcon from "@mui/icons-material/PeopleTwoTone";
@@ -14,27 +6,42 @@ import ScoreboardTwoToneIcon from "@mui/icons-material/ScoreboardTwoTone";
 import SpellcheckTwoToneIcon from "@mui/icons-material/SpellcheckTwoTone";
 import ContrastTwoToneIcon from "@mui/icons-material/ContrastTwoTone";
 import styles from "./createStoryPage.module.scss";
+import Button from "../../components/buttons/Button";
 
 const choose = [
-  { title: "Antal ord", icon: <SixtyFpsSelectIcon />, path: "/contribute" },
+  {
+    title: "Antal ord",
+    standard: "1000 ord",
+    icon: <SixtyFpsSelectIcon />,
+    path: "/contribute",
+  },
   {
     title: "Max tid",
+    standard: "20 min",
     icon: <HourglassTopTwoToneIcon />,
     path: "/createstory",
   },
-  { title: "Deltagare", icon: <PeopleTwoToneIcon />, path: "/contribute" },
+  {
+    title: "Deltagare",
+    standard: "2 st",
+    icon: <PeopleTwoToneIcon />,
+    path: "/contribute",
+  },
   {
     title: "Poängräkning",
+    standard: "aktiv",
     icon: <ScoreboardTwoToneIcon />,
     path: "/createstory",
   },
   {
     title: "Rättstavning",
+    standard: "aktiv",
     icon: <SpellcheckTwoToneIcon />,
     path: "/contribute",
   },
   {
     title: "Tema",
+    standrad: "ej aktiv",
     icon: <ContrastTwoToneIcon />,
     path: "/createstory",
   },
@@ -45,34 +52,51 @@ const CreateStoryPage = () => {
     <Box sx={{ display: "flex" }}>
       <Box
         sx={{
-          padding: 5,
           width: 250,
           textAlign: "center",
           flexDirection: "column",
-          backgroundColor: "rgb(225, 174, 112)",
+          backgroundColor: "rgb(129, 160, 129)",
           color: "white",
           height: "100vh",
         }}
       >
         <Typography
-          sx={{ paddingBottom: 5, textDecorationLine: "underline" }}
+          sx={{
+            paddingBottom: 3,
+            paddingTop: 3,
+            textDecorationLine: "underline",
+          }}
           variant="h5"
         >
-          Välj tillval
+          Ändra tillval
         </Typography>
         <List>
           {choose.map((text) => (
-            <ListItem className={styles.list} key={text.title}>
-              <ListItemText primary={text.title} sx={{paddingBottom: 1 , paddingTop: 1, fontSize: "1.rem", fontWeight: "bold"}} />
-              <Box component="span" sx={{ marginLeft: "auto", paddingBottom: 1, paddingTop: 1 }}>
-                {text.icon}
+            <ListItem
+              className={styles.list}
+              key={text.title}
+              sx={{ flexDirection: "column", alignItems: "flex-start" }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h5">{text.title}</Typography>
+                <Box component="span">{text.icon}</Box>
               </Box>
+              <Typography sx={{ paddingBottom: 2, fontStyle: "italic" }}>
+                - Standard: {text.standard} -
+              </Typography>
             </ListItem>
           ))}
         </List>
       </Box>
 
-      <Box sx={{ flexGrow: 1, p: 3 }}>
+      <Box sx={{ flexGrow: 1, p: 5 }}>
         <Typography variant="h4" gutterBottom>
           Skriv en berättelse
         </Typography>
@@ -86,10 +110,14 @@ const CreateStoryPage = () => {
             marginBottom: 2,
           }}
         />
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button variant="contained" color="primary">
-            Spara berättelse
-          </Button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            paddingTop: 20,
+          }}
+        >
+          <Button text="Skicka vidare"></Button>
         </div>
       </Box>
     </Box>

@@ -2,14 +2,15 @@
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  color: #FFFFFF;
+  color: white;
+  border-bottom: 1px solid rgb(158, 186, 158);
+  
 }
 
 .list:hover{
-    background-color: rgb(189, 134, 67);
-    // background-color:  rgb(179, 98, 27);
     cursor: pointer;
-    color: white;
-    
+ 
+    border-bottom: 1px solid rgb(232, 159, 70);
+    background-color: rgb(147, 171, 147);;
 
 }
