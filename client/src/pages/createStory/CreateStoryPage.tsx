@@ -8,6 +8,7 @@ import ContrastTwoToneIcon from "@mui/icons-material/ContrastTwoTone";
 import styles from "./createStoryPage.module.scss";
 import Button from "../../components/buttons/Button";
 import { useEffect, useState } from "react";
+import ButtonTimer from "../../components/buttons/ButtonTimer";
 
 const chooseFromMenu = [
   {
@@ -141,7 +142,7 @@ const CreateStoryPage = () => {
             </Typography>
           ) : (
              <Typography >
-              <Typography variant="h4" sx={{paddingBottom: 3}}>Skriv en berättelse </Typography><Button customStyle={{backgroundColor: "rgb(258, 195, 121)"}} text="Starta tiden" onClick={() => setStarted(true)} />
+              <Typography variant="h4" sx={{paddingBottom: 3}}>Skriv en berättelse </Typography><ButtonTimer text="Starta tiden" onClick={() => setStarted(true)} />
              </Typography>
           )}
         </Typography>
