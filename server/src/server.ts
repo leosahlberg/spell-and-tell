@@ -28,7 +28,10 @@ app.post("/login", async (req: Request, res: Response) => {
     if (user && (await matchEncryptPassword(password, user.password))) {
       const token = generateToken(user);
       res.status(200);
-      res.json(token);
+      res.send({
+        token: token,
+        user: { username: user.username, name: user.name, email: user.email },
+      });
     } else {
       res.sendStatus(400);
     }
