@@ -37,9 +37,9 @@ const NavBar = () => {
       ),
       path: "profile",
     },
-    { title: "Medverka i berättelse", 
+    { title: "Utforska berättelser", 
         icon: <AutoStoriesOutlinedIcon/>,
-        path: "/contribute" },
+        path: "/storys" },
     {
       title: "Skapa ny berättelse",
       icon: <AddCircleOutlineIcon/>,
