@@ -28,9 +28,9 @@ const Navigation = () => {
 
   return (
     <>
-      {!isStartPage && <Header loggedIn={loggedInUser != null} />}
       {loggedInUser != null ? (
         <>
+          <Header loggedIn={loggedInUser != null} />
           <NavBar />
           <Routes>
             <Route index element={<HomePage />} />
@@ -42,12 +42,15 @@ const Navigation = () => {
           </Routes>
         </>
       ) : (
-        <Routes>
-          <Route index element={<StartPage />} />
-          <Route path="/login" element={<LogInPage />} />
-          <Route path="/registration" element={<RegistrationPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-        </Routes>
+        <>
+          {!isStartPage && <Header loggedIn={loggedInUser != null} />}
+          <Routes>
+            <Route index element={<StartPage />} />
+            <Route path="/login" element={<LogInPage />} />
+            <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+          </Routes>
+        </>
       )}
     </>
   );

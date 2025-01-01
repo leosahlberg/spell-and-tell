@@ -17,6 +17,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import InfoIcon from "@mui/icons-material/Info";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { logout } from "../../redux/authSlice";
 
 type HeaderProps = {
   loggedIn: boolean;
@@ -30,6 +33,7 @@ const Header = (props: HeaderProps) => {
   };
 
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const NavList = [
     { title: "Hem", icon: <HomeIcon />, path: "/" },
@@ -53,7 +57,12 @@ const Header = (props: HeaderProps) => {
       </List>
       <Divider />
       <ListItem disablePadding>
-        <ListItemButton>
+        <ListItemButton
+          onClick={() => {
+            dispatch(logout());
+            navigate("/");
+          }}
+        >
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
