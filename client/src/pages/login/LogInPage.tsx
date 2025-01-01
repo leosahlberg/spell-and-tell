@@ -1,8 +1,10 @@
 import { Paper, TextField, Typography } from "@mui/material";
 import style from "./logInPage.module.scss";
 import Button from "../../components/buttons/Button";
+import { useNavigate } from "react-router";
 
 const LogInPage = () => {
+  const navigate = useNavigate();
   return (
     <div className={style.container}>
       <Paper
@@ -11,7 +13,7 @@ const LogInPage = () => {
           padding: 6,
           maxWidth: 800,
           maxHeight: "100vh",
-          marginBottom: 20,
+          marginBottom: 2,
           border: "2px solid rgb(158, 186, 158)",
         }}
       >
@@ -39,6 +41,12 @@ const LogInPage = () => {
           </div>
         </form>
       </Paper>
+      <Typography variant="h6" gutterBottom>
+        Har du inget konto? Registrera dig{" "}
+        <span className={style.link} onClick={() => navigate("/registration")}>
+          här
+        </span>
+      </Typography>
     </div>
   );
 };

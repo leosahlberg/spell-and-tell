@@ -18,7 +18,11 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import InfoIcon from "@mui/icons-material/Info";
 import { useNavigate } from "react-router";
 
-const Header = () => {
+type HeaderProps = {
+  loggedIn: boolean;
+};
+
+const Header = (props: HeaderProps) => {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -28,7 +32,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const NavList = [
-    { title: "Hem", icon: <HomeIcon />, path: "/home" },
+    { title: "Hem", icon: <HomeIcon />, path: "/" },
     { title: "Profil", icon: <AccountCircleIcon />, path: "/profile" },
     { title: "Skapa ny story", icon: <AddCircleIcon />, path: "/createstory" },
     { title: "Alla berättelser", icon: <LibraryBooksIcon />, path: "/storys" },
@@ -62,17 +66,25 @@ const Header = () => {
   return (
     <header>
       <img src={logo} alt="logo" />
-      <div className={style.title}>
+      <div className={style.title} onClick={() => navigate("/")}>
         <h1>Spell & Tell</h1>
         <p>Skapa kreativa berättelser tillsammans</p>
       </div>
-      <MenuIcon
-        sx={{ fontSize: "40px", marginLeft: 20, marginRight: 5 }}
-        onClick={toggleDrawer(true)}
-      />
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
+      {props.loggedIn ? (
+        <>
+          <MenuIcon
+            sx={{ fontSize: "40px", marginLeft: 20, marginRight: 5 }}
+            onClick={toggleDrawer(true)}
+          />
+          <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
+        </>
+      ) : (
+        <button className={style.button} onClick={() => navigate("/login")}>
+          <h3>Logga in</h3>
+        </button>
+      )}
     </header>
   );
 };
