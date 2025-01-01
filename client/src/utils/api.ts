@@ -6,13 +6,25 @@ export async function logIn(username: string, password: string) {
       },
       method: "POST",
       body: JSON.stringify({
-        username: username,
-        password: password,
+        username,
+        password,
       }),
     });
-    const data = await res.json();
-    return data;
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.log(errorData);
+      throw new Error(errorData.message || "Login failed");
+    }
+
+    return res;
   } catch (error) {
-    console.log("An error accurd while login, " + error);
+    if (error instanceof Error) {
+      throw new Error(
+        error.message || "Failed to connect to the server. Please try again."
+      );
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
   }
 }

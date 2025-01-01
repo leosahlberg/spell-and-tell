@@ -14,8 +14,14 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use("*", async (req, res, next) => {
-  await connectToDb();
-  next();
+  try {
+    await connectToDb();
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Error: connection to database failed." });
+    res.end();
+  }
 });
 
 app.post("/login", async (req: Request, res: Response) => {
@@ -33,10 +39,12 @@ app.post("/login", async (req: Request, res: Response) => {
         user: { username: user.username, name: user.name, email: user.email },
       });
     } else {
-      res.sendStatus(400);
+      res.status(400).send({ message: "Error: Invalid username or password." });
     }
   } catch (error) {
     console.log(error);
+    res.status(500).send({ message: "Error: Server failed to respond." });
+    res.end();
   }
 });
 
