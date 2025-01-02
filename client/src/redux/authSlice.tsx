@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../utils/types";
-import { logIn } from "../utils/api";
+import { logIn, registerUser } from "../utils/api";
 
 type InitialStateType = {
   user: User | null;
@@ -21,16 +21,27 @@ type LogInData = {
   password: string;
 };
 
+type RegistrationData = {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+};
+
+type RegistrationRespons = {
+  message: string;
+};
+
 type LogInResponse = {
   user: User;
   token: string;
 };
 
-export const getUserToken = createAsyncThunk<
+export const fetchLogin = createAsyncThunk<
   LogInResponse,
   LogInData,
   { rejectValue: string }
->("token/getUserToken", async ({ username, password }, { rejectWithValue }) => {
+>("user/fetchLogin", async ({ username, password }, { rejectWithValue }) => {
   try {
     const response = await logIn(username, password);
     return (await response.json()) as LogInResponse;
@@ -40,6 +51,24 @@ export const getUserToken = createAsyncThunk<
     return rejectWithValue(errorMessage);
   }
 });
+
+export const fetchRegistrateUser = createAsyncThunk<
+  RegistrationRespons,
+  RegistrationData,
+  { rejectValue: string }
+>(
+  "user/fetchRegistrateUser",
+  async ({ name, username, email, password }, { rejectWithValue }) => {
+    try {
+      const response = await registerUser(name, username, email, password);
+      return (await response.json()) as RegistrationRespons;
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -53,14 +82,22 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(
-      getUserToken.fulfilled,
+      fetchLogin.fulfilled,
       (state, action: PayloadAction<LogInResponse>) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.error = null;
       }
     ),
-      builder.addCase(getUserToken.rejected, (state, action) => {
+      builder.addCase(fetchLogin.rejected, (state, action) => {
+        state.error = action.payload || "An unexpected error occurred";
+      });
+
+    builder.addCase(fetchRegistrateUser.fulfilled, (state, action) => {
+      state.registerAccepted = true;
+      state.error = null;
+    }),
+      builder.addCase(fetchRegistrateUser.rejected, (state, action) => {
         state.error = action.payload || "An unexpected error occurred";
       });
   },

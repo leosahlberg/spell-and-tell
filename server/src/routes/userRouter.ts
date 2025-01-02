@@ -19,7 +19,7 @@ export function userRouter() {
       newUser.save();
       res.status(201).send({ message: "User registered successfully" });
     } catch (error) {
-      res.sendStatus(404);
+      res.status(404).send({ message: "User registration failed." });
       console.log(error);
       res.end();
     }

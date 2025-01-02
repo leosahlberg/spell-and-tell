@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { getUserToken } from "../../redux/authSlice";
+import { fetchLogin } from "../../redux/authSlice";
 
 const LogInPage = () => {
   const [username, setUsername] = useState("");
@@ -39,9 +39,9 @@ const LogInPage = () => {
           onSubmit={async (e) => {
             e.preventDefault();
             const actionresult = await dispatch(
-              getUserToken({ username: username, password: password })
+              fetchLogin({ username: username, password: password })
             );
-            if (getUserToken.fulfilled.match(actionresult)) {
+            if (fetchLogin.fulfilled.match(actionresult)) {
               navigate("/");
             }
           }}
