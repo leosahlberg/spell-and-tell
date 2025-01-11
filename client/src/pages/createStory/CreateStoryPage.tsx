@@ -107,7 +107,15 @@ const CreateStoryPage = () => {
             <ListItem
               className={styles.list}
               key={text.title}
-              sx={{ flexDirection: "column", alignItems: "flex-start" }}
+              sx={{
+                flexDirection: "column",
+                alignItems: "flex-start",
+                cursor: "pointer",
+              }}
+              tabIndex={0} 
+              role="button" 
+              onClick={() => window.location.href = text.path} 
+              
             >
               <Box
                 sx={{
