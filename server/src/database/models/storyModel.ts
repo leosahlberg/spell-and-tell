@@ -1,27 +1,22 @@
 import mongoose from "mongoose";
+import { contributionModel } from "./contributionModel";
 
 const storySchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  rouleSet: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "RouleSet",
+  created: {
+    type: Date,
   },
-  contributions: [
-   {
-    text: {
-      type: String,
-      required: true,
-    },
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    },
-    
-  }]
+  status: {
+    type: String,
+    enum: ["created", "in progress", "completed"],
+    required: true,
+  },
+  score: {
+    type: Number,
+  },
 });
 
 export const storyModel = mongoose.model("Story", storySchema);
