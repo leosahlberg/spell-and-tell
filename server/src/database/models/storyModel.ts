@@ -5,8 +5,21 @@ const storySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  contributors: [{
-    type: String,
+  rouleSet: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "RouleSet",
+  },
+  contributions: [
+   {
+    text: {
+      type: String,
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
     
   }]
 });
