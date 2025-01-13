@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { contributionModel } from "./contributionModel";
 
 const storySchema = new mongoose.Schema({
   title: {
@@ -16,6 +15,10 @@ const storySchema = new mongoose.Schema({
   },
   score: {
     type: Number,
+  },
+  rouleSetId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "RouleSet",
   },
 });
 

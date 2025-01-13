@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const rouleSetSchema = new mongoose.Schema({
-  storyId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Story",
-  },
   maxNumberOfWordsPerContribution: {
     type: String,
   },
