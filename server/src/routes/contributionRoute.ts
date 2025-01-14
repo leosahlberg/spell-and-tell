@@ -20,7 +20,8 @@ export function contributionRouter() {
 
   router.post("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const data = await contributionModel.create({ ...req.body });
+      const {storyId, text, userId, numberOfWords, created} = req.body;
+      const data = await contributionModel.create({ storyId: storyId, text: text, userId: userId, numberOfWords: numberOfWords, created: created });
       res.status(200).send(data);
     } catch (error) {
       res.status(404).send({ message: "Error: Failed to create story." });

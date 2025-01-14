@@ -14,7 +14,7 @@ const contributionSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  words: {
+  numberOfWords: {
     type: Number,
     required: true,
   },

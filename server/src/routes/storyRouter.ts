@@ -43,8 +43,11 @@ export function storyRouter() {
 
   router.post("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const {title, created, userId} = req.body;
-      const rouleSetData = await rouleSetModel.create({maxNumberOfWordsPerContribution: 1000, numberOfContributors: 5, spellChecking: false, scoring: false, type: "default"})
+      const {title, created, userId, rouleSetId} = req.body;
+      if(!rouleSetId){
+        
+      }
+      const rouleSetData = rouleSetId ? await rouleSetModel.findOne({type: "default"}): rouleSetId;
       if(rouleSetData){
         const data = await storyModel.create({ title: title, status: "created", created: created, userId: userId, rouleSetId: rouleSetData._id });
       res.status(200).send(data);
