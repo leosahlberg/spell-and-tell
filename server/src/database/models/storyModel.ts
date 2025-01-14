@@ -19,7 +19,13 @@ const storySchema = new mongoose.Schema({
   rouleSetId: {
     type: mongoose.Schema.ObjectId,
     ref: "RouleSet",
+    required: true,
   },
+  userId:{
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true
+  }
 });
 
 export const storyModel = mongoose.model("Story", storySchema);
