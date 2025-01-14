@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const rouleSetSchema = new mongoose.Schema({
   maxNumberOfWordsPerContribution: {
-    type: String,
+    type: Number,
   },
   numberOfContributors: {
     type: Number,
@@ -13,6 +13,10 @@ const rouleSetSchema = new mongoose.Schema({
   spellChecking: {
     type: Boolean,
   },
+  type: {
+    type: String,
+    enum: ["default", "custom"]
+  }
 });
 
 export const rouleSetModel = mongoose.model("RouleSet", rouleSetSchema);
