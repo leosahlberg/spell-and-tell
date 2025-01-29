@@ -20,11 +20,20 @@ export function contributionRouter() {
 
   router.post("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const {storyId, text, userId, numberOfWords, created} = req.body;
-      const data = await contributionModel.create({ storyId: storyId, text: text, userId: userId, numberOfWords: numberOfWords, created: created });
+      const { storyId, text, userId, numberOfWords } = req.body;
+      const date = new Date();
+      const data = await contributionModel.create({
+        storyId: storyId,
+        text: text,
+        userId: userId,
+        numberOfWords: numberOfWords,
+        created: date,
+      });
       res.status(200).send(data);
     } catch (error) {
-      res.status(404).send({ message: "Error: Failed to create story." });
+      res
+        .status(404)
+        .send({ message: "Error: Failed to create contribution." });
     }
   });
 
