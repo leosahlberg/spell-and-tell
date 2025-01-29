@@ -32,10 +32,12 @@ export function invitationRouter() {
     authenticateUser(),
     async (req: Request, res: Response) => {
       try {
-        const data = await invitationModel.findByIdAndUpdate({
-          _id: req.params.id,
-          ...req.body,
-        });
+        const { status } = req.body;
+        const data = await invitationModel.findByIdAndUpdate(
+          req.params.id,
+          { $set: { status: status } },
+          { new: true }
+        );
         res.status(200).send(data);
       } catch (error) {
         res.status(404).send({ message: "Error: Failed to create story." });
