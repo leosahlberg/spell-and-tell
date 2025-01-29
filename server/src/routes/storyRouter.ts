@@ -29,7 +29,7 @@ export function storyRouter() {
   );
 
   router.get(
-    "user/:id",
+    "/user/:id",
     authenticateUser(),
     async (req: Request, res: Response) => {
       try {
@@ -43,16 +43,17 @@ export function storyRouter() {
 
   router.post("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const {title, created, userId, rouleSetId} = req.body;
-      if(!rouleSetId){
-        
-      }
-      const rouleSetData = rouleSetId ? await rouleSetModel.findOne({type: "default"}): rouleSetId;
-      if(rouleSetData){
-        const data = await storyModel.create({ title: title, status: "created", created: created, userId: userId, rouleSetId: rouleSetData._id });
+      const { title, userId } = req.body;
+      let rouleSetId = "679a4ef2ea87678a17120a49";
+      const date = new Date();
+      const data = await storyModel.create({
+        title: title,
+        status: "created",
+        created: date,
+        userId: userId,
+        rouleSetId: rouleSetId,
+      });
       res.status(200).send(data);
-      }
-      
     } catch (error) {
       res.status(404).send({ message: "Error: Failed to create story." });
     }
@@ -63,11 +64,12 @@ export function storyRouter() {
     authenticateUser(),
     async (req: Request, res: Response) => {
       try {
-        const {status} = req.body;
-        const data = await storyModel.findByIdAndUpdate({
-          _id: req.params.id,
-          status: status,
-        });
+        const { status } = req.body;
+        const data = await storyModel.findByIdAndUpdate(
+          req.params.id, // ID of the document
+          { $set: { status: status } }, // Update object
+          { new: true }
+        );
         res.status(200).send(data);
       } catch (error) {
         res.status(404).send({ message: "Error: Failed to update story." });
