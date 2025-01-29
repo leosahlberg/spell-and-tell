@@ -43,15 +43,15 @@ export function storyRouter() {
 
   router.post("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const { title, userId } = req.body;
-      let rouleSetId = "679a4ef2ea87678a17120a49";
+      const { title, userId, rouleSetId } = req.body;
+      let roulesetid = rouleSetId ? rouleSetId : "679a4ef2ea87678a17120a49";
       const date = new Date();
       const data = await storyModel.create({
         title: title,
         status: "created",
         created: date,
         userId: userId,
-        rouleSetId: rouleSetId,
+        rouleSetId: roulesetid,
       });
       res.status(200).send(data);
     } catch (error) {
@@ -66,8 +66,8 @@ export function storyRouter() {
       try {
         const { status } = req.body;
         const data = await storyModel.findByIdAndUpdate(
-          req.params.id, // ID of the document
-          { $set: { status: status } }, // Update object
+          req.params.id,
+          { $set: { status: status } },
           { new: true }
         );
         res.status(200).send(data);
