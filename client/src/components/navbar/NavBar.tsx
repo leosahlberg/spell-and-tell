@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import styles from "./navbar.module.scss";
 import profileImage from "../../assets/profile.jpg";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import { useEffect, useState } from "react";
 
 const NavBar = () => {
@@ -29,36 +29,40 @@ const NavBar = () => {
       img: (
         <img
           src={profileImage}
-          alt="Profile"
-          width={45}
-          height={45}
+          alt="Profilbild"
+          width={40}
+          height={40}
           className={styles.img}
         />
       ),
       path: "profile",
     },
-    { title: "Utforska berättelser", 
-        icon: <AutoStoriesOutlinedIcon/>,
-        path: "/storys" },
+    {
+      title: "Utforska berättelser",
+      icon: <AutoStoriesOutlinedIcon />,
+      path: "/storys",
+    },
     {
       title: "Skapa ny berättelse",
-      icon: <AddCircleOutlineIcon/>,
+      icon: <AddCircleOutlineIcon />,
       path: "/createstory",
     },
   ];
 
   return (
-    <div className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
-      <div className={styles.center}>
-        {navList.map((l, index) => (
-          <Link className={styles.links} key={index} to={l.path}>
-            <p>{l.img}</p>
-            <p className={`${styles.icon}`}>{l.icon}</p>
-            <p>{l.title}</p>
-          </Link>
+    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
+      <ul className={styles.center}>
+        {navList.map((item, index) => (
+          <li key={index} className={styles.navitem}>
+            <Link className={styles.links} to={item.path}>
+              <p>{item.img}</p>
+              <p className={`${styles.icon}`}>{item.icon}</p>
+              <h1 className={styles.title}>{item.title}</h1>
+            </Link>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </nav>
   );
 };
 
