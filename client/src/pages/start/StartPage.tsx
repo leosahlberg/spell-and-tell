@@ -2,24 +2,37 @@ import style from "./startPage.module.scss";
 import imglogo from "../../assets/logoST2.png";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const StartPage = () => {
   const navigate = useNavigate();
   return (
     <div className={style.container}>
-      <Typography variant="h1" gutterBottom>
-        Välkommen till
-      </Typography>
-      <img src={imglogo} alt="logo" />
+      <header>
+        <Typography className={style.header} variant="h1" gutterBottom>
+          Välkommen till
+        </Typography>
+      </header>
+      <img
+        src={imglogo}
+        alt="Spell and Tell logotyp med en penna som symboliserar kreativt skrivande"
+        width={400}
+        height={250}
+      />
       <button className={style.button} onClick={() => navigate("/login")}>
-        <h1>Logga in</h1>
+        <Typography className={style.btntext} variant="h2">Logga in</Typography>
       </button>
-      <Typography variant="h6" gutterBottom>
-        Har du inget konto? Registrera dig{" "}
-        <span className={style.link} onClick={() => navigate("/registration")}>
-          här
-        </span>
-      </Typography>
+      <section>
+        <Typography sx={{fontSize: "2rem"}} variant="h3" gutterBottom>
+          Har du inget konto?
+          <Link
+            className={style.link}
+            to={"/registration"}
+          >
+            Registrera dig här
+          </Link>
+        </Typography>
+      </section>
     </div>
   );
 };
