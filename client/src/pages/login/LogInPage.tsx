@@ -36,8 +36,8 @@ const LogInPage = () => {
         elevation={24}
         sx={{
           padding: 6,
-          maxWidth: 600,
-          maxHeight: 500,
+          maxWidth: 700,
+          maxHeight: 600,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "#FFFEFA",
         }}
