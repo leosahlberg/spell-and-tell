@@ -7,6 +7,9 @@ const rouleSetSchema = new mongoose.Schema({
   numberOfContributors: {
     type: Number,
   },
+  maxTime: {
+    type: Number,
+  },
   scoring: {
     type: Boolean,
   },
@@ -15,8 +18,8 @@ const rouleSetSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ["default", "custom"]
-  }
+    enum: ["default", "custom"],
+  },
 });
 
 export const rouleSetModel = mongoose.model("RouleSet", rouleSetSchema);
