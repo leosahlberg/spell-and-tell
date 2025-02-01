@@ -73,27 +73,38 @@ const Header = (props: HeaderProps) => {
   );
 
   return (
-    <header>
-      <img src={logo} alt="logo" />
-      <div className={style.title} onClick={() => navigate("/")}>
-        <h1>Spell & Tell</h1>
-        <p>Skapa kreativa berättelser tillsammans</p>
+    <header className={style.header}>
+      <div className={style.headerContent}>
+        <img
+          src={logo}
+          alt="Spell and Tell logotyp med en penna som symboliserar kreativt skrivande"
+        />
+        <div className={style.title} onClick={() => navigate("/")}>
+          <h1>Spell & Tell</h1>
+          <p>Skapa kreativa berättelser tillsammans</p>
+        </div>
+        {props.loggedIn ? (
+          <>
+            <MenuIcon
+              sx={{
+                fontSize: "40px",
+                marginLeft: 20,
+                marginRight: 5,
+                cursor: "pointer",
+              }}
+              onClick={toggleDrawer(true)}
+            />
+            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+              {DrawerList}
+            </Drawer>
+          </>
+        ) : (
+          <button className={style.button} onClick={() => navigate("/login")}>
+            <h2>Logga in</h2>
+          </button>
+        )}
       </div>
-      {props.loggedIn ? (
-        <>
-          <MenuIcon
-            sx={{ fontSize: "40px", marginLeft: 20, marginRight: 5 }}
-            onClick={toggleDrawer(true)}
-          />
-          <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-            {DrawerList}
-          </Drawer>
-        </>
-      ) : (
-        <button className={style.button} onClick={() => navigate("/login")}>
-          <h3>Logga in</h3>
-        </button>
-      )}
+      <div className={style.underline}></div>
     </header>
   );
 };

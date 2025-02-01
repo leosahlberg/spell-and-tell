@@ -1,52 +1,22 @@
-import { Box, List, ListItem, TextField, Typography } from "@mui/material";
+import { Box, List, ListItem, Typography, TextField } from "@mui/material";
 import SixtyFpsSelectIcon from "@mui/icons-material/SixtyFpsSelect";
 import HourglassTopTwoToneIcon from "@mui/icons-material/HourglassTopTwoTone";
 import PeopleTwoToneIcon from "@mui/icons-material/PeopleTwoTone";
 import ScoreboardTwoToneIcon from "@mui/icons-material/ScoreboardTwoTone";
 import SpellcheckTwoToneIcon from "@mui/icons-material/SpellcheckTwoTone";
 import ContrastTwoToneIcon from "@mui/icons-material/ContrastTwoTone";
-import styles from "./createStoryPage.module.scss";
 import Button from "../../components/buttons/Button";
-import { useEffect, useState } from "react";
 import ButtonTimer from "../../components/buttons/ButtonTimer";
+import { useState, useEffect } from "react";
+import styles from "./createStoryPage.module.scss"; // Import your custom SCSS
 
 const chooseFromMenu = [
-  {
-    title: "Antal ord",
-    standard: "1000 ord",
-    icon: <SixtyFpsSelectIcon />,
-    path: "/contribute",
-  },
-  {
-    title: "Max tid",
-    standard: "20 min",
-    icon: <HourglassTopTwoToneIcon />,
-    path: "/createstory",
-  },
-  {
-    title: "Deltagare",
-    standard: "2 st",
-    icon: <PeopleTwoToneIcon />,
-    path: "/contribute",
-  },
-  {
-    title: "Poängräkning",
-    standard: "aktiv",
-    icon: <ScoreboardTwoToneIcon />,
-    path: "/createstory",
-  },
-  {
-    title: "Rättstavning",
-    standard: "aktiv",
-    icon: <SpellcheckTwoToneIcon />,
-    path: "/contribute",
-  },
-  {
-    title: "Tema",
-    standrad: "ej aktiv",
-    icon: <ContrastTwoToneIcon />,
-    path: "/createstory",
-  },
+  { title: "Antal ord", standard: "1000 ord", icon: <SixtyFpsSelectIcon /> },
+  { title: "Max tid", standard: "20 min", icon: <HourglassTopTwoToneIcon /> },
+  { title: "Deltagare", standard: "2 st", icon: <PeopleTwoToneIcon /> },
+  { title: "Poängräkning", standard: "aktiv", icon: <ScoreboardTwoToneIcon /> },
+  { title: "Rättstavning", standard: "aktiv", icon: <SpellcheckTwoToneIcon /> },
+  { title: "Tema", standard: "ej aktiv", icon: <ContrastTwoToneIcon /> },
 ];
 
 const CreateStoryPage = () => {
@@ -81,103 +51,85 @@ const CreateStoryPage = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: "row", padding: 4 }}>
       <Box
         sx={{
-          width: 250,
-          textAlign: "center",
-          flexDirection: "column",
-          backgroundColor: "rgb(129, 160, 129)",
-          color: "white",
-          height: "100vh",
+          width: 300,
+          marginRight: 4,
+          border: "2px solid  rgb(212, 202, 187)",
+          color: "rgb(12, 23, 79)",
+          padding: 4,
+          borderRadius: 8,
+          boxShadow: 2,
         }}
       >
-        <Typography
-          sx={{
-            paddingBottom: 3,
-            paddingTop: 3,
-            textDecorationLine: "underline",
-          }}
-          variant="h5"
-        >
+        <Typography variant="h4" sx={{ marginBottom: 3}}>
           Ändra tillval
         </Typography>
-        <List>
-          {chooseFromMenu.map((text) => (
+
+        <List sx={{ padding: 0 }}>
+          {chooseFromMenu.map((item) => (
             <ListItem
-              className={styles.list}
-              key={text.title}
-              sx={{
-                flexDirection: "column",
-                alignItems: "flex-start",
-                cursor: "pointer",
-              }}
-              tabIndex={0} 
-              role="button" 
-              onClick={() => window.location.href = text.path} 
-              
+              key={item.title}
+              className={styles.list} 
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="h5">{text.title}</Typography>
-                <Box component="span">{text.icon}</Box>
+              <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                <Typography className={styles.title}>{item.title}</Typography> {/* Use the custom title class */}
+                <Box sx={{  color: "rgb(12, 23, 79)"}}>{item.icon}</Box>
               </Box>
-              <Typography sx={{ paddingBottom: 2, fontStyle: "italic" }}>
-                - Standard: {text.standard} -
-              </Typography>
             </ListItem>
           ))}
         </List>
       </Box>
-
-      <Box sx={{ flexGrow: 1, p: 5 }}>
-        <Typography gutterBottom>
+      <Box sx={{ flexGrow: 1, padding: 4, backgroundColor: "#F5F5F5", borderRadius: 8 }}>
+        <Typography variant="h4" sx={{ marginBottom: 1, color: "rgb(12, 23, 79)" }}>
+          Skriv din berättelse
+        </Typography>
+        <Box sx={{ marginBottom: 2 }}>
           {started ? (
-            <Typography >
-                    {timeLeft ?  (
-                      <Typography variant="h5"  >Tänk på att avsluta innan tiden tar slut..</Typography> 
-                    ) : (
-                      <Typography variant="h5"  >Tiden är tyvär slut!</Typography>
-                    ) 
-                  }   
-              <Typography sx={{ paddingLeft:1, paddingTop: 2}}  color={timeLeft > 0 ? "rgb(238, 185, 121)" : "red"}variant="h5">Tid: {formatTime(timeLeft)}</Typography>
+            <Typography variant="h5">
+              {timeLeft > 0 ? (
+                <>
+                  <Typography variant="h5">Tänk på att avsluta innan tiden tar slut..</Typography>
+                  <Typography variant="h5" color="rgb(238, 185, 121)">
+                    Tid: {formatTime(timeLeft)}
+                  </Typography>
+                </>
+              ) : (
+                <Typography variant="h5" color="red">
+                  Tiden är tyvärr slut!
+                </Typography>
+              )}
             </Typography>
           ) : (
-             <Typography >
-              <Typography variant="h4" sx={{paddingBottom: 3}}>Skriv en berättelse </Typography><ButtonTimer text="Starta tiden" onClick={() => setStarted(true)} />
-             </Typography>
+            <Typography variant="h5" sx={{ marginBottom: 2 }}>
+              <Typography variant="h5" sx={{ display: "inline-block", marginRight: 2 }}>
+                Starta tiden
+              </Typography>
+              <ButtonTimer text="Starta" onClick={() => setStarted(true)} />
+            </Typography>
           )}
-        </Typography>
-
+        </Box>
         <TextField
-          onChange={handleInputChange}
-          disabled={!okWriting}
           value={text}
+          onChange={handleInputChange}
           fullWidth
           multiline
           rows={15}
+          disabled={!okWriting}
           variant="outlined"
           placeholder="Skriv din berättelse här..."
           sx={{
             marginBottom: 2,
-            marginTop: 4
+            backgroundColor: "white",
+            borderRadius: 2,
+            boxShadow: 1,
+            padding: 2,
           }}
         />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            paddingTop: 20,
-          }}
-        >
-          <Button text="Skicka vidare"></Button>
-        </div>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }} className={styles.buttonWrapper}>
+          <Button text="Skicka vidare" />
+        </Box>
       </Box>
     </Box>
   );

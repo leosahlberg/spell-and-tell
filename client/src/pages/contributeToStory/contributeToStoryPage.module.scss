@@ -1,0 +1,53 @@
+.pageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: auto;
+    margin-top: 40px;
+  }
+  
+  .mainContent {
+    flex-grow: 1;
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid  rgb(195, 158, 121);
+  }
+  
+  .timerText {
+    color: rgb(238, 185, 121);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .textField {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .buttonWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .buttonWrapper .MuiButton-root {
+    width: 48%;
+    font-size: 1rem;
+    background-color: rgb(12, 23, 79);
+    color: #fff;
+  
+    &:hover {
+      background-color: rgb(44, 59, 128);
+    }
+  }
+  

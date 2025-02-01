@@ -1,12 +1,17 @@
-.button{
-    background-color: rgb(258, 195, 121);
-    padding: 5px 10px;
-    border: 5px solid rgb(158, 186, 158);
-    border-radius: 10px;
-    color: white;
+.button {
+  background: linear-gradient(90deg, #3c6437, #88ba8a);
+  color: white;
+  font-size: 0.7rem;
+  margin-bottom: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 8px;
+  border: 2px solid rgb(220, 187, 155);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
-.button:hover{
-    background-color: rgb(102, 177, 102);
-    cursor: pointer;
+.button:hover {
+  background: linear-gradient(90deg, #81c784, #4caf50);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
