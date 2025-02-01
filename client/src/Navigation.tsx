@@ -31,7 +31,7 @@ const Navigation = () => {
       {loggedInUser != null ? (
         <>
           <Header loggedIn={loggedInUser != null} />
-          <NavBar />
+          <NavBar user={data} />
           <Routes>
             <Route index element={<HomePage />} />
             <Route path="/createstory" element={<CreateStoryPage />} />

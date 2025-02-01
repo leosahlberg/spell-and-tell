@@ -88,20 +88,20 @@ export const authSlice = createSlice({
         state.token = action.payload.token;
         state.error = null;
       }
-    ),
+    )
       builder.addCase(fetchLogin.rejected, (state, action) => {
         state.error = action.payload || "An unexpected error occurred";
       });
-
-    builder.addCase(fetchRegistrateUser.fulfilled, (state, action) => {
+  
+    builder.addCase(fetchRegistrateUser.fulfilled, (state) => {
       state.registerAccepted = true;
       state.error = null;
-    }),
+    });
       builder.addCase(fetchRegistrateUser.rejected, (state, action) => {
         state.error = action.payload || "An unexpected error occurred";
       });
   },
-});
+  });
 
 export const { logout } = authSlice.actions;
 

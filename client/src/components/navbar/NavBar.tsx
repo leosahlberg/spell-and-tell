@@ -4,8 +4,14 @@ import profileImage from "../../assets/profile.jpg";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import { useEffect, useState } from "react";
+import { User } from "../../utils/types";
 
-const NavBar = () => {
+type NavBarProps = {
+  user: User;
+};
+
+
+const NavBar = ({user}: NavBarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -25,7 +31,7 @@ const NavBar = () => {
 
   const navList = [
     {
-      title: "Elsa",
+      title: user.username,
       img: (
         <img
           src={profileImage}
