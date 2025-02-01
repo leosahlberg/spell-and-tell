@@ -9,8 +9,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5em;
     box-sizing: border-box;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   img {
@@ -39,18 +40,25 @@
   }
 
   .button {
-    background-color: green;
-    padding: 8px 20px;
-    border: 3px solid rgb(158, 186, 158);
+    background: linear-gradient(to right, 
+    rgb(251, 246, 233) 0%,
+    rgb(212, 202, 187) 100%
+ );
+    color: #07600a; 
+    padding: 5px 10px;
+    border: 2px solid green;
     border-radius: 8px;
-    color: white;
-    font-size: 1rem;
-    transition: background-color 0.3s ease-in-out;
-  }
+    margin-right: 20px;
+    border: 3px solid rgb(158, 186, 158);
 
-  .button:hover {
-    background-color: rgb(4, 173, 4);
-    cursor: pointer;
+    .btntext{
+      font-size: 2rem;
+    }
+    
+    &:hover {
+      background-color: rgb(4, 156, 4);
+      cursor: pointer;
+    }
   }
 
   .underline {

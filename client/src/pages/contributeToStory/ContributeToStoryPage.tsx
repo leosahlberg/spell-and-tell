@@ -2,6 +2,7 @@ import { Box, TextField, Typography } from "@mui/material";
 import Button from "../../components/buttons/Button";
 import { useEffect, useState } from "react";
 import ButtonTimer from "../../components/buttons/ButtonTimer";
+import styles from "./contributeToStoryPage.module.scss"; // Import your custom SCSS styles
 
 const ContributeToStoryPage = () => {
   const [timeLeft, setTimeLeft] = useState(10);
@@ -35,23 +36,31 @@ const ContributeToStoryPage = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <Box sx={{ flexGrow: 1, p: 5, ml:20, mr: 20 }}>
+    <Box className={styles.pageWrapper}>
+      <Box className={styles.mainContent}>
         <Typography gutterBottom>
           {started ? (
-            <Typography >
-                    {timeLeft ?  (
-                      <Typography variant="h5"  >Tänk på att avsluta innan tiden tar slut..</Typography> 
-                    ) : (
-                      <Typography variant="h5"  >Tiden är tyvär slut!</Typography>
-                    ) 
-                  }   
-              <Typography sx={{ paddingLeft:1, paddingTop: 2}}  color={timeLeft > 0 ? "rgb(238, 185, 121)" : "red"}variant="h5">Tid: {formatTime(timeLeft)}</Typography>
-            </Typography>
+            <Box>
+              {timeLeft ? (
+                <Typography variant="h5" className={styles.timerText}>
+                  Tänk på att avsluta innan tiden tar slut..
+                </Typography>
+              ) : (
+                <Typography variant="h5" className={styles.timerText}>
+                  Tiden är tyvärr slut!
+                </Typography>
+              )}
+              <Typography variant="h5" className={styles.timer}>
+                Tid: {formatTime(timeLeft)}
+              </Typography>
+            </Box>
           ) : (
-             <Typography >
-              <Typography variant="h4" sx={{paddingBottom: 3}}>Fortsätt på berättelsen </Typography><ButtonTimer text="Starta tiden" onClick={() => setStarted(true)} />
-             </Typography>
+            <Box>
+              <Typography variant="h4" sx={{ paddingBottom: 3 }}>
+                Fortsätt på berättelsen
+              </Typography>
+              <ButtonTimer text="Starta tiden" onClick={() => setStarted(true)} />
+            </Box>
           )}
         </Typography>
 
@@ -61,25 +70,15 @@ const ContributeToStoryPage = () => {
           value={text}
           fullWidth
           multiline
-          rows={20}
+          rows={15}
           variant="outlined"
           placeholder="Skriv din berättelse här..."
-          sx={{
-            marginBottom: 2,
-            marginTop: 4
-
-          }}
+          className={styles.textField}
         />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            paddingTop: 20,
-          }}
-        >
-          <Button text="Skicka vidare"></Button>
-          <Button text="Publicera"></Button>
-        </div>
+        <Box className={styles.buttonWrapper}>
+          <Button text="Skicka vidare" />
+          <Button text="Publicera" />
+        </Box>
       </Box>
     </Box>
   );
