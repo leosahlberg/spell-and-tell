@@ -70,18 +70,8 @@ const CreateStoryPage = () => {
         <List sx={{ padding: 0 }}>
           {chooseFromMenu.map((item) => (
             <ListItem
-
-              className={styles.list}
-              key={text.title}
-              sx={{
-                flexDirection: "column",
-                alignItems: "flex-start",
-                cursor: "pointer",
-              }}
-              tabIndex={0} 
-              role="button" 
-              onClick={() => window.location.href = text.path} 
-              
+              key={item.title}
+              className={styles.list} 
             >
               <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
                 <Typography className={styles.title}>{item.title}</Typography> {/* Use the custom title class */}
