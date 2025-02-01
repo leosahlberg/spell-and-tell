@@ -52,7 +52,6 @@ const CreateStoryPage = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", padding: 4 }}>
-      {/* Sidomeny - Vänster Panel */}
       <Box
         sx={{
           width: 300,
@@ -72,7 +71,7 @@ const CreateStoryPage = () => {
           {chooseFromMenu.map((item) => (
             <ListItem
               key={item.title}
-              className={styles.list} // Apply the custom styling class here
+              className={styles.list} 
             >
               <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
                 <Typography className={styles.title}>{item.title}</Typography> {/* Use the custom title class */}
@@ -82,14 +81,10 @@ const CreateStoryPage = () => {
           ))}
         </List>
       </Box>
-
-      {/* Huvudinnehåll - Höger Panel */}
       <Box sx={{ flexGrow: 1, padding: 4, backgroundColor: "#F5F5F5", borderRadius: 8 }}>
         <Typography variant="h4" sx={{ marginBottom: 1, color: "rgb(12, 23, 79)" }}>
           Skriv din berättelse
         </Typography>
-
-        {/* Timer och information om tid */}
         <Box sx={{ marginBottom: 2 }}>
           {started ? (
             <Typography variant="h5">
@@ -115,8 +110,6 @@ const CreateStoryPage = () => {
             </Typography>
           )}
         </Box>
-
-        {/* Textfält för att skriva berättelse */}
         <TextField
           value={text}
           onChange={handleInputChange}
@@ -134,8 +127,6 @@ const CreateStoryPage = () => {
             padding: 2,
           }}
         />
-
-        {/* Skicka vidare knapp */}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }} className={styles.buttonWrapper}>
           <Button text="Skicka vidare" />
         </Box>
