@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../utils/types";
+import { Story } from "../utils/types";
 import { getStorys } from "../utils/api";
 
 type InitialStateType = {
@@ -8,24 +8,6 @@ type InitialStateType = {
 
 const initialState: InitialStateType = {
   stories: [],
-};
-
-type RouleSet = {
-  maxNumberOfWordsPerCpntribution: Number;
-  numberOfContribution: Number;
-  maxTime: Number;
-  scoring: Boolean;
-  spellChecking: Boolean;
-  type: "default" | "custom";
-};
-
-type Story = {
-  title: String;
-  created: Date;
-  status: "created" | "in progress" | "completed";
-  score: Number;
-  rouleSet: RouleSet;
-  user: User;
 };
 
 export const fetchPublicStories = createAsyncThunk<
