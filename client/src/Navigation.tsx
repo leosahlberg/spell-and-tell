@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { User } from "./utils/types";
 import { RootState } from "./redux/store";
+import StoryPage from "./pages/story/StoryPage";
 
 const Navigation = () => {
   const user = useSelector<RootState>((state) => state.auth.user) as User;
@@ -41,7 +42,12 @@ const Navigation = () => {
             <Route path="/contribute" element={<ContributeToStoryPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/terms" element={<TermsPage />} />
+
+        
+            <Route path="/story" element={<StoryPage />} />
+
             <Route path="/stories" element={<PublicStorysPage />} />
+
           </Routes>
         </>
       ) : (

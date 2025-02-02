@@ -70,9 +70,9 @@ const ContributeToStoryPage = () => {
           value={text}
           fullWidth
           multiline
-          rows={15}
+          rows={20}
           variant="outlined"
-          placeholder="Skriv din berättelse här..."
+          placeholder="Förtsätt på berättelsen här..."
           className={styles.textField}
         />
         <Box className={styles.buttonWrapper}>

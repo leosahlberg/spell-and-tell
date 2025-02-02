@@ -74,14 +74,14 @@ const CreateStoryPage = () => {
               className={styles.list} 
             >
               <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                <Typography className={styles.title}>{item.title}</Typography> {/* Use the custom title class */}
+                <Typography className={styles.title}>{item.title}</Typography>
                 <Box sx={{  color: "rgb(12, 23, 79)"}}>{item.icon}</Box>
               </Box>
             </ListItem>
           ))}
         </List>
       </Box>
-      <Box sx={{ flexGrow: 1, padding: 4, backgroundColor: "#F5F5F5", borderRadius: 8 }}>
+      <Box className={styles.box} sx={{ flexGrow: 1, padding: 4, borderRadius: 8 }}>
         <Typography variant="h4" sx={{ marginBottom: 1, color: "rgb(12, 23, 79)" }}>
           Skriv din berättelse
         </Typography>
