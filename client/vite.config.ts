@@ -5,6 +5,9 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   plugins: [react()],
   server: {
+    fs: {
+      strict: false,
+    },
     proxy: {
       "/user": {
         target: "http://localhost:3000/",
@@ -12,6 +15,21 @@ export default defineConfig({
         secure: false,
       },
       "/login": {
+        target: "http://localhost:3000/",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/contribution": {
+        target: "http://localhost:3000/",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/story": {
+        target: "http://localhost:3000/",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/rouleSet": {
         target: "http://localhost:3000/",
         changeOrigin: true,
         secure: false,

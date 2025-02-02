@@ -39,7 +39,7 @@ const Header = (props: HeaderProps) => {
     { title: "Hem", icon: <HomeIcon />, path: "/" },
     { title: "Profil", icon: <AccountCircleIcon />, path: "/profile" },
     { title: "Skapa ny story", icon: <AddCircleIcon />, path: "/createstory" },
-    { title: "Alla berättelser", icon: <LibraryBooksIcon />, path: "/storys" },
+    { title: "Alla berättelser", icon: <LibraryBooksIcon />, path: "/stories" },
     { title: "Regler och villkor", icon: <InfoIcon />, path: "/terms" },
   ];
 
