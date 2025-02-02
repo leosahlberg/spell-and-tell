@@ -10,8 +10,10 @@ type InitialStateType = {
 };
 
 const initialState: InitialStateType = {
-  user: null,
-  token: null,
+  user: localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")!)
+    : null,
+  token: localStorage.getItem("token"),
   registerAccepted: null,
   error: null,
 };
@@ -44,7 +46,12 @@ export const fetchLogin = createAsyncThunk<
 >("user/fetchLogin", async ({ username, password }, { rejectWithValue }) => {
   try {
     const response = await logIn(username, password);
-    return (await response.json()) as LogInResponse;
+
+    const data = (await response.json()) as LogInResponse;
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    return data;
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error occurred";
@@ -78,6 +85,8 @@ export const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.error = null;
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {
@@ -88,20 +97,20 @@ export const authSlice = createSlice({
         state.token = action.payload.token;
         state.error = null;
       }
-    )
-      builder.addCase(fetchLogin.rejected, (state, action) => {
-        state.error = action.payload || "An unexpected error occurred";
-      });
-  
+    );
+    builder.addCase(fetchLogin.rejected, (state, action) => {
+      state.error = action.payload || "An unexpected error occurred";
+    });
+
     builder.addCase(fetchRegistrateUser.fulfilled, (state) => {
       state.registerAccepted = true;
       state.error = null;
     });
-      builder.addCase(fetchRegistrateUser.rejected, (state, action) => {
-        state.error = action.payload || "An unexpected error occurred";
-      });
+    builder.addCase(fetchRegistrateUser.rejected, (state, action) => {
+      state.error = action.payload || "An unexpected error occurred";
+    });
   },
-  });
+});
 
 export const { logout } = authSlice.actions;
 
