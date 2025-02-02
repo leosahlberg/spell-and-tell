@@ -10,8 +10,7 @@ type NavBarProps = {
   user: User;
 };
 
-
-const NavBar = ({user}: NavBarProps) => {
+const NavBar = ({ user }: NavBarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const NavBar = ({user}: NavBarProps) => {
     {
       title: "Utforska berättelser",
       icon: <AutoStoriesOutlinedIcon />,
-      path: "/storys",
+      path: "/stories",
     },
     {
       title: "Skapa ny berättelse",

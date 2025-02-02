@@ -1,3 +1,6 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+
 export async function logIn(username: string, password: string) {
   try {
     const res = await fetch(`/login`, {
@@ -57,6 +60,30 @@ export async function registerUser(
     }
 
     return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(
+        error.message || "Failed to connect to the server. Please try again."
+      );
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+export async function getStorys() {
+  try {
+    const token = useSelector<RootState>((state) => state.auth.token) as String;
+    const res = await fetch(`/story`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+    });
+
+    return res.json();
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
