@@ -17,7 +17,8 @@ export function authenticateUser() {
     const token = authHeader && authHeader.split(" ")[1];
 
     if (token == null) {
-      return res.sendStatus(401);
+      res.sendStatus(401);
+      return;
     }
 
     try {

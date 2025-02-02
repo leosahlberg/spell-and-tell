@@ -1,11 +1,11 @@
-import Express from "express";
+import Express, { Request, Response } from "express";
 import { userModel } from "../database/models/userModel";
 import { encryptPassword } from "../auth/encryptPassword";
 
 export function userRouter() {
   const router = Express.Router();
 
-  router.post("/", async (req, res) => {
+  router.post("/", async (req: Request, res: Response) => {
     try {
       const { name, username, email, password } = req.body;
       const hashedPassword = await encryptPassword(password);
