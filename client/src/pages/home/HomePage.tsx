@@ -37,7 +37,6 @@ const HomePage = () => {
           variant="h1"
           gutterBottom
           sx={{
-            padding: 1,
             width: "fit-content",
             fontWeight: "500",
             fontSize:"1.8rem",
@@ -90,7 +89,6 @@ const HomePage = () => {
           variant="h1"
           gutterBottom
           sx={{
-            padding: 1,
             width: "fit-content",
             fontWeight: "500",
             fontSize:"1.8rem",

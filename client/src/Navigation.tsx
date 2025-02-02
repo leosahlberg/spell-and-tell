@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { User } from "./utils/types";
 import { RootState } from "./redux/store";
+import StoryPage from "./pages/story/StoryPage";
 
 const Navigation = () => {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -39,6 +40,7 @@ const Navigation = () => {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/storys" element={<PublicStorysPage />} />
+            <Route path="/story" element={<StoryPage />} />
           </Routes>
         </>
       ) : (

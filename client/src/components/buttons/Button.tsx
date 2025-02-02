@@ -1,7 +1,7 @@
 import styles from "./button.module.scss";
 
 type ButtonProps = {
-  text: string;
+  text?: string;
   onClick?: () => void;
   customStyle?: React.CSSProperties;
 };
