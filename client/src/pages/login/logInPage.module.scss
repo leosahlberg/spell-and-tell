@@ -7,8 +7,11 @@
   flex-direction: column;
 
   .loggin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 2rem;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     color: rgb(12, 23, 79);
   }
 
@@ -43,11 +46,11 @@
     font-weight: bold;
     padding: 40px;
     color: white;
-    background-color: rgba(3, 14, 72, 0.9); 
+    background-color: rgba(3, 14, 72, 0.5); 
     border-radius: 10px;             
-    box-shadow: 0 4px 8px rgba(5, 1, 67, 0.7); 
+    box-shadow: 0 1px 1px rgba(5, 1, 67, 0.7); 
     max-width: 400px;                   
-    margin-top: 20px; 
+    margin-top: 30px; 
     margin-bottom: 60px;                  
     text-align: center;                
   }
@@ -57,13 +60,35 @@
     padding-left: 0;                  
     color: #fdc50e;                    
     font-size: 1.5rem;
+    font-weight: 100;
     cursor: pointer;
     display: inline-block;
     margin-top: 10px;                   
-    transition: color 0.3s ease;       
   }
   
   .link:hover {
     color: #f9d964;                       
   }
+
+  @media (max-width: 698px) {
+    .form{
+    margin-left: 40px;
+    margin-right: 40px;
+    }
+   }
+
+   @media (max-width: 480px) {
+    .form{
+    margin-left: 40px;
+    margin-right: 40px;
+    }
+    .register{
+      margin-left: 50px;
+      margin-right: 50px;
+      font-size: 1.3rem;
+    }
+    .link{
+      font-size: 1.2rem;
+    }
+   }
 }

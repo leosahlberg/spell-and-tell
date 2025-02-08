@@ -39,5 +39,30 @@
     cursor: pointer;
     color: rgb(99, 86, 214);
   }
+
+   @media (max-width: 480px) {
+
+    .header {
+      font-size: 3rem;
+    }
+
+    .button{
+      padding: 5px 10px;
+      font-size: 1.5rem;
+    }
+
+    .register {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .link {
+      font-size: 1.3rem;
+      padding-top: 1rem;
+    }
+ 
+  }
 }
 

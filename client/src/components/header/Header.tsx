@@ -20,6 +20,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { logout } from "../../redux/authSlice";
+import Button from "../buttons/Button";
 
 type HeaderProps = {
   loggedIn: boolean;
@@ -84,7 +85,7 @@ const Header = (props: HeaderProps) => {
           <p>Skapa kreativa berättelser tillsammans</p>
         </div>
         {props.loggedIn ? (
-          <>
+          <div className={style.menubar}>
             <MenuIcon
               sx={{
                 fontSize: "40px",
@@ -97,11 +98,10 @@ const Header = (props: HeaderProps) => {
             <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
               {DrawerList}
             </Drawer>
-          </>
+          </div>
         ) : (
-          <button className={style.button} onClick={() => navigate("/login")}>
-            <h2>Logga in</h2>
-          </button>
+          <Button text="Logga in" className={style.button} onClick={() => navigate("/login")}>
+          </Button>
         )}
       </div>
       <div className={style.underline}></div>
