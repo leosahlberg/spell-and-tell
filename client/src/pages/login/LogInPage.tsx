@@ -7,6 +7,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { fetchLogin } from "../../redux/authSlice";
 import backgroundImage from "../../assets/bookimg.jpg";
 import Button from "../../components/buttons/Button";
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 
 const LogInPage = () => {
   const [username, setUsername] = useState("");
@@ -70,7 +71,7 @@ const LogInPage = () => {
                 style: {
                   color: "black",
                   fontStyle: "italic",
-                  fontSize: 15,
+                  fontSize: 17,
                 },
               },
             }}
@@ -91,7 +92,7 @@ const LogInPage = () => {
                 style: {
                   color: "black",
                   fontStyle: "italic",
-                  fontSize: 15,
+                  fontSize: 17,
                 },
               },
             }}
@@ -120,7 +121,7 @@ const LogInPage = () => {
       </Paper>
       <section>
         <Typography variant="h2" gutterBottom className={style.register}>
-          Har du inget konto?
+          Har du inget konto? <ArrowForwardOutlinedIcon sx={{marginLeft: 1, marginRight: 4}}/>
           <Link
             className={style.link}
             to={"/registration"}

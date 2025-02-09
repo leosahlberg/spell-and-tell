@@ -22,7 +22,7 @@ const StartPage = () => {
       />
       <Button text="Logga in" className={style.button} onClick={() => navigate("/login")}/>
       <section>
-        <Typography className={style.register} sx={{fontSize: "2rem"}} variant="h3" gutterBottom>
+        <Typography className={style.register} sx={{fontSize: "2rem"}} variant="h2" gutterBottom>
           Har du inget konto?
           <Link
             className={style.link}

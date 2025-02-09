@@ -51,7 +51,7 @@ const CreateStoryPage = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, padding: 4, marginLeft: 5, marginRight: 5 }}>
+    <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, padding: { xs: 2, md: 4 },    marginLeft: { md: 5 },    marginRight: { md: 5 }, marginTop:5 }}>
       <Box
         sx={{
           width: { xs: "100%", md: 300 },
@@ -129,7 +129,7 @@ const CreateStoryPage = () => {
         />
 
         <Box sx={{ display: "flex", justifyContent: "flex-end" }} className={styles.buttonWrapper}>
-          <Button text="Skicka vidare" />
+          <Button className={styles.button} text="Skicka vidare" />
         </Box>
       </Box>
     </Box>

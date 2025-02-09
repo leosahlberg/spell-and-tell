@@ -42,7 +42,7 @@ const RegistrationPage = () => {
           borderRadius: "8px",
         }}
       >
-        <Typography className={styles.regtitle} variant="h4" gutterBottom>
+        <Typography className={styles.regtitle} variant="h1" sx={{fontSize: "3rem"}} gutterBottom>
           Skapa ett användarkonto
         </Typography>
 
@@ -63,7 +63,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 13 },
+              input: { color: "black", fontStyle: "italic", fontSize: 15 },
             }}
           />
 
@@ -80,7 +80,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 13 },
+              input: { color: "black", fontStyle: "italic", fontSize: 15 },
             }}
           />
 
@@ -101,7 +101,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 13 },
+              input: { color: "black", fontStyle: "italic", fontSize: 15 },
             }}
           />
 
@@ -122,7 +122,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 13 },
+              input: { color: "black", fontStyle: "italic", fontSize: 15 },
             }}
           />
 

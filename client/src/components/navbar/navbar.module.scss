@@ -47,28 +47,10 @@
     background-color: rgb(187, 159, 131);
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: auto;
-    padding: 10px 0;
-
-    .center {
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .links {
-      width: 100%;
-      justify-content: flex-start;
-      padding: 8px 15px;
+  @media (max-width: 800px) {
+    .title {
+      font-size: 1.3rem;
     }
   }
 
-  @media (max-width: 480px) {
-
-    .links {
-    font-size: 0.7rem;
-    }
-  }
 }

@@ -45,7 +45,7 @@ const Header = (props: HeaderProps) => {
   ];
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 250, height: "100%"}} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         {NavList.map((item) => (
           <ListItem key={item.title} disablePadding>
@@ -100,8 +100,11 @@ const Header = (props: HeaderProps) => {
             </Drawer>
           </div>
         ) : (
-          <Button text="Logga in" className={style.button} onClick={() => navigate("/login")}>
-          </Button>
+          <Button
+            text="Logga in"
+            className={style.button}
+            onClick={() => navigate("/login")}
+          ></Button>
         )}
       </div>
       <div className={style.underline}></div>

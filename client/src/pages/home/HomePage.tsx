@@ -68,7 +68,7 @@ const HomePage = () => {
             De hittar du här
           </Link>
         </Typography>
-        <button className={style.button} onClick={() => navigation("/storys")}>
+        <button className={style.button} onClick={() => navigation("/stories")}>
           <h2>Utforska berättelser</h2>
         </button>
       </Paper>
