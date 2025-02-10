@@ -3,6 +3,7 @@ import imglogo from "../../assets/logoST2.png";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
+import Button from "../../components/buttons/Button";
 
 const StartPage = () => {
   const navigate = useNavigate();
@@ -19,11 +20,9 @@ const StartPage = () => {
         width={400}
         height={250}
       />
-      <button className={style.button} onClick={() => navigate("/login")}>
-        <Typography className={style.btntext} variant="h2">Logga in</Typography>
-      </button>
+      <Button text="Logga in" className={style.button} onClick={() => navigate("/login")}/>
       <section>
-        <Typography sx={{fontSize: "2rem"}} variant="h3" gutterBottom>
+        <Typography className={style.register} sx={{fontSize: "2rem"}} variant="h2" gutterBottom>
           Har du inget konto?
           <Link
             className={style.link}

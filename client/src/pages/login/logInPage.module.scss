@@ -7,13 +7,16 @@
   flex-direction: column;
 
   .loggin{
-    font-size: 2rem;
-    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    padding-bottom: 20px;
     color: rgb(12, 23, 79);
   }
 
   .label{
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     color: rgb(12, 23, 79);
   }
 
@@ -27,7 +30,7 @@
     border: 2px solid green;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 2rem;
     font-weight: bold;
     transition: background-color 0.3s ease;
   
@@ -39,17 +42,23 @@
     }
   }
   .register {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     font-size: 1.5rem;
+    align-items: center;
     font-weight: bold;
-    padding: 40px;
+    padding: 20px 60px;
     color: white;
-    background-color: rgba(3, 14, 72, 0.9); 
+    background-color: rgba(38, 56, 65, 0.6); 
     border-radius: 10px;             
-    box-shadow: 0 4px 8px rgba(5, 1, 67, 0.7); 
-    max-width: 400px;                   
-    margin-top: 20px; 
+    box-shadow: 0 1px 1px rgba(5, 1, 67, 0.7);                  
+    margin-top: 30px;
+    // width: 645px; 
     margin-bottom: 60px;                  
-    text-align: center;                
+    text-align: center;  
+    white-space: nowrap;               
   }
   
   .link {
@@ -57,13 +66,35 @@
     padding-left: 0;                  
     color: #fdc50e;                    
     font-size: 1.5rem;
+    font-weight: 100;
     cursor: pointer;
     display: inline-block;
-    margin-top: 10px;                   
-    transition: color 0.3s ease;       
+    margin-left: 20px;
   }
   
   .link:hover {
     color: #f9d964;                       
   }
+
+  @media (max-width: 698px) {
+    .form{
+    margin-left: 40px;
+    margin-right: 40px;
+    }
+   }
+
+   @media (max-width: 480px) {
+    .form{
+    margin-left: 40px;
+    margin-right: 40px;
+    }
+    .register{
+      margin-left: 50px;
+      margin-right: 50px;
+      font-size: 1.3rem;
+    }
+    .link{
+      font-size: 1.2rem;
+    }
+   }
 }

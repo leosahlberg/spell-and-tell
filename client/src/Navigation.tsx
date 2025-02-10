@@ -11,7 +11,7 @@ import NavBar from "./components/navbar/NavBar";
 import TermsPage from "./pages/terms/TermsPage";
 import PublicStorysPage from "./pages/publicStorys/PublicStorysPage";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { User } from "./utils/types";
 import { RootState } from "./redux/store";
 import StoryPage from "./pages/story/StoryPage";
@@ -42,6 +42,7 @@ const Navigation = () => {
             <Route path="/contribute" element={<ContributeToStoryPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/registration" element={<RegistrationPage />} />
 
         
             <Route path="/story" element={<StoryPage />} />

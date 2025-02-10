@@ -1,15 +1,58 @@
 .registration {
-  background-color: rgb(242, 241, 241);
   display: flex;
   justify-content: center;
-  height: 100vh;
-  max-width: 100vw;
   align-items: center;
-  padding-top: 4rem;
- 
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
 
-  .regtitle{
-    font-size: 2rem;
-    color: rgb(12, 23, 79);
+.regtitle {
+  color: #0c174f;
+  text-align: center;
+  padding-bottom: 1.5rem;
+}
+
+.label {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #0c174f;
+}
+
+.button {
+  background: linear-gradient(to right, rgb(82, 97, 147), rgb(118, 154, 191));
+  color: white;
+  font-size: 1.7rem;
+  padding: 5px 15px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(12, 23, 79);
+  cursor: pointer;
+  margin: 10px;
+
+  h1 {
+    font-size: 1.2rem;
   }
 }
+
+.button:hover {
+  background: linear-gradient(to right, rgb(109, 129, 194), rgb(148, 193, 238));
+}
+
+@media (max-width: 768px) {
+  .regtitle {
+    font-size: 0.7rem;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 698px) {
+  .form{
+  margin-left: 80px;
+  margin-right: 80px;
+  }
+ }
+

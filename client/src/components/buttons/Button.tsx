@@ -1,13 +1,15 @@
-import styles from "./button.module.scss";
-
 type ButtonProps = {
   text?: string;
   onClick?: () => void;
-  customStyle?: React.CSSProperties;
+  className?: string;
 };
 
-const Button = ({ text, customStyle , onClick }: ButtonProps) => {
-  return <button className={styles.button} style={customStyle} onClick={onClick}><h1>{text}</h1></button>;
+const Button = ({ text, onClick, className }: ButtonProps) => {
+  return (
+    <button className={className} onClick={onClick}>
+      <span>{text}</span>
+    </button>
+  );
 };
 
 export default Button;

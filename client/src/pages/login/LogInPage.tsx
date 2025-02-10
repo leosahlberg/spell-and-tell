@@ -5,7 +5,9 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchLogin } from "../../redux/authSlice";
-import backgroundImage from "../../assets/bookimg.jpg"
+import backgroundImage from "../../assets/bookimg.jpg";
+import Button from "../../components/buttons/Button";
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 
 const LogInPage = () => {
   const [username, setUsername] = useState("");
@@ -21,22 +23,25 @@ const LogInPage = () => {
   }, [data]);
 
   return (
-    <div className={style.container}
-    style={{
-      backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      maxHeight: "100%",
-      width: "100%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
+    <div
+      className={style.container}
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        maxHeight: "100%",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Paper
         elevation={24}
+        className={style.form}
         sx={{
           padding: 6,
-          maxWidth: 700,
+          maxWidth: 650,
           maxHeight: 600,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "#FFFEFA",
@@ -60,12 +65,13 @@ const LogInPage = () => {
             Användarnamn
           </label>
           <TextField
-            variant="outlined"
+            variant="standard"
             slotProps={{
               input: {
                 style: {
                   color: "black",
                   fontStyle: "italic",
+                  fontSize: 17,
                 },
               },
             }}
@@ -73,7 +79,7 @@ const LogInPage = () => {
             fullWidth
             required
             id="username"
-            placeholder="Ange användarnamn (exempel: Anna79)"
+            placeholder="Exempel.. Anna79"
             onChange={(e) => setUsername(e.currentTarget.value)}
           />
 
@@ -86,29 +92,36 @@ const LogInPage = () => {
                 style: {
                   color: "black",
                   fontStyle: "italic",
+                  fontSize: 17,
                 },
               },
             }}
-            variant="outlined"
+            variant="standard"
             type="password"
             id="password"
-            placeholder="Ange lösenord (minst 8 tecken)"
+            placeholder="(minst 8 tecken)"
             onChange={(e) => setPassword(e.currentTarget.value)}
             fullWidth
             required
+            sx={{ marginBottom: 4, marginTop: 1 }}
           />
 
           {error != null ? <p style={{ color: "red" }}>{error}</p> : <></>}
-          <div style={{  display: "flex", justifyContent: "center", width: "100%", marginTop: "20px"  }}>
-            <button className={style.button} type="submit">
-              Logga in
-            </button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              marginTop: "20px",
+            }}
+          >
+            <Button text="Logga in" className={style.button} />
           </div>
         </form>
       </Paper>
       <section>
         <Typography variant="h2" gutterBottom className={style.register}>
-          Har du inget konto?
+          Har du inget konto? <ArrowForwardOutlinedIcon sx={{marginLeft: 1, marginRight: 4}}/>
           <Link
             className={style.link}
             to={"/registration"}
