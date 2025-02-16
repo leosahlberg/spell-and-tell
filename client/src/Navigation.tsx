@@ -43,12 +43,11 @@ const Navigation = () => {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/login" element={<LogInPage />} />
 
-        
             <Route path="/story" element={<StoryPage />} />
 
             <Route path="/stories" element={<PublicStorysPage />} />
-
           </Routes>
         </>
       ) : (
