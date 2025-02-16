@@ -8,7 +8,7 @@ import ContrastTwoToneIcon from "@mui/icons-material/ContrastTwoTone";
 import Button from "../../components/buttons/Button";
 import ButtonTimer from "../../components/buttons/ButtonTimer";
 import { useState, useEffect } from "react";
-import styles from "./createStoryPage.module.scss"; // Import your custom SCSS
+import styles from "./createStoryPage.module.scss";
 
 const chooseFromMenu = [
   { title: "Antal ord", standard: "1000 ord", icon: <SixtyFpsSelectIcon /> },
@@ -51,37 +51,36 @@ const CreateStoryPage = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", padding: 4 }}>
+    <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, padding: { xs: 2, md: 4 },    marginLeft: { md: 5 },    marginRight: { md: 5 }, marginTop:5 }}>
       <Box
         sx={{
-          width: 300,
-          marginRight: 4,
+          width: { xs: "100%", md: 300 },
+          marginRight: { md: 4 },
           border: "2px solid  rgb(212, 202, 187)",
           color: "rgb(12, 23, 79)",
           padding: 4,
           borderRadius: 8,
           boxShadow: 2,
+          marginBottom: { xs: 2, md: 0 },
         }}
       >
-        <Typography variant="h4" sx={{ marginBottom: 3}}>
+        <Typography variant="h4" sx={{ marginBottom: 3 }}>
           Ändra tillval
         </Typography>
 
         <List sx={{ padding: 0 }}>
           {chooseFromMenu.map((item) => (
-            <ListItem
-              key={item.title}
-              className={styles.list} 
-            >
+            <ListItem key={item.title} className={styles.list}>
               <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                <Typography className={styles.title}>{item.title}</Typography> {/* Use the custom title class */}
-                <Box sx={{  color: "rgb(12, 23, 79)"}}>{item.icon}</Box>
+                <Typography className={styles.title}>{item.title}</Typography>
+                <Box sx={{ color: "rgb(12, 23, 79)" }}>{item.icon}</Box>
               </Box>
             </ListItem>
           ))}
         </List>
       </Box>
-      <Box sx={{ flexGrow: 1, padding: 4, backgroundColor: "#F5F5F5", borderRadius: 8 }}>
+
+      <Box className={styles.box} sx={{ flexGrow: 1, padding: 4, borderRadius: 8 }}>
         <Typography variant="h4" sx={{ marginBottom: 1, color: "rgb(12, 23, 79)" }}>
           Skriv din berättelse
         </Typography>
@@ -110,6 +109,7 @@ const CreateStoryPage = () => {
             </Typography>
           )}
         </Box>
+
         <TextField
           value={text}
           onChange={handleInputChange}
@@ -127,8 +127,9 @@ const CreateStoryPage = () => {
             padding: 2,
           }}
         />
+
         <Box sx={{ display: "flex", justifyContent: "flex-end" }} className={styles.buttonWrapper}>
-          <Button text="Skicka vidare" />
+          <Button className={styles.button} text="Skicka vidare" />
         </Box>
       </Box>
     </Box>

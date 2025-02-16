@@ -5,18 +5,17 @@ import {
   FormControlLabel,
   Typography,
   Paper,
-  Divider,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router";
-import Button from "../../components/buttons/Button";
 import backgroundImage from "../../assets/bookimg.jpg";
+import Button from "../../components/buttons/Button";
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    navigate("home");
+    navigate("/home");
   };
 
   return (
@@ -28,28 +27,24 @@ const RegistrationPage = () => {
         backgroundPosition: "center",
         maxHeight: "100%",
         width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
       <Paper
         elevation={24}
+        className={styles.form}
         sx={{
           padding: 4,
-          maxWidth: 800,
-          marginBottom: 30,
+          maxWidth: 650,
+          marginBottom: 20,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "#FFFEFA",
-          marginTop: 5
-
+          marginTop: 5,
+          borderRadius: "8px",
         }}
       >
-        <Typography className={styles.regtitle} variant="h1" gutterBottom>
+        <Typography className={styles.regtitle} variant="h1" sx={{fontSize: "3rem"}} gutterBottom>
           Skapa ett användarkonto
         </Typography>
-
-        <Divider sx={{ marginBottom: 4, borderColor: "rgb(195, 158, 121)" }} />
 
         <form onSubmit={handleSubmit}>
           <label
@@ -60,39 +55,35 @@ const RegistrationPage = () => {
             Användarnamn
           </label>
           <TextField
-            variant="outlined"
+            variant="standard"
             id="username"
             fullWidth
             required
-            placeholder="Ange ditt användarnamn"
-            sx={{ marginBottom: 3 }}
-            slotProps={{
-              input: {
-                style: {
-                  color: "black",
-                  fontStyle: "italic",
-                  marginTop:10
-                },
-              },
+            placeholder="Ange användarnamn (exempel: Anna79)"
+            sx={{
+              marginBottom: 3,
+              marginTop: 1,
+              input: { color: "black", fontStyle: "italic", fontSize: 15 },
             }}
           />
-          <label
-            className={styles.label}
-            id="email-label"
-            htmlFor="email"
-          >
+
+          <label className={styles.label} id="email-label" htmlFor="email">
             E-postadress
           </label>
           <TextField
-            variant="outlined"
+            variant="standard"
             id="email"
             fullWidth
             required
             type="email"
-            placeholder="Ange din e-postadress"
-            sx={{ marginBottom: 3, marginTop:1 }}
+            placeholder="Ange din e-postadress (exempel anna@gmail.com)"
+            sx={{
+              marginBottom: 3,
+              marginTop: 1,
+              input: { color: "black", fontStyle: "italic", fontSize: 15 },
+            }}
           />
-          
+
           <label
             className={styles.label}
             id="password-label"
@@ -101,14 +92,19 @@ const RegistrationPage = () => {
             Lösenord
           </label>
           <TextField
-            variant="outlined"
+            variant="standard"
             id="password"
             type="password"
             fullWidth
             required
-            placeholder="Välj ett starkt lösenord"
-            sx={{ marginBottom: 3, marginTop:1 }}
+            placeholder="Ange lösenord (minst 8 tecken)"
+            sx={{
+              marginBottom: 3,
+              marginTop: 1,
+              input: { color: "black", fontStyle: "italic", fontSize: 15 },
+            }}
           />
+
           <label
             className={styles.label}
             id="confirm-password-label"
@@ -117,28 +113,36 @@ const RegistrationPage = () => {
             Bekräfta Lösenord
           </label>
           <TextField
-            variant="outlined"
+            variant="standard"
             id="confirm-password"
             type="password"
             fullWidth
             required
             placeholder="Bekräfta ditt lösenord"
-            sx={{ marginBottom: 3, marginTop:1 }}
+            sx={{
+              marginBottom: 3,
+              marginTop: 1,
+              input: { color: "black", fontStyle: "italic", fontSize: 15 },
+            }}
           />
 
           <FormControlLabel
             control={<Checkbox />}
             label="Jag accepterar villkor och regler"
             required
-            sx={{ marginBottom: 3, color: "rgb(12, 23, 79)" }}
+            sx={{
+              marginBottom: 1,
+              color: "rgb(12, 23, 79)",
+              fontSize: 14,
+            }}
           />
 
-          <Typography variant="body2" sx={{ marginBottom: 2 }}>
+          <Typography variant="body2">
             (läs <Link to="/terms">villkor och regler</Link>)
           </Typography>
 
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button text="Skapa" />
+            <Button text="Skapa" className={styles.button} />
           </div>
         </form>
       </Paper>

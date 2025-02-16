@@ -31,13 +31,86 @@
   .link {
     text-decoration: underline;
     padding-left: 20px;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    color:rgb(44, 45, 128) 
+    color:rgb(55, 57, 158) 
   }
   .link:hover{
     cursor: pointer;
     color: rgb(99, 86, 214);
   }
+
+   @media (max-width: 480px) {
+
+    .header {
+      font-size: 3rem;
+    }
+
+    .button{
+      padding: 5px 10px;
+      font-size: 1.5rem;
+    }
+
+    .register {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .link {
+      font-size: 1.3rem;
+      padding-top: 1rem;
+    }
+ 
+  }
 }
+
+.welcomebubble {
+  position: fixed;
+  top: 6%;
+  left: 10%;
+  transform: translateY(-50%);
+  background: linear-gradient(to right, rgb(12, 23, 79) 0%, rgb(44, 59, 128) 50%);
+  color: white;
+  padding: 20px 20px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 9999;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%; 
+
+
+  .bubblearrow {
+    position: absolute;
+    top: 80%;
+    left: -5px;
+    transform: translateY(-70%);
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(to right, rgb(44, 59, 128) 0%, rgb(12, 23, 79) 70%, rgb(12, 23, 79));
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+
+
+  @media (max-width: 768px) {
+    top: 5%;
+    left: 30%;
+    padding: 15px 15px;
+    font-size: 1rem;
+    max-width: 90%; 
+  }
+
+  @media (max-width: 480px) {
+    left: 3%;
+    top: 6%;
+    font-size: 0.9rem;
+    padding: 20px 10px;
+  }
+}
+
 

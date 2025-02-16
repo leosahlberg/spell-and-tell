@@ -1,0 +1,79 @@
+.pageWrapper {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storyCard {
+    background: linear-gradient(
+        to right,
+        rgb(250, 250, 249) 0%,
+        rgb(250, 247, 241) 100%
+      );
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  height: auto;
+  overflow: hidden;
+  margin: 40px 0;
+  padding: 20px;
+}
+
+.storyImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.storyContent {
+  padding: 20px;
+}
+
+.storyTitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 15px;
+  color: rgb(12, 23, 79);
+}
+
+.storyText {
+  font-size: 18px;
+  color: rgb(12, 23, 79);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 20px 20px;
+  color: rgb(12, 23, 79);
+}
+
+.continueButton {
+  font-size: 1.3rem;
+  padding: 5px 15px;
+  border-radius: 8px;
+  color: white;
+  width: fit-content;
+  border: 2px solid rgb(195, 158, 121);
+  cursor: pointer;
+  background: linear-gradient(
+    to right,
+    rgb(139, 155, 247) 0%,
+    rgb(77, 82, 150) 100%
+  );
+  padding: 10px;
+}
+.continueButton:hover {
+    background: linear-gradient(
+        to right,
+        rgb(165, 178, 253) 0%,
+        rgb(91, 94, 148) 100%
+      );
+}
