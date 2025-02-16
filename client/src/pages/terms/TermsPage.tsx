@@ -89,7 +89,7 @@ const TermsPage = () => {
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Link to="/registration">
             <Button variant="text" sx={{ marginTop: 10, color: "purple", fontSize: "1.2rem" }}>
-              Tillbaka till skapa konto
+              Skapa konto
             </Button>
           </Link>
         </Box>

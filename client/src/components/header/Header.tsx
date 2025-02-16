@@ -37,9 +37,9 @@ const Header = (props: HeaderProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const NavList = [
-    { title: "Hem", icon: <HomeIcon />, path: "/" },
+    { title: "Startsida", icon: <HomeIcon />, path: "/" },
     { title: "Profil", icon: <AccountCircleIcon />, path: "/profile" },
-    { title: "Skapa ny story", icon: <AddCircleIcon />, path: "/createstory" },
+    { title: "Skapa ny berättelse", icon: <AddCircleIcon />, path: "/createstory" },
     { title: "Alla berättelser", icon: <LibraryBooksIcon />, path: "/stories" },
     { title: "Regler och villkor", icon: <InfoIcon />, path: "/terms" },
   ];
