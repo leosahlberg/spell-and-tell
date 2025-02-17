@@ -25,10 +25,10 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user && !isAuthPage) {
+    if (!user && !isAuthPage && location.pathname !== "/terms") {
       navigate("/");
     }
-  }, [user, navigate]);
+  }, [user, navigate, isAuthPage, location.pathname]);
 
   return (
     <>
@@ -44,9 +44,7 @@ const Navigation = () => {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/login" element={<LogInPage />} />
-
             <Route path="/story" element={<StoryPage />} />
-
             <Route path="/stories" element={<PublicStorysPage />} />
           </Routes>
         </>
