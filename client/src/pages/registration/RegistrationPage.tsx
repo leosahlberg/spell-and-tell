@@ -34,7 +34,7 @@ const RegistrationPage = () => {
         className={styles.form}
         sx={{
           padding: 4,
-          maxWidth: 650,
+          maxWidth: 800,
           marginBottom: 20,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "#FFFEFA",
@@ -63,7 +63,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 15 },
+              input: { color: "black", fontStyle: "italic", fontSize: 18 },
             }}
           />
 
@@ -80,7 +80,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 15 },
+              input: { color: "black", fontStyle: "italic", fontSize: 18 },
             }}
           />
 
@@ -101,7 +101,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 15 },
+              input: { color: "black", fontStyle: "italic", fontSize: 18 },
             }}
           />
 
@@ -122,7 +122,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 15 },
+              input: { color: "black", fontStyle: "italic", fontSize: 18 },
             }}
           />
 
@@ -133,12 +133,12 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 1,
               color: "rgb(12, 23, 79)",
-              fontSize: 14,
+              fontSize: 18,
             }}
           />
 
-          <Typography variant="body2">
-            (läs <Link to="/terms">villkor och regler</Link>)
+          <Typography variant="body2" sx={{fontSize: 18, color: "purple"}}>
+            (läs <Link to="/terms" style={{color: "purple"}}>villkor och regler</Link>)
           </Typography>
 
           <div style={{ display: "flex", justifyContent: "flex-end" }}>

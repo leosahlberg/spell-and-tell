@@ -41,8 +41,8 @@ const LogInPage = () => {
         className={style.form}
         sx={{
           padding: 6,
-          maxWidth: 650,
-          maxHeight: 600,
+          maxWidth: 700,
+          maxHeight: 650,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "#FFFEFA",
         }}
@@ -71,7 +71,7 @@ const LogInPage = () => {
                 style: {
                   color: "black",
                   fontStyle: "italic",
-                  fontSize: 17,
+                  fontSize: 18,
                 },
               },
             }}
@@ -92,7 +92,7 @@ const LogInPage = () => {
                 style: {
                   color: "black",
                   fontStyle: "italic",
-                  fontSize: 17,
+                  fontSize: 18,
                 },
               },
             }}
