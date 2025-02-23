@@ -38,9 +38,9 @@ const ContributeToStoryPage = () => {
   return (
     <Box className={styles.pageWrapper}>
       <Box className={styles.mainContent}>
-        <Typography gutterBottom >
+        <Typography gutterBottom>
           {started ? (
-            <Box sx={{display:"flex", flexDirection: "row"}}>
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
               {timeLeft ? (
                 <Typography variant="h5" className={styles.timerText}>
                   Tänk på att avsluta innan tiden tar slut..
@@ -55,16 +55,23 @@ const ContributeToStoryPage = () => {
               </Typography>
             </Box>
           ) : (
-            <Box sx={{display:"flex", flexDirection: "row"}}>
-              <Typography variant="h1" sx={{ paddingBottom: 3, paddingRight: 5, fontSize: "2.5rem" }}>
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
+              <Typography
+                variant="h1"
+                sx={{ paddingBottom: 3, paddingRight: 5, fontSize: "2.5rem" }}
+              >
                 Fortsätt på berättelsen
               </Typography>
-              <ButtonTimer text="Starta tiden" onClick={() => setStarted(true)} />
+              <ButtonTimer
+                text="Starta tiden"
+                onClick={() => setStarted(true)}
+              />
             </Box>
           )}
         </Typography>
 
         <TextField
+          label="fortsätt på berättelsen"
           onChange={handleInputChange}
           disabled={!okWriting}
           value={text}
@@ -79,7 +86,7 @@ const ContributeToStoryPage = () => {
             backgroundColor: "white",
             borderRadius: 2,
             boxShadow: 1,
-            padding: 2,
+            padding: 1,
           }}
         />
         <Box className={styles.buttonWrapper}>

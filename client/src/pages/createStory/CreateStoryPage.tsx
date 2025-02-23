@@ -101,7 +101,7 @@ const CreateStoryPage = () => {
           marginBottom: { xs: 2, md: 0 },
         }}
       >
-        <Typography variant="h4" sx={{ marginBottom: 3 }}>
+        <Typography variant="h1" sx={{ marginBottom: 3, fontSize: 30 }}>
           Ändra tillval
         </Typography>
 
@@ -128,34 +128,34 @@ const CreateStoryPage = () => {
         sx={{ flexGrow: 1, padding: 4, borderRadius: 8 }}
       >
         <Typography
-          variant="h4"
-          sx={{ marginBottom: 1, color: "rgb(12, 23, 79)" }}
+          variant="h1"
+          sx={{ marginBottom: 1, color: "rgb(12, 23, 79)", fontSize: 35 }}
         >
           Skriv din berättelse
         </Typography>
         <Box sx={{ marginBottom: 2 }}>
           {started ? (
-            <Typography variant="h5">
+            <Typography variant="h2">
               {timeLeft > 0 ? (
                 <>
-                  <Typography variant="h5">
+                  <Typography variant="h3">
                     Tänk på att avsluta innan tiden tar slut..
                   </Typography>
-                  <Typography variant="h5" color="rgb(238, 185, 121)">
+                  <Typography variant="h3" color="rgb(238, 185, 121)">
                     Tid: {formatTime(timeLeft)}
                   </Typography>
                 </>
               ) : (
-                <Typography variant="h5" color="red">
+                <Typography variant="h3" color="red">
                   Tiden är tyvärr slut!
                 </Typography>
               )}
             </Typography>
           ) : (
-            <Typography variant="h5" sx={{ marginBottom: 2 }}>
+            <Typography variant="h2" sx={{ marginBottom: 2 }}>
               <Typography
-                variant="h5"
-                sx={{ display: "inline-block", marginRight: 2 }}
+                variant="h3"
+                sx={{ display: "inline-block", marginRight: 2, fontSize:30 }}
               >
                 Starta tiden
               </Typography>
@@ -165,6 +165,8 @@ const CreateStoryPage = () => {
         </Box>
 
         <TextField
+          id="story-title"
+          label="Titel"
           value={title}
           onChange={handleInputChangeTitle}
           fullWidth
@@ -173,15 +175,18 @@ const CreateStoryPage = () => {
           disabled={!okWriting}
           variant="outlined"
           placeholder="Titel..."
+            aria-labelledby="story-title-label"
           sx={{
             marginBottom: 2,
             backgroundColor: "white",
             borderRadius: 2,
             boxShadow: 1,
-            padding: 2,
+            padding: 0.5,
           }}
         />
         <TextField
+          id="story-content"
+          label="berättelse"
           value={text}
           onChange={handleInputChange}
           fullWidth
@@ -190,12 +195,13 @@ const CreateStoryPage = () => {
           disabled={!okWriting}
           variant="outlined"
           placeholder="Skriv din berättelse här..."
+            aria-labelledby="story-content-label"
           sx={{
             marginBottom: 2,
             backgroundColor: "white",
             borderRadius: 2,
             boxShadow: 1,
-            padding: 2,
+            padding: 0.5,
           }}
         />
 
@@ -224,14 +230,21 @@ const CreateStoryPage = () => {
               width: 600,
               height: 600,
               bgcolor: "background.paper",
+              border: "1px solid rgb(195, 158, 121)",
               p: 3,
               borderRadius: 2,
               boxShadow: 24,
             }}
           >
-            <Box sx={{display:"flex", justifyContent: "space-between"}}>
-              <Typography sx={{mt:4}} variant="h6">Välj en person</Typography>
-              <Button className={styles.button} text="X" onClick={() => setOpenModal(false)}></Button>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography sx={{ mt: 4, fontSize: 25 }} variant="h1">
+                Välj en person
+              </Typography>
+              <Button
+                className={styles.button}
+                text="X"
+                onClick={() => setOpenModal(false)}
+              ></Button>
             </Box>
             <TextField
               fullWidth
@@ -244,6 +257,7 @@ const CreateStoryPage = () => {
             <List>
               {filteredPeople.map((person) => (
                 <ListItemButton
+                  sx={{ fontSize: 20 }}
                   key={person}
                   onClick={() => {
                     setSelectedPerson(person);

@@ -74,7 +74,7 @@ export async function registerUser(
 
 export async function getStorys() {
   try {
-    const token = useSelector<RootState>((state) => state.auth.token) as String;
+    const token = useSelector<RootState>((state) => state.auth.token) as string;
     const res = await fetch(`/story`, {
       headers: {
         "Content-Type": "application/json",

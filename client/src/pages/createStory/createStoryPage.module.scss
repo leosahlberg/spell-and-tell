@@ -44,11 +44,7 @@
   width: fit-content;
   border: 2px solid rgb(195, 158, 121);
   cursor: pointer;
-  background: linear-gradient(
-    to right,
-    rgb(139, 155, 247) 0%,
-    rgb(77, 82, 150) 100%
-  );
+  background-color: rgb(77, 82, 150) ;
   padding: 10px;
 }
 .button:hover {
