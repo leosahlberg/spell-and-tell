@@ -2,8 +2,12 @@ import storyimg from "../../assets/buss.jpg";
 import { Link } from "react-router";
 import styles from "./storyPage.module.scss";
 import Button from "../../components/buttons/Button";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { User } from "../../utils/types";
 
 const StoryPage = () => {
+  const user = useSelector<RootState>((state) => state.auth.user) as User;
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.storyCard}>
@@ -30,7 +34,10 @@ const StoryPage = () => {
           </p>
         </div>
         <div className={styles.link}>
-          <h2>Författare: Anna, Sanna, Hanna</h2>
+          <div style={{display: "flex", flexDirection: "column"}}>
+          <h2 style={{marginBottom: 5, fontSize: 20}}>Huvudförfattare: {user.name}</h2>
+          <p style={{fontSize: 20}}> Deltagare: test namn sara</p>
+          </div>
           <Link to="/contribute">
             <Button
               text="Fortsätt på denna berättelse"
