@@ -10,10 +10,8 @@ type InitialStateType = {
 };
 
 const initialState: InitialStateType = {
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")!)
-    : null,
-  token: localStorage.getItem("token"),
+  user: null,
+  token: null,
   registerAccepted: null,
   error: null,
 };
@@ -50,7 +48,7 @@ export const fetchLogin = createAsyncThunk<
     const data = (await response.json()) as LogInResponse;
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-
+    console.log(data.token);
     return data;
   } catch (error) {
     const errorMessage =

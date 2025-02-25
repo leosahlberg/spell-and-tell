@@ -17,11 +17,14 @@ type CreateStory = {
 
 export const fetchPublicStories = createAsyncThunk<
   Story[],
+  string,
   { rejectValue: string }
->("story/fetchPublicStories", async (_, { rejectWithValue }) => {
+>("story/fetchPublicStories", async (token, { rejectWithValue }) => {
   try {
-    const response = await getStorys();
-    return await response.json();
+    const response = await getStorys(token);
+
+    const data = await response.json();
+    return data;
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error occurred";

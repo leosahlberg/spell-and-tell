@@ -72,9 +72,8 @@ export async function registerUser(
   }
 }
 
-export async function getStorys() {
+export async function getStorys(token: string) {
   try {
-    const token = useSelector<RootState>((state) => state.auth.token) as String;
     const res = await fetch(`/story`, {
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +82,7 @@ export async function getStorys() {
       method: "GET",
     });
 
-    return res.json();
+    return res;
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

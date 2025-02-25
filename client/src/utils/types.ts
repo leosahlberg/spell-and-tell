@@ -14,7 +14,8 @@ export type RouleSet = {
 };
 
 export type Story = {
-  title: String;
+  _id: string;
+  title: string;
   created: Date;
   status: "created" | "in progress" | "completed";
   score: Number;
