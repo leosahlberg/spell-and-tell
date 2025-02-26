@@ -95,6 +95,7 @@ export async function getStorys(token: string) {
   }
 }
 
+//Not finished will throw error
 export async function createStory(title: string, userId: string) {
   try {
     const token = useSelector<RootState>((state) => state.auth.token) as String;
@@ -120,6 +121,7 @@ export async function createStory(title: string, userId: string) {
   }
 }
 
+//Not finished will throw error
 export async function createRouleSet(title: string, userId: string) {
   try {
     const token = useSelector<RootState>((state) => state.auth.token) as String;

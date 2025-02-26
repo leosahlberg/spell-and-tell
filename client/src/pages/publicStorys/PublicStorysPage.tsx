@@ -1,10 +1,5 @@
 import CardPublic from "../../components/card/CardPublic";
 import bok from "../../assets/bok.jpg";
-import groda from "../../assets/groda.jpg";
-import buss from "../../assets/buss.jpg";
-import pyramid from "../../assets/pyramid.jpg";
-import sagolandet from "../../assets/sagolandet.jpg";
-import tunnel from "../../assets/tunnel.jpg";
 import styles from "./publicStorysPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -13,7 +8,7 @@ import { fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
 
 const PublicStorysPage = () => {
-  const [stories, setStories0] = useState<Story[]>([]);
+  const [stories, setStories] = useState<Story[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector<RootState>(
     (state) => state.story.stories
@@ -25,10 +20,8 @@ const PublicStorysPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setStories0(data);
-    console.log(stories);
-    console.log(token);
-  }, [setStories0]);
+    setStories(data);
+  }, [setStories]);
 
   return (
     <div className={styles.publicstory}>
