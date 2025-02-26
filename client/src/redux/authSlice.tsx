@@ -48,7 +48,7 @@ export const fetchLogin = createAsyncThunk<
     const data = (await response.json()) as LogInResponse;
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-    console.log(data.token);
+
     return data;
   } catch (error) {
     const errorMessage =
