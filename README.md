@@ -1,6 +1,6 @@
 # Spell & Tell
 
-Examensarbete av Eva-Li och Isabella
+Examensarbete av Eva-Li och Leo
 
 ## Om projektet
 
