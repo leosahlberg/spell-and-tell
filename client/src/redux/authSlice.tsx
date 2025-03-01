@@ -10,10 +10,8 @@ type InitialStateType = {
 };
 
 const initialState: InitialStateType = {
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")!)
-    : null,
-  token: localStorage.getItem("token"),
+  user: null,
+  token: null,
   registerAccepted: null,
   error: null,
 };

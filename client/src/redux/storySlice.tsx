@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../utils/types";
-import { getStorys } from "../utils/api";
+import { Story } from "../utils/types";
+import { createStory, getStorys } from "../utils/api";
 
 type InitialStateType = {
   stories: Story[];
@@ -10,30 +10,35 @@ const initialState: InitialStateType = {
   stories: [],
 };
 
-type RouleSet = {
-  maxNumberOfWordsPerCpntribution: Number;
-  numberOfContribution: Number;
-  maxTime: Number;
-  scoring: Boolean;
-  spellChecking: Boolean;
-  type: "default" | "custom";
-};
-
-type Story = {
-  title: String;
-  created: Date;
-  status: "created" | "in progress" | "completed";
-  score: Number;
-  rouleSet: RouleSet;
-  user: User;
+type CreateStory = {
+  title: string;
+  id: string;
 };
 
 export const fetchPublicStories = createAsyncThunk<
   Story[],
+  string,
   { rejectValue: string }
->("story/fetchPublicStories", async (_, { rejectWithValue }) => {
+>("story/fetchPublicStories", async (token, { rejectWithValue }) => {
   try {
-    const response = await getStorys();
+    const response = await getStorys(token);
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+    return rejectWithValue(errorMessage);
+  }
+});
+
+export const fetchcreateStory = createAsyncThunk<
+  Story[],
+  CreateStory,
+  { rejectValue: string }
+>("story/fetchPublicStories", async ({ title, id }, { rejectWithValue }) => {
+  try {
+    const response = await createStory(title, id);
     return await response.json();
   } catch (error) {
     const errorMessage =

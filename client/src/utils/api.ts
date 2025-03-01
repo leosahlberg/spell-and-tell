@@ -72,15 +72,66 @@ export async function registerUser(
   }
 }
 
-export async function getStorys() {
+export async function getStorys(token: string) {
   try {
-    const token = useSelector<RootState>((state) => state.auth.token) as string;
     const res = await fetch(`/story`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       method: "GET",
+    });
+
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(
+        error.message || "Failed to connect to the server. Please try again."
+      );
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+//Not finished will throw error
+export async function createStory(title: string, userId: string) {
+  try {
+    const token = useSelector<RootState>((state) => state.auth.token) as String;
+    const res = await fetch(`/story`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "POST",
+      body: JSON.stringify({ title, userId }),
+    });
+
+    return res.json();
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(
+        error.message || "Failed to connect to the server. Please try again."
+      );
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+//Not finished will throw error
+export async function createRouleSet(title: string, userId: string) {
+  try {
+    const token = useSelector<RootState>((state) => state.auth.token) as String;
+    const res = await fetch(`/story`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "POST",
+      body: JSON.stringify({ title, userId }),
     });
 
     return res.json();
