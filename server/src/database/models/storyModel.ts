@@ -8,11 +8,6 @@ const storySchema = new mongoose.Schema({
   created: {
     type: Date,
   },
-  status: {
-    type: String,
-    enum: ["created", "in progress", "completed"],
-    required: true,
-  },
   score: {
     type: Number,
   },
@@ -21,11 +16,28 @@ const storySchema = new mongoose.Schema({
     ref: "RouleSet",
     required: true,
   },
-  userId:{
+  userId: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    required: true
-  }
+    required: true,
+  },
+  contributions: [
+    {
+      text: {
+        type: String,
+        required: true,
+      },
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+    },
+  ],
+  imgUrl: {
+    type: String,
+    required: true,
+  },
 });
 
 export const storyModel = mongoose.model("Story", storySchema);

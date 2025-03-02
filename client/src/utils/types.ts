@@ -1,4 +1,5 @@
 export type User = {
+  userId: string;
   name: string;
   username: string;
   email: string;
@@ -17,8 +18,14 @@ export type Story = {
   _id: string;
   title: string;
   created: Date;
-  status: "created" | "in progress" | "completed";
   score: Number;
   rouleSet: RouleSet;
   user: User;
+  imgUrl: string;
+  contributions: [
+    {
+      userId: string;
+      text: string;
+    }
+  ];
 };

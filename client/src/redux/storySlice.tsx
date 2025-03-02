@@ -13,6 +13,9 @@ const initialState: InitialStateType = {
 type CreateStory = {
   title: string;
   id: string;
+  imgUrl: string;
+  text: string;
+  token: string;
 };
 
 export const fetchPublicStories = createAsyncThunk<
@@ -32,20 +35,24 @@ export const fetchPublicStories = createAsyncThunk<
   }
 });
 
-export const fetchcreateStory = createAsyncThunk<
+export const fetchCreateStory = createAsyncThunk<
   Story[],
   CreateStory,
   { rejectValue: string }
->("story/fetchPublicStories", async ({ title, id }, { rejectWithValue }) => {
-  try {
-    const response = await createStory(title, id);
-    return await response.json();
-  } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : "Unknown error occurred";
-    return rejectWithValue(errorMessage);
+>(
+  "story/fetchCreateStories",
+  async ({ title, id, imgUrl, text, token }, { rejectWithValue }) => {
+    try {
+      const response = await createStory(title, id, imgUrl, text, token);
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      return rejectWithValue(errorMessage);
+    }
   }
-});
+);
 
 export const storySlice = createSlice({
   name: "story",
@@ -58,7 +65,9 @@ export const storySlice = createSlice({
         state.stories = action.payload;
       }
     );
-    builder.addCase(fetchPublicStories.rejected, (state, action) => {});
+    builder.addCase(fetchCreateStory.fulfilled, (state, action) => {
+      console.log("created");
+    });
   },
 });
 

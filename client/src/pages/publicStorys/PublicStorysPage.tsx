@@ -21,7 +21,7 @@ const PublicStorysPage = () => {
 
   useEffect(() => {
     setStories(data);
-  }, [setStories]);
+  }, [data]);
 
   return (
     <div className={styles.publicstory}>

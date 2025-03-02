@@ -95,20 +95,24 @@ export async function getStorys(token: string) {
   }
 }
 
-//Not finished will throw error
-export async function createStory(title: string, userId: string) {
+export async function createStory(
+  title: string,
+  userId: string,
+  imgUrl: string,
+  text: string,
+  token: string
+) {
   try {
-    const token = useSelector<RootState>((state) => state.auth.token) as String;
     const res = await fetch(`/story`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       method: "POST",
-      body: JSON.stringify({ title, userId }),
+      body: JSON.stringify({ title, userId, imgUrl, text }),
     });
 
-    return res.json();
+    return res;
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

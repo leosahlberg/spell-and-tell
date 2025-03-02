@@ -43,18 +43,25 @@ export function storyRouter() {
 
   router.post("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const { title, userId, rouleSetId } = req.body;
+      const { title, userId, rouleSetId, imgUrl, text } = req.body;
       let roulesetid = rouleSetId ? rouleSetId : "679a4ef2ea87678a17120a49";
       const date = new Date();
       const data = await storyModel.create({
         title: title,
-        status: "created",
         created: date,
         userId: userId,
         rouleSetId: roulesetid,
+        imgUrl: imgUrl,
+        contributions: [
+          {
+            text: text,
+            userId: userId,
+          },
+        ],
       });
       res.status(200).send(data);
     } catch (error) {
+      console.log(error);
       res.status(404).send({ message: "Error: Failed to create story." });
     }
   });

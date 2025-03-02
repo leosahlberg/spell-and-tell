@@ -40,7 +40,12 @@ app.post("/login", async (req: Request, res: Response) => {
       res.status(200);
       res.send({
         token: token,
-        user: { username: user.username, name: user.name, email: user.email },
+        user: {
+          userId: user._id,
+          username: user.username,
+          name: user.name,
+          email: user.email,
+        },
       });
     } else {
       res.status(400).send({ message: "Error: Invalid username or password." });

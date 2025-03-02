@@ -17,6 +17,10 @@ import Button from "../../components/buttons/Button";
 import ButtonTimer from "../../components/buttons/ButtonTimer";
 import { useState, useEffect } from "react";
 import styles from "./createStoryPage.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { fetchCreateStory } from "../../redux/storySlice";
+import { User } from "../../utils/types";
 
 const chooseFromMenu = [
   { title: "Antal ord", standard: "1000 ord", icon: <SixtyFpsSelectIcon /> },
@@ -45,6 +49,12 @@ const CreateStoryPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [search, setSearch] = useState("");
 
+  const dispatch = useDispatch<AppDispatch>();
+  const userId = useSelector<RootState>(
+    (state) => state.auth.user?.userId
+  ) as string;
+  const token = useSelector<RootState>((state) => state.auth.token) as string;
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (started && timeLeft > 0) {
@@ -60,7 +70,7 @@ const CreateStoryPage = () => {
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+    return `${minutes}:${secs < 120 ? "0" : ""}${secs}`;
   };
 
   const handleInputChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +87,23 @@ const CreateStoryPage = () => {
   const filteredPeople = people.filter((person) =>
     person.toLowerCase().includes(search.toLowerCase())
   );
+
+  function createStory() {
+    if (userId && token) {
+      console.log(token);
+      dispatch(
+        fetchCreateStory({
+          title: title,
+          id: userId,
+          imgUrl: "test",
+          text: text,
+          token: token,
+        })
+      );
+    }
+    console.log(userId);
+    console.log(token + "-token");
+  }
 
   return (
     <Box
@@ -155,7 +182,7 @@ const CreateStoryPage = () => {
             <Typography variant="h2" sx={{ marginBottom: 2 }}>
               <Typography
                 variant="h3"
-                sx={{ display: "inline-block", marginRight: 2, fontSize:30 }}
+                sx={{ display: "inline-block", marginRight: 2, fontSize: 30 }}
               >
                 Starta tiden
               </Typography>
@@ -175,7 +202,7 @@ const CreateStoryPage = () => {
           disabled={!okWriting}
           variant="outlined"
           placeholder="Titel..."
-            aria-labelledby="story-title-label"
+          aria-labelledby="story-title-label"
           sx={{
             marginBottom: 2,
             backgroundColor: "white",
@@ -195,7 +222,7 @@ const CreateStoryPage = () => {
           disabled={!okWriting}
           variant="outlined"
           placeholder="Skriv din berättelse här..."
-            aria-labelledby="story-content-label"
+          aria-labelledby="story-content-label"
           sx={{
             marginBottom: 2,
             backgroundColor: "white",
@@ -209,6 +236,13 @@ const CreateStoryPage = () => {
           sx={{ display: "flex", justifyContent: "flex-end" }}
           className={styles.buttonWrapper}
         >
+          {/* Tillf
+        llig knapp */}
+          <Button
+            className={styles.button}
+            text={"Spara"}
+            onClick={() => createStory()}
+          />
           <Button
             className={styles.button}
             text={
