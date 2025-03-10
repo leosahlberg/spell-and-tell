@@ -1,10 +1,9 @@
 import CardPublic from "../../components/card/CardPublic";
-import bok from "../../assets/bok.jpg";
 import styles from "./publicStorysPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { Story } from "../../utils/types";
-import { fetchPublicStories } from "../../redux/storySlice";
+import { fetchDeleteStory, fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
 
 const PublicStorysPage = () => {
@@ -17,16 +16,20 @@ const PublicStorysPage = () => {
 
   useEffect(() => {
     dispatch(fetchPublicStories(token));
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   useEffect(() => {
     setStories(data);
   }, [data]);
 
+  const handleDelete = async (id: string) => {
+    dispatch(fetchDeleteStory({ id, token }));
+  };
+
   return (
     <div className={styles.publicstory}>
       {stories.map((story) => (
-        <CardPublic imgs={bok} title={story.title} id={story._id} />
+        <CardPublic key={story._id} imgs={story.imgUrl} title={story.title} contributions={[...story.contributions]} id={story._id} onDelete={handleDelete} />
       ))}
     </div>
   );

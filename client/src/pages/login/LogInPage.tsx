@@ -1,6 +1,6 @@
 import { Paper, TextField, Typography } from "@mui/material";
 import style from "./logInPage.module.scss";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";

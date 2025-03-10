@@ -6,11 +6,11 @@ export type User = {
 };
 
 export type RouleSet = {
-  maxNumberOfWordsPerCpntribution: Number;
-  numberOfContribution: Number;
-  maxTime: Number;
-  scoring: Boolean;
-  spellChecking: Boolean;
+  maxNumberOfWordsPerCpntribution: number;
+  numberOfContribution: number;
+  maxTime: number;
+  scoring: boolean;
+  spellChecking: boolean;
   type: "default" | "custom";
 };
 
@@ -18,7 +18,7 @@ export type Story = {
   _id: string;
   title: string;
   created: Date;
-  score: Number;
+  score: number;
   rouleSet: RouleSet;
   user: User;
   imgUrl: string;

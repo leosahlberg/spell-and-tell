@@ -1,7 +1,7 @@
 import style from "./startPage.module.scss";
 import imglogo from "../../assets/logoST2.png";
 import { Typography } from "@mui/material";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router";
 import Button from "../../components/buttons/Button";
 

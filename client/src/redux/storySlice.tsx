@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Story } from "../utils/types";
-import { createStory, getStorys } from "../utils/api";
+import { createStory, deleteStory, getStorys } from "../utils/api";
 
 type InitialStateType = {
   stories: Story[];
@@ -54,6 +54,27 @@ export const fetchCreateStory = createAsyncThunk<
   }
 );
 
+
+
+export const fetchDeleteStory = createAsyncThunk<
+  string, 
+  { id: string; token: string }, 
+  { rejectValue: string }
+>(
+  "story/fetchDeleteStory",
+  async ({ id, token }, { rejectWithValue }) => {
+    try {
+      await deleteStory(id, token);
+      return id;
+    } catch (error) {
+      console.log(error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
 export const storySlice = createSlice({
   name: "story",
   initialState,
@@ -68,8 +89,12 @@ export const storySlice = createSlice({
     builder.addCase(fetchCreateStory.fulfilled, (state, action) => {
       console.log("created");
     });
+    builder.addCase(fetchDeleteStory.fulfilled, (state, action) => {
+      state.stories = state.stories.filter(story => story._id !== action.payload);
+    });
   },
 });
+
 
 export const {} = storySlice.actions;
 

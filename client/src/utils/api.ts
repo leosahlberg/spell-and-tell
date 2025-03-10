@@ -85,7 +85,6 @@ export async function getStorys(token: string) {
     return res;
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message);
       throw new Error(
         error.message || "Failed to connect to the server. Please try again."
       );
@@ -124,6 +123,32 @@ export async function createStory(
     }
   }
 }
+
+export async function deleteStory(id: string, token: string) {
+  try {
+    const res = await fetch(`/story/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to delete story");
+    }
+
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(error.message || "Failed to connect to the server.");
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
 
 //Not finished will throw error
 export async function createRouleSet(title: string, userId: string) {

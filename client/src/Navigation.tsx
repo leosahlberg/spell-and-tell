@@ -44,7 +44,7 @@ const Navigation = () => {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/login" element={<LogInPage />} />
-            <Route path="/story" element={<StoryPage />} />
+            <Route path="/story/:id" element={<StoryPage />} />
             <Route path="/stories" element={<PublicStorysPage />} />
           </Routes>
         </>

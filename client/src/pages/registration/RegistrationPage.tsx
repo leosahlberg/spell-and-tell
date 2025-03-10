@@ -6,7 +6,7 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/bookimg.jpg";
 import Button from "../../components/buttons/Button";
 
