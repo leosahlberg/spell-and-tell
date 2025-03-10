@@ -20,7 +20,7 @@ import styles from "./createStoryPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchCreateStory } from "../../redux/storySlice";
-import { User } from "../../utils/types";
+import ImagePicker from "../../components/ImagePicker";
 
 const chooseFromMenu = [
   { title: "Antal ord", standard: "1000 ord", icon: <SixtyFpsSelectIcon /> },
@@ -40,7 +40,7 @@ const people = [
 ];
 
 const CreateStoryPage = () => {
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(60);
   const [started, setStarted] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -48,6 +48,7 @@ const CreateStoryPage = () => {
   const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState(false);
   const [search, setSearch] = useState("");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const dispatch = useDispatch<AppDispatch>();
   const userId = useSelector<RootState>(
@@ -90,20 +91,21 @@ const CreateStoryPage = () => {
 
   function createStory() {
     if (userId && token) {
-      console.log(token);
       dispatch(
         fetchCreateStory({
           title: title,
           id: userId,
-          imgUrl: "test",
+          imgUrl: selectedImage || "test",
           text: text,
           token: token,
         })
       );
     }
-    console.log(userId);
-    console.log(token + "-token");
   }
+
+  const handleImageSelect = (image: string) => {
+    setSelectedImage(image);
+  };
 
   return (
     <Box
@@ -154,42 +156,40 @@ const CreateStoryPage = () => {
         className={styles.box}
         sx={{ flexGrow: 1, padding: 4, borderRadius: 8 }}
       >
-        <Typography
-          variant="h1"
-          sx={{ marginBottom: 1, color: "rgb(12, 23, 79)", fontSize: 35 }}
-        >
-          Skriv din berättelse
-        </Typography>
-        <Box sx={{ marginBottom: 2 }}>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Typography
+            variant="h1"
+            sx={{
+              marginBottom: 1,
+              color: "rgb(12, 23, 79)",
+              fontSize: 35,
+              marginRight: 3,
+            }}
+          >
+            Skriv din berättelse
+          </Typography>
+          <ButtonTimer text="Starta" onClick={() => setStarted(true)} />
+        </Box>
+
+        <Box sx={{ marginBottom: 5, display: "flex", flexDirection: "row" }}>
           {started ? (
             <Typography variant="h2">
               {timeLeft > 0 ? (
                 <>
-                  <Typography variant="h3">
-                    Tänk på att avsluta innan tiden tar slut..
-                  </Typography>
-                  <Typography variant="h3" color="rgb(238, 185, 121)">
+                  <Typography variant="h3" color="rgb(238, 185, 121)" sx={{fontSize: 22}}>
                     Tid: {formatTime(timeLeft)}
                   </Typography>
                 </>
               ) : (
-                <Typography variant="h3" color="red">
+                <Typography variant="h3" color="red" sx={{fontSize: 22}}>
                   Tiden är tyvärr slut!
                 </Typography>
               )}
             </Typography>
-          ) : (
-            <Typography variant="h2" sx={{ marginBottom: 2 }}>
-              <Typography
-                variant="h3"
-                sx={{ display: "inline-block", marginRight: 2, fontSize: 30 }}
-              >
-                Starta tiden
-              </Typography>
-              <ButtonTimer text="Starta" onClick={() => setStarted(true)} />
-            </Typography>
-          )}
+          ) : null}
         </Box>
+
+        <ImagePicker onSelectImage={handleImageSelect} />
 
         <TextField
           id="story-title"
@@ -236,8 +236,6 @@ const CreateStoryPage = () => {
           sx={{ display: "flex", justifyContent: "flex-end" }}
           className={styles.buttonWrapper}
         >
-          {/* Tillf
-        llig knapp */}
           <Button
             className={styles.button}
             text={"Spara"}
@@ -278,7 +276,7 @@ const CreateStoryPage = () => {
                 className={styles.button}
                 text="X"
                 onClick={() => setOpenModal(false)}
-              ></Button>
+              />
             </Box>
             <TextField
               fullWidth

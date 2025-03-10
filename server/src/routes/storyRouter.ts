@@ -84,5 +84,23 @@ export function storyRouter() {
     }
   );
 
+  router.delete("/:id", authenticateUser(), async (req: Request, res: Response): Promise<void> => {
+    try {
+      const deletedStory = await storyModel.findByIdAndDelete(req.params.id);
+  
+      if (!deletedStory) {
+        res.status(404).send({ message: "Story not found" });
+        return;
+      }
+  
+      res.status(200).send({ message: "Story deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting story:", error);
+      res.status(500).send({ message: "Error: Failed to delete story" });
+    }
+  });
+  
+  
+
   return router;
 }
