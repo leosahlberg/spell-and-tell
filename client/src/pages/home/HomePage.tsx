@@ -1,7 +1,7 @@
 import { Paper, Typography } from "@mui/material";
 import style from "./homePage.module.scss";
 import image from "../../assets/backgroundletters.png";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { RootState } from "../../redux/store";
