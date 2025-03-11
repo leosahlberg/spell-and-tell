@@ -54,7 +54,7 @@ const NavBar = ({ user }: NavBarProps) => {
               <Link className={styles.links} to={item.path}>
                 <p>{item.img}</p>
                 <p className={`${styles.icon}`}>{item.icon}</p>
-                <h1 className={styles.title}>{item.title}</h1>
+                <span className={styles.title}>{item.title}</span>
               </Link>
             </li>
           ))}

@@ -6,7 +6,7 @@ type ButtonProps = {
 };
 
 const ButtonTimer = ({ text, onClick }: ButtonProps) => {
-  return <button className={styles.button} onClick={onClick}><h1>{text}</h1></button>;
+  return <button className={styles.button} onClick={onClick}><h2>{text}</h2></button>;
 };
 
 export default ButtonTimer;

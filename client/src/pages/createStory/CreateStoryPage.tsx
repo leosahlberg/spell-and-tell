@@ -138,6 +138,7 @@ const CreateStoryPage = () => {
           {chooseFromMenu.map((item) => (
             <ListItem key={item.title} className={styles.list}>
               <Box
+                tabIndex={0}
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -176,12 +177,16 @@ const CreateStoryPage = () => {
             <Typography variant="h2">
               {timeLeft > 0 ? (
                 <>
-                  <Typography variant="h3" color="rgb(238, 185, 121)" sx={{fontSize: 22}}>
+                  <Typography
+                    variant="h3"
+                    color="rgb(238, 185, 121)"
+                    sx={{ fontSize: 22 }}
+                  >
                     Tid: {formatTime(timeLeft)}
                   </Typography>
                 </>
               ) : (
-                <Typography variant="h3" color="red" sx={{fontSize: 22}}>
+                <Typography variant="h3" color="red" sx={{ fontSize: 22 }}>
                   Tiden är tyvärr slut!
                 </Typography>
               )}

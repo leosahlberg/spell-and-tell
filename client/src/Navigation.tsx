@@ -11,7 +11,7 @@ import NavBar from "./components/navbar/NavBar";
 import TermsPage from "./pages/terms/TermsPage";
 import PublicStorysPage from "./pages/publicStorys/PublicStorysPage";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { User } from "./utils/types";
 import { RootState } from "./redux/store";
 import StoryPage from "./pages/story/StoryPage";
@@ -23,6 +23,14 @@ const Navigation = () => {
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/registration";
   const navigate = useNavigate();
+
+  const mainContentRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (mainContentRef.current) {
+      mainContentRef.current.focus();
+    }
+  }, [location]);
 
   useEffect(() => {
     if (!user && !isAuthPage && location.pathname !== "/terms") {
@@ -36,27 +44,31 @@ const Navigation = () => {
         <>
           <Header loggedIn={true} />
           <NavBar user={user} />
-          <Routes>
-            <Route index element={<HomePage />} />
-            <Route path="/createstory" element={<CreateStoryPage />} />
-            <Route path="/contribute" element={<ContributeToStoryPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/registration" element={<RegistrationPage />} />
-            <Route path="/login" element={<LogInPage />} />
-            <Route path="/story/:id" element={<StoryPage />} />
-            <Route path="/stories" element={<PublicStorysPage />} />
-          </Routes>
+          <main ref={mainContentRef} tabIndex={-1}>
+            <Routes>
+              <Route index element={<HomePage />} />
+              <Route path="/createstory" element={<CreateStoryPage />} />
+              <Route path="/contribute" element={<ContributeToStoryPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/registration" element={<RegistrationPage />} />
+              <Route path="/login" element={<LogInPage />} />
+              <Route path="/story/:id" element={<StoryPage />} />
+              <Route path="/stories" element={<PublicStorysPage />} />
+            </Routes>
+          </main>
         </>
       ) : (
         <>
           {!isStartPage && <Header loggedIn={false} />}
-          <Routes>
-            <Route index element={<StartPage />} />
-            <Route path="/login" element={<LogInPage />} />
-            <Route path="/registration" element={<RegistrationPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-          </Routes>
+          <main ref={mainContentRef} tabIndex={-1}>
+            <Routes>
+              <Route index element={<StartPage />} />
+              <Route path="/login" element={<LogInPage />} />
+              <Route path="/registration" element={<RegistrationPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+            </Routes>
+          </main>
         </>
       )}
     </>

@@ -20,6 +20,7 @@
     align-items: center;
     flex-grow: 1;
     list-style: none;
+
     .links {
       display: flex;
       align-items: center;
@@ -36,6 +37,10 @@
 
       &:hover {
         background-color: rgba(243, 243, 243, 0.1);
+      }
+
+      .title{
+        font-size: 1.5rem;
       }
     }
   }
