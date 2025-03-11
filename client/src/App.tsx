@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import Navigation from "./Navigation";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";

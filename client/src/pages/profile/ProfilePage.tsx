@@ -3,7 +3,7 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import styles from "./profilePage.module.scss";
 import Button from "../../components/buttons/Button";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
   const user = useSelector<RootState>((state) => state.auth.user) as User;
