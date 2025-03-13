@@ -1,4 +1,4 @@
-import { User } from "../../utils/types";
+import { Story, User } from "../../utils/types";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import styles from "./profilePage.module.scss";
@@ -7,6 +7,23 @@ import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
   const user = useSelector<RootState>((state) => state.auth.user) as User;
+  const stories = useSelector<RootState>(
+    (state) => state.story.stories
+  ) as Story[];
+
+  const handleStoriesCount = () => {
+    let count = 0;
+    stories.forEach((story) => {
+      const contributed = story.contributions.some(
+        (contribution) => contribution.userId === user.userId
+      );
+      if (contributed) {
+        count++;
+      }
+    });
+    return count;
+  };
+
   return (
     <div className={styles.profilecontainer}>
       <div className={styles.info}>
@@ -18,18 +35,20 @@ const ProfilePage = () => {
           className={styles.img}
         />
         <div className={styles.details}>
-          <h2>{user.name}</h2>
+          <h1>{user.name}</h1>
           <p>Användarnamn: {user.username}</p>
           <p>Email: {user.email}</p>
         </div>
       </div>
       <div className={styles.container}>
         <div className={styles.activity}>
-          <i>Antal berättelser du bidragit till: 3 stycken </i>
+          <i>
+            Antal berättelser du bidragit till: {handleStoriesCount()} stycken
+          </i>
         </div>
 
         <div className={styles.settings}>
-          <h3>Inställningar</h3>
+          <h2 className={styles.submenu}>Inställningar</h2>
           <Button className={styles.button} text="Redigera profil" />
           <Button className={styles.button} text="Byt lösenord" />
           <Button className={styles.button} text="Sekretessinställningar" />

@@ -39,13 +39,21 @@ const Header = (props: HeaderProps) => {
   const NavList = [
     { title: "Startsida", icon: <HomeIcon />, path: "/" },
     { title: "Profil", icon: <AccountCircleIcon />, path: "/profile" },
-    { title: "Skapa ny berättelse", icon: <AddCircleIcon />, path: "/createstory" },
+    {
+      title: "Skapa ny berättelse",
+      icon: <AddCircleIcon />,
+      path: "/createstory",
+    },
     { title: "Alla berättelser", icon: <LibraryBooksIcon />, path: "/stories" },
     { title: "Regler och villkor", icon: <InfoIcon />, path: "/terms" },
   ];
 
   const DrawerList = (
-    <Box sx={{ width: 250, height: "100%"}} role="presentation" onClick={toggleDrawer(false)}>
+    <Box
+      sx={{ width: 250, height: "100%" }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+    >
       <List>
         {NavList.map((item) => (
           <ListItem key={item.title} disablePadding>
@@ -85,15 +93,23 @@ const Header = (props: HeaderProps) => {
           <p>Skapa kreativa berättelser tillsammans</p>
         </div>
         {props.loggedIn ? (
-          <div className={style.menubar}>
+          <div>
             <MenuIcon
+              className={style.menubar}
+              tabIndex={0}
               sx={{
                 fontSize: "40px",
                 marginLeft: 20,
                 marginRight: 5,
                 cursor: "pointer",
+                outline: "none",
               }}
               onClick={toggleDrawer(true)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  toggleDrawer(true)();
+                }
+              }}
             />
             <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
               {DrawerList}
