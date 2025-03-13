@@ -21,15 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchCreateStory } from "../../redux/storySlice";
 import ImagePicker from "../../components/ImagePicker";
-
-const chooseFromMenu = [
-  { title: "Antal ord", standard: "1000 ord", icon: <SixtyFpsSelectIcon /> },
-  { title: "Max tid", standard: "20 min", icon: <HourglassTopTwoToneIcon /> },
-  { title: "Deltagare", standard: "2 st", icon: <PeopleTwoToneIcon /> },
-  { title: "Poängräkning", standard: "aktiv", icon: <ScoreboardTwoToneIcon /> },
-  { title: "Rättstavning", standard: "aktiv", icon: <SpellcheckTwoToneIcon /> },
-  { title: "Tema", standard: "ej aktiv", icon: <ContrastTwoToneIcon /> },
-];
+import { RouleSet } from "../../utils/types";
 
 const people = [
   "Alice Andersson",
@@ -49,6 +41,14 @@ const CreateStoryPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [rouleSet, setRouleSet] = useState<RouleSet>({
+    maxNumberOfWordsPerCpntribution: 2,
+    numberOfContribution: 2,
+    maxTime: 60,
+    spellChecking: false,
+    scoring: false,
+    type: "default",
+  });
 
   const dispatch = useDispatch<AppDispatch>();
   const userId = useSelector<RootState>(
@@ -131,26 +131,101 @@ const CreateStoryPage = () => {
         }}
       >
         <Typography variant="h1" sx={{ marginBottom: 3, fontSize: 30 }}>
-          Ändra tillval
+          Ändra regler för story
         </Typography>
 
         <List sx={{ padding: 0 }}>
-          {chooseFromMenu.map((item) => (
-            <ListItem key={item.title} className={styles.list}>
-              <Box
-                tabIndex={0}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Typography className={styles.title}>{item.title}</Typography>
-                <Box sx={{ color: "rgb(12, 23, 79)" }}>{item.icon}</Box>
+          <ListItem className={styles.list}>
+            <Box
+              tabIndex={0}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography className={styles.title}>
+                Antal ord: {rouleSet.maxNumberOfWordsPerCpntribution}
+              </Typography>
+              <Box sx={{ color: "rgb(12, 23, 79)" }}>
+                {<SixtyFpsSelectIcon />}
               </Box>
-            </ListItem>
-          ))}
+            </Box>
+          </ListItem>
+          <ListItem className={styles.list}>
+            <Box
+              tabIndex={0}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography className={styles.title}>
+                Max tid: {rouleSet.maxTime}
+              </Typography>
+              <Box sx={{ color: "rgb(12, 23, 79)" }}>
+                <HourglassTopTwoToneIcon />
+              </Box>
+            </Box>
+          </ListItem>
+          <ListItem className={styles.list}>
+            <Box
+              tabIndex={0}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography className={styles.title}>
+                Antal deltagare: {rouleSet.numberOfContribution}
+              </Typography>
+              <Box sx={{ color: "rgb(12, 23, 79)" }}>
+                <PeopleTwoToneIcon />
+              </Box>
+            </Box>
+          </ListItem>
+          <ListItem className={styles.list}>
+            <Box
+              tabIndex={0}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography className={styles.title}>
+                Poängräkning: {rouleSet.scoring ? "Ja" : "Nej"}
+              </Typography>
+              <Box sx={{ color: "rgb(12, 23, 79)" }}>
+                <ScoreboardTwoToneIcon />
+              </Box>
+            </Box>
+          </ListItem>
+          <ListItem className={styles.list}>
+            <Box
+              tabIndex={0}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography className={styles.title}>
+                Stavningskontroll: {rouleSet.spellChecking ? "Ja" : "Nej"}
+              </Typography>
+              <Box sx={{ color: "rgb(12, 23, 79)" }}>
+                <SpellcheckTwoToneIcon />
+              </Box>
+            </Box>
+          </ListItem>
         </List>
+        <Button
+          className={styles.button}
+          text={"Spara"}
+          onClick={() => createStory()}
+        />
       </Box>
 
       <Box
