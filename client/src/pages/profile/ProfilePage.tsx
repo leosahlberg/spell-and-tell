@@ -1,11 +1,14 @@
 import { Story, User } from "../../utils/types";
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./profilePage.module.scss";
 import Button from "../../components/buttons/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../redux/authSlice";
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector<RootState>((state) => state.auth.user) as User;
   const stories = useSelector<RootState>(
     (state) => state.story.stories
@@ -55,9 +58,14 @@ const ProfilePage = () => {
         </div>
 
         <div className={styles.footer}>
-          <Link to="/login">
-            <Button className={styles.button} text="Logga ut" />
-          </Link>
+          <Button
+            onClick={() => {
+              dispatch(logout());
+              navigate("/");
+            }}
+            className={styles.button}
+            text="Logga ut"
+          />
         </div>
       </div>
     </div>

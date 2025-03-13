@@ -106,6 +106,7 @@ export const authSlice = createSlice({
       state.error = null;
     });
     builder.addCase(fetchRegistrateUser.rejected, (state, action) => {
+      state.registerAccepted = false;
       state.error = action.payload || "An unexpected error occurred";
     });
   },

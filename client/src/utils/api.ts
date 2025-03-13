@@ -35,12 +35,12 @@ export async function logIn(username: string, password: string) {
 
 export async function registerUser(
   name: string,
-  email: string,
   username: string,
+  email: string,
   password: string
 ) {
   try {
-    const res = await fetch(`/login`, {
+    const res = await fetch(`/user`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -148,7 +148,6 @@ export async function deleteStory(id: string, token: string) {
     }
   }
 }
-
 
 //Not finished will throw error
 export async function createRouleSet(title: string, userId: string) {
