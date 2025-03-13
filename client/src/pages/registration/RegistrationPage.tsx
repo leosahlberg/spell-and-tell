@@ -9,14 +9,50 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/bookimg.jpg";
 import Button from "../../components/buttons/Button";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { fetchRegistrateUser } from "../../redux/authSlice";
 
 const RegistrationPage = () => {
-  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [errorPassword, setErrorPassword] = useState<string | null>(null);
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const data = useSelector<RootState>((state) => state.auth.error) as string;
+
+  useEffect(() => {
+    setError(data);
+  }, [data]);
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    navigate("/home");
+
+    const actionresult = await dispatch(
+      fetchRegistrateUser({
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+      })
+    );
+    if (fetchRegistrateUser.fulfilled.match(actionresult)) {
+      navigate("/login");
+    }
   };
+
+  function confirmPassword(pass: string) {
+    if (pass !== password) {
+      setErrorPassword("Password don't match");
+    } else {
+      setErrorPassword(null);
+    }
+  }
 
   return (
     <div
@@ -42,11 +78,32 @@ const RegistrationPage = () => {
           borderRadius: "8px",
         }}
       >
-        <Typography className={styles.regtitle} variant="h1" sx={{fontSize: "3rem"}} gutterBottom>
+        <Typography
+          className={styles.regtitle}
+          variant="h1"
+          sx={{ fontSize: "3rem" }}
+          gutterBottom
+        >
           Skapa ett användarkonto
         </Typography>
 
         <form onSubmit={handleSubmit}>
+          <label className={styles.label} id="name-label" htmlFor="name">
+            Namn
+          </label>
+          <TextField
+            variant="standard"
+            id="name"
+            fullWidth
+            required
+            placeholder="Ange namn"
+            onChange={(e) => setName(e.currentTarget.value)}
+            sx={{
+              marginBottom: 3,
+              marginTop: 1,
+              input: { color: "black", fontStyle: "italic", fontSize: 18 },
+            }}
+          />
           <label
             className={styles.label}
             id="username-label"
@@ -60,6 +117,7 @@ const RegistrationPage = () => {
             fullWidth
             required
             placeholder="Ange användarnamn (exempel: Anna79)"
+            onChange={(e) => setUsername(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
@@ -77,6 +135,7 @@ const RegistrationPage = () => {
             required
             type="email"
             placeholder="Ange din e-postadress (exempel anna@gmail.com)"
+            onChange={(e) => setEmail(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
@@ -98,6 +157,7 @@ const RegistrationPage = () => {
             fullWidth
             required
             placeholder="Ange lösenord (minst 8 tecken)"
+            onChange={(e) => setPassword(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
@@ -119,13 +179,18 @@ const RegistrationPage = () => {
             fullWidth
             required
             placeholder="Bekräfta ditt lösenord"
+            onChange={(e) => confirmPassword(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
               input: { color: "black", fontStyle: "italic", fontSize: 18 },
             }}
           />
-
+          {errorPassword != null ? (
+            <p style={{ color: "red" }}>{errorPassword}</p>
+          ) : (
+            <></>
+          )}
           <FormControlLabel
             control={<Checkbox />}
             label="Jag accepterar villkor och regler"
@@ -137,8 +202,12 @@ const RegistrationPage = () => {
             }}
           />
 
-          <Typography variant="body2" sx={{fontSize: 18, color: "purple"}}>
-            (läs <Link to="/terms" style={{color: "purple"}}>villkor och regler</Link>)
+          <Typography variant="body2" sx={{ fontSize: 18, color: "purple" }}>
+            (läs{" "}
+            <Link to="/terms" style={{ color: "purple" }}>
+              villkor och regler
+            </Link>
+            )
           </Typography>
 
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
