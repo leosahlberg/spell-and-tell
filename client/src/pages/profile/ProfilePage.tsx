@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./profilePage.module.scss";
 import Button from "../../components/buttons/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authSlice";
 
 const ProfilePage = () => {
