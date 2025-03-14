@@ -19,17 +19,7 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      "/contribution": {
-        target: "http://localhost:3000/",
-        changeOrigin: true,
-        secure: false,
-      },
       "/story": {
-        target: "http://localhost:3000/",
-        changeOrigin: true,
-        secure: false,
-      },
-      "/rouleSet": {
         target: "http://localhost:3000/",
         changeOrigin: true,
         secure: false,

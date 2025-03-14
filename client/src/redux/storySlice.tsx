@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Story } from "../utils/types";
+import { Story, CreateStory } from "../utils/types";
 import { createStory, deleteStory, getStorys } from "../utils/api";
 
 type InitialStateType = {
@@ -8,14 +8,6 @@ type InitialStateType = {
 
 const initialState: InitialStateType = {
   stories: [],
-};
-
-type CreateStory = {
-  title: string;
-  id: string;
-  imgUrl: string;
-  text: string;
-  token: string;
 };
 
 export const fetchPublicStories = createAsyncThunk<
@@ -41,9 +33,34 @@ export const fetchCreateStory = createAsyncThunk<
   { rejectValue: string }
 >(
   "story/fetchCreateStories",
-  async ({ title, id, imgUrl, text, token }, { rejectWithValue }) => {
+  async (
+    {
+      title,
+      id,
+      imgUrl,
+      text,
+      numberOfContributors,
+      maxNumberOfWordsPerContribution,
+      maxTime,
+      spellChecking,
+      scoring,
+      token,
+    },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await createStory(title, id, imgUrl, text, token);
+      const response = await createStory(
+        title,
+        id,
+        imgUrl,
+        text,
+        numberOfContributors,
+        maxNumberOfWordsPerContribution,
+        maxTime,
+        spellChecking,
+        scoring,
+        token
+      );
       return await response.json();
     } catch (error) {
       console.log(error);
@@ -54,26 +71,21 @@ export const fetchCreateStory = createAsyncThunk<
   }
 );
 
-
-
 export const fetchDeleteStory = createAsyncThunk<
-  string, 
-  { id: string; token: string }, 
+  string,
+  { id: string; token: string },
   { rejectValue: string }
->(
-  "story/fetchDeleteStory",
-  async ({ id, token }, { rejectWithValue }) => {
-    try {
-      await deleteStory(id, token);
-      return id;
-    } catch (error) {
-      console.log(error);
-      const errorMessage =
-        error instanceof Error ? error.message : "Unknown error occurred";
-      return rejectWithValue(errorMessage);
-    }
+>("story/fetchDeleteStory", async ({ id, token }, { rejectWithValue }) => {
+  try {
+    await deleteStory(id, token);
+    return id;
+  } catch (error) {
+    console.log(error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+    return rejectWithValue(errorMessage);
   }
-);
+});
 
 export const storySlice = createSlice({
   name: "story",
@@ -90,11 +102,12 @@ export const storySlice = createSlice({
       console.log("created");
     });
     builder.addCase(fetchDeleteStory.fulfilled, (state, action) => {
-      state.stories = state.stories.filter(story => story._id !== action.payload);
+      state.stories = state.stories.filter(
+        (story) => story._id !== action.payload
+      );
     });
   },
 });
-
 
 export const {} = storySlice.actions;
 
