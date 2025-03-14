@@ -51,6 +51,8 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
       <Box
         sx={{
           marginBottom: { xs: 2, md: 0 },
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <Typography variant="h1" sx={{ marginBottom: 3, fontSize: 30 }}>
@@ -62,6 +64,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
           value={ruleSet.maxNumberOfWordsPerContribution}
           variant="outlined"
           aria-labelledby="story-numberOfWords-label"
+          fullWidth
           onChange={(e) =>
             setRuleSet({
               ...ruleSet,
@@ -77,11 +80,12 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
           }}
         />
         <TextField
-          id="numberOfWords"
+          id="numberOfContribution"
           label="Antal deltagare"
           value={ruleSet.numberOfContribution}
           variant="outlined"
-          aria-labelledby="story-numberOfWords-label"
+          aria-labelledby="story-numberOfContribution-label"
+          fullWidth
           onChange={(e) =>
             setRuleSet({
               ...ruleSet,
@@ -97,11 +101,12 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
           }}
         />
         <TextField
-          id="numberOfWords"
+          id="maxTime"
           label="Max tid"
           value={ruleSet.maxTime}
           variant="outlined"
-          aria-labelledby="story-numberOfWords-label"
+          aria-labelledby="story-maxTime-label"
+          fullWidth
           onChange={(e) =>
             setRuleSet({
               ...ruleSet,
@@ -117,13 +122,11 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
           }}
         />
         <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">
-            Stavningskontroll
-          </FormLabel>
+          <FormLabel id="spell-check-label">Stavningskontroll</FormLabel>
           <RadioGroup
             row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
+            aria-labelledby="spell-check-label"
+            name="spell-check"
             onChange={(e) =>
               setRuleSet({
                 ...ruleSet,
@@ -136,13 +139,11 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
           </RadioGroup>
         </FormControl>
         <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">
-            Poängräkning
-          </FormLabel>
+          <FormLabel id="score-label">Poängräkning</FormLabel>
           <RadioGroup
             row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
+            aria-labelledby="score-label"
+            name="score-label"
             onChange={(e) =>
               setRuleSet({
                 ...ruleSet,
