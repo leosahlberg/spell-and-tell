@@ -1,7 +1,6 @@
 import Express, { Request, Response } from "express";
 import { storyModel } from "../database/models/storyModel";
 import { authenticateUser } from "../auth/authenticate";
-import { rouleSetModel } from "../database/models/roulesetModel";
 
 export function storyRouter() {
   const router = Express.Router();
@@ -43,14 +42,23 @@ export function storyRouter() {
 
   router.post("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const { title, userId, rouleSetId, imgUrl, text } = req.body;
-      let roulesetid = rouleSetId ? rouleSetId : "679a4ef2ea87678a17120a49";
+      const {
+        title,
+        userId,
+        imgUrl,
+        text,
+        numberOfContributors,
+        maxNumberOfWordsPerContribution,
+        maxTime,
+        spellChecking,
+        scoring,
+      } = req.body;
+
       const date = new Date();
       const data = await storyModel.create({
         title: title,
         created: date,
         userId: userId,
-        rouleSetId: roulesetid,
         imgUrl: imgUrl,
         contributions: [
           {
@@ -58,6 +66,12 @@ export function storyRouter() {
             userId: userId,
           },
         ],
+
+        numberOfContributors: numberOfContributors,
+        maxNumberOfWordsPerContribution: maxNumberOfWordsPerContribution,
+        maxTime: maxTime,
+        spellChecking: spellChecking,
+        scoring: scoring,
       });
       res.status(200).send(data);
     } catch (error) {
@@ -84,23 +98,25 @@ export function storyRouter() {
     }
   );
 
-  router.delete("/:id", authenticateUser(), async (req: Request, res: Response): Promise<void> => {
-    try {
-      const deletedStory = await storyModel.findByIdAndDelete(req.params.id);
-  
-      if (!deletedStory) {
-        res.status(404).send({ message: "Story not found" });
-        return;
+  router.delete(
+    "/:id",
+    authenticateUser(),
+    async (req: Request, res: Response): Promise<void> => {
+      try {
+        const deletedStory = await storyModel.findByIdAndDelete(req.params.id);
+
+        if (!deletedStory) {
+          res.status(404).send({ message: "Story not found" });
+          return;
+        }
+
+        res.status(200).send({ message: "Story deleted successfully" });
+      } catch (error) {
+        console.error("Error deleting story:", error);
+        res.status(500).send({ message: "Error: Failed to delete story" });
       }
-  
-      res.status(200).send({ message: "Story deleted successfully" });
-    } catch (error) {
-      console.error("Error deleting story:", error);
-      res.status(500).send({ message: "Error: Failed to delete story" });
     }
-  });
-  
-  
+  );
 
   return router;
 }
