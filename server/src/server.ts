@@ -5,9 +5,7 @@ import { userModel } from "./database/models/userModel";
 import { generateToken } from "./auth/authenticate";
 import { matchEncryptPassword } from "./auth/encryptPassword";
 import { userRouter } from "./routes/userRouter";
-import { contributionRouter } from "./routes/contributionRoute";
 import { storyRouter } from "./routes/storyRouter";
-import { rouleSetRouter } from "./routes/rouleSetRouter";
 import { invitationRouter } from "./routes/invitationRoute";
 
 dotenv.config();
@@ -58,9 +56,7 @@ app.post("/login", async (req: Request, res: Response) => {
 });
 
 app.use("/user", userRouter());
-app.use("/contribution", contributionRouter());
 app.use("/story", storyRouter());
-app.use("/rouleSet", rouleSetRouter());
 app.use("/invitation", invitationRouter());
 
 app.listen(PORT, () => {

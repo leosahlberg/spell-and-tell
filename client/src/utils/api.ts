@@ -1,6 +1,3 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-
 export async function logIn(username: string, password: string) {
   try {
     const res = await fetch(`/login`, {
@@ -99,16 +96,44 @@ export async function createStory(
   userId: string,
   imgUrl: string,
   text: string,
+  numberOfContributors: number,
+  maxNumberOfWordsPerContribution: number,
+  maxTime: number,
+  spellChecking: boolean,
+  scoring: boolean,
   token: string
 ) {
   try {
+    console.log(
+      JSON.stringify({
+        title,
+        userId,
+        imgUrl,
+        text,
+        numberOfContributors,
+        maxNumberOfWordsPerContribution,
+        maxTime,
+        spellChecking,
+        scoring,
+      })
+    );
     const res = await fetch(`/story`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       method: "POST",
-      body: JSON.stringify({ title, userId, imgUrl, text }),
+      body: JSON.stringify({
+        title,
+        userId,
+        imgUrl,
+        text,
+        numberOfContributors,
+        maxNumberOfWordsPerContribution,
+        maxTime,
+        spellChecking,
+        scoring,
+      }),
     });
 
     return res;
@@ -143,32 +168,6 @@ export async function deleteStory(id: string, token: string) {
     if (error instanceof Error) {
       console.log(error.message);
       throw new Error(error.message || "Failed to connect to the server.");
-    } else {
-      throw new Error("An unexpected error occurred.");
-    }
-  }
-}
-
-//Not finished will throw error
-export async function createRouleSet(title: string, userId: string) {
-  try {
-    const token = useSelector<RootState>((state) => state.auth.token) as String;
-    const res = await fetch(`/story`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      method: "POST",
-      body: JSON.stringify({ title, userId }),
-    });
-
-    return res.json();
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-      throw new Error(
-        error.message || "Failed to connect to the server. Please try again."
-      );
     } else {
       throw new Error("An unexpected error occurred.");
     }

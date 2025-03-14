@@ -7,14 +7,11 @@ const storySchema = new mongoose.Schema({
   },
   created: {
     type: Date,
+    default: Date.now,
   },
   score: {
     type: Number,
-  },
-  rouleSetId: {
-    type: mongoose.Schema.ObjectId,
-    ref: "RouleSet",
-    required: true,
+    default: 0,
   },
   userId: {
     type: mongoose.Schema.ObjectId,
@@ -36,6 +33,26 @@ const storySchema = new mongoose.Schema({
   ],
   imgUrl: {
     type: String,
+    required: true,
+  },
+  maxNumberOfWordsPerContribution: {
+    type: Number,
+    required: true,
+  },
+  numberOfContributors: {
+    type: Number,
+    required: true,
+  },
+  maxTime: {
+    type: Number,
+    required: true,
+  },
+  scoring: {
+    type: Boolean,
+    required: true,
+  },
+  spellChecking: {
+    type: Boolean,
     required: true,
   },
 });

@@ -1,35 +1,20 @@
 import {
   Box,
   List,
-  ListItem,
   Typography,
   TextField,
   Modal,
   ListItemButton,
 } from "@mui/material";
-import SixtyFpsSelectIcon from "@mui/icons-material/SixtyFpsSelect";
-import HourglassTopTwoToneIcon from "@mui/icons-material/HourglassTopTwoTone";
-import PeopleTwoToneIcon from "@mui/icons-material/PeopleTwoTone";
-import ScoreboardTwoToneIcon from "@mui/icons-material/ScoreboardTwoTone";
-import SpellcheckTwoToneIcon from "@mui/icons-material/SpellcheckTwoTone";
-import ContrastTwoToneIcon from "@mui/icons-material/ContrastTwoTone";
 import Button from "../../components/buttons/Button";
-import ButtonTimer from "../../components/buttons/ButtonTimer";
 import { useState, useEffect } from "react";
 import styles from "./createStoryPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchCreateStory } from "../../redux/storySlice";
 import ImagePicker from "../../components/ImagePicker";
-
-const chooseFromMenu = [
-  { title: "Antal ord", standard: "1000 ord", icon: <SixtyFpsSelectIcon /> },
-  { title: "Max tid", standard: "20 min", icon: <HourglassTopTwoToneIcon /> },
-  { title: "Deltagare", standard: "2 st", icon: <PeopleTwoToneIcon /> },
-  { title: "Poängräkning", standard: "aktiv", icon: <ScoreboardTwoToneIcon /> },
-  { title: "Rättstavning", standard: "aktiv", icon: <SpellcheckTwoToneIcon /> },
-  { title: "Tema", standard: "ej aktiv", icon: <ContrastTwoToneIcon /> },
-];
+import { RuleSet } from "../../utils/types";
+import RouleSetList from "../../components/rouleSet/ruleSetList";
 
 const people = [
   "Alice Andersson",
@@ -40,39 +25,35 @@ const people = [
 ];
 
 const CreateStoryPage = () => {
-  const [timeLeft, setTimeLeft] = useState(60);
   const [started, setStarted] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [okWriting, setOkWriting] = useState(true);
   const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [ruleSet, setRuleSet] = useState<RuleSet>({
+    maxNumberOfWordsPerContribution: 1000,
+    numberOfContribution: 2,
+    maxTime: 60,
+    spellChecking: false,
+    scoring: false,
+  });
 
   const dispatch = useDispatch<AppDispatch>();
   const userId = useSelector<RootState>(
     (state) => state.auth.user?.userId
   ) as string;
   const token = useSelector<RootState>((state) => state.auth.token) as string;
+  const ruleSetData = useSelector<RootState>(
+    (state) => state.ruleSet.ruleSet
+  ) as RuleSet | null;
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (started && timeLeft > 0) {
-      timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-    } else if (timeLeft === 0) {
-      setOkWriting(false);
+    if (ruleSetData != null) {
+      setRuleSet(ruleSetData);
     }
-    return () => clearInterval(timer);
-  }, [started, timeLeft]);
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}:${secs < 120 ? "0" : ""}${secs}`;
-  };
+  }, [ruleSetData]);
 
   const handleInputChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -97,6 +78,12 @@ const CreateStoryPage = () => {
           id: userId,
           imgUrl: selectedImage || "test",
           text: text,
+          maxNumberOfWordsPerContribution:
+            ruleSet.maxNumberOfWordsPerContribution,
+          numberOfContributors: ruleSet.numberOfContribution,
+          maxTime: ruleSet.maxTime,
+          spellChecking: ruleSet.spellChecking,
+          scoring: ruleSet.scoring,
           token: token,
         })
       );
@@ -118,41 +105,7 @@ const CreateStoryPage = () => {
         marginTop: 5,
       }}
     >
-      <Box
-        sx={{
-          width: { xs: "100%", md: 300 },
-          marginRight: { md: 4 },
-          border: "2px solid  rgb(212, 202, 187)",
-          color: "rgb(12, 23, 79)",
-          padding: 4,
-          borderRadius: 8,
-          boxShadow: 2,
-          marginBottom: { xs: 2, md: 0 },
-        }}
-      >
-        <Typography variant="h1" sx={{ marginBottom: 3, fontSize: 30 }}>
-          Ändra tillval
-        </Typography>
-
-        <List sx={{ padding: 0 }}>
-          {chooseFromMenu.map((item) => (
-            <ListItem key={item.title} className={styles.list}>
-              <Box
-                tabIndex={0}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Typography className={styles.title}>{item.title}</Typography>
-                <Box sx={{ color: "rgb(12, 23, 79)" }}>{item.icon}</Box>
-              </Box>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-
+      <RouleSetList ruleSet={{ ...ruleSet }} edit={true} />
       <Box
         className={styles.box}
         sx={{ flexGrow: 1, padding: 4, borderRadius: 8 }}
@@ -167,31 +120,8 @@ const CreateStoryPage = () => {
               marginRight: 3,
             }}
           >
-            Skriv din berättelse
+            Skapa berättelse
           </Typography>
-          <ButtonTimer text="Starta" onClick={() => setStarted(true)} />
-        </Box>
-
-        <Box sx={{ marginBottom: 5, display: "flex", flexDirection: "row" }}>
-          {started ? (
-            <Typography variant="h2">
-              {timeLeft > 0 ? (
-                <>
-                  <Typography
-                    variant="h3"
-                    color="rgb(238, 185, 121)"
-                    sx={{ fontSize: 22 }}
-                  >
-                    Tid: {formatTime(timeLeft)}
-                  </Typography>
-                </>
-              ) : (
-                <Typography variant="h3" color="red" sx={{ fontSize: 22 }}>
-                  Tiden är tyvärr slut!
-                </Typography>
-              )}
-            </Typography>
-          ) : null}
         </Box>
 
         <ImagePicker onSelectImage={handleImageSelect} />
@@ -204,7 +134,6 @@ const CreateStoryPage = () => {
           fullWidth
           multiline
           rows={1}
-          disabled={!okWriting}
           variant="outlined"
           placeholder="Titel..."
           aria-labelledby="story-title-label"
@@ -224,7 +153,6 @@ const CreateStoryPage = () => {
           fullWidth
           multiline
           rows={15}
-          disabled={!okWriting}
           variant="outlined"
           placeholder="Skriv din berättelse här..."
           aria-labelledby="story-content-label"
@@ -243,7 +171,7 @@ const CreateStoryPage = () => {
         >
           <Button
             className={styles.button}
-            text={"Spara"}
+            text={"Spara och publicera"}
             onClick={() => createStory()}
           />
           <Button
@@ -251,7 +179,7 @@ const CreateStoryPage = () => {
             text={
               selectedPerson
                 ? `Skicka till: ${selectedPerson}`
-                : "Välj person att skicka till"
+                : "Spara och skicka vidare"
             }
             onClick={() => setOpenModal(true)}
           />

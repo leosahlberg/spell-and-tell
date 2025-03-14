@@ -5,13 +5,12 @@ export type User = {
   email: string;
 };
 
-export type RouleSet = {
-  maxNumberOfWordsPerCpntribution: number;
+export type RuleSet = {
+  maxNumberOfWordsPerContribution: number;
   numberOfContribution: number;
   maxTime: number;
   scoring: boolean;
   spellChecking: boolean;
-  type: "default" | "custom";
 };
 
 export type Story = {
@@ -19,7 +18,7 @@ export type Story = {
   title: string;
   created: Date;
   score: number;
-  rouleSet: RouleSet;
+  rouleSet: RuleSet;
   user: User;
   imgUrl: string;
   contributions: [
@@ -28,4 +27,24 @@ export type Story = {
       text: string;
     }
   ];
+  ruleSet: {
+    maxNumberOfWordsPerCpntribution: number;
+    numberOfContribution: number;
+    maxTime: number;
+    scoring: boolean;
+    spellChecking: boolean;
+  };
+};
+
+export type CreateStory = {
+  title: string;
+  id: string;
+  imgUrl: string;
+  text: string;
+  maxNumberOfWordsPerContribution: number;
+  numberOfContributors: number;
+  maxTime: number;
+  scoring: boolean;
+  spellChecking: boolean;
+  token: string;
 };
