@@ -85,15 +85,29 @@ export function storyRouter() {
     authenticateUser(),
     async (req: Request, res: Response) => {
       try {
-        const { status } = req.body;
-        const data = await storyModel.findByIdAndUpdate(
-          req.params.id,
-          { $set: { status: status } },
-          { new: true }
-        );
-        res.status(200).send(data);
+        const { id } = req.params;
+        const { text, userId } = req.body;
+
+        const story = await storyModel.findByIdAndUpdate(id);
+        if (story) {
+          const wordCount = text.trim().split(/\s+/).length;
+          if (wordCount > story.maxNumberOfWordsPerContribution) {
+            res.status(400).send({
+              message: `Contribution exceeds max word limit of ${story.maxNumberOfWordsPerContribution}.`,
+            });
+          }
+
+          story.contributions.push({ text, userId });
+          await story.save();
+
+          res.status(200).send(story);
+        } else {
+          res.status(400).send({
+            message: `Story not found`,
+          });
+        }
       } catch (error) {
-        res.status(404).send({ message: "Error: Failed to update story." });
+        res.status(500).send({ message: "Server error" });
       }
     }
   );
