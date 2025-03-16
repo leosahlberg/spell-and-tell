@@ -100,7 +100,7 @@ const CreateStoryPage = () => {
           maxTime: ruleSet.maxTime,
           spellChecking: ruleSet.spellChecking,
           scoring: ruleSet.scoring,
-          score: calculateScore(),
+          score: ruleSet.scoring ? calculateScore() : 0,
           token: token,
         })
       );

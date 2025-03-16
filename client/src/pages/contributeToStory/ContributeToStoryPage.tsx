@@ -50,7 +50,7 @@ const ContributeToStoryPage = () => {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
-  //använd denna metod för att räkna ut poängen
+  //använd denna metod för att räkna ut poängen om poängräkning är vald
   const calculateScore = () => {
     let score;
 
