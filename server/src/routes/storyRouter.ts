@@ -88,15 +88,8 @@ export function storyRouter() {
         const { id } = req.params;
         const { text, userId } = req.body;
 
-        const story = await storyModel.findByIdAndUpdate(id);
+        const story = await storyModel.findById(id);
         if (story) {
-          const wordCount = text.trim().split(/\s+/).length;
-          if (wordCount > story.maxNumberOfWordsPerContribution) {
-            res.status(400).send({
-              message: `Contribution exceeds max word limit of ${story.maxNumberOfWordsPerContribution}.`,
-            });
-          }
-
           story.contributions.push({ text, userId });
           await story.save();
 
