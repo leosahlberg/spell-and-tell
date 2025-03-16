@@ -70,6 +70,22 @@ const CreateStoryPage = () => {
     person.toLowerCase().includes(search.toLowerCase())
   );
 
+  const calculateScore = () => {
+    let score;
+
+    const wordCount = text.trim().split(/\s+/).length;
+    const maxWords = ruleSet.maxNumberOfWordsPerContribution;
+
+    if (wordCount > maxWords) {
+      const extraWords = wordCount - maxWords;
+      score = maxWords - extraWords;
+    } else {
+      score = wordCount;
+    }
+
+    return score;
+  };
+
   function createStory() {
     if (userId && token) {
       dispatch(
@@ -84,6 +100,7 @@ const CreateStoryPage = () => {
           maxTime: ruleSet.maxTime,
           spellChecking: ruleSet.spellChecking,
           scoring: ruleSet.scoring,
+          score: calculateScore(),
           token: token,
         })
       );

@@ -101,22 +101,10 @@ export async function createStory(
   maxTime: number,
   spellChecking: boolean,
   scoring: boolean,
+  score: number,
   token: string
 ) {
   try {
-    console.log(
-      JSON.stringify({
-        title,
-        userId,
-        imgUrl,
-        text,
-        numberOfContributors,
-        maxNumberOfWordsPerContribution,
-        maxTime,
-        spellChecking,
-        scoring,
-      })
-    );
     const res = await fetch(`/story`, {
       headers: {
         "Content-Type": "application/json",
@@ -133,6 +121,7 @@ export async function createStory(
         maxTime,
         spellChecking,
         scoring,
+        score,
       }),
     });
 
