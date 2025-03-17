@@ -29,7 +29,14 @@ const PublicStorysPage = () => {
   return (
     <div className={styles.publicstory}>
       {stories.map((story) => (
-        <CardPublic key={story._id} imgs={story.imgUrl} title={story.title} contributions={[...story.contributions]} id={story._id} onDelete={handleDelete} />
+        <CardPublic
+          key={story._id}
+          imgs={story.imgUrl}
+          title={story.title}
+          contributions={[...story.contributions]}
+          id={story._id}
+          onDelete={handleDelete}
+        />
       ))}
     </div>
   );

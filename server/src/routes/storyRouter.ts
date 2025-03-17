@@ -52,9 +52,11 @@ export function storyRouter() {
         maxTime,
         spellChecking,
         scoring,
+        score,
       } = req.body;
 
       const date = new Date();
+
       const data = await storyModel.create({
         title: title,
         created: date,
@@ -72,6 +74,7 @@ export function storyRouter() {
         maxTime: maxTime,
         spellChecking: spellChecking,
         scoring: scoring,
+        score: score,
       });
       res.status(200).send(data);
     } catch (error) {
@@ -86,10 +89,11 @@ export function storyRouter() {
     async (req: Request, res: Response) => {
       try {
         const { id } = req.params;
-        const { text, userId } = req.body;
+        const { text, userId, score } = req.body;
 
         const story = await storyModel.findById(id);
         if (story) {
+          story.score += score;
           story.contributions.push({ text, userId });
           await story.save();
 

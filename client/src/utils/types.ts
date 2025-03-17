@@ -27,13 +27,11 @@ export type Story = {
       text: string;
     }
   ];
-  ruleSet: {
-    maxNumberOfWordsPerCpntribution: number;
-    numberOfContribution: number;
-    maxTime: number;
-    scoring: boolean;
-    spellChecking: boolean;
-  };
+  maxNumberOfWordsPerContribution: number;
+  numberOfContributors: number;
+  maxTime: number;
+  scoring: boolean;
+  spellChecking: boolean;
 };
 
 export type CreateStory = {
@@ -46,5 +44,6 @@ export type CreateStory = {
   maxTime: number;
   scoring: boolean;
   spellChecking: boolean;
+  score: number;
   token: string;
 };

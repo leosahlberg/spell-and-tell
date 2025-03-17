@@ -48,7 +48,10 @@ const Navigation = () => {
             <Routes>
               <Route index element={<HomePage />} />
               <Route path="/createstory" element={<CreateStoryPage />} />
-              <Route path="/contribute" element={<ContributeToStoryPage />} />
+              <Route
+                path="/contribute/:id"
+                element={<ContributeToStoryPage />}
+              />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/registration" element={<RegistrationPage />} />

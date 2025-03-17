@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import styles from "./storyPage.module.scss";
 import Button from "../../components/buttons/Button";
 import { useEffect, useState } from "react";
-import { Story, User } from "../../utils/types"; 
+import { Story, User } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Box, Typography } from "@mui/material";
@@ -53,6 +53,7 @@ const StoryPage = () => {
           className={styles.storyImage}
         />
         <Box className={styles.storyContent}>
+          <Typography>Poäng: {story.score}</Typography>
           <Typography className={styles.storyText}>
             {story.contributions.map((contribution, index) => (
               <Box key={index} sx={{ marginBottom: 2 }}>
@@ -74,7 +75,7 @@ const StoryPage = () => {
           </Typography>
         </Box>
         <Box className={styles.link}>
-          <Link to="/contribute">
+          <Link to={`/contribute/${id}`}>
             <Button
               text="Fortsätt på denna berättelse"
               className={styles.continueButton}

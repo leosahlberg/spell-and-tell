@@ -62,7 +62,7 @@ const RuleSetList = (props: RuleSetListProps) => {
             }}
           >
             <Typography className={styles.title}>
-              Max tid: {props.ruleSet.maxTime}
+              Max tid: {props.ruleSet.maxTime}min
             </Typography>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
               <HourglassTopTwoToneIcon />
