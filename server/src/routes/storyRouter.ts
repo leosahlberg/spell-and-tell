@@ -9,8 +9,9 @@ export function storyRouter() {
     try {
       const data = await storyModel
         .find({})
-        .populate("userId")
-        .populate("contributions.userId");
+        .populate({ path: "userId", select: "name" })
+        .populate({ path: "contributions.userId", select: "name" });
+
       res.status(200).send(data);
     } catch (error) {
       res.status(404).send({ message: "No stories found." });
@@ -24,8 +25,8 @@ export function storyRouter() {
       try {
         const data = await storyModel
           .find({ _id: req.params.id })
-          .populate("userId")
-          .populate("contributions.userId");
+          .populate({ path: "userId", select: "name" })
+          .populate({ path: "contributions.userId", select: "name" });
         res.status(200).send(data);
       } catch (error) {
         res.status(404).send({ message: "No stories found." });
@@ -40,8 +41,8 @@ export function storyRouter() {
       try {
         const data = await storyModel
           .find({ userId: req.params.id })
-          .populate("userId")
-          .populate("contributions.userId");
+          .populate({ path: "userId", select: "name" })
+          .populate({ path: "contributions.userId", select: "name" });
         res.status(200).send(data);
       } catch (error) {
         res.status(404).send({ message: "No stories found." });

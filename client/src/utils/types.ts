@@ -5,6 +5,11 @@ export type User = {
   email: string;
 };
 
+export type PublicUser = {
+  userId: string;
+  name: string;
+};
+
 export type RuleSet = {
   maxNumberOfWordsPerContribution: number;
   numberOfContribution: number;
@@ -19,12 +24,13 @@ export type Story = {
   created: Date;
   score: number;
   rouleSet: RuleSet;
-  user: User;
+  user: PublicUser;
   imgUrl: string;
   contributions: [
     {
-      userId: string;
+      userId: PublicUser;
       text: string;
+      _id: string;
     }
   ];
   maxNumberOfWordsPerContribution: number;
@@ -46,4 +52,16 @@ export type CreateStory = {
   spellChecking: boolean;
   score: number;
   token: string;
+};
+
+export type CreateInvitation = {
+  storyId: string;
+  userId: string;
+  token: string;
+};
+
+export type Invitation = {
+  storyId: string;
+  userId: string;
+  status: "pending" | "accepted";
 };

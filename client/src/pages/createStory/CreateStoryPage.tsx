@@ -1,11 +1,4 @@
-import {
-  Box,
-  List,
-  Typography,
-  TextField,
-  Modal,
-  ListItemButton,
-} from "@mui/material";
+import { Box, Typography, TextField } from "@mui/material";
 import Button from "../../components/buttons/Button";
 import { useState, useEffect } from "react";
 import styles from "./createStoryPage.module.scss";
@@ -15,22 +8,12 @@ import { fetchCreateStory } from "../../redux/storySlice";
 import ImagePicker from "../../components/ImagePicker";
 import { RuleSet } from "../../utils/types";
 import RouleSetList from "../../components/rouleSet/ruleSetList";
-
-const people = [
-  "Alice Andersson",
-  "Bob Bergström",
-  "Charlie Claesson",
-  "David Dahl",
-  "Emma Eriksson",
-];
+import { useNavigate } from "react-router-dom";
 
 const CreateStoryPage = () => {
   const [started, setStarted] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
-  const [openModal, setOpenModal] = useState(false);
-  const [search, setSearch] = useState("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [ruleSet, setRuleSet] = useState<RuleSet>({
     maxNumberOfWordsPerContribution: 1000,
@@ -39,7 +22,7 @@ const CreateStoryPage = () => {
     spellChecking: false,
     scoring: false,
   });
-
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const userId = useSelector<RootState>(
     (state) => state.auth.user?.userId
@@ -66,10 +49,6 @@ const CreateStoryPage = () => {
     setText(e.target.value);
   };
 
-  const filteredPeople = people.filter((person) =>
-    person.toLowerCase().includes(search.toLowerCase())
-  );
-
   const calculateScore = () => {
     let score;
 
@@ -86,9 +65,9 @@ const CreateStoryPage = () => {
     return score;
   };
 
-  function createStory() {
+  async function createStory() {
     if (userId && token) {
-      dispatch(
+      const actionResult = await dispatch(
         fetchCreateStory({
           title: title,
           id: userId,
@@ -104,6 +83,10 @@ const CreateStoryPage = () => {
           token: token,
         })
       );
+
+      if (fetchCreateStory.fulfilled.match(actionResult)) {
+        navigate("/invitation");
+      }
     }
   }
 
@@ -191,67 +174,7 @@ const CreateStoryPage = () => {
             text={"Spara och publicera"}
             onClick={() => createStory()}
           />
-          <Button
-            className={styles.button}
-            text={
-              selectedPerson
-                ? `Skicka till: ${selectedPerson}`
-                : "Spara och skicka vidare"
-            }
-            onClick={() => setOpenModal(true)}
-          />
         </Box>
-
-        <Modal open={openModal} onClose={() => setOpenModal(false)}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 600,
-              height: 600,
-              bgcolor: "background.paper",
-              border: "1px solid rgb(195, 158, 121)",
-              p: 3,
-              borderRadius: 2,
-              boxShadow: 24,
-            }}
-          >
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography sx={{ mt: 4, fontSize: 25 }} variant="h1">
-                Välj en person
-              </Typography>
-              <Button
-                className={styles.button}
-                text="X"
-                onClick={() => setOpenModal(false)}
-              />
-            </Box>
-            <TextField
-              fullWidth
-              label="Sök..."
-              variant="outlined"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              sx={{ mb: 2, mt: 2 }}
-            />
-            <List>
-              {filteredPeople.map((person) => (
-                <ListItemButton
-                  sx={{ fontSize: 20 }}
-                  key={person}
-                  onClick={() => {
-                    setSelectedPerson(person);
-                    setOpenModal(false);
-                  }}
-                >
-                  {person}
-                </ListItemButton>
-              ))}
-            </List>
-          </Box>
-        </Modal>
       </Box>
     </Box>
   );

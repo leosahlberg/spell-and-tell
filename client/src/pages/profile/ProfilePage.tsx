@@ -18,7 +18,7 @@ const ProfilePage = () => {
     let count = 0;
     stories.forEach((story) => {
       const contributed = story.contributions.some(
-        (contribution) => contribution.userId === user.userId
+        (contribution) => contribution.userId.userId === user.userId
       );
       if (contributed) {
         count++;
