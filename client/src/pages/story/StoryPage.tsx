@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import styles from "./storyPage.module.scss";
 import Button from "../../components/buttons/Button";
 import { useEffect, useState } from "react";
-import { Story, User } from "../../utils/types";
+import { Story } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Box, Typography } from "@mui/material";
