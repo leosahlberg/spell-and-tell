@@ -5,10 +5,12 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { Link } from "react-router";
 import { Button } from "@mui/material";
+import { PublicUser } from "../../utils/types";
 
 type Contribution = {
-  userId: string;
+  userId: PublicUser;
   text: string;
+  _id: string;
 };
 
 type CardProps = {

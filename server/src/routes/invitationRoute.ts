@@ -1,16 +1,32 @@
 import Express, { Request, Response } from "express";
 import { authenticateUser } from "../auth/authenticate";
 import { invitationModel } from "../database/models/invitationModel";
+import { storyModel } from "../database/models/storyModel";
+import { userModel } from "../database/models/userModel";
 
 export function invitationRouter() {
   const router = Express.Router();
 
+  router.get("/", authenticateUser(), async (req: Request, res: Response) => {
+    try {
+      const data = await invitationModel
+        .find({})
+        .populate({ path: "userId", select: "name" })
+        .populate("storyId");
+      res.status(200).send(data);
+    } catch (error) {
+      res.status(404).send({ message: "No stories found." });
+    }
+  });
   router.get(
     "/:id",
     authenticateUser(),
     async (req: Request, res: Response) => {
       try {
-        const data = await invitationModel.find({ userId: req.params.id });
+        const data = await invitationModel
+          .find({ userId: req.params.id })
+          .populate({ path: "userId", select: "name" })
+          .populate("storyId");
         res.status(200).send(data);
       } catch (error) {
         res.status(404).send({ message: "No stories found." });
@@ -20,10 +36,29 @@ export function invitationRouter() {
 
   router.post("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const data = await invitationModel.create({ ...req.body });
+      const { storyId, userId } = req.body;
+      const story = await storyModel.findById(storyId);
+      const user = await userModel.findById(userId);
+      if (!story) {
+        res.status(404).send({
+          message: "Error: Failed to send invitation. Story not found.",
+        });
+      }
+      if (!user) {
+        res.status(404).send({
+          message: "Error: Failed to send invitation. User not found.",
+        });
+      }
+      const data = await invitationModel.create({
+        storyId: storyId,
+        userId: userId,
+        status: "pending",
+      });
       res.status(200).send(data);
     } catch (error) {
-      res.status(404).send({ message: "Error: Failed to create story." });
+      res
+        .status(500)
+        .send({ message: "Error: Failed to send invitation. Server error." });
     }
   });
 
@@ -32,15 +67,16 @@ export function invitationRouter() {
     authenticateUser(),
     async (req: Request, res: Response) => {
       try {
-        const { status } = req.body;
         const data = await invitationModel.findByIdAndUpdate(
           req.params.id,
-          { $set: { status: status } },
+          { $set: { status: req.body } },
           { new: true }
         );
         res.status(200).send(data);
       } catch (error) {
-        res.status(404).send({ message: "Error: Failed to create story." });
+        res
+          .status(404)
+          .send({ message: "Error: Failed to accept invitation." });
       }
     }
   );

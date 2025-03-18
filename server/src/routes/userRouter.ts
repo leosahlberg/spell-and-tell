@@ -25,5 +25,26 @@ export function userRouter() {
     }
   });
 
+  router.get("/", async (req: Request, res: Response) => {
+    try {
+      const users = await userModel.find({});
+      if (!users) {
+        res.status(404).send({ message: "No users found." });
+      }
+
+      const mappedUsers = users.map((user) => {
+        return {
+          userId: user._id,
+          name: user.name,
+        };
+      });
+      res.status(200).send(mappedUsers);
+    } catch (error) {
+      res.status(500).send({ message: "Server error." });
+      console.log(error);
+      res.end();
+    }
+  });
+
   return router;
 }

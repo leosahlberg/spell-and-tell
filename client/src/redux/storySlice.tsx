@@ -4,10 +4,12 @@ import { createStory, deleteStory, getStorys } from "../utils/api";
 
 type InitialStateType = {
   stories: Story[];
+  created: Story | null;
 };
 
 const initialState: InitialStateType = {
   stories: [],
+  created: null,
 };
 
 export const fetchPublicStories = createAsyncThunk<
@@ -28,7 +30,7 @@ export const fetchPublicStories = createAsyncThunk<
 });
 
 export const fetchCreateStory = createAsyncThunk<
-  Story[],
+  Story,
   CreateStory,
   { rejectValue: string }
 >(
@@ -100,9 +102,12 @@ export const storySlice = createSlice({
         state.stories = action.payload;
       }
     );
-    builder.addCase(fetchCreateStory.fulfilled, (state, action) => {
-      console.log("created");
-    });
+    builder.addCase(
+      fetchCreateStory.fulfilled,
+      (state, action: PayloadAction<Story>) => {
+        state.created = action.payload;
+      }
+    );
     builder.addCase(fetchDeleteStory.fulfilled, (state, action) => {
       state.stories = state.stories.filter(
         (story) => story._id !== action.payload

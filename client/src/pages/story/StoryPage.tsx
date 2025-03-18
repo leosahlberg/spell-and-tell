@@ -14,14 +14,6 @@ const StoryPage = () => {
   const stories = useSelector<RootState>(
     (state) => state.story.stories
   ) as Story[];
-  const user = useSelector<RootState>((state) => state.auth.user) as User;
-
-  const getUserName = (userId: string) => {
-    if (user && user.userId === userId) {
-      return user.name;
-    }
-    return "Okänd användare";
-  };
 
   useEffect(() => {
     if (id) {
@@ -54,6 +46,7 @@ const StoryPage = () => {
         />
         <Box className={styles.storyContent}>
           <Typography>Poäng: {story.score}</Typography>
+
           <Typography className={styles.storyText}>
             {story.contributions.map((contribution, index) => (
               <Box key={index} sx={{ marginBottom: 2 }}>
@@ -67,9 +60,7 @@ const StoryPage = () => {
                   variant="h6"
                   component="h2"
                   sx={{ border: "1px solid lightgray", padding: 1 }}
-                >{`Huvudförfattare: ${getUserName(
-                  contribution.userId
-                )}`}</Typography>
+                >{`Författare: ${contribution.userId.name}`}</Typography>
               </Box>
             ))}
           </Typography>

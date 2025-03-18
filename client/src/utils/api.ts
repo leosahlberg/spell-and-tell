@@ -162,3 +162,94 @@ export async function deleteStory(id: string, token: string) {
     }
   }
 }
+
+export async function sendInvitation(
+  storyId: string,
+  userId: string,
+  token: string
+) {
+  try {
+    const res = await fetch("/invitation", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        storyId,
+        userId,
+      }),
+    });
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(error.message || "Failed to connect to the server.");
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+export async function getInvitationsByUserId(userId: string, token: string) {
+  try {
+    const res = await fetch(`/invitation${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+    });
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(error.message || "Failed to connect to the server.");
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+export async function updateInvitationStatus(id: string, token: string) {
+  try {
+    const res = await fetch(`/invitation${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        status: "accepted",
+      }),
+    });
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(error.message || "Failed to connect to the server.");
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+export async function getUsers(token: string) {
+  try {
+    const res = await fetch(`/user`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+    });
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(error.message || "Failed to connect to the server.");
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
