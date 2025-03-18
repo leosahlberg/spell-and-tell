@@ -7,7 +7,10 @@ export function storyRouter() {
 
   router.get("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
-      const data = await storyModel.find({});
+      const data = await storyModel
+        .find({})
+        .populate("userId")
+        .populate("contributions.userId");
       res.status(200).send(data);
     } catch (error) {
       res.status(404).send({ message: "No stories found." });
@@ -19,7 +22,10 @@ export function storyRouter() {
     authenticateUser(),
     async (req: Request, res: Response) => {
       try {
-        const data = await storyModel.find({ _id: req.params.id });
+        const data = await storyModel
+          .find({ _id: req.params.id })
+          .populate("userId")
+          .populate("contributions.userId");
         res.status(200).send(data);
       } catch (error) {
         res.status(404).send({ message: "No stories found." });
@@ -32,7 +38,10 @@ export function storyRouter() {
     authenticateUser(),
     async (req: Request, res: Response) => {
       try {
-        const data = await storyModel.find({ userId: req.params.id });
+        const data = await storyModel
+          .find({ userId: req.params.id })
+          .populate("userId")
+          .populate("contributions.userId");
         res.status(200).send(data);
       } catch (error) {
         res.status(404).send({ message: "No stories found." });
