@@ -102,17 +102,15 @@ export function storyRouter() {
         const { text, userId, score } = req.body;
 
         const story = await storyModel.findById(id);
-        if (story) {
-          story.score += score;
-          story.contributions.push({ text, userId });
-          await story.save();
-
-          res.status(200).send(story);
-        } else {
-          res.status(400).send({
-            message: `Story not found`,
-          });
+        if (!story) {
+          res.status(404).json({ message: "Story not found" });
+          return;
         }
+        story.score += score;
+        story.contributions.push({ text, userId });
+        await story.save();
+
+        res.status(200).send(story);
       } catch (error) {
         res.status(500).send({ message: "Server error" });
       }
