@@ -8,7 +8,7 @@ export function storyRouter() {
   router.get("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
       const data = await storyModel
-        .find({})
+        .find({ public: true })
         .populate({ path: "userId", select: "name" })
         .populate({ path: "contributions.userId", select: "name" });
 
