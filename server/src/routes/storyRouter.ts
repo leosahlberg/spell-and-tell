@@ -63,6 +63,7 @@ export function storyRouter() {
         spellChecking,
         scoring,
         score,
+        publicStory,
       } = req.body;
 
       const date = new Date();
@@ -85,6 +86,7 @@ export function storyRouter() {
         spellChecking: spellChecking,
         scoring: scoring,
         score: score,
+        public: publicStory,
       });
       res.status(200).send(data);
     } catch (error) {
