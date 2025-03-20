@@ -13,6 +13,7 @@ import { PublicUser, Story } from "../../utils/types";
 import { fetchGetAllUsers } from "../../redux/userSlice";
 import { fetchCreateInvitation } from "../../redux/invitationSlice";
 import styles from "./inviteUserToContribute.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const InviteUserToContribute = () => {
   const [selectedPerson, setSelectedPerson] = useState<PublicUser | null>(null);
@@ -24,6 +25,8 @@ const InviteUserToContribute = () => {
   const storyData = useSelector<RootState>(
     (state) => state.story.created
   ) as Story | null;
+
+  const navigate = useNavigate();
 
   const userData = useSelector<RootState>((state) => state.user.users) as
     | PublicUser[]
@@ -61,7 +64,7 @@ const InviteUserToContribute = () => {
   );
 
   return (
-    <div>
+    <Box className={styles.pageWrapper}>
       <Box
         sx={{
           bgcolor: "background.paper",
@@ -106,12 +109,21 @@ const InviteUserToContribute = () => {
           ))}
         </List>
       </Box>
+      {selectedPerson ? (
+        <Button
+          text={`Skicka inbjudan till ${selectedPerson?.name}`}
+          onClick={sendInvitation}
+          className={styles.button}
+        ></Button>
+      ) : (
+        <></>
+      )}
       <Button
-        text={`Skicka inbjudan till ${selectedPerson?.name}`}
-        onClick={sendInvitation}
+        text={`Gå till berättelser`}
+        onClick={() => navigate(`/stories`)}
         className={styles.button}
       ></Button>
-    </div>
+    </Box>
   );
 };
 
