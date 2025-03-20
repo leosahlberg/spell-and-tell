@@ -6,8 +6,9 @@ import { useParams } from "react-router-dom";
 import Button from "../../components/buttons/Button";
 import { useEffect, useState } from "react";
 import { Story } from "../../utils/types";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { fetchUpdateStory } from "../../redux/storySlice";
 
 const ContributeToStoryPage = () => {
   const [timeLeft, setTimeLeft] = useState(1);
@@ -16,6 +17,9 @@ const ContributeToStoryPage = () => {
   const [wordsWhenTimesUp, setWordsWhenTimesUp] = useState(0);
   const { id } = useParams<{ id: string }>();
   const [story, setStory] = useState<Story | null>(null);
+  const currentUser = useSelector((state: RootState) => state.auth.user);
+  const userToken = useSelector((state: RootState) => state.auth.token);
+  const dispatch = useDispatch<AppDispatch>();
 
   const stories = useSelector<RootState>(
     (state) => state.story.stories
@@ -50,9 +54,8 @@ const ContributeToStoryPage = () => {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
-  //använd denna metod för att räkna ut poängen om poängräkning är vald
   const calculateScore = () => {
-    let score;
+    let score = 0;
 
     const wordCount = text.trim().split(/\s+/).length;
     if (story) {
@@ -79,6 +82,43 @@ const ContributeToStoryPage = () => {
       setStarted(true);
     }
     setText(e.target.value);
+  };
+
+  const handlePublish = () => {
+    if (text.trim() && story) {
+      const score = calculateScore();
+      const newContribution = {
+        text: text,
+        userId: {
+          userId: currentUser?.userId ?? "",
+          name: currentUser?.name ?? "Okänd användare",
+        },
+        _id: Date.now().toString(),
+      };
+
+      dispatch(
+        fetchUpdateStory({
+          id: story._id,
+          text: text,
+          userId: currentUser?.userId ?? "",
+          score: score,
+          token: userToken || "",
+        })
+      );
+
+      setStory((prevStory) => {
+        if (prevStory) {
+          const updatedStory: Story = {
+            ...prevStory,
+            contributions: [...prevStory.contributions, newContribution],
+          };
+          return updatedStory;
+        }
+        return prevStory;
+      });
+
+      setText("");
+    }
   };
 
   if (!story) {
@@ -132,6 +172,25 @@ const ContributeToStoryPage = () => {
             </Box>
           )}
         </Typography>
+        <Typography className={styles.storyText}>
+          {story.contributions.map((contribution, index) => (
+            <Box key={index} sx={{ marginBottom: 2 }}>
+              <Typography
+                variant="body1"
+                sx={{ marginTop: 3, marginBottom: 5 }}
+              >
+                {contribution.text}
+              </Typography>
+              <Typography
+                variant="h6"
+                component="h2"
+                sx={{ border: "1px solid lightgray", padding: 1 }}
+              >
+                Författare: {contribution.userId.name}
+              </Typography>
+            </Box>
+          ))}
+        </Typography>
 
         <TextField
           label="fortsätt på berättelsen"
@@ -154,7 +213,11 @@ const ContributeToStoryPage = () => {
         />
         <Box className={styles.buttonWrapper}>
           <Button className={styles.button} text="Skicka vidare" />
-          <Button className={styles.button} text="Publicera" />
+          <Button
+            className={styles.button}
+            text="Publicera"
+            onClick={handlePublish}
+          />
         </Box>
       </Box>
     </Box>
