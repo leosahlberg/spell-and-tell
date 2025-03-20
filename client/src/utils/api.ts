@@ -102,6 +102,7 @@ export async function createStory(
   spellChecking: boolean,
   scoring: boolean,
   score: number,
+  publicStory: boolean,
   token: string
 ) {
   try {
@@ -121,6 +122,7 @@ export async function createStory(
         maxTime,
         spellChecking,
         scoring,
+        publicStory,
         score,
       }),
     });

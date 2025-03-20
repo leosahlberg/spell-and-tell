@@ -55,6 +55,10 @@ const storySchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  public: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 export const storyModel = mongoose.model("Story", storySchema);

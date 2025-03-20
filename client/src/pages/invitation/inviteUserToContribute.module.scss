@@ -17,3 +17,12 @@
     rgb(91, 94, 148) 100%
   );
 }
+
+.pageWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 2em;
+  color: rgb(12, 23, 79);
+  flex-direction: column;
+}

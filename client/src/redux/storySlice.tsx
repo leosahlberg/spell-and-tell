@@ -47,6 +47,7 @@ export const fetchCreateStory = createAsyncThunk<
       spellChecking,
       scoring,
       score,
+      publicStory,
       token,
     },
     { rejectWithValue }
@@ -63,6 +64,7 @@ export const fetchCreateStory = createAsyncThunk<
         spellChecking,
         scoring,
         score,
+        publicStory,
         token
       );
       return await response.json();

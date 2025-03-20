@@ -23,6 +23,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
     maxTime: 0,
     spellChecking: false,
     scoring: false,
+    public: true,
   });
 
   const dispatch = useDispatch<AppDispatch>();
@@ -148,6 +149,23 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
               setRuleSet({
                 ...ruleSet,
                 scoring: e.currentTarget.value === "Yes" ? true : false,
+              })
+            }
+          >
+            <FormControlLabel value="Yes" control={<Radio />} label="Ja" />
+            <FormControlLabel value="No" control={<Radio />} label="Nej" />
+          </RadioGroup>
+        </FormControl>
+        <FormControl>
+          <FormLabel id="score-label">Publik:</FormLabel>
+          <RadioGroup
+            row
+            aria-labelledby="score-label"
+            name="score-label"
+            onChange={(e) =>
+              setRuleSet({
+                ...ruleSet,
+                public: e.currentTarget.value === "Yes" ? true : false,
               })
             }
           >

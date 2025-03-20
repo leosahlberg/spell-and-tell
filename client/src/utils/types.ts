@@ -16,6 +16,7 @@ export type RuleSet = {
   maxTime: number;
   scoring: boolean;
   spellChecking: boolean;
+  public?: boolean;
 };
 
 export type Story = {
@@ -45,6 +46,7 @@ export type CreateStory = {
   scoring: boolean;
   spellChecking: boolean;
   score: number;
+  publicStory: boolean;
   token: string;
 };
 

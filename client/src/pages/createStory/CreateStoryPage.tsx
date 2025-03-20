@@ -21,6 +21,7 @@ const CreateStoryPage = () => {
     maxTime: 60,
     spellChecking: false,
     scoring: false,
+    public: true,
   });
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -80,6 +81,7 @@ const CreateStoryPage = () => {
           spellChecking: ruleSet.spellChecking,
           scoring: ruleSet.scoring,
           score: ruleSet.scoring ? calculateScore() : 0,
+          publicStory: ruleSet.public ? ruleSet.public : true,
           token: token,
         })
       );

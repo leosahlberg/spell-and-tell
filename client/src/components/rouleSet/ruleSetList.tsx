@@ -120,6 +120,27 @@ const RuleSetList = (props: RuleSetListProps) => {
             </Box>
           </Box>
         </ListItem>
+        {props.ruleSet.public != undefined ? (
+          <ListItem className={styles.list}>
+            <Box
+              tabIndex={0}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography className={styles.title}>
+                Publik: {props.ruleSet.public ? "Ja" : "Nej"}
+              </Typography>
+              <Box sx={{ color: "rgb(12, 23, 79)" }}>
+                <SpellcheckTwoToneIcon />
+              </Box>
+            </Box>
+          </ListItem>
+        ) : (
+          <></>
+        )}
       </List>
       {props.edit ? (
         <>
