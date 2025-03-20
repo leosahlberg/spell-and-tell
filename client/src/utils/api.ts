@@ -91,6 +91,31 @@ export async function getStorys(token: string) {
   }
 }
 
+export async function getStoriesCreatedOrContributedToByUser(
+  userId: string,
+  token: string
+) {
+  try {
+    const res = await fetch(`/story/user/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+    });
+
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        error.message || "Failed to connect to the server. Please try again."
+      );
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
 export async function createStory(
   title: string,
   userId: string,
@@ -195,7 +220,7 @@ export async function sendInvitation(
 
 export async function getInvitationsByUserId(userId: string, token: string) {
   try {
-    const res = await fetch(`/invitation${userId}`, {
+    const res = await fetch(`/invitation/${userId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -215,7 +240,7 @@ export async function getInvitationsByUserId(userId: string, token: string) {
 
 export async function updateInvitationStatus(id: string, token: string) {
   try {
-    const res = await fetch(`/invitation${id}`, {
+    const res = await fetch(`/invitation/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

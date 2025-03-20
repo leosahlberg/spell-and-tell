@@ -1,14 +1,21 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Story, CreateStory } from "../utils/types";
-import { createStory, deleteStory, getStorys } from "../utils/api";
+import {
+  createStory,
+  deleteStory,
+  getStorys,
+  getStoriesCreatedOrContributedToByUser,
+} from "../utils/api";
 
 type InitialStateType = {
   stories: Story[];
   created: Story | null;
+  storiesByUser: Story[];
 };
 
 const initialState: InitialStateType = {
   stories: [],
+  storiesByUser: [],
   created: null,
 };
 
@@ -28,6 +35,29 @@ export const fetchPublicStories = createAsyncThunk<
     return rejectWithValue(errorMessage);
   }
 });
+
+export const fetchStoriesByUserId = createAsyncThunk<
+  Story[],
+  { userId: string; token: string },
+  { rejectValue: string }
+>(
+  "story/fetchStoriesByUserId",
+  async ({ userId, token }, { rejectWithValue }) => {
+    try {
+      const response = await getStoriesCreatedOrContributedToByUser(
+        userId,
+        token
+      );
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
 
 export const fetchCreateStory = createAsyncThunk<
   Story,
@@ -102,6 +132,12 @@ export const storySlice = createSlice({
       fetchPublicStories.fulfilled,
       (state, action: PayloadAction<Story[]>) => {
         state.stories = action.payload;
+      }
+    );
+    builder.addCase(
+      fetchStoriesByUserId.fulfilled,
+      (state, action: PayloadAction<Story[]>) => {
+        state.storiesByUser = action.payload;
       }
     );
     builder.addCase(

@@ -46,9 +46,10 @@ export const fetchGetInvitations = createAsyncThunk<
   "invitation/fetchGetInvitation",
   async ({ id, token }, { rejectWithValue }) => {
     try {
-      const response = await updateInvitationStatus(id, token);
+      const response = await getInvitationsByUserId(id, token);
 
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (error) {
       const errorMessage =
@@ -66,7 +67,7 @@ export const fetchUpdateInvitation = createAsyncThunk<
   "invitation/fetchUpdateInvitation",
   async ({ userId, token }, { rejectWithValue }) => {
     try {
-      const response = await getInvitationsByUserId(userId, token);
+      const response = await updateInvitationStatus(userId, token);
 
       const data = await response.json();
       return data;

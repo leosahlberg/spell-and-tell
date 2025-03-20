@@ -40,7 +40,12 @@ export function storyRouter() {
     async (req: Request, res: Response) => {
       try {
         const data = await storyModel
-          .find({ userId: req.params.id })
+          .find({
+            $or: [
+              { userId: req.params.id }, // Stories created by the user
+              { "contributions.userId": req.params.id }, // Stories where the user contributed
+            ],
+          })
           .populate({ path: "userId", select: "name" })
           .populate({ path: "contributions.userId", select: "name" });
         res.status(200).send(data);

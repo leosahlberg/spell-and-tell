@@ -25,7 +25,7 @@ export type Story = {
   created: Date;
   score: number;
   rouleSet: RuleSet;
-  user: PublicUser;
+  userId: PublicUser;
   imgUrl: string;
   contributions: [
     {
@@ -63,7 +63,7 @@ export type CreateInvitation = {
 };
 
 export type Invitation = {
-  storyId: string;
-  userId: string;
+  storyId: Story;
+  userId: PublicUser;
   status: "pending" | "accepted";
 };
