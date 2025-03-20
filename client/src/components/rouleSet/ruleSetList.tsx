@@ -30,7 +30,7 @@ const RuleSetList = (props: RuleSetListProps) => {
         marginBottom: { xs: 2, md: 0 },
       }}
     >
-      <Typography variant="h1" sx={{ marginBottom: 3, fontSize: 30 }}>
+      <Typography variant="h1" sx={{ marginBottom: 3, paddingLeft: 3, fontSize: 30 }}>
         Regler
       </Typography>
 
