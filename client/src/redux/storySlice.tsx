@@ -5,6 +5,7 @@ import {
   deleteStory,
   getStorys,
   getStoriesCreatedOrContributedToByUser,
+  updateStory,
 } from "../utils/api";
 
 type InitialStateType = {
@@ -107,6 +108,24 @@ export const fetchCreateStory = createAsyncThunk<
   }
 );
 
+export const fetchUpdateStory = createAsyncThunk<
+  Story,
+  { id: string; text: string; userId: string; score: number; token: string },
+  { rejectValue: string }
+>(
+  "story/fetchUpdateStory",
+  async ({ id, text, userId, score, token }, { rejectWithValue }) => {
+    try {
+      const response = await updateStory(id, text, userId, score, token);
+      return await response.json();
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
 export const fetchDeleteStory = createAsyncThunk<
   string,
   { id: string; token: string },
@@ -151,6 +170,15 @@ export const storySlice = createSlice({
         (story) => story._id !== action.payload
       );
     });
+    builder.addCase(
+      fetchUpdateStory.fulfilled,
+      (state, action: PayloadAction<Story>) => {
+        const updatedStory = action.payload;
+        state.stories = state.stories.map((story) =>
+          story._id === updatedStory._id ? updatedStory : story
+        );
+      }
+    );
   },
 });
 
