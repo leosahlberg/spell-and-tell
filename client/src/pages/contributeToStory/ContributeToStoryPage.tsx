@@ -1,24 +1,32 @@
 import { Box, TextField, Typography } from "@mui/material";
-import ButtonTimer from "../../components/buttons/ButtonTimer";
-import styles from "./contributeToStoryPage.module.scss";
-import RuleSetList from "../../components/rouleSet/ruleSetList";
 import { useParams } from "react-router-dom";
-import Button from "../../components/buttons/Button";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Button from "../../components/buttons/Button";
+import ButtonTimer from "../../components/buttons/ButtonTimer";
+import RuleSetList from "../../components/rouleSet/ruleSetList";
+
+import { AppDispatch, RootState } from "../../redux/store";
+import { fetchUpdateStory } from "../../redux/storySlice";
 import { Story } from "../../utils/types";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+
+import styles from "./contributeToStoryPage.module.scss";
 
 const ContributeToStoryPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const [story, setStory] = useState<Story | null>(null);
+  const [text, setText] = useState("");
   const [timeLeft, setTimeLeft] = useState(1);
   const [started, setStarted] = useState(false);
-  const [text, setText] = useState("");
   const [wordsWhenTimesUp, setWordsWhenTimesUp] = useState(0);
-  const { id } = useParams<{ id: string }>();
-  const [story, setStory] = useState<Story | null>(null);
 
-  const stories = useSelector<RootState>(
-    (state) => state.story.stories
+  const currentUser = useSelector((state: RootState) => state.auth.user);
+  const userToken = useSelector((state: RootState) => state.auth.token);
+  const stories = useSelector(
+    (state: RootState) => state.story.stories
   ) as Story[];
 
   useEffect(() => {
@@ -34,15 +42,12 @@ const ContributeToStoryPage = () => {
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (started && timeLeft > 0) {
-      timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
+      timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
     } else if (timeLeft === 0) {
-      const wordCount = text.trim().split(/\s+/).length;
-      setWordsWhenTimesUp(wordCount);
+      setWordsWhenTimesUp(text.trim().split(/\s+/).length);
     }
     return () => clearInterval(timer);
-  }, [started, timeLeft]);
+  }, [started, timeLeft, text]);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -50,40 +55,61 @@ const ContributeToStoryPage = () => {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
-  //använd denna metod för att räkna ut poängen om poängräkning är vald
   const calculateScore = () => {
-    let score;
-
-    const wordCount = text.trim().split(/\s+/).length;
+    let score = 0;
     if (story) {
+      const wordCount = text.trim().split(/\s+/).length;
       const maxWords = story.maxNumberOfWordsPerContribution;
 
-      if (wordCount > maxWords) {
-        const extraWords = wordCount - maxWords;
-        score = maxWords - extraWords;
-      } else {
-        score = wordCount;
-      }
-
-      if (wordsWhenTimesUp > wordCount) {
-        const extraWordsAfterTimesUp = wordsWhenTimesUp - wordCount;
-        score -= extraWordsAfterTimesUp;
-      }
+      score =
+        wordCount > maxWords ? maxWords - (wordCount - maxWords) : wordCount;
+      score -= wordsWhenTimesUp > wordCount ? wordsWhenTimesUp - wordCount : 0;
     }
-    console.log(score);
     return score;
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!started) {
-      setStarted(true);
-    }
+    if (!started) setStarted(true);
     setText(e.target.value);
   };
 
-  if (!story) {
+  const handlePublish = () => {
+    if (text.trim() && story) {
+      const score = calculateScore();
+      const newContribution = {
+        text,
+        userId: {
+          userId: currentUser?.userId ?? "",
+          name: currentUser?.name ?? "Okänd användare",
+        },
+        _id: Date.now().toString(),
+      };
+
+      dispatch(
+        fetchUpdateStory({
+          id: story._id,
+          text,
+          userId: currentUser?.userId ?? "",
+          score,
+          token: userToken || "",
+        })
+      );
+
+      setStory((prevStory) =>
+        prevStory
+          ? {
+              ...prevStory,
+              contributions: [...prevStory.contributions, newContribution],
+            }
+          : prevStory
+      );
+
+      setText("");
+    }
+  };
+
+  if (!story)
     return <Typography variant="h1">Berättelsen hittades inte.</Typography>;
-  }
 
   return (
     <Box className={styles.pageWrapper}>
@@ -102,17 +128,13 @@ const ContributeToStoryPage = () => {
         <Typography gutterBottom>
           {started ? (
             <Box sx={{ display: "flex", flexDirection: "row" }}>
-              {timeLeft ? (
-                <Typography variant="h5" className={styles.timerText}>
-                  Tänk på att avsluta innan tiden tar slut..
-                </Typography>
-              ) : (
-                <Typography variant="h5" className={styles.timerText}>
-                  {story.scoring
-                    ? "Tiden är tyvärr slut! Om du fortsätter skriva kommer du få minuspoäng..."
-                    : "Tiden är tyvärr slut!"}
-                </Typography>
-              )}
+              <Typography variant="h5" className={styles.timerText}>
+                {timeLeft
+                  ? "Tänk på att avsluta innan tiden tar slut.."
+                  : story.scoring
+                  ? "Tiden är slut! Om du fortsätter skriva får du minuspoäng..."
+                  : "Tiden är slut!"}
+              </Typography>
               <Typography variant="h5" className={styles.timer}>
                 Tid: {formatTime(timeLeft)}
               </Typography>
@@ -121,7 +143,7 @@ const ContributeToStoryPage = () => {
             <Box sx={{ display: "flex", flexDirection: "row" }}>
               <Typography
                 variant="h1"
-                sx={{ paddingBottom: 3, paddingRight: 5, fontSize: "2.5rem" }}
+                sx={{ paddingRight: 5, paddingLeft: 1, fontSize: "2.5rem" }}
               >
                 Fortsätt på berättelsen
               </Typography>
@@ -133,13 +155,65 @@ const ContributeToStoryPage = () => {
           )}
         </Typography>
 
+        <Box className={styles.storyContent}>
+          <Typography
+            sx={{
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "green",
+              paddingY: 2,
+              paddingLeft: 1
+            }}
+          >
+            Poäng: <span className={styles.scoreCircle}>{story.score}</span>
+          </Typography>
+
+          <Typography sx={{ backgroundColor: "white", padding: 4 }}>
+            {story.contributions.map((contribution, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ marginY: 2, fontSize: 26 }}
+              >
+                {contribution.text}
+              </Typography>
+            ))}
+          </Typography>
+
+          <Typography
+            sx={{ display: "flex", flexDirection: "row", paddingBottom: 2 }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                color: "purple",
+                marginRight: 2,
+                paddingTop: 4,
+                paddingLeft:1
+              }}
+            >
+              Författare:
+            </Typography>
+            {story.contributions.map((contribution, index) => (
+              <Typography
+                key={index}
+                variant="h6"
+                sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
+              >
+                {contribution.userId.name}
+              </Typography>
+            ))}
+          </Typography>
+        </Box>
+
         <TextField
-          label="fortsätt på berättelsen"
+          label="Fortsätt på berättelsen"
           onChange={handleInputChange}
           value={text}
           fullWidth
           multiline
-          rows={20}
+          rows={12}
           variant="outlined"
           placeholder="Skriv här..."
           className={styles.textField}
@@ -150,11 +224,16 @@ const ContributeToStoryPage = () => {
             boxShadow: 1,
             padding: 1,
           }}
-          spellCheck={story.spellChecking ? "true" : "false"}
+          spellCheck={story.spellChecking}
         />
+
         <Box className={styles.buttonWrapper}>
           <Button className={styles.button} text="Skicka vidare" />
-          <Button className={styles.button} text="Publicera" />
+          <Button
+            className={styles.button}
+            text="Publicera"
+            onClick={handlePublish}
+          />
         </Box>
       </Box>
     </Box>

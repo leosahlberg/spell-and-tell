@@ -27,13 +27,7 @@ export type Story = {
   rouleSet: RuleSet;
   user: PublicUser;
   imgUrl: string;
-  contributions: [
-    {
-      userId: PublicUser;
-      text: string;
-      _id: string;
-    }
-  ];
+  contributions: { userId: PublicUser; text: string; _id: string }[]
   maxNumberOfWordsPerContribution: number;
   numberOfContributors: number;
   maxTime: number;

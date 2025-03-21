@@ -236,6 +236,37 @@ export async function updateInvitationStatus(id: string, token: string) {
   }
 }
 
+export async function updateStory(
+  id: string,
+  text: string,
+  userId: string,
+  score: number,
+  token: string
+) {
+  try {
+    const response = await fetch(`/story/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        text,
+        userId,
+        score,
+      }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to update story");
+    }
+    const updatedStory = await response.json();
+    return updatedStory;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function getUsers(token: string) {
   try {
     const res = await fetch(`/user`, {

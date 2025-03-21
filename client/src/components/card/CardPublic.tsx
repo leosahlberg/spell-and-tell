@@ -46,7 +46,7 @@ export default function CardPublic({
           maxHeight: "450px",
           overflow: "hidden",
           display: "-webkit-box",
-          WebkitLineClamp: 5,
+          WebkitLineClamp: 2,
           WebkitBoxOrient: "vertical",
         }}
       >
@@ -58,7 +58,8 @@ export default function CardPublic({
   return (
     <Card
       sx={{
-        maxWidth: 400,
+        width: 400,
+        height: 550,
         backgroundColor: "white",
         transition: "transform 0.3s, background-color 0.3s",
         "&:hover": {
