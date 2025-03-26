@@ -7,13 +7,13 @@ import {
 } from "../utils/api";
 
 type InitialStateType = {
-  invitations: Invitation[] | null;
+  invitations: Invitation[];
   sucess: boolean;
   error: string | null;
 };
 
 const initialState: InitialStateType = {
-  invitations: null,
+  invitations: [],
   sucess: false,
   error: null,
 };
@@ -49,7 +49,6 @@ export const fetchGetInvitations = createAsyncThunk<
       const response = await getInvitationsByUserId(id, token);
 
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (error) {
       const errorMessage =

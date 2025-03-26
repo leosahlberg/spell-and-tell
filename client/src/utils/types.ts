@@ -6,7 +6,7 @@ export type User = {
 };
 
 export type PublicUser = {
-  userId: string;
+  _id: string;
   name: string;
 };
 
@@ -27,7 +27,7 @@ export type Story = {
   rouleSet: RuleSet;
   userId: PublicUser;
   imgUrl: string;
-  contributions: { userId: PublicUser; text: string; _id: string }[]
+  contributions: { userId: PublicUser; text: string; _id: string }[];
   maxNumberOfWordsPerContribution: number;
   numberOfContributors: number;
   maxTime: number;
