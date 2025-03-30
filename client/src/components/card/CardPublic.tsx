@@ -28,7 +28,14 @@ export default function CardPublic({
   id,
   onDelete,
 }: CardProps) {
-  const renderContributions = () => {
+  
+  const getFirstTwoSentences = (text: string) => {
+    const sentences = text.split(".");  
+    const firstTwo = sentences.slice(0, 2).join(".");
+    return firstTwo;
+  };
+  
+  const renderFirstContribution = () => {
     if (contributions.length === 0) {
       return (
         <Typography variant="body2" color="text.secondary">
@@ -37,22 +44,24 @@ export default function CardPublic({
       );
     }
 
-    return contributions.map((contribution, index) => (
+    const firstContribution = contributions[0]; 
+    const firstTwoSentences = getFirstTwoSentences(firstContribution.text);
+
+    return (
       <Typography
-        key={index}
         variant="body2"
         sx={{
           paddingTop: 2,
-          maxHeight: "450px",
-          overflow: "hidden",
           display: "-webkit-box",
-          WebkitLineClamp: 2,
+          WebkitLineClamp: 2, 
           WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          textOverflow: "ellipsis", 
         }}
       >
-        {contribution.text}...
+        {firstTwoSentences}...
       </Typography>
-    ));
+    );
   };
 
   return (
@@ -89,7 +98,7 @@ export default function CardPublic({
           >
             {title}
           </Typography>
-          {renderContributions()}
+          {renderFirstContribution()}
         </CardContent>
       </CardActionArea>
       <Button

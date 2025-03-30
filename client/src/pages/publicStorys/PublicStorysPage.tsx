@@ -5,8 +5,9 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { Story } from "../../utils/types";
 import { fetchDeleteStory, fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
-import { CustomTabPanel } from "../../components/customTabs/CustomTabs";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, ListItemText, Tab, Tabs } from "@mui/material";
+import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
+import Search from "../../components/search/Search";
 
 const PublicStorysPage = () => {
   const [stories, setStories] = useState<Story[]>([]);
@@ -40,13 +41,29 @@ const PublicStorysPage = () => {
     dispatch(fetchDeleteStory({ id, token }));
   };
 
+  const names = ["anna", "pelle", "kalle", "anne"];
+
   return (
     <>
-      <Box sx={{ width: "100%%" }}>
+      <Box
+        sx={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+          paddingTop: 10
+        }}
+      >
+        <Box>
+          <Search
+            items={names}
+            renderItem={(name) => <ListItemText primary={name} />}
+            placeholder="Sök på författarens namn eller berättelsens titel.."
+          />
+        </Box>
+
         <Box
           sx={{
-            paddingTop: 5,
-            paddingRight: 10,
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
@@ -57,21 +74,21 @@ const PublicStorysPage = () => {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab label="Alla berättelser" {...a11yProps(0)} />
-            <Tab label="Läsa färdiga berättelser" {...a11yProps(1)} />
-            <Tab label="Fortsätta på berätteser" {...a11yProps(2)} />
+            <Tab
+              label="Se alla berättelser"
+              {...a11yProps(0)}
+              sx={{ paddingRight: 5 }}
+            />
+            <Tab
+              label="Läs färdiga berättelser"
+              {...a11yProps(1)}
+              sx={{ paddingRight: 5 }}
+            />
+            <Tab label="Fortsätt på berätteser" {...a11yProps(2)} />
           </Tabs>
         </Box>
-        <CustomTabPanel value={value} index={0}>
-          <div className={styles.container}>test4</div>
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-          <div className={styles.container}>test 3</div>
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          <div className={styles.container}>test 1</div>
-        </CustomTabPanel>
       </Box>
+      <CustomTabPanel value={value} index={0}>
       <div className={styles.publicstory}>
         {stories.map((story) => (
           <CardPublic
@@ -84,6 +101,13 @@ const PublicStorysPage = () => {
           />
         ))}
       </div>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        <div className={styles.container}>test 3</div>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+        <div className={styles.container}>test 1</div>
+      </CustomTabPanel>
     </>
   );
 };
