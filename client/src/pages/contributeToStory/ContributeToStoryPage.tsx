@@ -74,7 +74,7 @@ const ContributeToStoryPage = () => {
     setText(e.target.value);
   };
 
-  const handlePublish = async () => {
+  async function handlePublish() {
     if (text.trim() && story) {
       const score = calculateScore();
 
@@ -87,12 +87,13 @@ const ContributeToStoryPage = () => {
           token: userToken || "",
         })
       );
-      setText("");
+      console.log(actionResult);
       if (fetchUpdateStory.fulfilled.match(actionResult)) {
+        console.log("nav issue");
         navigate("/invitation");
       }
     }
-  };
+  }
 
   if (!story)
     return <Typography variant="h1">Berättelsen hittades inte.</Typography>;
@@ -235,7 +236,7 @@ const ContributeToStoryPage = () => {
           <Button
             className={styles.button}
             text="Publicera"
-            onClick={handlePublish}
+            onClick={() => handlePublish()}
           />
         </Box>
       </Box>
