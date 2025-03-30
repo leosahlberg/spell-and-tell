@@ -9,6 +9,7 @@ import ImagePicker from "../../components/ImagePicker";
 import { RuleSet } from "../../utils/types";
 import RouleSetList from "../../components/rouleSet/ruleSetList";
 import { useNavigate } from "react-router-dom";
+import { clearCustomRuleSet } from "../../redux/rulesetSlice";
 
 const CreateStoryPage = () => {
   const [started, setStarted] = useState(false);
@@ -85,6 +86,8 @@ const CreateStoryPage = () => {
           token: token,
         })
       );
+
+      dispatch(clearCustomRuleSet(null));
 
       if (fetchCreateStory.fulfilled.match(actionResult)) {
         navigate("/invitation");

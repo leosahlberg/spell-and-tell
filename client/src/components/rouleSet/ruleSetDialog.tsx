@@ -82,7 +82,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
         />
         <TextField
           id="numberOfContribution"
-          label="Antal deltagare"
+          label="Antal bidrag"
           value={ruleSet.numberOfContribution}
           variant="outlined"
           aria-labelledby="story-numberOfContribution-label"
@@ -149,23 +149,6 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
               setRuleSet({
                 ...ruleSet,
                 scoring: e.currentTarget.value === "Yes" ? true : false,
-              })
-            }
-          >
-            <FormControlLabel value="Yes" control={<Radio />} label="Ja" />
-            <FormControlLabel value="No" control={<Radio />} label="Nej" />
-          </RadioGroup>
-        </FormControl>
-        <FormControl>
-          <FormLabel id="score-label">Publik:</FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="score-label"
-            name="score-label"
-            onChange={(e) =>
-              setRuleSet({
-                ...ruleSet,
-                public: e.currentTarget.value === "Yes" ? true : false,
               })
             }
           >

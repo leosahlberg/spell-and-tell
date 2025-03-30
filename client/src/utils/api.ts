@@ -281,14 +281,14 @@ export async function updateStory(
         score,
       }),
     });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to update story");
-    }
-    const updatedStory = await response.json();
-    return updatedStory;
+    return response;
   } catch (error) {
-    console.error(error);
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw new Error(error.message || "Failed to connect to the server.");
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
   }
 }
 
