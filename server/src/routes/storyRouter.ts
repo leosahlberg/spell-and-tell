@@ -8,7 +8,7 @@ export function storyRouter() {
   router.get("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
       const data = await storyModel
-        .find({ public: true })
+        .find()
         .populate({ path: "userId", select: "name" })
         .populate({ path: "contributions.userId", select: "name" });
 
@@ -112,6 +112,17 @@ export function storyRouter() {
         if (!story) {
           res.status(404).json({ message: "Story not found" });
           return;
+        }
+
+        if (
+          story.contributions.length === story.numberOfContributors ||
+          story.contributions.length > story.numberOfContributors
+        ) {
+          res.status(404).send({
+            message:
+              "Du kan inte bidra till den här berättelsen. Antal bidrag överskrider reglerna.",
+          });
+          res.end();
         }
         story.score += score;
         story.contributions.push({ text, userId });
