@@ -1,5 +1,5 @@
 import { Box, TextField, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -28,6 +28,7 @@ const ContributeToStoryPage = () => {
   const stories = useSelector(
     (state: RootState) => state.story.stories
   ) as Story[];
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -73,19 +74,11 @@ const ContributeToStoryPage = () => {
     setText(e.target.value);
   };
 
-  const handlePublish = () => {
+  const handlePublish = async () => {
     if (text.trim() && story) {
       const score = calculateScore();
-      const newContribution = {
-        text,
-        userId: {
-          userId: currentUser?.userId ?? "",
-          name: currentUser?.name ?? "Okänd användare",
-        },
-        _id: Date.now().toString(),
-      };
 
-      dispatch(
+      const actionResult = await dispatch(
         fetchUpdateStory({
           id: story._id,
           text,
@@ -94,17 +87,10 @@ const ContributeToStoryPage = () => {
           token: userToken || "",
         })
       );
-
-      setStory((prevStory) =>
-        prevStory
-          ? {
-              ...prevStory,
-              contributions: [...prevStory.contributions, newContribution],
-            }
-          : prevStory
-      );
-
       setText("");
+      if (fetchUpdateStory.fulfilled.match(actionResult)) {
+        navigate("/invitation");
+      }
     }
   };
 
@@ -162,7 +148,7 @@ const ContributeToStoryPage = () => {
               fontWeight: "bold",
               color: "green",
               paddingY: 2,
-              paddingLeft: 1
+              paddingLeft: 1,
             }}
           >
             Poäng: <span className={styles.scoreCircle}>{story.score}</span>
@@ -190,7 +176,7 @@ const ContributeToStoryPage = () => {
                 color: "purple",
                 marginRight: 2,
                 paddingTop: 4,
-                paddingLeft:1
+                paddingLeft: 1,
               }}
             >
               Författare:
@@ -205,6 +191,23 @@ const ContributeToStoryPage = () => {
               </Typography>
             ))}
           </Typography>
+          {story.contributions.length + 1 == story.numberOfContributors ? (
+            <Typography
+              variant="h6"
+              sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
+            >
+              Ditt bidrag är sista för denna berättelse. Tänk på att avsluta
+              berättelsen på ett bra sätt!
+            </Typography>
+          ) : (
+            <Typography
+              variant="h6"
+              sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
+            >
+              Ditt bidrag är nummer {story.contributions.length + 1} av{" "}
+              {story.numberOfContributors}.
+            </Typography>
+          )}
         </Box>
 
         <TextField

@@ -16,9 +16,12 @@ export const rulesetSlice = createSlice({
     addCustomRuleSet: (state, action) => {
       state.ruleSet = action.payload;
     },
+    clearCustomRuleSet: (state, action) => {
+      state.ruleSet = null;
+    },
   },
 });
 
-export const { addCustomRuleSet } = rulesetSlice.actions;
+export const { addCustomRuleSet, clearCustomRuleSet } = rulesetSlice.actions;
 
 export default rulesetSlice.reducer;

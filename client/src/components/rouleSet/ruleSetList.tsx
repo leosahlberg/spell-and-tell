@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Typography, Modal } from "@mui/material";
+import { Box, List, ListItem, Typography, Modal, Tooltip } from "@mui/material";
 import SixtyFpsSelectIcon from "@mui/icons-material/SixtyFpsSelect";
 import HourglassTopTwoToneIcon from "@mui/icons-material/HourglassTopTwoTone";
 import PeopleTwoToneIcon from "@mui/icons-material/PeopleTwoTone";
@@ -30,7 +30,10 @@ const RuleSetList = (props: RuleSetListProps) => {
         marginBottom: { xs: 2, md: 0 },
       }}
     >
-      <Typography variant="h1" sx={{ marginBottom: 3, paddingLeft: 3, fontSize: 30 }}>
+      <Typography
+        variant="h1"
+        sx={{ marginBottom: 3, paddingLeft: 3, fontSize: 30 }}
+      >
         Regler
       </Typography>
 
@@ -44,9 +47,12 @@ const RuleSetList = (props: RuleSetListProps) => {
               width: "100%",
             }}
           >
-            <Typography className={styles.title}>
-              Antal ord: {props.ruleSet.maxNumberOfWordsPerContribution}
-            </Typography>
+            {" "}
+            <Tooltip title="Antal ord per bidrag.">
+              <Typography className={styles.title}>
+                Antal ord: {props.ruleSet.maxNumberOfWordsPerContribution}
+              </Typography>
+            </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
               {<SixtyFpsSelectIcon />}
             </Box>
@@ -61,9 +67,11 @@ const RuleSetList = (props: RuleSetListProps) => {
               width: "100%",
             }}
           >
-            <Typography className={styles.title}>
-              Max tid: {props.ruleSet.maxTime}min
-            </Typography>
+            <Tooltip title="Max tid gäller per bidrag.">
+              <Typography className={styles.title}>
+                Max tid: {props.ruleSet.maxTime}min
+              </Typography>
+            </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
               <HourglassTopTwoToneIcon />
             </Box>
@@ -78,9 +86,11 @@ const RuleSetList = (props: RuleSetListProps) => {
               width: "100%",
             }}
           >
-            <Typography className={styles.title}>
-              Antal deltagare: {props.ruleSet.numberOfContribution}
-            </Typography>
+            <Tooltip title="Antal bidrag för denna berättelse.">
+              <Typography className={styles.title}>
+                Antal bidrag: {props.ruleSet.numberOfContribution}
+              </Typography>
+            </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
               <PeopleTwoToneIcon />
             </Box>
@@ -120,27 +130,6 @@ const RuleSetList = (props: RuleSetListProps) => {
             </Box>
           </Box>
         </ListItem>
-        {props.ruleSet.public != undefined ? (
-          <ListItem className={styles.list}>
-            <Box
-              tabIndex={0}
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
-              <Typography className={styles.title}>
-                Publik: {props.ruleSet.public ? "Ja" : "Nej"}
-              </Typography>
-              <Box sx={{ color: "rgb(12, 23, 79)" }}>
-                <SpellcheckTwoToneIcon />
-              </Box>
-            </Box>
-          </ListItem>
-        ) : (
-          <></>
-        )}
       </List>
       {props.edit ? (
         <>

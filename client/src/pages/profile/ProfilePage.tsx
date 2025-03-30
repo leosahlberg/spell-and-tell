@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./profilePage.module.scss";
 import Button from "../../components/buttons/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchGetInvitations } from "../../redux/invitationSlice";
 import { fetchStoriesByUserId } from "../../redux/storySlice";
@@ -43,11 +43,11 @@ function a11yProps(index: number) {
 const ProfilePage = () => {
   const [invitation, setInvitation] = useState<Invitation[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
-  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector<RootState>((state) => state.auth.user) as User;
   const token = useSelector<RootState>((state) => state.auth.token) as string;
   const [value, setValue] = useState(0);
+  const navigation = useNavigate();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -89,18 +89,6 @@ const ProfilePage = () => {
     }
   }, [storiesByUser]);
 
-  function getStoriesCreatedByUser() {
-    console.log(stories);
-    console.log(user.userId);
-    return stories.filter((story) => story.userId._id === user.userId);
-  }
-
-  function getStoriesContributedToByUser() {
-    return stories.filter((story) =>
-      story.contributions.filter((c) => c.userId._id === user.userId)
-    );
-  }
-
   return (
     <div className={styles.profilecontainer}>
       <div className={styles.info}>
@@ -130,43 +118,61 @@ const ProfilePage = () => {
           >
             <Tab label="Konto information" {...a11yProps(0)} />
             <Tab label="Inbjudningar" {...a11yProps(1)} />
-            <Tab label="Mina bidrag till berättelser" {...a11yProps(2)} />
-            <Tab label="Mina skapade berättelser" {...a11yProps(3)} />
+            <Tab
+              label="Mina bidrag och skapade berättelser"
+              {...a11yProps(2)}
+            />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
           <div className={styles.container}>
-            <div className={styles.settings}>
-              <h3>Konto information</h3>
-              <div className={styles.details}>
-                <p>Namn: {user.name}</p>
-                <p>Användarnamn: {user.username}</p>
-                <p>Email: {user.email}</p>
-                <p>Lösenord: ******</p>
-              </div>
-              <Button className={styles.button} text="Redigera" />
+            <h3>Konto information</h3>
+
+            <div className={styles.details}>
+              <p>Namn: {user.name}</p>
+              <p>Användarnamn: {user.username}</p>
+              <p>Email: {user.email}</p>
+              <p>Lösenord: ******</p>
             </div>
+            <Button className={styles.button} text="Redigera" />
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <div className={styles.container}>
-            <div className={styles.settings}>
+            <div>
               <h3>Inbjudningar:</h3>
+              <p>
+                Här kan du se berättelser som andra användare bjudit in dig till
+                att skriva på. <br />
+                <br />
+                Tänk på att en inbjudan inte är en garanti på att du kan skriva
+                på berättelsen. <br />
+                Det finns begränsat antal platser för varje berättelse och en
+                inbjudan kan ha skickats till flera personer.
+                <br />
+                <br /> Det är först till kvarn som gäller!
+              </p>
               {invitation?.map((invitation) => {
                 return (
-                  <div className={styles.invitation}>
-                    <>
-                      <p>Berättelse: {invitation.storyId?.title}</p>
-                      <p>
-                        Status:
-                        {invitation.status}
-                      </p>
-                    </>
-                    {invitation.status === "pending" ? (
-                      <Button className={styles.button} text="Godkänn" />
-                    ) : (
-                      <></>
-                    )}
+                  <div
+                    className={styles.settings}
+                    onClick={() =>
+                      navigation(`/story/${invitation.storyId._id}`)
+                    }
+                  >
+                    <img
+                      src={invitation.storyId.imgUrl}
+                      alt=""
+                      className="rounded-md shadow-md"
+                      width={100}
+                      height={100}
+                    />
+                    <p>Titel: {invitation.storyId?.title}</p>
+                    <p>
+                      Antal platser kvar:{" "}
+                      {invitation.storyId.numberOfContributors -
+                        invitation.storyId.contributions.length}
+                    </p>
                   </div>
                 );
               })}
@@ -175,51 +181,37 @@ const ProfilePage = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           <div className={styles.container}>
-            <div className={styles.settings}>
+            <div>
               <h3>
-                Antal berättelser du bidragit till:
-                {getStoriesContributedToByUser().length} stycken
+                Antal berättelser du skapat eller bidragit till: {""}
+                {stories.length}
               </h3>
-              {getStoriesContributedToByUser().length > 0 ? (
-                getStoriesContributedToByUser().map((story) => {
+              <p>
+                Här kan du se berättelser som du varit med och skrivit på.
+                Inklusive de berättelser du själv skapat!
+              </p>
+              {stories.length > 0 ? (
+                stories.map((story) => {
                   return (
-                    <>
-                      <Link to={`/story/${story._id}`}>
-                        <p className={styles.link}>{story.title}</p>
-                      </Link>
-                    </>
+                    <div
+                      className={styles.settings}
+                      onClick={() => navigation(`/story/${story._id}`)}
+                    >
+                      <img
+                        src={story.imgUrl}
+                        alt=""
+                        className="rounded-md shadow-md"
+                        width={100}
+                        height={100}
+                      />
+                      <p>{story.title}</p>
+                    </div>
                   );
                 })
               ) : (
                 <p>
-                  Du har inte bidrag till någon berättelse ännu. När du gjort
-                  ett bidrag kommer du att se det här.
-                </p>
-              )}
-            </div>
-          </div>
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={3}>
-          <div className={styles.container}>
-            <div className={styles.settings}>
-              <h3>
-                Antal berättelser du skapat: {getStoriesCreatedByUser().length}
-                stycken
-              </h3>
-              {getStoriesCreatedByUser().length > 0 ? (
-                getStoriesCreatedByUser().map((story) => {
-                  return (
-                    <>
-                      <Link to={`/story/${story._id}`}>
-                        <p className={styles.link}>{story.title}</p>
-                      </Link>
-                    </>
-                  );
-                })
-              ) : (
-                <p>
-                  Du har inte skapat någon berättelse ännu. När du skapat en
-                  berättelse kommer du att se det här.
+                  Du har inte skapat eller bidragit till någon berättelse ännu.
+                  När du gjort det kommer du att se det här.
                 </p>
               )}
             </div>
