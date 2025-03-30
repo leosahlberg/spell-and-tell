@@ -49,6 +49,25 @@
   color: #555;
 }
 
+.link {
+  color: rgb(12, 23, 79);
+  font-size: 1.3rem;
+  margin: 8px 0;
+  color: #555;
+}
+
+.invitation p {
+  color: rgb(12, 23, 79);
+  font-size: 1.3rem;
+  margin: 8px 0;
+  color: #555;
+}
+
+.invitation {
+  margin-bottom: 1rem;
+  gap: 5px;
+}
+
 .activity,
 .settings {
   width: 75%;
@@ -75,7 +94,7 @@
   align-items: center;
 }
 
-.submenu{
+.submenu {
   font-size: 2rem;
   padding: 10px 0 30px 0;
 }

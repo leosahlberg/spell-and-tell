@@ -6,7 +6,7 @@ export type User = {
 };
 
 export type PublicUser = {
-  userId: string;
+  _id: string;
   name: string;
 };
 
@@ -25,9 +25,9 @@ export type Story = {
   created: Date;
   score: number;
   rouleSet: RuleSet;
-  user: PublicUser;
+  userId: PublicUser;
   imgUrl: string;
-  contributions: { userId: PublicUser; text: string; _id: string }[]
+  contributions: { userId: PublicUser; text: string; _id: string }[];
   maxNumberOfWordsPerContribution: number;
   numberOfContributors: number;
   maxTime: number;
@@ -57,7 +57,7 @@ export type CreateInvitation = {
 };
 
 export type Invitation = {
-  storyId: string;
-  userId: string;
+  storyId: Story;
+  userId: PublicUser;
   status: "pending" | "accepted";
 };
