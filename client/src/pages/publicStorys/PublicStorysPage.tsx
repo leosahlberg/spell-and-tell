@@ -73,6 +73,7 @@ const PublicStorysPage = () => {
          <Box
          sx={{paddingTop: 6}}
         >
+          
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="Se alla berättelser" {...a11yProps(0)} sx={{  fontSize: 18, marginRight: 5, backgroundColor:"white"}} />
             <Tab label="Läs färdiga berättelser" {...a11yProps(1)} sx={{ marginRight: 5, fontSize: 18, backgroundColor:"white" }} />

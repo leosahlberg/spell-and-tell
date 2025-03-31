@@ -8,6 +8,7 @@ interface SearchListProps<T> {
   onSearch: (item: string) => void;
 }
 
+
 function Search<T>({
   items,
   renderItem,
