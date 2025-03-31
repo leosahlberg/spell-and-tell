@@ -2,21 +2,22 @@ import CardPublic from "../../components/card/CardPublic";
 import styles from "./publicStorysPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { Story } from "../../utils/types";
+import { PublicUser, Story } from "../../utils/types";
 import { fetchDeleteStory, fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
 import { Box, ListItemText, Tab, Tabs } from "@mui/material";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
 import Search from "../../components/search/Search";
+import { fetchGetAllUsers } from "../../redux/userSlice";
 
 const PublicStorysPage = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const dispatch = useDispatch<AppDispatch>();
-  const data = useSelector<RootState>(
-    (state) => state.story.stories
-  ) as Story[];
+  const data = useSelector<RootState>((state) => state.story.stories) as Story[];
   const token = useSelector<RootState>((state) => state.auth.token) as string;
+  const users = useSelector((state: RootState) => state.user.users) as PublicUser[];
   const [value, setValue] = useState(0);
+  const [searchListItem, setSearchListItem] = useState("");
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -31,6 +32,7 @@ const PublicStorysPage = () => {
 
   useEffect(() => {
     dispatch(fetchPublicStories(token));
+    dispatch(fetchGetAllUsers({ token }));
   }, [dispatch, token]);
 
   useEffect(() => {
@@ -41,7 +43,11 @@ const PublicStorysPage = () => {
     dispatch(fetchDeleteStory({ id, token }));
   };
 
-  const names = ["anna", "pelle", "kalle", "anne"];
+  const filteredStories =  stories && stories.filter((story) =>
+    story.contributions.some((contrib) =>
+      contrib.userId.name.toLowerCase().includes(searchListItem.toLowerCase())
+    )
+  );
 
   return (
     <>
@@ -50,61 +56,53 @@ const PublicStorysPage = () => {
           position: "relative",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-around",
-          paddingTop: 10
+          justifyContent: "center",
+          paddingTop: 5,
+          backgroundColor: "#fff5e6",
+          paddingBottom:5
         }}
       >
-        <Box>
+         <Box  sx={{paddingRight: 10}}>
           <Search
-            items={names}
+            items={users && users.map((user) => user.name)} 
             renderItem={(name) => <ListItemText primary={name} />}
-            placeholder="Sök på författarens namn eller berättelsens titel.."
+            placeholder="förnamn efternamn ex: Anna Andersson"
+            onSearch={setSearchListItem} 
           />
         </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-          }}
+         <Box
+         sx={{paddingTop: 6}}
         >
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab
-              label="Se alla berättelser"
-              {...a11yProps(0)}
-              sx={{ paddingRight: 5 }}
-            />
-            <Tab
-              label="Läs färdiga berättelser"
-              {...a11yProps(1)}
-              sx={{ paddingRight: 5 }}
-            />
-            <Tab label="Fortsätt på berätteser" {...a11yProps(2)} />
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab label="Se alla berättelser" {...a11yProps(0)} sx={{  fontSize: 18, marginRight: 5, backgroundColor:"white"}} />
+            <Tab label="Läs färdiga berättelser" {...a11yProps(1)} sx={{ marginRight: 5, fontSize: 18, backgroundColor:"white" }} />
+            <Tab label="Fortsätt på berättelser" {...a11yProps(2)}sx={{fontSize: 18, backgroundColor:"white"}} />
           </Tabs>
         </Box>
+       
+
+       
       </Box>
+
       <CustomTabPanel value={value} index={0}>
-      <div className={styles.publicstory}>
-        {stories.map((story) => (
-          <CardPublic
-            key={story._id}
-            imgs={story.imgUrl}
-            title={story.title}
-            contributions={[...story.contributions]}
-            id={story._id}
-            onDelete={handleDelete}
-          />
-        ))}
-      </div>
+        <div className={styles.publicstory}>
+          {filteredStories.map((story) => (
+            <CardPublic
+              key={story._id}
+              imgs={story.imgUrl}
+              title={story.title}
+              contributions={[...story.contributions]}
+              id={story._id}
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={1}>
         <div className={styles.container}>test 3</div>
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={2}>
         <div className={styles.container}>test 1</div>
       </CustomTabPanel>
