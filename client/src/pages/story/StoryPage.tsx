@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Box, Typography } from "@mui/material";
 import logo from "../../assets/logoST2.png";
+import { isMaxContributionsReached } from "../../utils/helpers";
 
 const StoryPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -113,12 +114,14 @@ const StoryPage = () => {
               alt="Spell and Tell logotyp med en penna som symboliserar kreativt skrivande"
             />
           </Typography>
-          <Link to={`/contribute/${id}`}>
-            <Button
-              text="Fortsätt på denna berättelse"
-              className={styles.continueButton}
-            />
-          </Link>
+          {!isMaxContributionsReached(story) && (
+            <Link to={`/contribute/${id}`}>
+              <Button
+                text="Fortsätt på denna berättelse"
+                className={styles.continueButton}
+              />
+            </Link>
+          )}
         </Box>
       </Typography>
     </Box>

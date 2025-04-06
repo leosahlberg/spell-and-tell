@@ -2,25 +2,63 @@ import CardPublic from "../../components/card/CardPublic";
 import styles from "./publicStorysPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { PublicUser, Story } from "../../utils/types";
+import { Story } from "../../utils/types";
 import { fetchDeleteStory, fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
-import { Box, ListItemText, Tab, Tabs } from "@mui/material";
+import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
-import Search from "../../components/search/Search";
 import { fetchGetAllUsers } from "../../redux/userSlice";
+import { useNavigate } from "react-router-dom"; 
+import { isMaxContributionsReached } from "../../utils/helpers";
 
 const PublicStorysPage = () => {
-  const [stories, setStories] = useState<Story[]>([]);
+  const [stories, setStories] = useState<Story[]>([]); 
+  const [searchListItem, setSearchListItem] = useState(""); 
+  const [value, setValue] = useState(0); 
   const dispatch = useDispatch<AppDispatch>();
-  const data = useSelector<RootState>((state) => state.story.stories) as Story[];
+  const navigate = useNavigate(); 
+
+  const storie = useSelector<RootState>(
+    (state) => state.story.stories
+  ) as Story[];
   const token = useSelector<RootState>((state) => state.auth.token) as string;
-  const users = useSelector((state: RootState) => state.user.users) as PublicUser[];
-  const [value, setValue] = useState(0);
-  const [searchListItem, setSearchListItem] = useState("");
+
+  useEffect(() => {
+    dispatch(fetchPublicStories(token)); 
+    dispatch(fetchGetAllUsers({ token })); 
+  }, [dispatch, token]);
+
+  useEffect(() => {
+    setStories(storie);
+  }, [storie]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+
+  const filterStories = (searchTerm: string): Story[] => {
+    if (!searchTerm.trim()) {
+      return stories; 
+    }
+    return stories.filter((story) =>
+      story.contributions.some((contrib) =>
+        contrib.userId.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+  };
+
+  const handleSearch = () => {
+    const filtered = filterStories(searchListItem); 
+    navigate("/search-results", {
+      state: {
+        filteredStories: filtered,
+        searchedName: searchListItem, 
+      },
+    });
+  };
+
+  const handleDelete = async (id: string) => {
+    dispatch(fetchDeleteStory({ id, token }));
   };
 
   function a11yProps(index: number) {
@@ -30,25 +68,6 @@ const PublicStorysPage = () => {
     };
   }
 
-  useEffect(() => {
-    dispatch(fetchPublicStories(token));
-    dispatch(fetchGetAllUsers({ token }));
-  }, [dispatch, token]);
-
-  useEffect(() => {
-    setStories(data);
-  }, [data]);
-
-  const handleDelete = async (id: string) => {
-    dispatch(fetchDeleteStory({ id, token }));
-  };
-
-  const filteredStories =  stories && stories.filter((story) =>
-    story.contributions.some((contrib) =>
-      contrib.userId.name.toLowerCase().includes(searchListItem.toLowerCase())
-    )
-  );
-
   return (
     <>
       <Box
@@ -56,56 +75,170 @@ const PublicStorysPage = () => {
           position: "relative",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          paddingTop: 5,
-          backgroundColor: "#fff5e6",
-          paddingBottom:5
+          justifyContent: "space-around",
+          paddingTop: 3,
+          backgroundColor: "#F9FBFD",
+          paddingBottom: 2,
         }}
       >
-         <Box  sx={{paddingRight: 10}}>
-          <Search
-            items={users && users.map((user) => user.name)} 
-            renderItem={(name) => <ListItemText primary={name} />}
-            placeholder="förnamn efternamn ex: Anna Andersson"
-            onSearch={setSearchListItem} 
+        <Box sx={{ paddingRight: 5 }}>
+          <p style={{ paddingLeft: 3 }}>Sök på författarens namn 🖋️📚</p>
+          <TextField
+            label="tex. anna"
+            variant="outlined"
+            value={searchListItem}
+            onChange={(e) => setSearchListItem(e.target.value)} 
+            sx={{
+              marginBottom: 2,
+              marginTop: 2,
+              backgroundColor: "white",
+              width: 300,
+            }}
           />
+          <Button
+            sx={{ marginLeft: 4, marginTop: 4 }}
+            variant="contained"
+            color="primary"
+            onClick={handleSearch} 
+          >
+            Sök
+          </Button>
         </Box>
-         <Box
-         sx={{paddingTop: 6}}
+        <Box
+          sx={{
+            paddingTop: 4,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Se alla berättelser" {...a11yProps(0)} sx={{  fontSize: 18, marginRight: 5, backgroundColor:"white"}} />
-            <Tab label="Läs färdiga berättelser" {...a11yProps(1)} sx={{ marginRight: 5, fontSize: 18, backgroundColor:"white" }} />
-            <Tab label="Fortsätt på berättelser" {...a11yProps(2)}sx={{fontSize: 18, backgroundColor:"white"}} />
+          <Tabs value={value} onChange={handleChange} aria-label="tabs">
+            <Tab label="Se alla berättelser" {...a11yProps(0)} />
+            <Tab label="Läs färdiga berättelser" {...a11yProps(1)} />
+            <Tab label="Fortsätt på berättelser" {...a11yProps(2)} />
           </Tabs>
         </Box>
-       
-
-       
       </Box>
-
+ 
       <CustomTabPanel value={value} index={0}>
         <div className={styles.publicstory}>
-          {filteredStories.map((story) => (
-            <CardPublic
-              key={story._id}
-              imgs={story.imgUrl}
-              title={story.title}
-              contributions={[...story.contributions]}
-              id={story._id}
-              onDelete={handleDelete}
-            />
-          ))}
+          {stories.length > 0 ? (
+            stories.map((story) => (
+              <CardPublic
+                key={story._id}
+                imgs={story.imgUrl}
+                title={story.title}
+                contributions={[...story.contributions]}
+                id={story._id}
+                onDelete={handleDelete}
+              >
+                {isMaxContributionsReached(story) && (
+                  <Typography
+                    variant="h6"
+                    color="error"
+                    sx={{ paddingTop: 2.5, textAlign: "center", fontSize: 15 }}
+                  >
+                   Max antal bidrag är uppnått, går ej bidra mer!
+                  </Typography>
+                )}
+                {!isMaxContributionsReached(story) && (
+                  <Typography
+                    variant="h6"
+                    color="success"
+                    sx={{ paddingTop: 2, textAlign: "center" }}
+                  >
+                    Fortsätt på denna berättelse
+                  </Typography>
+                )}
+              </CardPublic>
+            ))
+          ) : (
+            <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
+              Inga berättelser hittades.
+            </Typography>
+          )}
         </div>
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={1}>
-        <div className={styles.container}>test 3</div>
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontSize: "1.5rem",
+            color: "rgb(12, 23, 79)",
+            paddingBottom: 4,
+          }}
+        >
+          Klicka på den berättelse som du vill läsa!
+        </Typography>
+        <div className={styles.publicstory}>
+          {stories.length > 0 ? (
+            stories
+              .filter((story) => isMaxContributionsReached(story))
+              .map((story) => (
+                <CardPublic
+                  key={story._id}
+                  imgs={story.imgUrl}
+                  title={story.title}
+                  contributions={[...story.contributions]}
+                  id={story._id}
+                >
+                  <Typography
+                    variant="body2"
+                    color="error"
+                    sx={{ paddingTop: 2, textAlign: "center" }}
+                  >
+                    ( Max antal bidrag är uppnått, går ej bidra mer! )
+                  </Typography>
+                </CardPublic>
+              ))
+          ) : (
+            <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
+              Inga färdiga berättelser hittades.
+            </Typography>
+          )}
+        </div>
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={2}>
-        <div className={styles.container}>test 1</div>
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontSize: "1.5rem",
+            color: "rgb(12, 23, 79)",
+            paddingBottom: 4,
+          }}
+        >
+          Klicka på den berättelse som du vill fortsätta på!
+        </Typography>
+        <div className={styles.publicstory}>
+          {stories.length > 0 ? (
+            stories
+              .filter((story) => !isMaxContributionsReached(story)) 
+              .map((story) => (
+                <CardPublic
+                  key={story._id}
+                  imgs={story.imgUrl}
+                  title={story.title}
+                  contributions={[...story.contributions]}
+                  id={story._id}
+                  onDelete={handleDelete}
+                >
+                  <Typography
+                    variant="body2"
+                    color="success"
+                    sx={{ paddingTop: 2, textAlign: "center" }}
+                  >
+                    Fortsätt gärna på denna berättelse.. 🙂
+                  </Typography>
+                </CardPublic>
+              ))
+          ) : (
+            <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
+              Inga berättelser hittades.
+            </Typography>
+          )}
+        </div>
       </CustomTabPanel>
     </>
   );

@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { Story } from "../../utils/types";
 import CardPublic from "../card/CardPublic";
 import styles from "../search/search.module.scss";
+import { isMaxContributionsReached } from "../../utils/helpers";
 interface Search {
   filteredStories: Story[];
   searchedName: string;
@@ -32,7 +33,26 @@ const Search: React.FC<Search> = ({ filteredStories, searchedName }) => {
               title={story.title}
               contributions={[...story.contributions]}
               id={story._id}
-            />
+            >
+              {isMaxContributionsReached(story) && (
+                <Typography
+                  variant="h6"
+                  color="error"
+                  sx={{ paddingTop: 2.5, textAlign: "center", fontSize: 15 }}
+                >
+                  Max antal bidrag är uppnått, går ej bidra mer!
+                </Typography>
+              )}
+              {!isMaxContributionsReached(story) && (
+                <Typography
+                  variant="h6"
+                  color="success"
+                  sx={{ paddingTop: 2, textAlign: "center" }}
+                >
+                  Fortsätt på denna berättelse
+                </Typography>
+              )}
+            </CardPublic>
           ))
         ) : (
           <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>

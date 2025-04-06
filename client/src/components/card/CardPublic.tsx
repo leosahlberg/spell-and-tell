@@ -4,8 +4,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { Link } from "react-router";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import { PublicUser } from "../../utils/types";
+import { Box } from "@mui/material";
 
 type Contribution = {
   userId: PublicUser;
@@ -18,7 +19,8 @@ type CardProps = {
   title: string;
   contributions: Contribution[];
   id: string;
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
+  children?: React.ReactNode;
 };
 
 export default function CardPublic({
@@ -26,7 +28,8 @@ export default function CardPublic({
   title,
   contributions,
   id,
-  onDelete,
+  // onDelete,
+  children
 }: CardProps) {
   
   const getFirstTwoSentences = (text: string) => {
@@ -51,7 +54,7 @@ export default function CardPublic({
       <Typography
         variant="body2"
         sx={{
-          paddingTop: 2,
+          paddingTop: 1,
           display: "-webkit-box",
           WebkitLineClamp: 2, 
           WebkitBoxOrient: "vertical",
@@ -67,48 +70,61 @@ export default function CardPublic({
   return (
     <Card
       sx={{
-        width: 400,
-        height: 550,
+        width: 350,
+        height: 400,
         backgroundColor: "white",
-        transition: "transform 0.3s, background-color 0.3s",
-        "&:hover": {
-          transform: "scale(1.02)",
-          boxShadow: 2,
-          backgroundColor: "#f5f5f5",
-        },
       }}
     >
+      
       <CardActionArea
         component={Link}
         to={`/story/${id}`}
-        sx={{ textDecoration: "none", backgroundColor: "white" }}
+        sx={{ textDecoration: "none", backgroundColor: "white", "&:hover": {
+     
+          backgroundColor: "#f1f1f1",
+          cursor:"pointer"
+        }, }}
       >
         <CardMedia
           component="img"
-          height="250"
+          height="220"
           image={imgs}
           alt={`Bild för berättelsen: ${title}`}
+          sx={{transition: "none"}}
         />
         <CardContent>
           <Typography
             gutterBottom
             variant="h2"
             component="h1"
-            sx={{ fontSize: "1.5rem", paddingTop: 2 }}
+            sx={{ fontSize: "1.2rem"}}
           >
             {title}
           </Typography>
           {renderFirstContribution()}
         </CardContent>
+       
       </CardActionArea>
-      <Button
+       
+      {children && (
+        <Box
+          sx={{
+            marginTop: "auto", 
+            textAlign: "center",
+            paddingBottom: 2,
+          }}
+        >
+          {children}
+        </Box>
+      )}
+      {/* <Button
         variant="contained"
         color="error"
         sx={{ margin: 2 }}
-        onClick={() => onDelete(id)}
+        onClick={() => onDelete?.(id)}
       >
         Ta bort
-      </Button>
+      </Button> */}
     </Card>
   );
 }
