@@ -81,12 +81,10 @@ const StoryPage = () => {
               component="h2"
               className={styles.storyTitle}
               sx={{
-                fontSize: 40,
+                fontSize: 35,
                 color: "rgb(12, 23, 79)",
                 textAlign: "center",
-                alignSelf: "center",
                 width: "100%",
-                marginBottom: 3,
               }}
             >
               {story.title}
@@ -103,7 +101,7 @@ const StoryPage = () => {
                 <Box key={index} sx={{ marginBottom: 2 }}>
                   <Typography
                     variant="body1"
-                    sx={{ marginTop: 3, fontSize: 28 }}
+                    sx={{ marginTop: 3, fontSize: 24 }}
                   >
                     {contribution.text}
                   </Typography>
