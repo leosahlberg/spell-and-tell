@@ -16,6 +16,7 @@ import { User } from "./utils/types";
 import { RootState } from "./redux/store";
 import StoryPage from "./pages/story/StoryPage";
 import InviteUserToContribute from "./pages/invitation/InviteUserToContribute";
+import SearchResultsPagePage from "./pages/searchResult/SearchResultPage";
 
 const Navigation = () => {
   const user = useSelector<RootState>((state) => state.auth.user) as User;
@@ -59,6 +60,7 @@ const Navigation = () => {
               <Route path="/login" element={<LogInPage />} />
               <Route path="/story/:id" element={<StoryPage />} />
               <Route path="/stories" element={<PublicStorysPage />} />
+              <Route path="/search-results" element={<SearchResultsPagePage />} />
               <Route
                 path="/invitation"
                 element={<InviteUserToContribute></InviteUserToContribute>}

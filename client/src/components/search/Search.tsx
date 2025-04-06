@@ -1,72 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { TextField, Box, List, ListItem, Typography } from "@mui/material";
-
-interface SearchListProps<T> {
-  items: T[];
-  renderItem: (item: T) => React.ReactNode;
-  placeholder?: string;
-  onSearch: (item: string) => void;
+import { Box, Typography } from "@mui/material";
+import { Story } from "../../utils/types";
+import CardPublic from "../card/CardPublic";
+import styles from "../search/search.module.scss";
+interface Search {
+  filteredStories: Story[];
+  searchedName: string;
 }
 
-
-function Search<T>({
-  items,
-  renderItem,
-  placeholder = "Sök...",
-  onSearch,
-}: SearchListProps<T>) {
-  const [listItem, setListItem] = useState("");
-
-  useEffect(() => {
-    onSearch(listItem);
-  }, [listItem, onSearch]);
-
-  const filteredItems = items?.filter((item) =>
-    JSON.stringify(item).toLowerCase().includes(listItem.toLowerCase())
-  );
-
+const Search: React.FC<Search> = ({ filteredStories, searchedName }) => {
   return (
-    <Box>
-      <Box sx={{ color:"darkBlue", borderRadius: 3, fontSize: 22, paddingLeft: 3, paddingRight: 3}}>
-      <p style={{paddingBottom: 15, paddingLeft:10}}>
-        <i >Sök på författarens namn..👇📚</i>
-
-        </p>
-        <TextField
-          label={placeholder}
-          fullWidth
-          variant="outlined"
-          value={listItem}
-          onChange={(e) => setListItem(e.target.value)}
-          sx={{ width: 350, backgroundColor:"white" }}
-        />
-     
-      </Box>
-
-      {listItem && (
-        <List
-          sx={{
-            position: "absolute",
-            zIndex: 10,
-            backgroundColor: "white",
-            width: "350px",
-            maxHeight: 200,
-            overflowY: "auto",
-            boxShadow: 3,
-            borderRadius: 1,
-          }}
-        >
-          {filteredItems.length > 0 ? (
-            filteredItems.map((item, index) => (
-              <ListItem key={index}>{renderItem(item)}</ListItem>
-            ))
-          ) : (
-            <Typography sx={{ mt: 2, color: "gray" }}>Inga resultat</Typography>
-          )}
-        </List>
+    <Box
+      sx={{
+        padding: 4,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      {searchedName && (
+        <Typography variant="subtitle1" sx={{ marginBottom: 3, fontSize: 25 }}>
+          Berättelser som <strong>{searchedName}</strong> deltagit i 📖
+        </Typography>
       )}
+      <Box className={styles.search}>
+        {filteredStories.length > 0 ? (
+          filteredStories.map((story) => (
+            <CardPublic
+              key={story._id}
+              imgs={story.imgUrl}
+              title={story.title}
+              contributions={[...story.contributions]}
+              id={story._id}
+            />
+          ))
+        ) : (
+          <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
+            Inga berättelser hittades.
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
-}
+};
 
 export default Search;
