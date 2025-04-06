@@ -27,7 +27,7 @@ const RuleSetList = (props: RuleSetListProps) => {
         padding: 4,
         borderRadius: 8,
         boxShadow: 2,
-        marginBottom: { xs: 2, md: 0 },
+        marginBottom: { xs: 2, md: 24},
       }}
     >
       <Typography
