@@ -113,15 +113,15 @@ const PublicStorysPage = () => {
           }}
         >
           <Tabs value={value} onChange={handleChange} aria-label="tabs">
-            <Tab label="Se alla berättelser" {...a11yProps(0)} />
-            <Tab label="Läs färdiga berättelser" {...a11yProps(1)} />
-            <Tab label="Fortsätt på berättelser" {...a11yProps(2)} />
+            <Tab tabIndex={0} label="Se alla berättelser" {...a11yProps(0)} />
+            <Tab tabIndex={0} label="Läs färdiga berättelser" {...a11yProps(1)} />
+            <Tab tabIndex={0} label="Fortsätt på berättelser" {...a11yProps(2)} />
           </Tabs>
         </Box>
       </Box>
  
       <CustomTabPanel value={value} index={0}>
-        <div className={styles.publicstory}>
+        <div className={styles.publicstory} >
           {stories.length > 0 ? (
             stories.map((story) => (
               <CardPublic
