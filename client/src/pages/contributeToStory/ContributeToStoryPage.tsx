@@ -197,7 +197,7 @@ const ContributeToStoryPage = () => {
               variant="h6"
               sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
             >
-              Ditt bidrag är sista för denna berättelse. Tänk på att avsluta
+              Ditt bidrag är det sista för denna berättelse. Tänk på att avsluta
               berättelsen på ett bra sätt!
             </Typography>
           ) : (
