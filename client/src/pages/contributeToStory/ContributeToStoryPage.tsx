@@ -232,10 +232,9 @@ const ContributeToStoryPage = () => {
         />
 
         <Box className={styles.buttonWrapper}>
-          <Button className={styles.button} text="Skicka vidare" />
           <Button
             className={styles.button}
-            text="Publicera"
+            text="Spara"
             onClick={() => handlePublish()}
           />
         </Box>

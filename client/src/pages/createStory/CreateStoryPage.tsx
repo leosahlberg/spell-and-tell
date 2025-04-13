@@ -176,7 +176,7 @@ const CreateStoryPage = () => {
         >
           <Button
             className={styles.button}
-            text={"Spara och publicera"}
+            text={"Spara"}
             onClick={() => createStory()}
           />
         </Box>

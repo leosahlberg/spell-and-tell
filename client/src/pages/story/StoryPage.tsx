@@ -14,10 +14,11 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 const StoryPage = () => {
   const { id } = useParams<{ id: string }>();
   const [story, setStory] = useState<Story | null>(null);
-
   const stories = useSelector<RootState>(
     (state) => state.story.stories
   ) as Story[];
+
+  const currentUser = useSelector((state: RootState) => state.auth.user);
 
   const navigate = useNavigate();
 
@@ -37,6 +38,12 @@ const StoryPage = () => {
   if (!story) {
     return <Typography variant="h1">Berättelsen hittades inte.</Typography>;
   }
+
+  const hasContributed = () => {
+    return story?.contributions.some(
+      (contribution) => contribution.userId._id === currentUser?.userId
+    );
+  };
 
   return (
     <>
@@ -141,8 +148,9 @@ const StoryPage = () => {
             {!isMaxContributionsReached(story) && (
               <Link to={`/contribute/${id}`}>
                 <Button
-                  text="Fortsätt på denna berättelse"
+                  text={hasContributed() ? "Du har redan bidragit!" : "Fortsätt på denna berättelse"}
                   className={styles.continueButton}
+                  disabled={hasContributed()}
                 />
               </Link>
             )}
