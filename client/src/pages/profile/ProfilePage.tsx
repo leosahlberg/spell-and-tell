@@ -12,7 +12,6 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
 
-
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -96,11 +95,12 @@ const ProfilePage = () => {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab label="Konto information" {...a11yProps(0)} />
-            <Tab label="Inbjudningar" {...a11yProps(1)} />
+            <Tab label="Konto information" {...a11yProps(0)} tabIndex={0} />
+            <Tab label="Inbjudningar" {...a11yProps(1)} tabIndex={0} />
             <Tab
               label="Mina bidrag och skapade berättelser"
               {...a11yProps(2)}
+              tabIndex={0}
             />
           </Tabs>
         </Box>
@@ -174,8 +174,10 @@ const ProfilePage = () => {
                 stories.map((story) => {
                   return (
                     <div
+                      tabIndex={0}
                       className={styles.settings}
                       onClick={() => navigation(`/story/${story._id}`)}
+                  
                     >
                       <img
                         src={story.imgUrl}

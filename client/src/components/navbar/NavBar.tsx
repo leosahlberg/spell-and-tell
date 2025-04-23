@@ -26,7 +26,7 @@ const NavBar = ({ user }: NavBarProps) => {
           className={styles.img}
         />
       ),
-      path: "profile",
+      path: "/profile",
     },
     {
       title: "Startsida",
