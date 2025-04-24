@@ -10,7 +10,6 @@ import logo from "../../assets/logoST2.png";
 import { isMaxContributionsReached } from "../../utils/helpers";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-
 const StoryPage = () => {
   const { id } = useParams<{ id: string }>();
   const [story, setStory] = useState<Story | null>(null);
@@ -24,6 +23,12 @@ const StoryPage = () => {
 
   const handleNavigate = () => {
     navigate("/stories");
+  };
+
+  const handleKeydown = (e: { key: string; }) => {
+    if (e.key === "Enter") {
+      navigate("/stories");
+    }
   };
 
   useEffect(() => {
@@ -50,6 +55,7 @@ const StoryPage = () => {
       <div
         tabIndex={0}
         onClick={handleNavigate}
+        onKeyDown={handleKeydown}
         style={{
           display: "flex",
           flexDirection: "row",
@@ -148,7 +154,11 @@ const StoryPage = () => {
             {!isMaxContributionsReached(story) && (
               <Link to={`/contribute/${id}`}>
                 <Button
-                  text={hasContributed() ? "Du har redan bidragit!" : "Fortsätt på denna berättelse"}
+                  text={
+                    hasContributed()
+                      ? "Du har redan bidragit!"
+                      : "Fortsätt på denna berättelse"
+                  }
                   className={styles.continueButton}
                   disabled={hasContributed()}
                 />
