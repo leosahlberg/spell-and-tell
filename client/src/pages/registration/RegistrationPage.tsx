@@ -13,15 +13,16 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchRegistrateUser } from "../../redux/authSlice";
+import { useTranslation } from "react-i18next";
 
 const RegistrationPage = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
   const [errorPassword, setErrorPassword] = useState<string | null>(null);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector<RootState>((state) => state.auth.error) as string;
@@ -69,39 +70,41 @@ const RegistrationPage = () => {
         elevation={24}
         className={styles.form}
         sx={{
-          padding: 4,
+          padding: "20px",
+         
           maxWidth: 800,
+          maxHeight: 700,
           marginBottom: 20,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "#FFFEFA",
-          marginTop: 5,
+          marginTop: 15,
           borderRadius: "8px",
         }}
       >
         <Typography
           className={styles.regtitle}
           variant="h1"
-          sx={{ fontSize: "3rem" }}
+          sx={{ fontSize: "2rem" }}
           gutterBottom
         >
-          Skapa ett användarkonto
+            {t("registration.createAccount")}
         </Typography>
 
         <form onSubmit={handleSubmit}>
           <label className={styles.label} id="name-label" htmlFor="name">
-            Namn
+          {t("registration.name")} 
           </label>
           <TextField
             variant="standard"
             id="name"
             fullWidth
             required
-            placeholder="Ange namn"
+            placeholder={t("registration.name")}
             onChange={(e) => setName(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 18 },
+              input: { color: "black", fontStyle: "italic", fontSize: 16 },
             }}
           />
           <label
@@ -109,24 +112,24 @@ const RegistrationPage = () => {
             id="username-label"
             htmlFor="username"
           >
-            Användarnamn
+            {t("registration.username")} 
           </label>
           <TextField
             variant="standard"
             id="username"
             fullWidth
             required
-            placeholder="Ange användarnamn (exempel: Anna79)"
+            placeholder={t("registration.username")}
             onChange={(e) => setUsername(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 18 },
+              input: { color: "black", fontStyle: "italic", fontSize: 16 },
             }}
           />
 
           <label className={styles.label} id="email-label" htmlFor="email">
-            E-postadress
+          {t("registration.email")}
           </label>
           <TextField
             variant="standard"
@@ -134,12 +137,12 @@ const RegistrationPage = () => {
             fullWidth
             required
             type="email"
-            placeholder="Ange din e-postadress (exempel anna@gmail.com)"
+            placeholder={t("registration.email")}
             onChange={(e) => setEmail(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 18 },
+              input: { color: "black", fontStyle: "italic", fontSize: 16 },
             }}
           />
 
@@ -148,7 +151,7 @@ const RegistrationPage = () => {
             id="password-label"
             htmlFor="password"
           >
-            Lösenord
+               {t("registration.password")}
           </label>
           <TextField
             variant="standard"
@@ -156,12 +159,12 @@ const RegistrationPage = () => {
             type="password"
             fullWidth
             required
-            placeholder="Ange lösenord (minst 8 tecken)"
+            placeholder={t("registration.password")}
             onChange={(e) => setPassword(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 18 },
+              input: { color: "black", fontStyle: "italic", fontSize: 16 },
             }}
           />
 
@@ -170,7 +173,7 @@ const RegistrationPage = () => {
             id="confirm-password-label"
             htmlFor="confirm-password"
           >
-            Bekräfta Lösenord
+           {t("registration.confirmPassword")} 
           </label>
           <TextField
             variant="standard"
@@ -178,12 +181,12 @@ const RegistrationPage = () => {
             type="password"
             fullWidth
             required
-            placeholder="Bekräfta ditt lösenord"
+            placeholder={t("registration.confirmPassword")}
             onChange={(e) => confirmPassword(e.currentTarget.value)}
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 18 },
+              input: { color: "black", fontStyle: "italic", fontSize: 16 },
             }}
           />
           {errorPassword != null ? (
@@ -193,7 +196,7 @@ const RegistrationPage = () => {
           )}
           <FormControlLabel
             control={<Checkbox />}
-            label="Jag accepterar villkor och regler"
+            label={t("registration.acceptTerms")}
             required
             sx={{
               marginBottom: 1,
@@ -203,15 +206,13 @@ const RegistrationPage = () => {
           />
 
           <Typography variant="body2" sx={{ fontSize: 18, color: "purple" }}>
-            (läs{" "}
             <Link to="/terms" style={{ color: "purple" }}>
-              villkor och regler
+            ({t("registration.terms")})
             </Link>
-            )
           </Typography>
 
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button text="Skapa" className={styles.button} />
+            <Button text={t("registration.createBtn")} className={styles.button} />
           </div>
         </form>
       </Paper>

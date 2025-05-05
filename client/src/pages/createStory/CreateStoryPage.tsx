@@ -10,8 +10,10 @@ import { RuleSet } from "../../utils/types";
 import RouleSetList from "../../components/rouleSet/ruleSetList";
 import { useNavigate } from "react-router-dom";
 import { clearCustomRuleSet } from "../../redux/rulesetSlice";
+import { useTranslation } from "react-i18next";
 
 const CreateStoryPage = () => {
+  const { t } = useTranslation(); 
   const [started, setStarted] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -125,7 +127,7 @@ const CreateStoryPage = () => {
               marginRight: 3,
             }}
           >
-            Skapa berättelse
+           {t("create.createStory")}
           </Typography>
         </Box>
 
@@ -133,14 +135,14 @@ const CreateStoryPage = () => {
 
         <TextField
           id="story-title"
-          label="Titel"
+          label={t("create.title")}
           value={title}
           onChange={handleInputChangeTitle}
           fullWidth
           multiline
           rows={1}
           variant="outlined"
-          placeholder="Titel..."
+          placeholder={t("create.titlePlaceholder")}
           aria-labelledby="story-title-label"
           sx={{
             marginBottom: 2,
@@ -152,14 +154,14 @@ const CreateStoryPage = () => {
         />
         <TextField
           id="story-content"
-          label="berättelse"
+          label={t(".create.story")}
           value={text}
           onChange={handleInputChange}
           fullWidth
           multiline
           rows={15}
           variant="outlined"
-          placeholder="Skriv din berättelse här..."
+          placeholder={t("create.storyPlaceholder")}
           aria-labelledby="story-content-label"
           sx={{
             marginBottom: 2,
@@ -176,7 +178,7 @@ const CreateStoryPage = () => {
         >
           <Button
             className={styles.button}
-            text={"Spara"}
+            text={t("create.save")}
             onClick={() => createStory()}
           />
         </Box>
