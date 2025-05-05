@@ -20,7 +20,11 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { logout } from "../../redux/authSlice";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 import Button from "../buttons/Button";
+import swe from "../../assets/sweden.jpg";
+import eng from "../../assets/england.jpg";
 
 type HeaderProps = {
   loggedIn: boolean;
@@ -28,6 +32,9 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps) => {
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = React.useState(i18n.language);
+  const [selectedFlag, setSelectedFlag] = React.useState(swe);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -37,16 +44,30 @@ const Header = (props: HeaderProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const NavList = [
-    { title: "Startsida", icon: <HomeIcon />, path: "/" },
-    { title: "Profil", icon: <AccountCircleIcon />, path: "/profile" },
-    {
-      title: "Skapa ny berättelse",
-      icon: <AddCircleIcon />,
-      path: "/createstory",
-    },
-    { title: "Alla berättelser", icon: <LibraryBooksIcon />, path: "/stories" },
-    { title: "Regler och villkor", icon: <InfoIcon />, path: "/terms" },
+    { title: t("header.home"), icon: <HomeIcon />, path: "/" },
+    { title: t("header.profile"), icon: <AccountCircleIcon />, path: "/profile" },
+    { title: t("header.createStory"), icon: <AddCircleIcon />, path: "/createstory" },
+    { title: t("header.allStories"), icon: <LibraryBooksIcon />, path: "/stories" },
+    { title: t("header.terms"), icon: <InfoIcon />, path: "/terms" },
   ];
+  
+
+  const handleChangeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+    setSelectedLanguage(language);
+
+    if (language === "sv") {
+      setSelectedFlag(swe);
+    } else if (language === "en") {
+      setSelectedFlag(eng);
+    }
+  };
+
+  React.useEffect(() => {
+    setSelectedLanguage(i18n.language);
+    setSelectedFlag(i18n.language === "sv" ? swe : eng);
+  }, [i18n.language]);
+  
 
   const DrawerList = (
     <Box
@@ -75,7 +96,8 @@ const Header = (props: HeaderProps) => {
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText primary={"Logga ut"} />
+          <ListItemText primary={t("header.logout")} />
+
         </ListItemButton>
       </ListItem>
     </Box>
@@ -90,38 +112,55 @@ const Header = (props: HeaderProps) => {
         />
         <div className={style.title} onClick={() => navigate("/")}>
           <h1>Spell & Tell</h1>
-          <p>Skapa kreativa berättelser tillsammans</p>
+          <p> {t("header.subtitle")}</p>
         </div>
-        {props.loggedIn ? (
-          <div>
-            <MenuIcon
-              className={style.menubar}
-              tabIndex={0}
-              sx={{
-                fontSize: "40px",
-                marginLeft: 20,
-                marginRight: 5,
-                cursor: "pointer",
-                outline: "none",
-              }}
-              onClick={toggleDrawer(true)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  toggleDrawer(true)();
-                }
-              }}
-            />
-            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-              {DrawerList}
-            </Drawer>
-          </div>
-        ) : (
-          <Button
-            text="Logga in"
-            className={style.button}
-            onClick={() => navigate("/login")}
-          ></Button>
-        )}
+        <div className={style.language}>
+          <img
+            src={selectedFlag}
+            alt={selectedLanguage === "sv" ? "Svenska" : "English"}
+            className={style.flag}
+          />
+          <select
+            className={style.flagname}
+            onChange={(e) => handleChangeLanguage(e.target.value)}
+            value={selectedLanguage}
+          >
+            <option value="sv">Sve</option>
+            <option value="en">Eng</option>
+          </select>
+          {props.loggedIn ? (
+            <div>
+              <MenuIcon
+                className={style.menubar}
+                tabIndex={0}
+                sx={{
+                  fontSize: "40px",
+                  marginLeft: 20,
+                  marginRight: 5,
+                  cursor: "pointer",
+                  outline: "none",
+                }}
+                onClick={toggleDrawer(true)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    toggleDrawer(true)();
+                  }
+                }}
+              />
+              <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+                {DrawerList}
+              </Drawer>
+            </div>
+          ) : (
+            <>
+              <Button
+                text={t("welcome.loggin")}
+                className={style.button}
+                onClick={() => navigate("/login")}
+              ></Button>
+            </>
+          )}
+        </div>
       </div>
       <div className={style.underline}></div>
     </header>

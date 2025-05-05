@@ -5,12 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { RootState } from "../../redux/store";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
   const navigation = useNavigate();
   const user = useSelector((state: RootState) => state.auth.user);
   const [open, setOpen] = useState(false);
-  const [messageIndex, setMessageIndex] = useState(0); 
+  const [messageIndex, setMessageIndex] = useState(0);
+  const { t } = useTranslation(); 
 
   const messages = [
     `${user?.name}! Dags att skriva! ✍️`,
@@ -104,33 +106,31 @@ const HomePage = () => {
             height: "fit-content",
           }}
         >
-          Hitta berättelse att bidra till
+             {t("home.findstory")} 
         </Typography>
         <Typography variant="body1" gutterBottom
         sx={{fontSize: "1.3rem"}}
         >
-          Vill du inte starta en ny berättelse?
+         {t("home.startnew")}
         </Typography>
         <Typography variant="body1" gutterBottom
          sx={{fontSize: "1.2rem"}}
         >
-          Utforska öppna berättelser som du kan bidra till. Tänk på att läsa
-          igenom berättelsen och vilka villkor som gäller för just den du valt
-          innan du börjar!
+           {t("home.contribute")}
         </Typography>
 
         <Typography variant="body1" gutterBottom
          sx={{fontSize: "1.2rem", marginTop: 5}}>
-          Glöm inte att läsa våra regler och villkor också.     
+            {t("home.terms")}     
           <Link
             className={style.link}
             to={"/terms"}
           >
-            De hittar du här
+           {t("home.find")}
           </Link>
         </Typography>
         <button className={style.button} onClick={() => navigation("/stories")}>
-          <h2>Utforska berättelser</h2>
+          <h2> {t("home.storys")}</h2>
         </button>
       </Paper>
       <Paper
@@ -156,23 +156,19 @@ const HomePage = () => {
             height: "fit-content",
           }}
         >
-          Hur funkar det?
+       {t("home.work")}
         </Typography>
         <Typography variant="body1" gutterBottom
           sx={{fontSize: "1.3rem"}}>
-          Spell & Tell är ett berättar spel för dig och dina vänner. Det funkar
-          lika bra att använda i skolan som på fritiden.
+                {t("home.spell")}
         </Typography>
         <Typography variant="body1" gutterBottom
           sx={{fontSize: "1.2rem"}}>
-          Skapa roliga och kreativa berättelser tillsammans. Du startar en
-          berättelse och väljer vilka regler du vill applicera, sen skickar du
-          den vidare till en person eller lägger den öppen för vem som helst att
-          bidra.
+         {t("home.create")}
         </Typography>
 
         <button className={style.button} onClick={() => navigation("/terms")}>
-          <h2>Läs regler och villkor</h2>
+          <h2>{t("home.readterms")}</h2>
         </button>
       </Paper>
       <Paper

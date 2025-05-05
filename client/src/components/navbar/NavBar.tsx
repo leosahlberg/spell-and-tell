@@ -6,6 +6,7 @@ import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { User } from "../../utils/types";
 import { useMediaQuery } from "@mui/material"; // Importera useMediaQuery
+import { useTranslation } from "react-i18next";
 
 type NavBarProps = {
   user: User;
@@ -13,6 +14,7 @@ type NavBarProps = {
 
 const NavBar = ({ user }: NavBarProps) => {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const { t } = useTranslation();
 
   const navList = [
     {
@@ -29,17 +31,17 @@ const NavBar = ({ user }: NavBarProps) => {
       path: "profile",
     },
     {
-      title: "Startsida",
+      title: t("navbar.home"),
       icon: <HomeOutlinedIcon />,
       path: "/",
     },
     {
-      title: "Utforska berättelser",
+      title: t("navbar.explore"),
       icon: <AutoStoriesOutlinedIcon />,
       path: "/stories",
     },
     {
-      title: "Skapa ny berättelse",
+      title: t("navbar.create"),
       icon: <AddCircleOutlineIcon />,
       path: "/createstory",
     },
