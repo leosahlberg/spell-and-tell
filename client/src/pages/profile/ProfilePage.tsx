@@ -13,7 +13,6 @@ import Box from "@mui/material/Box";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
 import { useTranslation } from "react-i18next";
 
-
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -97,12 +96,14 @@ const ProfilePage = () => {
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
-          >
+
             <Tab label= {t("profile.accountInfo")} {...a11yProps(0)} />
             <Tab label= {t("profile.invitations")} {...a11yProps(1)} />
+
             <Tab
               label={t("profile.myStories")}
               {...a11yProps(2)}
+              tabIndex={0}
             />
           </Tabs>
         </Box>
@@ -172,8 +173,10 @@ const ProfilePage = () => {
                 stories.map((story) => {
                   return (
                     <div
+                      tabIndex={0}
                       className={styles.settings}
                       onClick={() => navigation(`/story/${story._id}`)}
+                  
                     >
                       <img
                         src={story.imgUrl}

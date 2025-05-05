@@ -91,6 +91,7 @@ const HomePage = () => {
           width: { xs: "100%", sm: "45%" },
           margin: { xs: 1, sm: 2 },
           color:"rgb(7, 7, 58)",
+          backgroundColor:"rgb(912, 941, 541)",
           display: "flex",
           justifyContent: "right",
           flexDirection: "column",

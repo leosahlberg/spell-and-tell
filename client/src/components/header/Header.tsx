@@ -49,7 +49,7 @@ const Header = (props: HeaderProps) => {
     { title: t("header.createStory"), icon: <AddCircleIcon />, path: "/createstory" },
     { title: t("header.allStories"), icon: <LibraryBooksIcon />, path: "/stories" },
     { title: t("header.terms"), icon: <InfoIcon />, path: "/terms" },
-  ];
+];
   
 
   const handleChangeLanguage = (language: string) => {
@@ -78,7 +78,18 @@ const Header = (props: HeaderProps) => {
       <List>
         {NavList.map((item) => (
           <ListItem key={item.title} disablePadding>
-            <ListItemButton onClick={() => navigate(item.path)}>
+            <ListItemButton
+              onClick={() => {
+                toggleDrawer(false)(); 
+                navigate(item.path)
+              }}
+              
+              sx={{
+                "&:focus-visible": {
+                  outline: "2px solid #0571EC",
+                },
+              }}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.title} />
             </ListItemButton>
@@ -91,6 +102,11 @@ const Header = (props: HeaderProps) => {
           onClick={() => {
             dispatch(logout());
             navigate("/");
+          }}    
+          sx={{
+            "&:focus-visible": {
+              outline: "2px solid #0571EC",
+            },
           }}
         >
           <ListItemIcon>
