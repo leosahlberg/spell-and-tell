@@ -34,44 +34,47 @@ export function invitationRouter() {
     }
   );
 
-  router.post("/", authenticateUser(), async (req: Request, res: Response): Promise<void> => {
-    try {
-      const { storyId, userId } = req.body;
-  
-      const [story, user] = await Promise.all([
-        storyModel.findById(storyId),
-        userModel.findById(userId),
-      ]);
-  
-      if (!story) {
-        res.status(404).send({
-          message: "Error: Failed to send invitation. Story not found.",
+  router.post(
+    "/",
+    authenticateUser(),
+    async (req: Request, res: Response): Promise<void> => {
+      try {
+        const { storyId, userId } = req.body;
+
+        const [story, user] = await Promise.all([
+          storyModel.findById(storyId),
+          userModel.findById(userId),
+        ]);
+
+        if (!story) {
+          res.status(404).send({
+            message: "Error: Failed to send invitation. Story not found.",
+          });
+          return;
+        }
+
+        if (!user) {
+          res.status(404).send({
+            message: "Error: Failed to send invitation. User not found.",
+          });
+          return;
+        }
+
+        const data = await invitationModel.create({
+          storyId,
+          userId,
+          status: "pending",
         });
-        return;
-      }
-  
-      if (!user) {
-        res.status(404).send({
-          message: "Error: Failed to send invitation. User not found.",
+
+        res.status(200).send(data);
+      } catch (error) {
+        res.status(500).send({
+          message: "Error: Failed to send invitation. Server error.",
         });
-        return;
       }
-  
-      const data = await invitationModel.create({
-        storyId,
-        userId,
-        status: "pending",
-      });
-  
-      res.status(200).send(data);
-    } catch (error) {
-      res.status(500).send({
-        message: "Error: Failed to send invitation. Server error.",
-      });
     }
-  });
-  
-  
+  );
+
   router.put(
     "/:id",
     authenticateUser(),
