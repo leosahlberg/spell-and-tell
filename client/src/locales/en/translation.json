@@ -1,0 +1,51 @@
+{
+  "header": {
+    "subtitle": "Create creative stories together"
+  },
+  "navbar": {
+    "home": "Home",
+    "explore": "Explore Stories",
+    "create": "Create New Story"
+  },
+
+"profile": {
+  "accountInfo": "Account Information",
+  "name": "Name",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "edit": "Edit",
+  "invitations": "Invitations",
+  "invitationsDescription": "Here you can see stories that other users have invited you to contribute to.",
+  "myStories": "My Contributions and Created Stories",
+  "storyCount": "Number of stories you've created or contributed to",
+  "invitationNote": "Note that an invitation is not a guarantee that you can contribute to the story.",
+  "invitationLimit": "There is a limited number of contributor spots for each story, and invitations may have been sent to multiple people.",
+  "firstCome": "First come, first served!",
+  "noStories": "You haven't created or contributed to any stories yet. When you do, they'll appear here.",
+  "viewStory": "Click to view the story",
+  "myStoriesDescription": "Here you can see stories that you have contributed to, including those you've created yourself!"
+},
+
+
+  "welcome": {
+    "welcometext": "Welcome to",
+    "loggin": "Log In",
+    "noaccount": "Don't have an account?",
+    "register": "Sign up here",
+    "language": "Choose language"
+  },
+  "home": {
+  "findstory": "Find a story to contribute to",
+  "startnew": "Don't want to start a new story?",
+  "contribute": "Explore open stories you can contribute to. Be sure to read through the story and its specific conditions before you begin!",
+  "find": "You can find them here",
+  "terms": "Don't forget to read our terms and conditions too.",
+  "storys": "Explore stories",
+  "work": "How does it work?",
+  "spell": "Spell & Tell is a storytelling game for you and your friends. It works just as well in school as it does in your free time.",
+  "create": "Create fun and creative stories together. You start a story and choose which rules to apply, then pass it on to someone or leave it open for anyone to contribute.",
+  "readterms": "Read terms and rules"
+}
+
+}
