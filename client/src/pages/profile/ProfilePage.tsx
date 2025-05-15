@@ -11,6 +11,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
+import { useTranslation } from "react-i18next";
 
 function a11yProps(index: number) {
   return {
@@ -27,6 +28,7 @@ const ProfilePage = () => {
   const token = useSelector<RootState>((state) => state.auth.token) as string;
   const [value, setValue] = useState(0);
   const navigation = useNavigate();
+  const { t } = useTranslation(); 
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -94,11 +96,12 @@ const ProfilePage = () => {
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
-          >
-            <Tab label="Konto information" {...a11yProps(0)} tabIndex={0} />
-            <Tab label="Inbjudningar" {...a11yProps(1)} tabIndex={0} />
+
+            <Tab label= {t("profile.accountInfo")} {...a11yProps(0)} />
+            <Tab label= {t("profile.invitations")} {...a11yProps(1)} />
+
             <Tab
-              label="Mina bidrag och skapade berättelser"
+              label={t("profile.myStories")}
               {...a11yProps(2)}
               tabIndex={0}
             />
@@ -106,31 +109,28 @@ const ProfilePage = () => {
         </Box>
         <CustomTabPanel value={value} index={0}>
           <div className={styles.container}>
-            <h3>Konto information</h3>
+            <h3>  {t("profile.accountInfo")}</h3>
 
             <div className={styles.details}>
-              <p>Namn: {user.name}</p>
-              <p>Användarnamn: {user.username}</p>
-              <p>Email: {user.email}</p>
-              <p>Lösenord: ******</p>
+              <p>{t("profile.name")}: {user.name}</p>
+              <p>{t("profile.username")}: {user.username}</p>
+              <p>{t("profile.email")}: {user.email}</p>
+              <p>{t("profile.password")}: ******</p>
             </div>
-            <Button className={styles.button} text="Redigera" />
+            <Button className={styles.button} text={t("profile.edit")} />
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <div className={styles.container}>
             <div>
-              <h3>Inbjudningar:</h3>
+              <h3>{t("profile.invitations")}:</h3>
               <p>
-                Här kan du se berättelser som andra användare bjudit in dig till
-                att skriva på. <br />
+              {t("profile.invitationsDescription")}
+             <br />
                 <br />
-                Tänk på att en inbjudan inte är en garanti på att du kan skriva
-                på berättelsen. <br />
-                Det finns begränsat antal platser för varje berättelse och en
-                inbjudan kan ha skickats till flera personer.
+                {t("profile.invitationNote")}
                 <br />
-                <br /> Det är först till kvarn som gäller!
+                <br /> {t("profile.firstCome")}
               </p>
               {invitation?.map((invitation) => {
                 return (
@@ -151,12 +151,12 @@ const ProfilePage = () => {
                           width={100}
                           height={100}
                         />
-                        <p>Titel: {invitation.storyId.title}</p>
-                        <p>
-                          Antal platser kvar:{" "}
-                          {invitation.storyId.numberOfContributors -
-                            invitation.storyId.contributions.length}
-                        </p>
+                        <p>{t("profile.title")}: {invitation.storyId.title}</p>
+                         <p>
+                    {t("profile.spotsLeft")}:{" "}
+                      {invitation.storyId.numberOfContributors -
+                        invitation.storyId.contributions.length}
+                    </p>
                       </div>
                     ) : (
                       <></>
@@ -171,12 +171,11 @@ const ProfilePage = () => {
           <div className={styles.container}>
             <div>
               <h3>
-                Antal berättelser du skapat eller bidragit till: {""}
+              {t("profile.storyCount")}: {""}
                 {stories.length}
               </h3>
               <p>
-                Här kan du se berättelser som du varit med och skrivit på.
-                Inklusive de berättelser du själv skapat!
+              {t("profile.myStoriesDescription")}
               </p>
               {stories.length > 0 ? (
                 stories.map((story) => {
@@ -199,8 +198,7 @@ const ProfilePage = () => {
                 })
               ) : (
                 <p>
-                  Du har inte skapat eller bidragit till någon berättelse ännu.
-                  När du gjort det kommer du att se det här.
+                 {t("profile.noStories")}
                 </p>
               )}
             </div>

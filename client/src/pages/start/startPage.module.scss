@@ -47,6 +47,30 @@
     }
   }
 
+  .flags{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+  }
+
+  .flagname{
+    padding: 2px;
+    outline: none;
+    margin-left: 20px;
+    background-color:  rgb(12, 23, 79);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .flag{
+    width: 30px;
+    height: 20px;
+    margin-left: 20px;
+  }
+
   @media (min-width: 481px) and (max-width: 768px) {
 
     .header {

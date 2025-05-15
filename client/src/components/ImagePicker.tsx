@@ -19,16 +19,31 @@ import img9 from "../assets/cows.jpg";
 import img10 from "../assets/dragonfly.jpg";
 import img11 from "../assets/goose.jpg";
 import img12 from "../assets/ice-cream.jpg";
+import { useTranslation } from "react-i18next";
 
-const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
+const images = [
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+  img10,
+  img11,
+  img12,
+];
 
 type ImagePickerProps = {
   onSelectImage: (image: string) => void;
-}
+};
 
 export default function ImagePicker({ onSelectImage }: ImagePickerProps) {
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const handleSelectImage = (img: string) => {
     if (img) {
@@ -50,7 +65,7 @@ export default function ImagePicker({ onSelectImage }: ImagePickerProps) {
         variant="contained"
         onClick={() => setOpen(true)}
       >
-        {selectedImage ? "Byt bild" : "Välj en bild"}
+        {selectedImage ? t("picker.changeImage") : t("picker.chooseImage")}
       </Button>
 
       {selectedImage && (
@@ -67,7 +82,7 @@ export default function ImagePicker({ onSelectImage }: ImagePickerProps) {
       )}
 
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle sx={{marginLeft: 3}}>Välj en bild</DialogTitle>
+        <DialogTitle sx={{ marginLeft: 3 }}>Välj en bild</DialogTitle>
         <DialogContent>
           <Box display="flex" flexWrap="wrap" gap={2} justifyContent="center">
             {images.map((img, index) => (
