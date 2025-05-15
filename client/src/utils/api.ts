@@ -69,6 +69,43 @@ export async function registerUser(
   }
 }
 
+export async function updateUserprofile(
+  userId: string,
+  imgUrl: string,
+  name: string,
+  email: string
+) {
+  try {
+    const res = await fetch(`/user/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        imgUrl,
+        name,
+        email,
+      }),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.log(errorData);
+      throw new Error(errorData.message || "Update profile failed");
+    }
+
+    return res;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        error.message || "Failed to connect to the server. Please try again."
+      );
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
 export async function getStorys(token: string) {
   try {
     const res = await fetch(`/story`, {

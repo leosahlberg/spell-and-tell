@@ -80,8 +80,7 @@
     "title": "Title",
     "titlePlaceholder": "Title...",
     "story": "Story",
-    "storyPlaceholder": "Write your story here...",
-    "save": "Save"
+    "storyPlaceholder": "Write your story here..."
   },
   "picker": {
     "chooseImage": "Choose an image",
@@ -99,7 +98,8 @@
     "spellCheck": "Spell check",
     "yes": "Yes",
     "no": "No",
-    "editRules": "Edit rules"
+    "editRules": "Edit rules",
+    "editDialogTitle": "Edit rules for story"
   },
   "publicStories": {
     "searchLabel": "Search by author's name",
@@ -107,6 +107,39 @@
     "searchButton": "Search",
     "tabAll": "View all stories",
     "tabCompleted": "Read completed stories",
-    "tabInProgress": "Continue stories"
+    "tabInProgress": "Continue stories",
+    "notfound": "No stories found",
+    "contributionsMaxed": "Story is closed for contributions",
+    "contribute": "Contribute to this story",
+    "titleReadStory": "Select a story you want to read",
+    "titleContributeStory": "Select a story you want to contribute to"
+  },
+  "story": {
+    "back": "Go back",
+    "notfound": "Story not found.",
+    "score": "Score",
+    "author": "Author",
+    "logo": "Logo for Spell and Tell.",
+    "contribute": "Contribute to this story",
+    "alreadyContributed": "You already contributed to this story"
+  },
+  "contributeToStory": {
+    "notfound": "Story not found.",
+    "timingInfo": "Finish your story before times up..",
+    "timesUpScroing": "Times up! If you keep writing you will get deduction of score...",
+    "timesUpTime": "Times up!",
+    "time": "Time",
+    "start": "Start time",
+    "continueStory": "Continue story",
+    "lastContribution": "Your contribution is the last one for this story. Make sure to create a good ending!",
+    "contributionNumber": "Your contribution is number ",
+    "of": "of ",
+    "storyPlaceholder": "Write here...",
+    "scoring": "Scoring",
+    "author": "Author"
+  },
+  "general": {
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }

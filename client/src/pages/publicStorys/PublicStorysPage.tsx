@@ -154,7 +154,7 @@ const PublicStorysPage = () => {
                     color="error"
                     sx={{ paddingTop: 2.5, textAlign: "center", fontSize: 15 }}
                   >
-                    Max antal bidrag är uppnått, går ej bidra mer!
+                    {t("publicStories.contributionsMaxed")}
                   </Typography>
                 )}
                 {!isMaxContributionsReached(story) && (
@@ -163,14 +163,14 @@ const PublicStorysPage = () => {
                     color="success"
                     sx={{ paddingTop: 2, textAlign: "center" }}
                   >
-                    Fortsätt på denna berättelse
+                    {t("publicStories.contribute")}
                   </Typography>
                 )}
               </CardPublic>
             ))
           ) : (
             <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
-              Inga berättelser hittades.
+              {t("publicStories.notfound")}
             </Typography>
           )}
         </div>
@@ -185,7 +185,7 @@ const PublicStorysPage = () => {
             paddingBottom: 4,
           }}
         >
-          Klicka på den berättelse som du vill läsa!
+          {t("publicStories.titleReadStory")}
         </Typography>
         <div className={styles.publicstory}>
           {stories.length > 0 ? (
@@ -204,13 +204,13 @@ const PublicStorysPage = () => {
                     color="error"
                     sx={{ paddingTop: 2, textAlign: "center" }}
                   >
-                    ( Max antal bidrag är uppnått, går ej bidra mer! )
+                    {t("publicStories.contributionsMaxed")}
                   </Typography>
                 </CardPublic>
               ))
           ) : (
             <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
-              Inga färdiga berättelser hittades.
+              {t("publicStories.notfound")}
             </Typography>
           )}
         </div>
@@ -225,7 +225,7 @@ const PublicStorysPage = () => {
             paddingBottom: 4,
           }}
         >
-          Klicka på den berättelse som du vill fortsätta på!
+          {t("publicStories.titleContributeStory")}
         </Typography>
         <div className={styles.publicstory}>
           {stories.length > 0 ? (
@@ -245,13 +245,13 @@ const PublicStorysPage = () => {
                     color="success"
                     sx={{ paddingTop: 2, textAlign: "center" }}
                   >
-                    Fortsätt gärna på denna berättelse.. 🙂
+                    {t("publicStories.contribute")}
                   </Typography>
                 </CardPublic>
               ))
           ) : (
             <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
-              Inga berättelser hittades.
+              {t("publicStories.notfound")}
             </Typography>
           )}
         </div>

@@ -29,14 +29,14 @@ const RuleSetList = (props: RuleSetListProps) => {
         padding: 4,
         borderRadius: 8,
         boxShadow: 2,
-        marginBottom: { xs: 2, md: 24},
+        marginBottom: { xs: 2, md: 24 },
       }}
     >
       <Typography
         variant="h1"
         sx={{ marginBottom: 3, paddingLeft: 3, fontSize: 30 }}
       >
-   {t("rules.title")}
+        {t("rules.title")}
       </Typography>
 
       <List sx={{ padding: 0 }}>
@@ -50,9 +50,10 @@ const RuleSetList = (props: RuleSetListProps) => {
             }}
           >
             {" "}
-            <Tooltip title="Antal ord per bidrag.">
+            <Tooltip title={t("rules.wordCountTooltip")}>
               <Typography className={styles.title}>
-                {t("rules.wordCount")}: {props.ruleSet.maxNumberOfWordsPerContribution}
+                {t("rules.wordCount")}:{" "}
+                {props.ruleSet.maxNumberOfWordsPerContribution}
               </Typography>
             </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
@@ -69,9 +70,9 @@ const RuleSetList = (props: RuleSetListProps) => {
               width: "100%",
             }}
           >
-            <Tooltip title="Max tid gäller per bidrag.">
+            <Tooltip title={t("rules.maxTimeTooltip")}>
               <Typography className={styles.title}>
-                {("rules.maxTime")}: {props.ruleSet.maxTime}min
+                {t("rules.maxTime")}: {props.ruleSet.maxTime}min
               </Typography>
             </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
@@ -88,9 +89,9 @@ const RuleSetList = (props: RuleSetListProps) => {
               width: "100%",
             }}
           >
-            <Tooltip title="Antal bidrag för denna berättelse.">
+            <Tooltip title={t("rules.contributionsTooltip")}>
               <Typography className={styles.title}>
-              {t("rules.contributions")}: {props.ruleSet.numberOfContribution}
+                {t("rules.contributions")}: {props.ruleSet.numberOfContribution}
               </Typography>
             </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
@@ -108,7 +109,8 @@ const RuleSetList = (props: RuleSetListProps) => {
             }}
           >
             <Typography className={styles.title}>
-            {t("rules.spellCheck")}: {props.ruleSet.spellChecking ? t("rules.yes") : t("rules.no")}
+              {t("rules.scoring")}:{" "}
+              {props.ruleSet.scoring ? t("rules.yes") : t("rules.no")}
             </Typography>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
               <ScoreboardTwoToneIcon />
@@ -125,7 +127,8 @@ const RuleSetList = (props: RuleSetListProps) => {
             }}
           >
             <Typography className={styles.title}>
-            {t("rules.spellCheck")}: {props.ruleSet.spellChecking ? "Ja" : "Nej"}
+              {t("rules.spellCheck")}:{" "}
+              {props.ruleSet.spellChecking ? t("rules.yes") : t("rules.no")}
             </Typography>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
               <SpellcheckTwoToneIcon />

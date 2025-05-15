@@ -10,7 +10,10 @@ import { fetchStoriesByUserId } from "../../redux/storySlice";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import { TextField } from "@mui/material";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
+import ImagePicker from "../../components/ImagePicker";
+import { fetchUpdateUserProfile } from "../../redux/authSlice";
 import { useTranslation } from "react-i18next";
 
 function a11yProps(index: number) {
@@ -28,6 +31,12 @@ const ProfilePage = () => {
   const token = useSelector<RootState>((state) => state.auth.token) as string;
   const [value, setValue] = useState(0);
   const navigation = useNavigate();
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [profileInfo, setProfileInfo] = useState({
+    imgUrl: "",
+    name: "",
+    email: "",
+  });
   const { t } = useTranslation();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -70,11 +79,35 @@ const ProfilePage = () => {
     }
   }, [storiesByUser]);
 
+  const handleImageSelect = (image: string) => {
+    setProfileInfo({ ...profileInfo, imgUrl: image });
+  };
+
+  const handleSaveProfileChanges = async () => {
+    const actionResult = await dispatch(
+      fetchUpdateUserProfile({
+        userId: user.userId,
+        imgUrl: profileInfo.imgUrl,
+        name: profileInfo.name,
+        email: profileInfo.email,
+      })
+    );
+
+    if (fetchUpdateUserProfile.fulfilled.match(actionResult)) {
+      setProfileInfo({
+        name: "",
+        imgUrl: "",
+        email: "",
+      });
+      setEditMode(false);
+    }
+  };
+
   return (
     <div className={styles.profilecontainer}>
       <div className={styles.info}>
         <img
-          src="/profileimg.jpg"
+          src={user.imgUrl ?? "/profileimg.jpg"}
           width={225}
           height={225}
           alt="Profilbild"
@@ -109,21 +142,87 @@ const ProfilePage = () => {
         </Box>
         <CustomTabPanel value={value} index={0}>
           <div className={styles.container}>
-            <h3> {t("profile.accountInfo")}</h3>
+            {editMode ? (
+              <>
+                <h3>
+                  {t("profile.edit")} {t("profile.accountInfo")}
+                </h3>
 
-            <div className={styles.details}>
-              <p>
-                {t("profile.name")}: {user.name}
-              </p>
-              <p>
-                {t("profile.username")}: {user.username}
-              </p>
-              <p>
-                {t("profile.email")}: {user.email}
-              </p>
-              <p>{t("profile.password")}: ******</p>
-            </div>
-            <Button className={styles.button} text={t("profile.edit")} />
+                <div className={styles.details}>
+                  <TextField
+                    fullWidth
+                    label={t("profile.name")}
+                    variant="outlined"
+                    value={profileInfo.name}
+                    onChange={(e) =>
+                      setProfileInfo({
+                        ...profileInfo,
+                        name: e.currentTarget.value,
+                      })
+                    }
+                    sx={{ mb: 2, mt: 2 }}
+                  />
+
+                  <TextField
+                    fullWidth
+                    label={t("profile.email")}
+                    variant="outlined"
+                    value={profileInfo.email}
+                    onChange={(e) =>
+                      setProfileInfo({
+                        ...profileInfo,
+                        email: e.currentTarget.value,
+                      })
+                    }
+                    sx={{ mb: 2, mt: 2 }}
+                  />
+                  <ImagePicker onSelectImage={handleImageSelect} />
+                </div>
+                <Button
+                  className={styles.button}
+                  text={t("general.cancel")}
+                  onClick={() => {
+                    setEditMode(false);
+                  }}
+                />
+                <Button
+                  className={styles.button}
+                  text={t("general.save")}
+                  onClick={() => {
+                    handleSaveProfileChanges();
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <h3> {t("profile.accountInfo")}</h3>
+
+                <div className={styles.details}>
+                  <p>
+                    {t("profile.name")}: {user.name}
+                  </p>
+                  <p>
+                    {t("profile.username")}: {user.username}
+                  </p>
+                  <p>
+                    {t("profile.email")}: {user.email}
+                  </p>
+                  <p>{t("profile.password")}: ******</p>
+                </div>
+                <Button
+                  className={styles.button}
+                  text={t("profile.edit")}
+                  onClick={() => {
+                    setProfileInfo({
+                      name: user.name,
+                      imgUrl: user.imgUrl,
+                      email: user.email,
+                    });
+                    setEditMode(true);
+                  }}
+                />
+              </>
+            )}
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>

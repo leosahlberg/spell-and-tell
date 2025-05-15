@@ -9,6 +9,7 @@ import { Box, Typography } from "@mui/material";
 import logo from "../../assets/logoST2.png";
 import { isMaxContributionsReached } from "../../utils/helpers";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { useTranslation } from "react-i18next";
 
 const StoryPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,14 +19,14 @@ const StoryPage = () => {
   ) as Story[];
 
   const currentUser = useSelector((state: RootState) => state.auth.user);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate("/stories");
   };
 
-  const handleKeydown = (e: { key: string; }) => {
+  const handleKeydown = (e: { key: string }) => {
     if (e.key === "Enter") {
       navigate("/stories");
     }
@@ -41,7 +42,7 @@ const StoryPage = () => {
   }, [id, stories]);
 
   if (!story) {
-    return <Typography variant="h1">Berättelsen hittades inte.</Typography>;
+    return <Typography variant="h1">{t("story.notfound")}</Typography>;
   }
 
   const hasContributed = () => {
@@ -65,7 +66,7 @@ const StoryPage = () => {
           width: 50,
         }}
       >
-        <ArrowBackIosIcon /> <i style={{ marginTop: 4 }}>tillbaka</i>
+        <ArrowBackIosIcon /> <i style={{ marginTop: 4 }}>{t("story.back")}</i>
       </div>
       <Box className={styles.pageWrapper}>
         <Typography className={styles.storyCard}>
@@ -87,7 +88,7 @@ const StoryPage = () => {
                 paddingTop: 2,
               }}
             >
-              Poäng {story.score}
+              {t("story.score")}: {story.score}
             </Typography>
             <Typography
               variant="h2"
@@ -130,7 +131,7 @@ const StoryPage = () => {
                   color: "rgb(12, 23, 79)",
                 }}
               >
-                Författare:
+                {t("story.author")}:
               </p>
               {story.contributions.map((contribution, index) => (
                 <Box key={index}>
@@ -145,19 +146,15 @@ const StoryPage = () => {
           </Box>
           <Box className={styles.link}>
             <Typography>
-              <img
-                className={styles.img}
-                src={logo}
-                alt="Spell and Tell logotyp med en penna som symboliserar kreativt skrivande"
-              />
+              <img className={styles.img} src={logo} alt={t("story.logo")} />
             </Typography>
             {!isMaxContributionsReached(story) && (
               <Link to={`/contribute/${id}`}>
                 <Button
                   text={
                     hasContributed()
-                      ? "Du har redan bidragit!"
-                      : "Fortsätt på denna berättelse"
+                      ? t("story.alreadyContributed")
+                      : t("story.contribute")
                   }
                   className={styles.continueButton}
                   disabled={hasContributed()}

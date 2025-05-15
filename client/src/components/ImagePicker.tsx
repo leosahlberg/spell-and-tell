@@ -82,7 +82,9 @@ export default function ImagePicker({ onSelectImage }: ImagePickerProps) {
       )}
 
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle sx={{ marginLeft: 3 }}>Välj en bild</DialogTitle>
+        <DialogTitle sx={{ marginLeft: 3 }}>
+          {t("picker.chooseImage")}
+        </DialogTitle>
         <DialogContent>
           <Box display="flex" flexWrap="wrap" gap={2} justifyContent="center">
             {images.map((img, index) => (

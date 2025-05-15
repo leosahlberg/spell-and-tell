@@ -11,6 +11,7 @@ import FormLabel from "@mui/material/FormLabel";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { addCustomRuleSet } from "../../redux/rulesetSlice";
+import { useTranslation } from "react-i18next";
 
 type RuleSetDialogProps = {
   close: () => void;
@@ -25,6 +26,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
     scoring: false,
     public: true,
   });
+  const { t } = useTranslation();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -57,11 +59,11 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
         }}
       >
         <Typography variant="h1" sx={{ marginBottom: 3, fontSize: 30 }}>
-          Regler för story
+          {t("rules.editDialogTitle")}
         </Typography>
         <TextField
           id="numberOfWords"
-          label="Antal ord"
+          label={t("rules.wordCount")}
           value={ruleSet.maxNumberOfWordsPerContribution}
           variant="outlined"
           aria-labelledby="story-numberOfWords-label"
@@ -82,7 +84,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
         />
         <TextField
           id="numberOfContribution"
-          label="Antal bidrag"
+          label={t("rules.contributions")}
           value={ruleSet.numberOfContribution}
           variant="outlined"
           aria-labelledby="story-numberOfContribution-label"
@@ -103,7 +105,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
         />
         <TextField
           id="maxTime"
-          label="Max tid"
+          label={t("rules.maxTime")}
           value={ruleSet.maxTime}
           variant="outlined"
           aria-labelledby="story-maxTime-label"
@@ -123,7 +125,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
           }}
         />
         <FormControl>
-          <FormLabel id="spell-check-label">Stavningskontroll</FormLabel>
+          <FormLabel id="spell-check-label">{t("rules.spellCheck")}</FormLabel>
           <RadioGroup
             row
             aria-labelledby="spell-check-label"
@@ -135,12 +137,20 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
               })
             }
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Ja" />
-            <FormControlLabel value="No" control={<Radio />} label="Nej" />
+            <FormControlLabel
+              value="Yes"
+              control={<Radio />}
+              label={t("rules.yes")}
+            />
+            <FormControlLabel
+              value="No"
+              control={<Radio />}
+              label={t("rules.no")}
+            />
           </RadioGroup>
         </FormControl>
         <FormControl>
-          <FormLabel id="score-label">Poängräkning</FormLabel>
+          <FormLabel id="score-label">{t("rules.scoring")}</FormLabel>
           <RadioGroup
             row
             aria-labelledby="score-label"
@@ -152,13 +162,21 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
               })
             }
           >
-            <FormControlLabel value="Yes" control={<Radio />} label="Ja" />
-            <FormControlLabel value="No" control={<Radio />} label="Nej" />
+            <FormControlLabel
+              value="Yes"
+              control={<Radio />}
+              label={t("rules.yes")}
+            />
+            <FormControlLabel
+              value="No"
+              control={<Radio />}
+              label={t("rules.no")}
+            />
           </RadioGroup>
         </FormControl>
         <Button
           className={styles.button}
-          text={"Spara"}
+          text={t("general.save")}
           onClick={saveRuleSet}
         />
       </Box>

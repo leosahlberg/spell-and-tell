@@ -13,7 +13,7 @@ import { clearCustomRuleSet } from "../../redux/rulesetSlice";
 import { useTranslation } from "react-i18next";
 
 const CreateStoryPage = () => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   const [started, setStarted] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -127,7 +127,7 @@ const CreateStoryPage = () => {
               marginRight: 3,
             }}
           >
-           {t("create.createStory")}
+            {t("create.createStory")}
           </Typography>
         </Box>
 
@@ -154,7 +154,7 @@ const CreateStoryPage = () => {
         />
         <TextField
           id="story-content"
-          label={t(".create.story")}
+          label={t("create.story")}
           value={text}
           onChange={handleInputChange}
           fullWidth
@@ -178,7 +178,7 @@ const CreateStoryPage = () => {
         >
           <Button
             className={styles.button}
-            text={t("create.save")}
+            text={t("general.save")}
             onClick={() => createStory()}
           />
         </Box>

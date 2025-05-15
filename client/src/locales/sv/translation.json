@@ -80,8 +80,7 @@
     "title": "Titel",
     "titlePlaceholder": "Titel...",
     "story": "Berättelse",
-    "storyPlaceholder": "Skriv din berättelse här...",
-    "save": "Spara"
+    "storyPlaceholder": "Skriv din berättelse här..."
   },
   "picker": {
     "chooseImage": "Välj en bild",
@@ -99,7 +98,8 @@
     "spellCheck": "Stavningskontroll",
     "yes": "Ja",
     "no": "Nej",
-    "editRules": "Ändra regler"
+    "editRules": "Ändra regler",
+    "editDialogTitle": "Ändra regler för berättelse"
   },
   "publicStories": {
     "searchLabel": "Sök på författarens namn",
@@ -107,6 +107,38 @@
     "searchButton": "Sök",
     "tabAll": "Se alla berättelser",
     "tabCompleted": "Läs färdiga berättelser",
-    "tabInProgress": "Fortsätt på berättelser"
+    "tabInProgress": "Fortsätt på berättelser",
+    "notfound": "Inga berättelser hittades.",
+    "contributionsMaxed": "Max antal bidrag är uppnått, går ej bidra mer!",
+    "contribute": "Fortsätt gärna på denna berättelse"
+  },
+  "story": {
+    "back": "Tillbaka",
+    "notfound": "Berättelsen kunde inte hittas",
+    "score": "Poäng",
+    "author": "Författare",
+    "logo": "Spell and Tell logotyp med en penna som symboliserar kreativt skrivande",
+    "contribute": "Fortsätt på denna berättelse",
+    "alreadyContributed": "Du har redan bidragit!",
+    "titleReadStory": "Klicka på den berättelse som du vill läsa!",
+    "titleContributeStory": "Klicka på den berättelse som du vill fortsätta på!"
+  },
+  "contributeToStory": {
+    "notfound": "Berättelsen hittades inte.",
+    "timingInfo": "Tänk på att avsluta innan tiden tar slut..",
+    "timesUpTimeScroing": "Tiden är slut! Om du fortsätter skriva får du minuspoäng...",
+    "timesUpTime": "Tiden är slut!",
+    "time": "Tid",
+    "start": "Starta tiden",
+    "continueStory": "Fortsätt på berättelsen",
+    "lastContribution": "Ditt bidrag är sista på denna berättelse. Tänk på att avsluta på ett bra sätt!",
+    "contributionNumber": "Ditt bidrag är nummer ",
+    "of": "av ",
+    "storyPlaceholder": "Skriv här...",
+    "author": "Författare"
+  },
+  "general": {
+    "save": "Spara",
+    "cancel": "Avbryt"
   }
 }
