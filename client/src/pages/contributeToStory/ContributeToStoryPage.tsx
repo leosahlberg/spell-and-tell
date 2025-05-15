@@ -2,21 +2,19 @@ import { Box, TextField, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Button from "../../components/buttons/Button";
 import ButtonTimer from "../../components/buttons/ButtonTimer";
 import RuleSetList from "../../components/rouleSet/ruleSetList";
-
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchUpdateStory } from "../../redux/storySlice";
 import { Story } from "../../utils/types";
-
 import styles from "./contributeToStoryPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 const ContributeToStoryPage = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-
+  const { t } = useTranslation();
   const [story, setStory] = useState<Story | null>(null);
   const [text, setText] = useState("");
   const [timeLeft, setTimeLeft] = useState(1);
@@ -89,14 +87,15 @@ const ContributeToStoryPage = () => {
       );
       console.log(actionResult);
       if (fetchUpdateStory.fulfilled.match(actionResult)) {
-        console.log("nav issue");
         navigate("/invitation");
       }
     }
   }
 
   if (!story)
-    return <Typography variant="h1">Berättelsen hittades inte.</Typography>;
+    return (
+      <Typography variant="h1">{t("contributeToStory.notfound")}</Typography>
+    );
 
   return (
     <Box className={styles.pageWrapper}>
@@ -117,13 +116,13 @@ const ContributeToStoryPage = () => {
             <Box sx={{ display: "flex", flexDirection: "row" }}>
               <Typography variant="h5" className={styles.timerText}>
                 {timeLeft
-                  ? "Tänk på att avsluta innan tiden tar slut.."
+                  ? t("contributeToStory.timingInfo")
                   : story.scoring
-                  ? "Tiden är slut! Om du fortsätter skriva får du minuspoäng..."
-                  : "Tiden är slut!"}
+                  ? t("contributeToStory.timesUpScoring")
+                  : t("contributeToStory.timesUp")}
               </Typography>
               <Typography variant="h5" className={styles.timer}>
-                Tid: {formatTime(timeLeft)}
+                {t("contributeToStory.time")} {formatTime(timeLeft)}
               </Typography>
             </Box>
           ) : (
@@ -132,10 +131,10 @@ const ContributeToStoryPage = () => {
                 variant="h1"
                 sx={{ paddingRight: 5, paddingLeft: 1, fontSize: "2.5rem" }}
               >
-                Fortsätt på berättelsen
+                {t("contributeToStory.continueStory")}
               </Typography>
               <ButtonTimer
-                text="Starta tiden"
+                text={t("contributeToStory.start")}
                 onClick={() => setStarted(true)}
               />
             </Box>
@@ -152,7 +151,8 @@ const ContributeToStoryPage = () => {
               paddingLeft: 1,
             }}
           >
-            Poäng: <span className={styles.scoreCircle}>{story.score}</span>
+            {t("story.score")}:
+            <span className={styles.scoreCircle}>{story.score}</span>
           </Typography>
 
           <Typography sx={{ backgroundColor: "white", padding: 4 }}>
@@ -180,7 +180,7 @@ const ContributeToStoryPage = () => {
                 paddingLeft: 1,
               }}
             >
-              Författare:
+              {t("contributeToStory.author")}
             </Typography>
             {story.contributions.map((contribution, index) => (
               <Typography
@@ -197,29 +197,28 @@ const ContributeToStoryPage = () => {
               variant="h6"
               sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
             >
-              Ditt bidrag är det sista för denna berättelse. Tänk på att avsluta
-              berättelsen på ett bra sätt!
+              {t("contributeToStory.lastContribution")}
             </Typography>
           ) : (
             <Typography
               variant="h6"
               sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
             >
-              Ditt bidrag är nummer {story.contributions.length + 1} av{" "}
-              {story.numberOfContributors}.
+              {t("contributeToStory.contributionNumber")}{" "}
+              {story.contributions.length + 1}/{story.numberOfContributors}.
             </Typography>
           )}
         </Box>
 
         <TextField
-          label="Fortsätt på berättelsen"
+          label={t("contributeToStory.storyPlaceholder")}
           onChange={handleInputChange}
           value={text}
           fullWidth
           multiline
           rows={12}
           variant="outlined"
-          placeholder="Skriv här..."
+          placeholder={t("contributeToStory.storyPlaceholder")}
           className={styles.textField}
           sx={{
             marginBottom: 2,
@@ -234,7 +233,7 @@ const ContributeToStoryPage = () => {
         <Box className={styles.buttonWrapper}>
           <Button
             className={styles.button}
-            text="Spara"
+            text={t("general.save")}
             onClick={() => handlePublish()}
           />
         </Box>

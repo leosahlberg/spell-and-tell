@@ -14,6 +14,7 @@ import { TextField } from "@mui/material";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
 import ImagePicker from "../../components/ImagePicker";
 import { fetchUpdateUserProfile } from "../../redux/authSlice";
+import { useTranslation } from "react-i18next";
 
 function a11yProps(index: number) {
   return {
@@ -36,6 +37,7 @@ const ProfilePage = () => {
     name: "",
     email: "",
   });
+  const { t } = useTranslation();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -128,10 +130,11 @@ const ProfilePage = () => {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab label="Konto information" {...a11yProps(0)} tabIndex={0} />
-            <Tab label="Inbjudningar" {...a11yProps(1)} tabIndex={0} />
+            <Tab label={t("profile.accountInfo")} {...a11yProps(0)} />
+            <Tab label={t("profile.invitations")} {...a11yProps(1)} />
+
             <Tab
-              label="Mina bidrag och skapade berättelser"
+              label={t("profile.myStories")}
               {...a11yProps(2)}
               tabIndex={0}
             />
@@ -141,12 +144,14 @@ const ProfilePage = () => {
           <div className={styles.container}>
             {editMode ? (
               <>
-                <h3>Redigera konto information</h3>
+                <h3>
+                  {t("profile.edit")} {t("profile.accountInfo")}
+                </h3>
 
                 <div className={styles.details}>
                   <TextField
                     fullWidth
-                    label="Namn:"
+                    label={t("profile.name")}
                     variant="outlined"
                     value={profileInfo.name}
                     onChange={(e) =>
@@ -160,7 +165,7 @@ const ProfilePage = () => {
 
                   <TextField
                     fullWidth
-                    label="Email:"
+                    label={t("profile.email")}
                     variant="outlined"
                     value={profileInfo.email}
                     onChange={(e) =>
@@ -175,14 +180,14 @@ const ProfilePage = () => {
                 </div>
                 <Button
                   className={styles.button}
-                  text="Avbryt"
+                  text={t("general.cancel")}
                   onClick={() => {
                     setEditMode(false);
                   }}
                 />
                 <Button
                   className={styles.button}
-                  text="Spara"
+                  text={t("general.save")}
                   onClick={() => {
                     handleSaveProfileChanges();
                   }}
@@ -190,17 +195,23 @@ const ProfilePage = () => {
               </>
             ) : (
               <>
-                <h3>Konto information</h3>
+                <h3> {t("profile.accountInfo")}</h3>
 
                 <div className={styles.details}>
-                  <p>Namn: {user.name}</p>
-                  <p>Användarnamn: {user.username}</p>
-                  <p>Email: {user.email}</p>
-                  <p>Lösenord: ******</p>
+                  <p>
+                    {t("profile.name")}: {user.name}
+                  </p>
+                  <p>
+                    {t("profile.username")}: {user.username}
+                  </p>
+                  <p>
+                    {t("profile.email")}: {user.email}
+                  </p>
+                  <p>{t("profile.password")}: ******</p>
                 </div>
                 <Button
                   className={styles.button}
-                  text="Redigera"
+                  text={t("profile.edit")}
                   onClick={() => {
                     setProfileInfo({
                       name: user.name,
@@ -217,17 +228,14 @@ const ProfilePage = () => {
         <CustomTabPanel value={value} index={1}>
           <div className={styles.container}>
             <div>
-              <h3>Inbjudningar:</h3>
+              <h3>{t("profile.invitations")}:</h3>
               <p>
-                Här kan du se berättelser som andra användare bjudit in dig till
-                att skriva på. <br />
+                {t("profile.invitationsDescription")}
                 <br />
-                Tänk på att en inbjudan inte är en garanti på att du kan skriva
-                på berättelsen. <br />
-                Det finns begränsat antal platser för varje berättelse och en
-                inbjudan kan ha skickats till flera personer.
                 <br />
-                <br /> Det är först till kvarn som gäller!
+                {t("profile.invitationNote")}
+                <br />
+                <br /> {t("profile.firstCome")}
               </p>
               {invitation?.map((invitation) => {
                 return (
@@ -248,9 +256,11 @@ const ProfilePage = () => {
                           width={100}
                           height={100}
                         />
-                        <p>Titel: {invitation.storyId.title}</p>
                         <p>
-                          Antal platser kvar:{" "}
+                          {t("profile.title")}: {invitation.storyId.title}
+                        </p>
+                        <p>
+                          {t("profile.spotsLeft")}:{" "}
                           {invitation.storyId.numberOfContributors -
                             invitation.storyId.contributions.length}
                         </p>
@@ -268,13 +278,10 @@ const ProfilePage = () => {
           <div className={styles.container}>
             <div>
               <h3>
-                Antal berättelser du skapat eller bidragit till: {""}
+                {t("profile.storyCount")}: {""}
                 {stories.length}
               </h3>
-              <p>
-                Här kan du se berättelser som du varit med och skrivit på.
-                Inklusive de berättelser du själv skapat!
-              </p>
+              <p>{t("profile.myStoriesDescription")}</p>
               {stories.length > 0 ? (
                 stories.map((story) => {
                   return (
@@ -295,10 +302,7 @@ const ProfilePage = () => {
                   );
                 })
               ) : (
-                <p>
-                  Du har inte skapat eller bidragit till någon berättelse ännu.
-                  När du gjort det kommer du att se det här.
-                </p>
+                <p>{t("profile.noStories")}</p>
               )}
             </div>
           </div>

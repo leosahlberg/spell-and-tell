@@ -1,0 +1,144 @@
+{
+  "header": {
+    "subtitle": "Skapa kreativa berättelser tillsammans",
+    "home": "Startsida",
+    "profile": "Profil",
+    "createStory": "Skapa ny berättelse",
+    "allStories": "Alla berättelser",
+    "terms": "Regler och villkor",
+    "logout": "Logga ut"
+  },
+  "navbar": {
+    "home": "Startsida",
+    "explore": "Utforska berättelser",
+    "create": "Skapa ny berättelse"
+  },
+
+  "loginuser": {
+    "login": "Logga in",
+    "username": "Användarnamn",
+    "password": "Lösenord",
+    "loginbtn": "Logga in",
+    "noaccount": "Har du inget konto",
+    "register": "Registrera dig här",
+    "example": "Exempel.. Anna79",
+    "min": "(minst 8 tecken)"
+  },
+  "registration": {
+    "createAccount": "Skapa ett användarkonto",
+    "name": "Namn",
+    "username": "Användarnamn",
+    "email": "E-postadress",
+    "password": "Lösenord",
+    "confirmPassword": "Bekräfta Lösenord",
+    "passwordHint": "Lösenord måste vara minst 8 tecken",
+    "acceptTerms": "Jag accepterar villkor och regler",
+    "terms": "Läs villkor och regler",
+    "createBtn": "Skapa"
+  },
+
+  "profile": {
+    "accountInfo": "Konto information",
+    "name": "Namn",
+    "username": "Användarnamn",
+    "email": "Email",
+    "password": "Lösenord",
+    "edit": "Redigera",
+    "invitations": "Inbjudningar",
+    "invitationsDescription": "Här kan du se berättelser som andra användare bjudit in dig till att skriva på.",
+    "myStories": "Mina bidrag och skapade berättelser",
+    "storyCount": "Antal berättelser du skapat eller bidragit till",
+    "invitationNote": "Tänk på att en inbjudan inte är en garanti på att du kan skriva på berättelsen.",
+    "invitationLimit": "Det finns begränsat antal platser för varje berättelse och en inbjudan kan ha skickats till flera personer.",
+    "firstCome": "Det är först till kvarn som gäller!",
+    "noStories": "Du har inte skapat eller bidragit till någon berättelse ännu. När du gjort det kommer du att se det här.",
+    "viewStory": "Klicka för att visa berättelsen",
+    "myStoriesDescription": "Här kan du se berättelser som du varit med och skrivit på. Inklusive de berättelser du själv skapat!"
+  },
+
+  "welcome": {
+    "welcometext": "Välkommen till",
+    "loggin": "Logga in",
+    "noaccount": "Har du inget konto",
+    "register": "Registrera dig här",
+    "language": "Välj språk"
+  },
+  "home": {
+    "findstory": " Hitta berättelse att bidra till",
+    "startnew": "Vill du inte starta en ny berättelse?",
+    "contribute": " Utforska öppna berättelser som du kan bidra till. Tänk på att läsa igenom berättelsen och vilka villkor som gäller för just den du valt innan du börjar!",
+    "find": "De hittar du här",
+    "terms": " Glöm inte att läsa våra regler och villkor också.",
+    "storys": "Utforska beröttelser",
+    "work": "Hur funkar det?",
+    "spell": " Spell & Tell är ett berättar spel för dig och dina vänner. Det funkar lika bra att använda i skolan som på fritiden.",
+    "create": "   Skapa roliga och kreativa berättelser tillsammans. Du startar enberättelse och väljer vilka regler du vill applicera, sen skickar duden vidare till en person eller lägger den öppen för vem som helst att bidra.",
+    "readterms": "Läs villkor och regler"
+  },
+  "create": {
+    "createStory": "Skapa berättelse",
+    "title": "Titel",
+    "titlePlaceholder": "Titel...",
+    "story": "Berättelse",
+    "storyPlaceholder": "Skriv din berättelse här..."
+  },
+  "picker": {
+    "chooseImage": "Välj en bild",
+    "changeImage": "Byt bild"
+  },
+  "rules": {
+    "title": "Regler",
+    "wordCount": "Antal ord",
+    "wordCountTooltip": "Antal ord per bidrag.",
+    "maxTime": "Max tid",
+    "maxTimeTooltip": "Max tid gäller per bidrag.",
+    "contributions": "Antal bidrag",
+    "contributionsTooltip": "Antal bidrag för denna berättelse.",
+    "scoring": "Poängräkning",
+    "spellCheck": "Stavningskontroll",
+    "yes": "Ja",
+    "no": "Nej",
+    "editRules": "Ändra regler",
+    "editDialogTitle": "Ändra regler för berättelse"
+  },
+  "publicStories": {
+    "searchLabel": "Sök på författarens namn",
+    "searchPlaceholder": "tex. anna",
+    "searchButton": "Sök",
+    "tabAll": "Se alla berättelser",
+    "tabCompleted": "Läs färdiga berättelser",
+    "tabInProgress": "Fortsätt på berättelser",
+    "notfound": "Inga berättelser hittades.",
+    "contributionsMaxed": "Max antal bidrag är uppnått, går ej bidra mer!",
+    "contribute": "Fortsätt gärna på denna berättelse"
+  },
+  "story": {
+    "back": "Tillbaka",
+    "notfound": "Berättelsen kunde inte hittas",
+    "score": "Poäng",
+    "author": "Författare",
+    "logo": "Spell and Tell logotyp med en penna som symboliserar kreativt skrivande",
+    "contribute": "Fortsätt på denna berättelse",
+    "alreadyContributed": "Du har redan bidragit!",
+    "titleReadStory": "Klicka på den berättelse som du vill läsa!",
+    "titleContributeStory": "Klicka på den berättelse som du vill fortsätta på!"
+  },
+  "contributeToStory": {
+    "notfound": "Berättelsen hittades inte.",
+    "timingInfo": "Tänk på att avsluta innan tiden tar slut..",
+    "timesUpTimeScroing": "Tiden är slut! Om du fortsätter skriva får du minuspoäng...",
+    "timesUpTime": "Tiden är slut!",
+    "time": "Tid",
+    "start": "Starta tiden",
+    "continueStory": "Fortsätt på berättelsen",
+    "lastContribution": "Ditt bidrag är sista på denna berättelse. Tänk på att avsluta på ett bra sätt!",
+    "contributionNumber": "Ditt bidrag är nummer ",
+    "of": "av ",
+    "storyPlaceholder": "Skriv här...",
+    "author": "Författare"
+  },
+  "general": {
+    "save": "Spara",
+    "cancel": "Avbryt"
+  }
+}

@@ -8,15 +8,17 @@ import { useEffect, useState } from "react";
 import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
 import { fetchGetAllUsers } from "../../redux/userSlice";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { isMaxContributionsReached } from "../../utils/helpers";
+import { useTranslation } from "react-i18next";
 
 const PublicStorysPage = () => {
-  const [stories, setStories] = useState<Story[]>([]); 
-  const [searchListItem, setSearchListItem] = useState(""); 
-  const [value, setValue] = useState(0); 
+  const [stories, setStories] = useState<Story[]>([]);
+  const [searchListItem, setSearchListItem] = useState("");
+  const [value, setValue] = useState(0);
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const storie = useSelector<RootState>(
     (state) => state.story.stories
@@ -24,8 +26,8 @@ const PublicStorysPage = () => {
   const token = useSelector<RootState>((state) => state.auth.token) as string;
 
   useEffect(() => {
-    dispatch(fetchPublicStories(token)); 
-    dispatch(fetchGetAllUsers({ token })); 
+    dispatch(fetchPublicStories(token));
+    dispatch(fetchGetAllUsers({ token }));
   }, [dispatch, token]);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const PublicStorysPage = () => {
 
   const filterStories = (searchTerm: string): Story[] => {
     if (!searchTerm.trim()) {
-      return stories; 
+      return stories;
     }
     return stories.filter((story) =>
       story.contributions.some((contrib) =>
@@ -48,11 +50,11 @@ const PublicStorysPage = () => {
   };
 
   const handleSearch = () => {
-    const filtered = filterStories(searchListItem); 
+    const filtered = filterStories(searchListItem);
     navigate("/search-results", {
       state: {
         filteredStories: filtered,
-        searchedName: searchListItem, 
+        searchedName: searchListItem,
       },
     });
   };
@@ -82,12 +84,14 @@ const PublicStorysPage = () => {
         }}
       >
         <Box sx={{ paddingRight: 5 }}>
-          <p style={{ paddingLeft: 3 }}>Sök på författarens namn 🖋️📚</p>
+          <p style={{ paddingLeft: 3 }}>
+            {t("publicStories.searchLabel")} 🖋️📚
+          </p>
           <TextField
-            label="tex. anna"
+            label={t("publicStories.searchPlaceholder")}
             variant="outlined"
             value={searchListItem}
-            onChange={(e) => setSearchListItem(e.target.value)} 
+            onChange={(e) => setSearchListItem(e.target.value)}
             sx={{
               marginBottom: 2,
               marginTop: 2,
@@ -99,9 +103,9 @@ const PublicStorysPage = () => {
             sx={{ marginLeft: 4, marginTop: 4 }}
             variant="contained"
             color="primary"
-            onClick={handleSearch} 
+            onClick={handleSearch}
           >
-            Sök
+            {t("publicStories.searchButton")}
           </Button>
         </Box>
         <Box
@@ -113,15 +117,27 @@ const PublicStorysPage = () => {
           }}
         >
           <Tabs value={value} onChange={handleChange} aria-label="tabs">
-            <Tab tabIndex={0} label="Se alla berättelser" {...a11yProps(0)} />
-            <Tab tabIndex={0} label="Läs färdiga berättelser" {...a11yProps(1)} />
-            <Tab tabIndex={0} label="Fortsätt på berättelser" {...a11yProps(2)} />
+            <Tab
+              tabIndex={0}
+              label={t("publicStories.tabAll")}
+              {...a11yProps(0)}
+            />
+            <Tab
+              tabIndex={0}
+              label={t("publicStories.tabCompleted")}
+              {...a11yProps(1)}
+            />
+            <Tab
+              tabIndex={0}
+              label={t("publicStories.tabInProgress")}
+              {...a11yProps(2)}
+            />
           </Tabs>
         </Box>
       </Box>
- 
+
       <CustomTabPanel value={value} index={0}>
-        <div className={styles.publicstory} >
+        <div className={styles.publicstory}>
           {stories.length > 0 ? (
             stories.map((story) => (
               <CardPublic
@@ -138,7 +154,7 @@ const PublicStorysPage = () => {
                     color="error"
                     sx={{ paddingTop: 2.5, textAlign: "center", fontSize: 15 }}
                   >
-                   Max antal bidrag är uppnått, går ej bidra mer!
+                    {t("publicStories.contributionsMaxed")}
                   </Typography>
                 )}
                 {!isMaxContributionsReached(story) && (
@@ -147,14 +163,14 @@ const PublicStorysPage = () => {
                     color="success"
                     sx={{ paddingTop: 2, textAlign: "center" }}
                   >
-                    Fortsätt på denna berättelse
+                    {t("publicStories.contribute")}
                   </Typography>
                 )}
               </CardPublic>
             ))
           ) : (
             <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
-              Inga berättelser hittades.
+              {t("publicStories.notfound")}
             </Typography>
           )}
         </div>
@@ -169,7 +185,7 @@ const PublicStorysPage = () => {
             paddingBottom: 4,
           }}
         >
-          Klicka på den berättelse som du vill läsa!
+          {t("publicStories.titleReadStory")}
         </Typography>
         <div className={styles.publicstory}>
           {stories.length > 0 ? (
@@ -188,13 +204,13 @@ const PublicStorysPage = () => {
                     color="error"
                     sx={{ paddingTop: 2, textAlign: "center" }}
                   >
-                    ( Max antal bidrag är uppnått, går ej bidra mer! )
+                    {t("publicStories.contributionsMaxed")}
                   </Typography>
                 </CardPublic>
               ))
           ) : (
             <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
-              Inga färdiga berättelser hittades.
+              {t("publicStories.notfound")}
             </Typography>
           )}
         </div>
@@ -209,12 +225,12 @@ const PublicStorysPage = () => {
             paddingBottom: 4,
           }}
         >
-          Klicka på den berättelse som du vill fortsätta på!
+          {t("publicStories.titleContributeStory")}
         </Typography>
         <div className={styles.publicstory}>
           {stories.length > 0 ? (
             stories
-              .filter((story) => !isMaxContributionsReached(story)) 
+              .filter((story) => !isMaxContributionsReached(story))
               .map((story) => (
                 <CardPublic
                   key={story._id}
@@ -229,13 +245,13 @@ const PublicStorysPage = () => {
                     color="success"
                     sx={{ paddingTop: 2, textAlign: "center" }}
                   >
-                    Fortsätt gärna på denna berättelse.. 🙂
+                    {t("publicStories.contribute")}
                   </Typography>
                 </CardPublic>
               ))
           ) : (
             <Typography sx={{ mt: 2, color: "gray", textAlign: "center" }}>
-              Inga berättelser hittades.
+              {t("publicStories.notfound")}
             </Typography>
           )}
         </div>

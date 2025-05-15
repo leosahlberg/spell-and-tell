@@ -9,6 +9,7 @@ import { useState } from "react";
 import styles from "./ruleSet.module.scss";
 import { RuleSet } from "../../utils/types";
 import RuleSetModal from "./ruleSetDialog";
+import { useTranslation } from "react-i18next";
 
 type RuleSetListProps = {
   ruleSet: RuleSet;
@@ -16,6 +17,7 @@ type RuleSetListProps = {
 };
 const RuleSetList = (props: RuleSetListProps) => {
   const [openModal, setOpenModal] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -27,14 +29,14 @@ const RuleSetList = (props: RuleSetListProps) => {
         padding: 4,
         borderRadius: 8,
         boxShadow: 2,
-        marginBottom: { xs: 2, md: 24},
+        marginBottom: { xs: 2, md: 24 },
       }}
     >
       <Typography
         variant="h1"
         sx={{ marginBottom: 3, paddingLeft: 3, fontSize: 30 }}
       >
-        Regler
+        {t("rules.title")}
       </Typography>
 
       <List sx={{ padding: 0 }}>
@@ -48,9 +50,10 @@ const RuleSetList = (props: RuleSetListProps) => {
             }}
           >
             {" "}
-            <Tooltip title="Antal ord per bidrag.">
+            <Tooltip title={t("rules.wordCountTooltip")}>
               <Typography className={styles.title}>
-                Antal ord: {props.ruleSet.maxNumberOfWordsPerContribution}
+                {t("rules.wordCount")}:{" "}
+                {props.ruleSet.maxNumberOfWordsPerContribution}
               </Typography>
             </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
@@ -67,9 +70,9 @@ const RuleSetList = (props: RuleSetListProps) => {
               width: "100%",
             }}
           >
-            <Tooltip title="Max tid gäller per bidrag.">
+            <Tooltip title={t("rules.maxTimeTooltip")}>
               <Typography className={styles.title}>
-                Max tid: {props.ruleSet.maxTime}min
+                {t("rules.maxTime")}: {props.ruleSet.maxTime}min
               </Typography>
             </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
@@ -86,9 +89,9 @@ const RuleSetList = (props: RuleSetListProps) => {
               width: "100%",
             }}
           >
-            <Tooltip title="Antal bidrag för denna berättelse.">
+            <Tooltip title={t("rules.contributionsTooltip")}>
               <Typography className={styles.title}>
-                Antal bidrag: {props.ruleSet.numberOfContribution}
+                {t("rules.contributions")}: {props.ruleSet.numberOfContribution}
               </Typography>
             </Tooltip>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
@@ -106,7 +109,8 @@ const RuleSetList = (props: RuleSetListProps) => {
             }}
           >
             <Typography className={styles.title}>
-              Poängräkning: {props.ruleSet.scoring ? "Ja" : "Nej"}
+              {t("rules.scoring")}:{" "}
+              {props.ruleSet.scoring ? t("rules.yes") : t("rules.no")}
             </Typography>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
               <ScoreboardTwoToneIcon />
@@ -123,7 +127,8 @@ const RuleSetList = (props: RuleSetListProps) => {
             }}
           >
             <Typography className={styles.title}>
-              Stavningskontroll: {props.ruleSet.spellChecking ? "Ja" : "Nej"}
+              {t("rules.spellCheck")}:{" "}
+              {props.ruleSet.spellChecking ? t("rules.yes") : t("rules.no")}
             </Typography>
             <Box sx={{ color: "rgb(12, 23, 79)" }}>
               <SpellcheckTwoToneIcon />
@@ -135,7 +140,7 @@ const RuleSetList = (props: RuleSetListProps) => {
         <>
           <Button
             className={styles.button}
-            text={"Ändra regler"}
+            text={t("rules.editRules")}
             onClick={() => setOpenModal(true)}
           />
           <Modal open={openModal} onClose={() => setOpenModal(false)}>
