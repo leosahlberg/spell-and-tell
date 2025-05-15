@@ -38,6 +38,11 @@ const Navigation = () => {
     }
   }, [user, navigate, isAuthPage, location.pathname]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+  
+
   return (
     <>
       {user ? (
