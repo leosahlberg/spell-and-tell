@@ -22,8 +22,7 @@ const Navigation = () => {
   const user = useSelector<RootState>((state) => state.auth.user) as User;
   const location = useLocation();
   const isStartPage = location.pathname === "/";
-  const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/registration";
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/registration";
   const navigate = useNavigate();
 
   const mainContentRef = useRef<HTMLElement>(null);
