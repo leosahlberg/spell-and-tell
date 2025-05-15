@@ -11,6 +11,7 @@ import RouleSetList from "../../components/rouleSet/ruleSetList";
 import { useNavigate } from "react-router-dom";
 import { clearCustomRuleSet } from "../../redux/rulesetSlice";
 import { useTranslation } from "react-i18next";
+import MessageRandom from "../../components/message/MessageRandom";
 
 const CreateStoryPage = () => {
   const { t } = useTranslation();
@@ -112,6 +113,7 @@ const CreateStoryPage = () => {
         marginTop: 5,
       }}
     >
+      <MessageRandom/>
       <RouleSetList ruleSet={{ ...ruleSet }} edit={true} />
       <Box
         className={styles.box}

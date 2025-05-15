@@ -1,9 +1,10 @@
 .header {
-  display: flex;
+  display: relative;
   flex-direction: column;
-  max-width: 100vw;
-  background-color: rgb(12, 23, 79);
+  background-color: #0c174f;
   color: white;
+  position: relative;
+  width: 100%;
 
   .headerContent {
     display: flex;
