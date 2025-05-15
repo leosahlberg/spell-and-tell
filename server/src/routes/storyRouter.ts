@@ -1,6 +1,7 @@
 import Express, { Request, Response } from "express";
 import { storyModel } from "../database/models/storyModel";
 import { authenticateUser } from "../auth/authenticate";
+import { invitationModel } from "../database/models/invitationModel";
 
 export function storyRouter() {
   const router = Express.Router();
@@ -146,6 +147,9 @@ export function storyRouter() {
           res.status(404).send({ message: "Story not found" });
           return;
         }
+
+        //Removes all invitations for the deleted story
+        await invitationModel.deleteMany({ storyId: req.params.id });
 
         res.status(200).send({ message: "Story deleted successfully" });
       } catch (error) {

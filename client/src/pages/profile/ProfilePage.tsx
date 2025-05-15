@@ -134,26 +134,34 @@ const ProfilePage = () => {
               </p>
               {invitation?.map((invitation) => {
                 return (
-                  <div
-                    className={styles.settings}
-                    onClick={() =>
-                      navigation(`/story/${invitation.storyId._id}`)
-                    }
-                  >
-                    <img
-                      src={invitation.storyId.imgUrl}
-                      alt=""
-                      className="rounded-md shadow-md"
-                      width={100}
-                      height={100}
-                    />
-                    <p>{t("profile.title")}: {invitation.storyId?.title}</p>
-                    <p>
+                  <>
+                    {invitation.storyId != null ||
+                    invitation.storyId != undefined ? (
+                      <div
+                        className={styles.settings}
+                        onClick={() =>
+                          navigation(`/story/${invitation.storyId._id}`)
+                        }
+                        key={invitation.storyId._id}
+                      >
+                        <img
+                          src={invitation.storyId.imgUrl}
+                          alt=""
+                          className="rounded-md shadow-md"
+                          width={100}
+                          height={100}
+                        />
+                        <p>{t("profile.title")}: {invitation.storyId.title}</p>
+                         <p>
                     {t("profile.spotsLeft")}:{" "}
                       {invitation.storyId.numberOfContributors -
                         invitation.storyId.contributions.length}
                     </p>
-                  </div>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </>
                 );
               })}
             </div>
@@ -176,7 +184,6 @@ const ProfilePage = () => {
                       tabIndex={0}
                       className={styles.settings}
                       onClick={() => navigation(`/story/${story._id}`)}
-                  
                     >
                       <img
                         src={story.imgUrl}
