@@ -28,7 +28,7 @@ const ProfilePage = () => {
   const token = useSelector<RootState>((state) => state.auth.token) as string;
   const [value, setValue] = useState(0);
   const navigation = useNavigate();
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -96,9 +96,9 @@ const ProfilePage = () => {
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
-
-            <Tab label= {t("profile.accountInfo")} {...a11yProps(0)} />
-            <Tab label= {t("profile.invitations")} {...a11yProps(1)} />
+          >
+            <Tab label={t("profile.accountInfo")} {...a11yProps(0)} />
+            <Tab label={t("profile.invitations")} {...a11yProps(1)} />
 
             <Tab
               label={t("profile.myStories")}
@@ -109,12 +109,18 @@ const ProfilePage = () => {
         </Box>
         <CustomTabPanel value={value} index={0}>
           <div className={styles.container}>
-            <h3>  {t("profile.accountInfo")}</h3>
+            <h3> {t("profile.accountInfo")}</h3>
 
             <div className={styles.details}>
-              <p>{t("profile.name")}: {user.name}</p>
-              <p>{t("profile.username")}: {user.username}</p>
-              <p>{t("profile.email")}: {user.email}</p>
+              <p>
+                {t("profile.name")}: {user.name}
+              </p>
+              <p>
+                {t("profile.username")}: {user.username}
+              </p>
+              <p>
+                {t("profile.email")}: {user.email}
+              </p>
               <p>{t("profile.password")}: ******</p>
             </div>
             <Button className={styles.button} text={t("profile.edit")} />
@@ -125,8 +131,8 @@ const ProfilePage = () => {
             <div>
               <h3>{t("profile.invitations")}:</h3>
               <p>
-              {t("profile.invitationsDescription")}
-             <br />
+                {t("profile.invitationsDescription")}
+                <br />
                 <br />
                 {t("profile.invitationNote")}
                 <br />
@@ -151,12 +157,14 @@ const ProfilePage = () => {
                           width={100}
                           height={100}
                         />
-                        <p>{t("profile.title")}: {invitation.storyId.title}</p>
-                         <p>
-                    {t("profile.spotsLeft")}:{" "}
-                      {invitation.storyId.numberOfContributors -
-                        invitation.storyId.contributions.length}
-                    </p>
+                        <p>
+                          {t("profile.title")}: {invitation.storyId.title}
+                        </p>
+                        <p>
+                          {t("profile.spotsLeft")}:{" "}
+                          {invitation.storyId.numberOfContributors -
+                            invitation.storyId.contributions.length}
+                        </p>
                       </div>
                     ) : (
                       <></>
@@ -171,12 +179,10 @@ const ProfilePage = () => {
           <div className={styles.container}>
             <div>
               <h3>
-              {t("profile.storyCount")}: {""}
+                {t("profile.storyCount")}: {""}
                 {stories.length}
               </h3>
-              <p>
-              {t("profile.myStoriesDescription")}
-              </p>
+              <p>{t("profile.myStoriesDescription")}</p>
               {stories.length > 0 ? (
                 stories.map((story) => {
                   return (
@@ -197,9 +203,7 @@ const ProfilePage = () => {
                   );
                 })
               ) : (
-                <p>
-                 {t("profile.noStories")}
-                </p>
+                <p>{t("profile.noStories")}</p>
               )}
             </div>
           </div>
