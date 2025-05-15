@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../utils/types";
-import { logIn, registerUser } from "../utils/api";
+import { logIn, registerUser, updateUserprofile } from "../utils/api";
 
 type InitialStateType = {
   user: User | null;
@@ -37,6 +37,13 @@ type LogInResponse = {
   token: string;
 };
 
+type UpdateUserRequest = {
+  userId: string;
+  imgUrl: string;
+  name: string;
+  email: string;
+};
+
 export const fetchLogin = createAsyncThunk<
   LogInResponse,
   LogInData,
@@ -48,8 +55,6 @@ export const fetchLogin = createAsyncThunk<
     const data = (await response.json()) as LogInResponse;
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-    console.log(JSON.stringify(data.user));
-
     return data;
   } catch (error) {
     const errorMessage =
@@ -76,6 +81,24 @@ export const fetchRegistrateUser = createAsyncThunk<
   }
 );
 
+export const fetchUpdateUserProfile = createAsyncThunk<
+  User,
+  UpdateUserRequest,
+  { rejectValue: string }
+>(
+  "user/fetchUpdateUserProfile",
+  async ({ userId, imgUrl, name, email }, { rejectWithValue }) => {
+    try {
+      const response = await updateUserprofile(userId, imgUrl, name, email);
+      return (await response.json()) as User;
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -86,6 +109,9 @@ export const authSlice = createSlice({
       state.error = null;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+    },
+    updateProfile: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -109,6 +135,12 @@ export const authSlice = createSlice({
       state.registerAccepted = false;
       state.error = action.payload || "An unexpected error occurred";
     });
+    builder.addCase(
+      fetchUpdateUserProfile.fulfilled,
+      (state, action: PayloadAction<User>) => {
+        state.user = action.payload;
+      }
+    );
   },
 });
 

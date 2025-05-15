@@ -10,7 +10,10 @@ import { fetchStoriesByUserId } from "../../redux/storySlice";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import { TextField } from "@mui/material";
 import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
+import ImagePicker from "../../components/ImagePicker";
+import { fetchUpdateUserProfile } from "../../redux/authSlice";
 
 function a11yProps(index: number) {
   return {
@@ -27,6 +30,12 @@ const ProfilePage = () => {
   const token = useSelector<RootState>((state) => state.auth.token) as string;
   const [value, setValue] = useState(0);
   const navigation = useNavigate();
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [profileInfo, setProfileInfo] = useState({
+    imgUrl: "",
+    name: "",
+    email: "",
+  });
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -68,11 +77,35 @@ const ProfilePage = () => {
     }
   }, [storiesByUser]);
 
+  const handleImageSelect = (image: string) => {
+    setProfileInfo({ ...profileInfo, imgUrl: image });
+  };
+
+  const handleSaveProfileChanges = async () => {
+    const actionResult = await dispatch(
+      fetchUpdateUserProfile({
+        userId: user.userId,
+        imgUrl: profileInfo.imgUrl,
+        name: profileInfo.name,
+        email: profileInfo.email,
+      })
+    );
+
+    if (fetchUpdateUserProfile.fulfilled.match(actionResult)) {
+      setProfileInfo({
+        name: "",
+        imgUrl: "",
+        email: "",
+      });
+      setEditMode(false);
+    }
+  };
+
   return (
     <div className={styles.profilecontainer}>
       <div className={styles.info}>
         <img
-          src="/profileimg.jpg"
+          src={user.imgUrl ?? "/profileimg.jpg"}
           width={225}
           height={225}
           alt="Profilbild"
@@ -106,15 +139,79 @@ const ProfilePage = () => {
         </Box>
         <CustomTabPanel value={value} index={0}>
           <div className={styles.container}>
-            <h3>Konto information</h3>
+            {editMode ? (
+              <>
+                <h3>Redigera konto information</h3>
 
-            <div className={styles.details}>
-              <p>Namn: {user.name}</p>
-              <p>Användarnamn: {user.username}</p>
-              <p>Email: {user.email}</p>
-              <p>Lösenord: ******</p>
-            </div>
-            <Button className={styles.button} text="Redigera" />
+                <div className={styles.details}>
+                  <TextField
+                    fullWidth
+                    label="Namn:"
+                    variant="outlined"
+                    value={profileInfo.name}
+                    onChange={(e) =>
+                      setProfileInfo({
+                        ...profileInfo,
+                        name: e.currentTarget.value,
+                      })
+                    }
+                    sx={{ mb: 2, mt: 2 }}
+                  />
+
+                  <TextField
+                    fullWidth
+                    label="Email:"
+                    variant="outlined"
+                    value={profileInfo.email}
+                    onChange={(e) =>
+                      setProfileInfo({
+                        ...profileInfo,
+                        email: e.currentTarget.value,
+                      })
+                    }
+                    sx={{ mb: 2, mt: 2 }}
+                  />
+                  <ImagePicker onSelectImage={handleImageSelect} />
+                </div>
+                <Button
+                  className={styles.button}
+                  text="Avbryt"
+                  onClick={() => {
+                    setEditMode(false);
+                  }}
+                />
+                <Button
+                  className={styles.button}
+                  text="Spara"
+                  onClick={() => {
+                    handleSaveProfileChanges();
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <h3>Konto information</h3>
+
+                <div className={styles.details}>
+                  <p>Namn: {user.name}</p>
+                  <p>Användarnamn: {user.username}</p>
+                  <p>Email: {user.email}</p>
+                  <p>Lösenord: ******</p>
+                </div>
+                <Button
+                  className={styles.button}
+                  text="Redigera"
+                  onClick={() => {
+                    setProfileInfo({
+                      name: user.name,
+                      imgUrl: user.imgUrl,
+                      email: user.email,
+                    });
+                    setEditMode(true);
+                  }}
+                />
+              </>
+            )}
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>

@@ -3,7 +3,7 @@ import styles from "./navbar.module.scss";
 import profileImage from "../../assets/profile.jpg";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { User } from "../../utils/types";
 import { useMediaQuery } from "@mui/material"; // Importera useMediaQuery
 
@@ -16,10 +16,10 @@ const NavBar = ({ user }: NavBarProps) => {
 
   const navList = [
     {
-      title: user.username,
+      title: user.name,
       img: (
         <img
-          src={profileImage}
+          src={user.imgUrl ?? profileImage}
           alt="Profilbild"
           width={40}
           height={40}

@@ -43,6 +43,7 @@ app.post("/login", async (req: Request, res: Response) => {
           username: user.username,
           name: user.name,
           email: user.email,
+          imgUrl: user.imgUrl,
         },
       });
     } else {
