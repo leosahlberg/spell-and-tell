@@ -1,12 +1,14 @@
+@import "../../utils/css/colors";
+
 .container {
-  background-color: rgb(215, 211, 206);
+  background-color: $color-background-light;
   display: flex;
   justify-content: center;
   height: 90vh;
   align-items: center;
   flex-direction: column;
 
-  .loggin{
+  .loggin {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,17 +17,18 @@
     color: rgb(12, 23, 79);
   }
 
-  .label{
+  .label {
     font-size: 1.7rem;
     color: rgb(12, 23, 79);
   }
 
   .button {
-    background: linear-gradient(to right, 
-    rgb(251, 246, 233) 0%,
-    rgb(212, 202, 187) 100%
- );
-    color: #07600a; 
+    background: linear-gradient(
+      to right,
+      rgb(251, 246, 233) 0%,
+      rgb(212, 202, 187) 100%
+    );
+    color: #07600a;
     padding: 10px 20px;
     border: 2px solid green;
     border-radius: 8px;
@@ -33,12 +36,13 @@
     font-size: 2rem;
     font-weight: bold;
     transition: background-color 0.3s ease;
-  
+
     &:hover {
-      background: linear-gradient(to right, 
-      rgb(250, 241, 217) 0%,
-      rgb(211, 197, 174) 100%
-   );
+      background: linear-gradient(
+        to right,
+        rgb(250, 241, 217) 0%,
+        rgb(211, 197, 174) 100%
+      );
     }
   }
   .register {
@@ -50,51 +54,51 @@
     align-items: center;
     font-weight: bold;
     padding: 20px 60px;
-    color: white;
-    background-color: rgba(38, 56, 65, 0.6); 
-    border-radius: 10px;             
-    box-shadow: 0 1px 1px rgba(5, 1, 67, 0.7);                  
+    color: $color-white;
+    background-color: $color-blue;
+    border-radius: 10px;
+    box-shadow: 0 1px 1px $color-box-shadow;
     margin-top: 30px;
-    // width: 645px; 
-    margin-bottom: 60px;                  
-    text-align: center;  
-    white-space: nowrap;               
+    // width: 645px;
+    margin-bottom: 60px;
+    text-align: center;
+    white-space: nowrap;
   }
-  
+
   .link {
     text-decoration: underline;
-    padding-left: 0;                  
-    color: #fdc50e;                    
+    padding-left: 0;
+    color: $color-orange;
     font-size: 1.5rem;
     font-weight: 100;
     cursor: pointer;
     display: inline-block;
     margin-left: 20px;
   }
-  
+
   .link:hover {
-    color: #f9d964;                       
+    color: $color-orange-light;
   }
 
   @media (max-width: 698px) {
-    .form{
-    margin-left: 40px;
-    margin-right: 40px;
+    .form {
+      margin-left: 40px;
+      margin-right: 40px;
     }
-   }
+  }
 
-   @media (max-width: 480px) {
-    .form{
-    margin-left: 40px;
-    margin-right: 40px;
+  @media (max-width: 480px) {
+    .form {
+      margin-left: 40px;
+      margin-right: 40px;
     }
-    .register{
+    .register {
       margin-left: 50px;
       margin-right: 50px;
       font-size: 1.3rem;
     }
-    .link{
+    .link {
       font-size: 1.2rem;
     }
-   }
+  }
 }

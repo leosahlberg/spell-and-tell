@@ -1,3 +1,5 @@
+import style from "./button.module.scss";
+
 type ButtonProps = {
   text?: string;
   onClick?: () => void;
@@ -7,8 +9,8 @@ type ButtonProps = {
 
 const Button = ({ text, onClick, className, disabled }: ButtonProps) => {
   return (
-    <button className={className} onClick={onClick} disabled={disabled}>
-      <span>{text}</span>
+    <button className={style.button} onClick={onClick} disabled={disabled}>
+      <h1>{text}</h1>
     </button>
   );
 };

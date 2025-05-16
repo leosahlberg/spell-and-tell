@@ -1,3 +1,5 @@
+@import "../../utils/css/colors";
+
 .list {
   display: flex;
   justify-content: space-between;
@@ -11,38 +13,19 @@
 .box {
   background: linear-gradient(
     to right,
-    rgb(252, 250, 246) 0%,
-    rgb(221, 216, 209) 100%
+    $color-background-light 0%,
+    $color-background-light 100%
   );
   margin-left: 30px;
   margin-right: 30px;
   margin-bottom: 2em;
+  border: 1px solid $color-orange-light;
 }
 
 .title {
   font-size: 1.5rem;
   padding: 10px 0;
   color: rgb(12, 23, 79);
-}
-
-.button {
-  margin: 1rem;
-  font-size: 1.3rem;
-  padding: 5px 15px;
-  border-radius: 8px;
-  color: white;
-  width: fit-content;
-  border: 2px solid rgb(195, 158, 121);
-  cursor: pointer;
-  background-color: rgb(77, 82, 150);
-  padding: 10px;
-}
-.button:hover {
-  background: linear-gradient(
-    to right,
-    rgb(165, 178, 253) 0%,
-    rgb(91, 94, 148) 100%
-  );
 }
 
 @media (max-width: 768px) {
