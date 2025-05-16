@@ -25,6 +25,7 @@ import i18n from "../../i18n";
 import Button from "../buttons/Button";
 import swe from "../../assets/sweden.jpg";
 import eng from "../../assets/england.jpg";
+import NavBar from "../navbar/NavBar";
 
 type HeaderProps = {
   loggedIn: boolean;
@@ -179,6 +180,7 @@ const Header = (props: HeaderProps) => {
         </div>
       </div>
       <div className={style.underline}></div>
+      <NavBar/>
     </header>
   );
 };

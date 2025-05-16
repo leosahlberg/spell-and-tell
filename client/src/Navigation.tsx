@@ -7,7 +7,6 @@ import CreateStoryPage from "./pages/createStory/CreateStoryPage";
 import ContributeToStoryPage from "./pages/contributeToStory/ContributeToStoryPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import Header from "./components/header/Header";
-import NavBar from "./components/navbar/NavBar";
 import TermsPage from "./pages/terms/TermsPage";
 import PublicStorysPage from "./pages/publicStorys/PublicStorysPage";
 import { useSelector } from "react-redux";
@@ -22,8 +21,7 @@ const Navigation = () => {
   const user = useSelector<RootState>((state) => state.auth.user) as User;
   const location = useLocation();
   const isStartPage = location.pathname === "/";
-  const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/registration";
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/registration";
   const navigate = useNavigate();
 
   const mainContentRef = useRef<HTMLElement>(null);
@@ -40,13 +38,20 @@ const Navigation = () => {
     }
   }, [user, navigate, isAuthPage, location.pathname]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+  
+
   return (
     <>
       {user ? (
         <>
           <Header loggedIn={true} />
-          <NavBar user={user} />
-          <main ref={mainContentRef} tabIndex={-1}>
+          <main
+            ref={mainContentRef}
+            tabIndex={-1}
+          >
             <Routes>
               <Route index element={<HomePage />} />
               <Route path="/createstory" element={<CreateStoryPage />} />
@@ -60,7 +65,10 @@ const Navigation = () => {
               <Route path="/login" element={<LogInPage />} />
               <Route path="/story/:id" element={<StoryPage />} />
               <Route path="/stories" element={<PublicStorysPage />} />
-              <Route path="/search-results" element={<SearchResultsPagePage />} />
+              <Route
+                path="/search-results"
+                element={<SearchResultsPagePage />}
+              />
               <Route
                 path="/invitation"
                 element={<InviteUserToContribute></InviteUserToContribute>}

@@ -5,11 +5,11 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { User } from "../../utils/types";
-import { useMediaQuery } from "@mui/material"; // Importera useMediaQuery
+import { useMediaQuery } from "@mui/material"; 
 import { useTranslation } from "react-i18next";
 
 type NavBarProps = {
-  user: User;
+  user?: User;
 };
 
 const NavBar = ({ user }: NavBarProps) => {
@@ -18,13 +18,13 @@ const NavBar = ({ user }: NavBarProps) => {
 
   const navList = [
     {
-      title: user.name,
+      title: user?.name,
       img: (
         <img
-          src={user.imgUrl ?? profileImage}
+          src={user?.imgUrl ?? profileImage}
           alt="Profilbild"
-          width={40}
-          height={40}
+          width={30}
+          height={30}
           className={styles.img}
         />
       ),

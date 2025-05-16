@@ -95,22 +95,6 @@
     background: linear-gradient(to right, rgb(44, 59, 128) 0%, rgb(12, 23, 79) 70%, rgb(12, 23, 79));
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   }
-
-
-  @media (max-width: 768px) {
-    top: 5%;
-    left: 30%;
-    padding: 15px 15px;
-    font-size: 1rem;
-    max-width: 90%; 
-  }
-
-  @media (max-width: 480px) {
-    left: 3%;
-    top: 6%;
-    font-size: 0.9rem;
-    padding: 20px 10px;
-  }
 }
 
 
