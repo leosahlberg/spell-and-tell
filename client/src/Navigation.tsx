@@ -21,7 +21,8 @@ const Navigation = () => {
   const user = useSelector<RootState>((state) => state.auth.user) as User;
   const location = useLocation();
   const isStartPage = location.pathname === "/";
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/registration";
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/registration";
   const navigate = useNavigate();
 
   const mainContentRef = useRef<HTMLElement>(null);
@@ -38,20 +39,13 @@ const Navigation = () => {
     }
   }, [user, navigate, isAuthPage, location.pathname]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
-  
-
   return (
     <>
       {user ? (
         <>
-          <Header loggedIn={true} />
-          <main
-            ref={mainContentRef}
-            tabIndex={-1}
-          >
+          <main ref={mainContentRef} tabIndex={-1}>
+            <Header loggedIn={true} />
+
             <Routes>
               <Route index element={<HomePage />} />
               <Route path="/createstory" element={<CreateStoryPage />} />
@@ -78,8 +72,9 @@ const Navigation = () => {
         </>
       ) : (
         <>
-          {!isStartPage && <Header loggedIn={false} />}
           <main ref={mainContentRef} tabIndex={-1}>
+            {!isStartPage && <Header loggedIn={false} />}
+
             <Routes>
               <Route index element={<StartPage />} />
               <Route path="/login" element={<LogInPage />} />

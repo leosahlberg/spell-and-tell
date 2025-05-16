@@ -17,8 +17,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import InfoIcon from "@mui/icons-material/Info";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
 import { logout } from "../../redux/authSlice";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
@@ -26,6 +26,7 @@ import Button from "../buttons/Button";
 import swe from "../../assets/sweden.jpg";
 import eng from "../../assets/england.jpg";
 import NavBar from "../navbar/NavBar";
+import { User } from "../../utils/types";
 
 type HeaderProps = {
   loggedIn: boolean;
@@ -36,6 +37,7 @@ const Header = (props: HeaderProps) => {
   const { t } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = React.useState(i18n.language);
   const [selectedFlag, setSelectedFlag] = React.useState(swe);
+  const user = useSelector<RootState>((state) => state.auth.user) as User;
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -46,12 +48,23 @@ const Header = (props: HeaderProps) => {
 
   const NavList = [
     { title: t("header.home"), icon: <HomeIcon />, path: "/" },
-    { title: t("header.profile"), icon: <AccountCircleIcon />, path: "/profile" },
-    { title: t("header.createStory"), icon: <AddCircleIcon />, path: "/createstory" },
-    { title: t("header.allStories"), icon: <LibraryBooksIcon />, path: "/stories" },
+    {
+      title: t("header.profile"),
+      icon: <AccountCircleIcon />,
+      path: "/profile",
+    },
+    {
+      title: t("header.createStory"),
+      icon: <AddCircleIcon />,
+      path: "/createstory",
+    },
+    {
+      title: t("header.allStories"),
+      icon: <LibraryBooksIcon />,
+      path: "/stories",
+    },
     { title: t("header.terms"), icon: <InfoIcon />, path: "/terms" },
-];
-  
+  ];
 
   const handleChangeLanguage = (language: string) => {
     i18n.changeLanguage(language);
@@ -68,7 +81,6 @@ const Header = (props: HeaderProps) => {
     setSelectedLanguage(i18n.language);
     setSelectedFlag(i18n.language === "sv" ? swe : eng);
   }, [i18n.language]);
-  
 
   const DrawerList = (
     <Box
@@ -81,10 +93,9 @@ const Header = (props: HeaderProps) => {
           <ListItem key={item.title} disablePadding>
             <ListItemButton
               onClick={() => {
-                toggleDrawer(false)(); 
-                navigate(item.path)
+                toggleDrawer(false)();
+                navigate(item.path);
               }}
-              
               sx={{
                 "&:focus-visible": {
                   outline: "2px solid #0571EC",
@@ -103,7 +114,7 @@ const Header = (props: HeaderProps) => {
           onClick={() => {
             dispatch(logout());
             navigate("/");
-          }}    
+          }}
           sx={{
             "&:focus-visible": {
               outline: "2px solid #0571EC",
@@ -114,7 +125,6 @@ const Header = (props: HeaderProps) => {
             <LogoutIcon />
           </ListItemIcon>
           <ListItemText primary={t("header.logout")} />
-
         </ListItemButton>
       </ListItem>
     </Box>
@@ -179,8 +189,14 @@ const Header = (props: HeaderProps) => {
           )}
         </div>
       </div>
-      <div className={style.underline}></div>
-      <NavBar/>
+      {props.loggedIn ? (
+        <>
+          <div className={style.underline}></div>
+          <NavBar user={user} />
+        </>
+      ) : (
+        <></>
+      )}
     </header>
   );
 };
