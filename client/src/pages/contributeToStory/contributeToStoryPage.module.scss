@@ -1,9 +1,11 @@
+@import "../../utils/css/colors";
+
 .pageWrapper {
   display: flex;
   justify-content: center;
   padding: 20px;
   margin-top: 20px;
-  color: rgb(12, 23, 79);
+  color: $color-blue;
 }
 
 .mainContent {
@@ -11,17 +13,17 @@
   max-width: 1200px;
   background: linear-gradient(
     to right,
-    rgb(252, 250, 246) 0%,
-    rgb(221, 216, 209) 100%
+    $color-background-light 0%,
+    $color-background-light 100%
   );
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgb(195, 158, 121);
+  box-shadow: 0 4px 12px $color-box-shadow;
+  border: 1px solid $color-orange-light;
 }
 
 .timerText {
-  color: rgb(246, 155, 43);
+  color: $color-orange;
   font-size: 1.25rem;
   font-weight: 600;
   padding-bottom: 20px;
@@ -31,38 +33,14 @@
 .textField {
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #f7f7f7;
+  background-color: $color-background-xtrlight;
   border-radius: 8px;
   padding: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px $color-box-shadow;
 }
 
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
-
-  .button {
-    margin: 1rem;
-    font-size: 1.3rem;
-    padding: 5px 15px;
-    border-radius: 8px;
-    color: white;
-    width: fit-content;
-    border: 2px solid rgb(195, 158, 121);
-    cursor: pointer;
-    background: linear-gradient(
-      to right,
-      rgb(117, 136, 247) 0%,
-      rgb(70, 75, 154) 100%
-    );
-    padding: 10px;
-  }
-  .button:hover {
-    background: linear-gradient(
-      to right,
-      rgb(165, 178, 253) 0%,
-      rgb(91, 94, 148) 100%
-    );
-  }
 }

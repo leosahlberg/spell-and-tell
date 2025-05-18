@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/buttons/Button";
-import ButtonTimer from "../../components/buttons/ButtonTimer";
 import RuleSetList from "../../components/rouleSet/ruleSetList";
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchUpdateStory } from "../../redux/storySlice";
@@ -133,7 +132,7 @@ const ContributeToStoryPage = () => {
               >
                 {t("contributeToStory.continueStory")}
               </Typography>
-              <ButtonTimer
+              <Button
                 text={t("contributeToStory.start")}
                 onClick={() => setStarted(true)}
               />

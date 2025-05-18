@@ -1,35 +1,36 @@
-.button {
-    background: linear-gradient(to right, rgb(82, 97, 147), rgb(118, 154, 191));
-    border: none;
-    color: white;
-    font-size: 0.5rem;
-    font-weight: bold;
-    padding: 12px 24px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    border: 2px solid rgb(12, 23, 79);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 10px;
+@import "../../utils/css/colors";
 
-    h1{
-      font-size: 1.2rem;
-    }
+.button {
+  background: $color-btn-primary;
+  border: none;
+  color: $color-text-primary;
+  font-size: 0.5rem;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px $color-box-shadow;
+  border: 2px solid $color-btn-secondary;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
+
+  h1 {
+    font-size: 1.2rem;
   }
-  
-  .button:hover {
-    background: linear-gradient(90deg, #4d78f2, #56a1f5);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transform: translateY(-2px);
-  }
-  
-  .button:active {
-    transform: translateY(2px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .button:focus {
-    outline: 3px solid #f0f8ff;
-    outline-offset: 3px;
-  }
-  
+}
+
+.button:hover {
+  background: $color-btn-secondary;
+  box-shadow: 0 8px 20px $color-box-shadow;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 10px $color-box-shadow;
+}
+
+.button:focus {
+  outline: 3px solid $color-blue-light;
+  outline-offset: 3px;
+}

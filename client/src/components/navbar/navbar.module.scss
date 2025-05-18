@@ -1,12 +1,14 @@
+@import "../../utils/css/colors";
+
 .navbar {
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(
     to right,
-    rgb(12, 23, 79) 10%,
-    rgb(44, 59, 128) 55%,
-    rgb(171, 147, 112) 100%
+    $color-blue 10%,
+    $color-blue-light 55%,
+    $color-blue 100%
   );
   width: 100%;
   padding: 5px 0;
@@ -25,7 +27,7 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      color: white;
+      color: $color-white;
       transition: background-color 0.3s ease-in-out;
       border-radius: 4px;
 
@@ -34,10 +36,10 @@
       }
 
       &:hover {
-        background-color: rgba(243, 243, 243, 0.1);
+        background-color: $color-blue-light;
       }
 
-      .title{
+      .title {
         font-size: 1.5rem;
       }
     }
@@ -48,9 +50,9 @@
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    border: 3px solid rgb(108, 78, 32);
+    border: 3px solid $color-orange;
     padding: 1px;
-    background-color: rgb(187, 159, 131);
+    background-color: $color-white;
   }
 
   @media (max-width: 800px) {
@@ -58,5 +60,4 @@
       font-size: 1.3rem;
     }
   }
-
 }

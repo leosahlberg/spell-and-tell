@@ -1,41 +1,23 @@
+@import "../../utils/css/colors";
+
 .list {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
   border-radius: 4px;
-  color: white;
+  color: $color-white;
   margin-bottom: 10px;
 }
 
 .title {
   font-size: 1.2rem;
   padding: 10px 10px;
-  color: rgb(12, 23, 79);
+  color: $color-blue;
 }
 
-.title:hover{
+.title:hover {
   cursor: pointer;
-}
-
-.button {
-  margin: 1rem;
-  font-size: 1.3rem;
-  padding: 5px 15px;
-  border-radius: 8px;
-  color: white;
-  width: fit-content;
-  border: 2px solid rgb(195, 158, 121);
-  cursor: pointer;
-  background-color: rgb(77, 82, 150);
-  padding: 10px;
-}
-.button:hover {
-  background: linear-gradient(
-    to right,
-    rgb(165, 178, 253) 0%,
-    rgb(91, 94, 148) 100%
-  );
 }
 
 @media (max-width: 768px) {
