@@ -22,29 +22,6 @@
     color: rgb(12, 23, 79);
   }
 
-  .button {
-    background: linear-gradient(
-      to right,
-      rgb(251, 246, 233) 0%,
-      rgb(212, 202, 187) 100%
-    );
-    color: #07600a;
-    padding: 10px 20px;
-    border: 2px solid green;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 2rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background: linear-gradient(
-        to right,
-        rgb(250, 241, 217) 0%,
-        rgb(211, 197, 174) 100%
-      );
-    }
-  }
   .register {
     display: flex;
     flex-direction: row;

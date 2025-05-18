@@ -8,7 +8,7 @@
 }
 
 .regtitle {
-  color: #0c174f;
+  color: $color-blue;
   text-align: center;
   padding-bottom: 1.5rem;
 }
@@ -16,27 +16,7 @@
 .label {
   font-size: 1.7rem;
   font-weight: 500;
-  color: #0c174f;
-}
-
-.button {
-  background: linear-gradient(to right, rgb(82, 97, 147), rgb(118, 154, 191));
-  color: white;
-  font-size: 1.7rem;
-  padding: 5px 15px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgb(12, 23, 79);
-  cursor: pointer;
-  margin-bottom: 20px;
-
-  h1 {
-    font-size: 1.2rem;
-  }
-}
-
-.button:hover {
-  background: linear-gradient(to right, rgb(109, 129, 194), rgb(148, 193, 238));
+  color: $color-blue;
 }
 
 @media (max-width: 768px) {
@@ -50,9 +30,8 @@
 }
 
 @media (max-width: 698px) {
-  .form{
-  margin-left: 80px;
-  margin-right: 80px;
+  .form {
+    margin-left: 80px;
+    margin-right: 80px;
   }
- }
-
+}

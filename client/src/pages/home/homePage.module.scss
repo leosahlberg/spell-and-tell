@@ -16,11 +16,11 @@
     padding-left: 20px;
     font-size: 1.3rem;
     font-weight: bold;
-    color: purple;
+    color: $color-blue-light;
   }
   .link:hover {
     cursor: pointer;
-    color: rgb(172, 74, 172);
+    color: $color-blue;
   }
 
   @media (max-width: 480px) {
