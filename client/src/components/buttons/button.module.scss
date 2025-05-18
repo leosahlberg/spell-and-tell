@@ -1,15 +1,15 @@
 @use "../../utils/css/colors" as colors;
 
 .button {
-  background: $color-btn-primary;
+  background: colors.$color-btn-primary;
   border: none;
-  color: $color-text-primary;
+  color: colors.$color-text-primary;
   font-size: 0.5rem;
   font-weight: bold;
   padding: 12px 24px;
   border-radius: 8px;
-  box-shadow: 0 5px 15px $color-box-shadow;
-  border: 2px solid $color-btn-secondary;
+  box-shadow: 0 5px 15px colors.$color-box-shadow;
+  border: 2px solid colors.$color-btn-secondary;
   cursor: pointer;
   transition: all 0.3s ease;
   margin: 10px;
@@ -20,17 +20,17 @@
 }
 
 .button:hover {
-  background: $color-btn-secondary;
-  box-shadow: 0 8px 20px $color-box-shadow;
+  background: colors.$color-btn-secondary;
+  box-shadow: 0 8px 20px colors.$color-box-shadow;
   transform: translateY(-2px);
 }
 
 .button:active {
   transform: translateY(2px);
-  box-shadow: 0 3px 10px $color-box-shadow;
+  box-shadow: 0 3px 10px colors.$color-box-shadow;
 }
 
 .button:focus {
-  outline: 3px solid $color-blue-light;
+  outline: 3px solid colors.$color-blue-light;
   outline-offset: 3px;
 }
