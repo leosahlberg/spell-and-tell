@@ -1,11 +1,11 @@
-@import "../../utils/css/colors";
+@use "../../utils/css/colors" as colors;
 
 .pageWrapper {
   display: flex;
   justify-content: center;
   padding: 20px;
   margin-top: 20px;
-  color: $color-blue;
+  color: colors.$color-blue;
 }
 
 .mainContent {
@@ -13,17 +13,17 @@
   max-width: 1200px;
   background: linear-gradient(
     to right,
-    $color-background-light 0%,
-    $color-background-light 100%
+    colors.$color-background-light 0%,
+    colors.$color-background-light 100%
   );
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px $color-box-shadow;
-  border: 1px solid $color-orange-light;
+  box-shadow: 0 4px 12px colors.$color-box-shadow;
+  border: 1px solid colors.$color-orange-light;
 }
 
 .timerText {
-  color: $color-orange;
+  color: colors.$color-orange;
   font-size: 1.25rem;
   font-weight: 600;
   padding-bottom: 20px;
@@ -33,10 +33,10 @@
 .textField {
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: $color-background-xtrlight;
+  background-color: colors.$color-background-xtrlight;
   border-radius: 8px;
   padding: 10px;
-  box-shadow: 0 2px 8px $color-box-shadow;
+  box-shadow: 0 2px 8px colors.$color-box-shadow;
 }
 
 .buttonWrapper {

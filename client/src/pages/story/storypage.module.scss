@@ -1,3 +1,5 @@
+@use "../../utils/css/colors" as colors;
+
 .pageWrapper {
   height: auto;
   display: flex;
@@ -7,15 +9,15 @@
 }
 
 .storyCard {
-  border: 2px solid $color-blue;
+  border: 2px solid colors.$color-blue;
   background: linear-gradient(
     to right,
-    $color-blue 15%,
-    $color-background-xtrlight 5%,
-    $color-white 100%
+    colors.$color-blue 15%,
+    colors.$color-background-xtrlight 5%,
+    colors.$color-white 100%
   );
   border-radius: 20px;
-  box-shadow: 0 4px 8px $color-box-shadow;
+  box-shadow: 0 4px 8px colors.$color-box-shadow;
   max-width: 900px;
   height: auto;
   overflow: hidden;
@@ -32,14 +34,14 @@
   object-fit: cover;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: $color-white;
+  background-color: colors.$color-white;
   margin-left: 135px;
 }
 
 .img {
   width: 120px;
   height: 70px;
-  background-color: $color-blue;
+  background-color: colors.$color-blue;
   transition: width 0.3s ease-in-out;
 }
 
@@ -49,14 +51,14 @@
 
 .storyTitle {
   font-weight: bold;
-  color: $color-blue;
+  color: colors.$color-blue;
 }
 
 .link {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  color: $color-blue;
+  color: colors.$color-blue;
   margin-right: 20px;
   margin-bottom: 5px;
   margin-top: 40px;

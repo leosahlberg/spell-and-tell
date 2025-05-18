@@ -1,12 +1,12 @@
-@import "../../utils/css/colors";
+@use "../../utils/css/colors" as colors;
 
 .profilecontainer {
   padding: 20px;
   max-width: 1200px;
-  background-color: $color-background-container;
+  background-color: colors.$color-background-container;
   border-radius: 15px;
-  border: 1px solid $color-orange-light;
-  box-shadow: 0 4px 15px $color-box-shadow;
+  border: 1px solid colors.$color-orange-light;
+  box-shadow: 0 4px 15px colors.$color-box-shadow;
   margin: 20px auto;
 }
 
@@ -27,7 +27,7 @@
 
 .img {
   border-radius: 50%;
-  border: 4px solid $color-orange;
+  border: 4px solid colors.$color-orange;
   object-fit: cover;
   margin-bottom: 10px;
 }
@@ -40,19 +40,19 @@
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 10px;
-  color: $color-blue;
+  color: colors.$color-blue;
 }
 
 .details p {
   font-size: 1.3rem;
   margin: 8px 0;
-  color: $color-text-primary;
+  color: colors.$color-text-primary;
 }
 
 .link {
   font-size: 1.3rem;
   margin: 8px 0;
-  color: $color-text-primary;
+  color: colors.$color-text-primary;
 }
 
 .settings {
@@ -61,16 +61,16 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-color: $color-background-xtrlight;
+  background-color: colors.$color-background-xtrlight;
   border-radius: 12px;
-  box-shadow: 0 4px 15px $color-box-shadow;
+  box-shadow: 0 4px 15px colors.$color-box-shadow;
   transition: box-shadow 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
   margin-top: 20px;
 }
 
 .settings:hover {
-  background-color: $color-background-light;
+  background-color: colors.$color-background-light;
   cursor: pointer;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .container h3 {
-  color: $color-blue;
+  color: colors.$color-blue;
   font-size: 1.8rem;
   font-weight: 700;
   padding: 20px 0;

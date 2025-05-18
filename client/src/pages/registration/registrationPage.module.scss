@@ -1,3 +1,5 @@
+@use "../../utils/css/colors" as colors;
+
 .registration {
   display: flex;
   justify-content: center;
@@ -8,7 +10,7 @@
 }
 
 .regtitle {
-  color: $color-blue;
+  color: colors.$color-blue;
   text-align: center;
   padding-bottom: 1.5rem;
 }
@@ -16,7 +18,7 @@
 .label {
   font-size: 1.7rem;
   font-weight: 500;
-  color: $color-blue;
+  color: colors.$color-blue;
 }
 
 @media (max-width: 768px) {
