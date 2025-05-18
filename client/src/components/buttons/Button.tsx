@@ -7,7 +7,7 @@ type ButtonProps = {
   disabled?: boolean;
 };
 
-const Button = ({ text, onClick, className, disabled }: ButtonProps) => {
+const Button = ({ text, onClick, disabled }: ButtonProps) => {
   return (
     <button className={style.button} onClick={onClick} disabled={disabled}>
       <h1>{text}</h1>

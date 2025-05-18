@@ -31,7 +31,7 @@
     align-items: center;
     font-weight: bold;
     padding: 20px 60px;
-    color: $color-white;
+    color: colors.$color-white;
     background-color: colors.$color-blue;
     border-radius: 10px;
     box-shadow: 0 1px 1px colors.$color-box-shadow;
@@ -45,7 +45,7 @@
   .link {
     text-decoration: underline;
     padding-left: 0;
-    color: $color-orange;
+    color: colors.$color-orange;
     font-size: 1.5rem;
     font-weight: 100;
     cursor: pointer;

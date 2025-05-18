@@ -1,10 +1,10 @@
-@import "../../utils/css/colors";
+@use "../../utils/css/colors" as colors;
 
 .header {
   display: relative;
   flex-direction: column;
-  background-color: $color-blue;
-  color: $color-white;
+  background-color: colors.$color-blue;
+  color: colors.$color-white;
   position: relative;
   width: 100%;
 
@@ -64,13 +64,13 @@
   .underline {
     width: 100%;
     margin: 0 auto;
-    border-bottom: 1px solid $color-orange-light;
+    border-bottom: 1px solid colors.$color-orange-light;
   }
 
   .menubar:focus-visible {
-    outline: 2px solid $color-white;
+    outline: 2px solid colors.$color-white;
     border-radius: 5px;
-    background-color: $color-blue-light;
+    background-color: colors.$color-blue-light;
   }
 
   @media (max-width: 768px) {
