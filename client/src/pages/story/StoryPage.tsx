@@ -148,19 +148,19 @@ const StoryPage = () => {
             <Typography>
               <img className={styles.img} src={logo} alt={t("story.logo")} />
             </Typography>
-            {!isMaxContributionsReached(story) && (
-              <Link to={`/contribute/${id}`}>
-                <Button
-                  text={
-                    hasContributed()
-                      ? t("story.alreadyContributed")
-                      : t("story.contribute")
-                  }
-                  className={styles.continueButton}
-                  disabled={hasContributed()}
-                />
-              </Link>
-            )}
+            {!isMaxContributionsReached(story) &&
+               hasContributed() ? (
+                <Typography sx={{fontSize: 25, fontWeight: "bold", color: "orange"}}>
+                  {t("story.alreadyContributed")}
+                </Typography>
+              ) : (
+                <Link to={`/contribute/${id}`}>
+                  <Button
+                    text={t("story.contribute")}
+                    className={styles.continueButton}
+                  />
+                </Link>
+              )}
           </Box>
         </Typography>
       </Box>
