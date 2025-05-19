@@ -114,6 +114,10 @@
     "titleReadStory": "Select a story you want to read",
     "titleContributeStory": "Select a story you want to contribute to"
   },
+  "search": {
+    "subtitle1": "Stories that ",
+    "subtitle2": " contributed to "
+  },
   "story": {
     "back": "Go back",
     "notfound": "Story not found.",
@@ -137,6 +141,34 @@
     "storyPlaceholder": "Write here...",
     "scoring": "Scoring",
     "author": "Author"
+  },
+  "terms": {
+    "title": "Terms and Rules",
+    "subtitle-about": "What is the game about?",
+    "about": "Spell & Tell is a creative storytelling game for you and your friends. It works just as well in school as during your free time. Create fun and imaginative stories together by contributing text piece by piece. The game begins with someone starting a story and choosing which rules will apply. After that, the story is passed on to another person or made available for anyone to continue writing. The goal is to create a unique story together!",
+    "subtitle-rules": "Game Rules",
+    "rule-one": "Start a story: The player who begins writes the first paragraph and chooses the rules for the story.",
+    "rule-two": "Choose game rules: Decide whether there should be any limitations, such as a maximum number of words per post, time limits, or scoring.",
+    "rule-three": "Contribute to the story: When a player receives the story, they must continue it with a new paragraph before passing it on.",
+    "rule-four": "Follow the rules: Players must adhere to the rules that were set. If someone breaks the rules, their entry may be removed.",
+    "rule-five": "Finish the story: When the story feels complete, it can be published as a finished story.",
+    "subtitle-conditions": "Conditions to Accept in Order to Participate",
+    "condition-one": "This game is intended for creative collaboration and entertainment.",
+    "condition-two": "Respect other players: No offensive, abusive, or discriminatory content.",
+    "condition-three": "Follow the rules: Each story has its own rules that must be followed.",
+    "condition-four": "No spoilers or sabotage: Try to contribute in a way that improves the story.",
+    "condition-five": "No spam or advertising: Stick to the game and avoid posting irrelevant content.",
+    "condition-six": "Accept that your text may be changed: Other players can continue your story and develop it in unexpected directions.",
+    "condition-seven": "If a player breaks the rules, their entry may be removed or they may be banned from the game."
+  },
+  "invitation": {
+    "title": "Send invitation to another user",
+    "select-person": "Select person to invite",
+    "hide-search": "Hide searchfield",
+    "stories": "Go to stories",
+    "sent": "Invitation sent to ",
+    "selected-person": "Selected person:",
+    "send": "Send"
   },
   "general": {
     "save": "Save",
