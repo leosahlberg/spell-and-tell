@@ -16,6 +16,7 @@ import { fetchGetAllUsers } from "../../redux/userSlice";
 import { fetchCreateInvitation } from "../../redux/invitationSlice";
 import styles from "./inviteUserToContribute.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const InviteUserToContribute = () => {
   const [selectedPerson, setSelectedPerson] = useState<PublicUser | null>(null);
@@ -24,6 +25,7 @@ const InviteUserToContribute = () => {
   const [search, setSearch] = useState("");
   const [searchVisible, setSearchVisible] = useState(false);
   const [invitationSent, setInvitationSent] = useState(false);
+  const { t } = useTranslation();
 
   const token = useSelector<RootState>((state) => state.auth.token) as string;
   const storyData = useSelector<RootState>(
@@ -65,7 +67,7 @@ const InviteUserToContribute = () => {
       setInvitationSent(true);
       setTimeout(() => {
         setInvitationSent(false);
-        setSelectedPerson(null)
+        setSelectedPerson(null);
       }, 3000);
     }
   }
@@ -85,10 +87,19 @@ const InviteUserToContribute = () => {
           boxShadow: 24,
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-          <Typography variant="h1" sx={{fontSize: 30, mb: 8, color: "green", mt: 2}}>
-            Välj att skicka inbjudan till en vän eller lägga ut
-            berättelsen direkt i flödet..
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="h1"
+            sx={{ fontSize: 30, mb: 8, color: "green", mt: 2 }}
+          >
+            {t("invitation.title")}
           </Typography>
         </Box>
         <Box
@@ -102,8 +113,8 @@ const InviteUserToContribute = () => {
           <Button
             text={
               searchVisible
-                ? "Dölj sökfältet"
-                : "Välj en person att bjuda in"
+                ? t("invitation.hide-search")
+                : t("invitation.select-person")
             }
             onClick={() => setSearchVisible((prev) => !prev)}
             className={styles.button}
@@ -111,13 +122,7 @@ const InviteUserToContribute = () => {
 
           <Box>
             <Button
-              text="🌐 Publicera vidare till publika flödet"
-              onClick={() => navigate("/stories")}
-              className={styles.button}
-            />
-
-            <Button
-              text="📚 Gå till berättelser"
+              text={t("invitation.stories")}
               onClick={() => navigate(`/stories`)}
               className={styles.button}
             />
@@ -133,10 +138,11 @@ const InviteUserToContribute = () => {
               }}
             >
               <Typography sx={{ mt: 4, ml: 2 }}>
-                ✅ Vald person: <strong>{selectedPerson.name}</strong>
+                ✅ {t("invitation.selected-person")}
+                <strong>{selectedPerson.name}</strong>
               </Typography>
               <Button
-                text={`Skicka`}
+                text={t("invitation.send")}
                 onClick={sendInvitation}
                 className={styles.button}
               ></Button>
@@ -146,7 +152,7 @@ const InviteUserToContribute = () => {
 
         {invitationSent && (
           <Alert severity="success" sx={{ mt: 2 }}>
-            Inbjudan skickades till {selectedPerson?.name}!
+            {t("invitation.sent")} {selectedPerson?.name}!
           </Alert>
         )}
 

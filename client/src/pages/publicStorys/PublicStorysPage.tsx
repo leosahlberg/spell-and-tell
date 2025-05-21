@@ -148,7 +148,7 @@ const PublicStorysPage = () => {
                 id={story._id}
                 onDelete={handleDelete}
               >
-                {isMaxContributionsReached(story) && (
+                {isMaxContributionsReached(story) ? (
                   <Typography
                     variant="h6"
                     color="error"
@@ -156,8 +156,7 @@ const PublicStorysPage = () => {
                   >
                     {t("publicStories.contributionsMaxed")}
                   </Typography>
-                )}
-                {!isMaxContributionsReached(story) && (
+                ) : (
                   <Typography
                     variant="h6"
                     color="success"

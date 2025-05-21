@@ -112,6 +112,10 @@
     "contributionsMaxed": "Max antal bidrag är uppnått, går ej bidra mer!",
     "contribute": "Fortsätt gärna på denna berättelse"
   },
+  "search": {
+    "subtitle1": "Berättelser som ",
+    "subtitle2": " deltagit i "
+  },
   "story": {
     "back": "Tillbaka",
     "notfound": "Berättelsen kunde inte hittas",
@@ -136,6 +140,34 @@
     "of": "av ",
     "storyPlaceholder": "Skriv här...",
     "author": "Författare"
+  },
+  "terms": {
+    "title": "Villkor och Regler",
+    "subtitle-about": "Vad handlar spelet om?",
+    "about": "Spell & Tell är ett kreativt berättarspel för dig och dina vänner. Det fungerar lika bra i skolan som på fritiden. Skapa roliga och fantasifulla berättelser tillsammans genom att bidra med text stycke för stycke. Spelet börjar med att någon startar en berättelse och väljer vilka regler som ska gälla. Därefter skickas berättelsen vidare till en annan person eller görs tillgänglig för vem som helst att fortsätta skriva på. Målet är att skapa en unik historia tillsammans!",
+    "subtitle-rules": "Spelregler",
+    "rule-one": "Starta en berättelse: Spelaren som börjar skriver första stycket och väljer regler för berättelsen.",
+    "rule-two": "Välj spelregler: Bestäm om det ska finnas några begränsningar, t.ex. Max antal ord per inlägg, Tidsbegränsning eller poängräkning.",
+    "rule-three": "Bidra till berättelsen: När en spelare får berättelsen ska denne fortsätta med ett nytt stycke innan den skickas vidare.",
+    "rule-four": "Följ reglerna: Spelarna måste hålla sig till de regler som satts upp. Om någon bryter mot reglerna kan deras inlägg tas bort.",
+    "rule-five": "Avsluta berättelsen: När historien känns färdig kan den publiceras som en färdig berättelse.",
+    "subtitle-conditions": "Villkor att godkänna för att delta",
+    "condition-one": "Detta spel är avsett för kreativt samarbete och underhållning.",
+    "condition-two": "Respektera andra spelare: Inga kränkande, stötande eller diskriminerande texter.",
+    "condition-three": "Följ reglerna: Varje berättelse har sina egna regler som måste följas.",
+    "condition-four": "Inga spoilers eller sabotage: Försök att bidra till berättelsen på ett sätt som gör den bättre.",
+    "condition-five": "Ingen spam eller reklam: Håll dig till spelet och undvik att posta irrelevant innehåll.",
+    "condition-six": "Godkänn att din text kan ändras: Andra spelare kan fortsätta på din berättelse och utveckla den i oväntade riktningar.",
+    "condition-seven": "Om en spelare bryter mot reglerna kan deras inlägg tas bort eller de kan bli avstängda från spelet."
+  },
+  "invitation": {
+    "title": "Välj att skicka inbjudan till en vän",
+    "select-person": "Välj person att bjuda in",
+    "hide-search": "Dölj sökfältet",
+    "stories": "Gå till berättelser",
+    "sent": "Inbjudan skickades till ",
+    "selected-person": "Vald person:",
+    "send": "Skicka"
   },
   "general": {
     "save": "Spara",
