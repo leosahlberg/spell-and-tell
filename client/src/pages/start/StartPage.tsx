@@ -48,13 +48,12 @@ const StartPage = () => {
         />
         <Button
           text={t("welcome.loggin")}
-          className={style.button}
           onClick={() => navigate("/login")}
         />
         <section>
           <Typography
             className={style.register}
-            sx={{ fontSize: "2rem" }}
+            sx={{ fontSize: "2rem", mt: 5}}
             variant="h2"
             gutterBottom
           >

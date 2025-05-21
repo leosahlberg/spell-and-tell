@@ -33,7 +33,7 @@ const HomePage = () => {
           color: "rgb(7, 7, 58)",
           backgroundColor: "rgb(912, 941, 541)",
           display: "flex",
-          justifyContent: "right",
+          justifyContent: "flex-start",
           flexDirection: "column",
         }}
       >
@@ -59,7 +59,7 @@ const HomePage = () => {
         <Typography
           variant="body1"
           gutterBottom
-          sx={{ fontSize: "1.2rem", marginTop: 5 }}
+          sx={{ fontSize: "1.2rem", marginTop: 5, mb:3 }}
         >
           {t("home.terms")}
           <Link className={style.link} to={"/terms"}>
@@ -68,7 +68,6 @@ const HomePage = () => {
         </Typography>
         <Button
           text={t("home.storys")}
-          className={style.button}
           onClick={() => navigation("/stories")}
         />
       </Paper>
@@ -81,7 +80,7 @@ const HomePage = () => {
           margin: { xs: 1, sm: 2 },
           color: "rgb(7, 7, 58)",
           display: "flex",
-          justifyContent: "right",
+          justifyContent: "flex-start",
           flexDirection: "column",
         }}
       >
@@ -100,13 +99,12 @@ const HomePage = () => {
         <Typography variant="body1" gutterBottom sx={{ fontSize: "1.3rem" }}>
           {t("home.spell")}
         </Typography>
-        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.2rem" }}>
+        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.2rem", mb:3 }}>
           {t("home.create")}
         </Typography>
 
         <Button
           text={t("home.readterms")}
-          className={style.button}
           onClick={() => navigation("/terms")}
         />
       </Paper>

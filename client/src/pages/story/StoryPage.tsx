@@ -158,7 +158,6 @@ const StoryPage = () => {
               <Link to={`/contribute/${id}`}>
                 <Button
                   text={t("story.contribute")}
-                  className={styles.continueButton}
                 />
               </Link>
             )}

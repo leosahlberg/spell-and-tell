@@ -179,7 +179,6 @@ const CreateStoryPage = () => {
           className={styles.buttonWrapper}
         >
           <Button
-            className={styles.button}
             text={t("general.save")}
             onClick={() => createStory()}
           />

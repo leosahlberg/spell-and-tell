@@ -1,15 +1,20 @@
-import style from "./button.module.scss";
+import styles from "./button.module.scss";
 
 type ButtonProps = {
   text?: string;
   onClick?: () => void;
-  className?: string;
   disabled?: boolean;
+  style?: React.CSSProperties;  
 };
 
-const Button = ({ text, onClick, disabled }: ButtonProps) => {
+const Button = ({ text, onClick, disabled, style }: ButtonProps) => {
   return (
-    <button className={style.button} onClick={onClick} disabled={disabled}>
+    <button
+      className={styles?.button}  
+      onClick={onClick}
+      disabled={disabled}
+      style={style} 
+    >
       <h1>{text}</h1>
     </button>
   );
