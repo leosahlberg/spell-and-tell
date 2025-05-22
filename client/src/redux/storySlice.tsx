@@ -12,12 +12,14 @@ type InitialStateType = {
   stories: Story[];
   created: Story | null;
   storiesByUser: Story[];
+  story: Story | null;
 };
 
 const initialState: InitialStateType = {
   stories: [],
   storiesByUser: [],
   created: null,
+  story: null,
 };
 
 export const fetchPublicStories = createAsyncThunk<
@@ -177,6 +179,7 @@ export const storySlice = createSlice({
         state.stories = state.stories.map((story) =>
           story._id === updatedStory._id ? updatedStory : story
         );
+        state.story = action.payload;
       }
     );
   },

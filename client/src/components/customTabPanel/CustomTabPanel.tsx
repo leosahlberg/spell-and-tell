@@ -6,7 +6,7 @@ interface TabPanelProps {
   value: number;
 }
 
-export function CustomTabPanel(props: TabPanelProps) {
+const CustomTabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -20,4 +20,6 @@ export function CustomTabPanel(props: TabPanelProps) {
       {value === index && <Box sx={{ p: 6 }}>{children}</Box>}
     </div>
   );
-}
+};
+
+export default CustomTabPanel;

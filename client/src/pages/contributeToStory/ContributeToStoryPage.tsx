@@ -84,9 +84,8 @@ const ContributeToStoryPage = () => {
           token: userToken || "",
         })
       );
-      console.log(actionResult);
       if (fetchUpdateStory.fulfilled.match(actionResult)) {
-        navigate("/invitation");
+        navigate(`/invitation/${story._id}`);
       }
     }
   }
@@ -230,11 +229,7 @@ const ContributeToStoryPage = () => {
         />
 
         <Box className={styles.buttonWrapper}>
-          <Button
-            className={styles.button}
-            text={t("general.save")}
-            onClick={() => handlePublish()}
-          />
+          <Button text={t("general.save")} onClick={() => handlePublish()} />
         </Box>
       </Box>
     </Box>

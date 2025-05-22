@@ -7,14 +7,14 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { fetchLogin } from "../../redux/authSlice";
 import backgroundImage from "../../assets/bookimg.jpg";
 import Button from "../../components/buttons/Button";
-import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import { useTranslation } from "react-i18next";
 
 const LogInPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -50,7 +50,7 @@ const LogInPage = () => {
         }}
       >
         <Typography variant="h1" gutterBottom className={style.loggin}>
-        {t("loginuser.login")}
+          {t("loginuser.login")}
         </Typography>
         <form
           onSubmit={async (e) => {
@@ -64,7 +64,7 @@ const LogInPage = () => {
           }}
         >
           <label className={style.label} id="username-label" htmlFor="username">
-          {t("loginuser.username")}
+            {t("loginuser.username")}
           </label>
           <TextField
             variant="standard"
@@ -81,12 +81,12 @@ const LogInPage = () => {
             fullWidth
             required
             id="username"
-            placeholder= {t("loginuser.example")}
+            placeholder={t("loginuser.example")}
             onChange={(e) => setUsername(e.currentTarget.value)}
           />
 
           <label className={style.label} id="password-label" htmlFor="password">
-          {t("loginuser.password")}
+            {t("loginuser.password")}
           </label>
           <TextField
             slotProps={{
@@ -117,13 +117,14 @@ const LogInPage = () => {
               marginTop: "20px",
             }}
           >
-            <Button text={t("loginuser.loginbtn")} className={style.button} />
+            <Button text={t("loginuser.loginbtn")} />
           </div>
         </form>
       </Paper>
       <section>
         <Typography variant="h2" gutterBottom className={style.register}>
-        {t("loginuser.noaccount")}? <ArrowForwardOutlinedIcon sx={{marginLeft: 1, marginRight: 4}}/>
+          {t("loginuser.noaccount")}?{" "}
+          <ArrowForwardOutlinedIcon sx={{ marginLeft: 1, marginRight: 4 }} />
           <Link
             className={style.link}
             to={"/registration"}

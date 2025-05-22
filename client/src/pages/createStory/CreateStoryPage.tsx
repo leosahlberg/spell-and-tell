@@ -93,7 +93,8 @@ const CreateStoryPage = () => {
       dispatch(clearCustomRuleSet(null));
 
       if (fetchCreateStory.fulfilled.match(actionResult)) {
-        navigate("/invitation");
+        console.log(actionResult.payload);
+        navigate(`/invitation/${actionResult.payload._id}`);
       }
     }
   }
@@ -113,7 +114,7 @@ const CreateStoryPage = () => {
         marginTop: 5,
       }}
     >
-      <MessageRandom/>
+      <MessageRandom />
       <RouleSetList ruleSet={{ ...ruleSet }} edit={true} />
       <Box
         className={styles.box}
@@ -178,10 +179,7 @@ const CreateStoryPage = () => {
           sx={{ display: "flex", justifyContent: "flex-end" }}
           className={styles.buttonWrapper}
         >
-          <Button
-            text={t("general.save")}
-            onClick={() => createStory()}
-          />
+          <Button text={t("general.save")} onClick={() => createStory()} />
         </Box>
       </Box>
     </Box>

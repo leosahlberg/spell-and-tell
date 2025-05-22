@@ -7,7 +7,7 @@ export type User = {
 };
 
 export type PublicUser = {
-  _id: string;
+  userId: string;
   name: string;
 };
 

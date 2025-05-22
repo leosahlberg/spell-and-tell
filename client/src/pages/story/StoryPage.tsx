@@ -47,7 +47,7 @@ const StoryPage = () => {
 
   const hasContributed = () => {
     return story?.contributions.some(
-      (contribution) => contribution.userId._id === currentUser?.userId
+      (contribution) => contribution.userId.userId === currentUser?.userId
     );
   };
 
@@ -156,9 +156,7 @@ const StoryPage = () => {
               </Typography>
             ) : (
               <Link to={`/contribute/${id}`}>
-                <Button
-                  text={t("story.contribute")}
-                />
+                <Button text={t("story.contribute")} />
               </Link>
             )}
           </Box>

@@ -64,7 +64,7 @@ const Navigation = () => {
                 element={<SearchResultsPagePage />}
               />
               <Route
-                path="/invitation"
+                path="/invitation/:id"
                 element={<InviteUserToContribute></InviteUserToContribute>}
               />
             </Routes>

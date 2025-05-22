@@ -11,7 +11,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
-import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
+import CustomTabPanel from "../../components/customTabPanel/CustomTabPanel";
 import ImagePicker from "../../components/ImagePicker";
 import { fetchUpdateUserProfile } from "../../redux/authSlice";
 import { useTranslation } from "react-i18next";
@@ -179,14 +179,12 @@ const ProfilePage = () => {
                   <ImagePicker onSelectImage={handleImageSelect} />
                 </div>
                 <Button
-                  className={styles.button}
                   text={t("general.cancel")}
                   onClick={() => {
                     setEditMode(false);
                   }}
                 />
                 <Button
-                  className={styles.button}
                   text={t("general.save")}
                   onClick={() => {
                     handleSaveProfileChanges();
@@ -210,7 +208,6 @@ const ProfilePage = () => {
                   <p>{t("profile.password")}: ******</p>
                 </div>
                 <Button
-                  className={styles.button}
                   text={t("profile.edit")}
                   onClick={() => {
                     setProfileInfo({
@@ -289,6 +286,7 @@ const ProfilePage = () => {
                       tabIndex={0}
                       className={styles.settings}
                       onClick={() => navigation(`/story/${story._id}`)}
+                      key={story._id}
                     >
                       <img
                         src={story.imgUrl}

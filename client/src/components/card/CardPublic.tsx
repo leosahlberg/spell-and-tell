@@ -4,7 +4,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { Link } from "react-router";
-// import { Button } from "@mui/material";
+//import { Button } from "@mui/material";
 import { PublicUser } from "../../utils/types";
 import { Box } from "@mui/material";
 
@@ -19,25 +19,24 @@ type CardProps = {
   title: string;
   contributions: Contribution[];
   id: string;
-  onDelete?: (id: string) => void;
+  //onDelete?: (id: string) => void;
   children?: React.ReactNode;
 };
 
-export default function CardPublic({
+const CardPublic = ({
   imgs,
   title,
   contributions,
   id,
-  // onDelete,
-  children
-}: CardProps) {
-  
+  //onDelete,
+  children,
+}: CardProps) => {
   const getFirstTwoSentences = (text: string) => {
-    const sentences = text.split(".");  
+    const sentences = text.split(".");
     const firstTwo = sentences.slice(0, 2).join(".");
     return firstTwo;
   };
-  
+
   const renderFirstContribution = () => {
     if (contributions.length === 0) {
       return (
@@ -47,7 +46,7 @@ export default function CardPublic({
       );
     }
 
-    const firstContribution = contributions[0]; 
+    const firstContribution = contributions[0];
     const firstTwoSentences = getFirstTwoSentences(firstContribution.text);
 
     return (
@@ -56,10 +55,10 @@ export default function CardPublic({
         sx={{
           paddingTop: 1,
           display: "-webkit-box",
-          WebkitLineClamp: 2, 
+          WebkitLineClamp: 2,
           WebkitBoxOrient: "vertical",
           overflow: "hidden",
-          textOverflow: "ellipsis", 
+          textOverflow: "ellipsis",
         }}
       >
         {firstTwoSentences}...
@@ -75,41 +74,42 @@ export default function CardPublic({
         backgroundColor: "white",
       }}
     >
-      
       <CardActionArea
         component={Link}
         to={`/story/${id}`}
-        sx={{ textDecoration: "none", backgroundColor: "white", "&:hover": {
-     
-          backgroundColor: "#f1f1f1",
-          cursor:"pointer"
-        }, }}
+        sx={{
+          textDecoration: "none",
+          backgroundColor: "white",
+          "&:hover": {
+            backgroundColor: "#f1f1f1",
+            cursor: "pointer",
+          },
+        }}
       >
         <CardMedia
           component="img"
           height="220"
           image={imgs}
           alt={`Bild för berättelsen: ${title}`}
-          sx={{transition: "none"}}
+          sx={{ transition: "none" }}
         />
         <CardContent>
           <Typography
             gutterBottom
             variant="h2"
             component="h1"
-            sx={{ fontSize: "1.2rem"}}
+            sx={{ fontSize: "1.2rem" }}
           >
             {title}
           </Typography>
           {renderFirstContribution()}
         </CardContent>
-       
       </CardActionArea>
-       
+
       {children && (
         <Box
           sx={{
-            marginTop: "auto", 
+            marginTop: "auto",
             textAlign: "center",
             paddingBottom: 2,
           }}
@@ -118,13 +118,15 @@ export default function CardPublic({
         </Box>
       )}
       {/* <Button
-        variant="contained"
-        color="error"
-        sx={{ margin: 2 }}
-        onClick={() => onDelete?.(id)}
-      >
-        Ta bort
+          variant="contained"
+          color="error"
+          sx={{ margin: 2 }}
+          onClick={() => onDelete?.(id)}
+        >
+          Ta bort
       </Button> */}
     </Card>
   );
-}
+};
+
+export default CardPublic;
