@@ -6,7 +6,7 @@ import { Story } from "../../utils/types";
 import { fetchDeleteStory, fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
 import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
-import { CustomTabPanel } from "../../components/customTabPanel/CustomTabPanel";
+import CustomTabPanel from "../../components/customTabPanel/CustomTabPanel";
 import { fetchGetAllUsers } from "../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import { isMaxContributionsReached } from "../../utils/helpers";

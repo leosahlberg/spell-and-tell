@@ -40,7 +40,7 @@ type ImagePickerProps = {
   onSelectImage: (image: string) => void;
 };
 
-export default function ImagePicker({ onSelectImage }: ImagePickerProps) {
+const ImagePicker = ({ onSelectImage }: ImagePickerProps) => {
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { t } = useTranslation();
@@ -103,4 +103,6 @@ export default function ImagePicker({ onSelectImage }: ImagePickerProps) {
       </Dialog>
     </Stack>
   );
-}
+};
+
+export default ImagePicker;

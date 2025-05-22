@@ -71,7 +71,7 @@ const RegistrationPage = () => {
         className={styles.form}
         sx={{
           padding: "20px",
-         
+
           maxWidth: 800,
           maxHeight: 700,
           marginBottom: 20,
@@ -87,12 +87,12 @@ const RegistrationPage = () => {
           sx={{ fontSize: "2rem" }}
           gutterBottom
         >
-            {t("registration.createAccount")}
+          {t("registration.createAccount")}
         </Typography>
 
         <form onSubmit={handleSubmit}>
           <label className={styles.label} id="name-label" htmlFor="name">
-          {t("registration.name")} 
+            {t("registration.name")}
           </label>
           <TextField
             variant="standard"
@@ -112,7 +112,7 @@ const RegistrationPage = () => {
             id="username-label"
             htmlFor="username"
           >
-            {t("registration.username")} 
+            {t("registration.username")}
           </label>
           <TextField
             variant="standard"
@@ -129,7 +129,7 @@ const RegistrationPage = () => {
           />
 
           <label className={styles.label} id="email-label" htmlFor="email">
-          {t("registration.email")}
+            {t("registration.email")}
           </label>
           <TextField
             variant="standard"
@@ -151,7 +151,7 @@ const RegistrationPage = () => {
             id="password-label"
             htmlFor="password"
           >
-               {t("registration.password")}
+            {t("registration.password")}
           </label>
           <TextField
             variant="standard"
@@ -173,7 +173,7 @@ const RegistrationPage = () => {
             id="confirm-password-label"
             htmlFor="confirm-password"
           >
-           {t("registration.confirmPassword")} 
+            {t("registration.confirmPassword")}
           </label>
           <TextField
             variant="standard"
@@ -207,12 +207,12 @@ const RegistrationPage = () => {
 
           <Typography variant="body2" sx={{ fontSize: 18, color: "purple" }}>
             <Link to="/terms" style={{ color: "purple" }}>
-            ({t("registration.terms")})
+              ({t("registration.terms")})
             </Link>
           </Typography>
 
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button text={t("registration.createBtn")} className={styles.button} />
+            <Button text={t("registration.createBtn")} />
           </div>
         </form>
       </Paper>

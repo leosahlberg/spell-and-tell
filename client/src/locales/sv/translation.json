@@ -53,7 +53,9 @@
     "firstCome": "Det är först till kvarn som gäller!",
     "noStories": "Du har inte skapat eller bidragit till någon berättelse ännu. När du gjort det kommer du att se det här.",
     "viewStory": "Klicka för att visa berättelsen",
-    "myStoriesDescription": "Här kan du se berättelser som du varit med och skrivit på. Inklusive de berättelser du själv skapat!"
+    "myStoriesDescription": "Här kan du se berättelser som du varit med och skrivit på. Inklusive de berättelser du själv skapat!",
+    "title": "Titel",
+    "spotsLeft": "Platser kvar"
   },
 
   "welcome": {
@@ -110,7 +112,9 @@
     "tabInProgress": "Fortsätt på berättelser",
     "notfound": "Inga berättelser hittades.",
     "contributionsMaxed": "Max antal bidrag är uppnått, går ej bidra mer!",
-    "contribute": "Fortsätt gärna på denna berättelse"
+    "contribute": "Fortsätt gärna på denna berättelse",
+    "titleReadStory": "Välj en berättelse att läsa!",
+    "titleContributeStory": "Välj en berättelse att bidra till!"
   },
   "search": {
     "subtitle1": "Berättelser som ",

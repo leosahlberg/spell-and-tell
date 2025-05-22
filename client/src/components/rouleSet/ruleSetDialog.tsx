@@ -174,11 +174,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
             />
           </RadioGroup>
         </FormControl>
-        <Button
-          className={styles.button}
-          text={t("general.save")}
-          onClick={saveRuleSet}
-        />
+        <Button text={t("general.save")} onClick={saveRuleSet} />
       </Box>
     </Box>
   );

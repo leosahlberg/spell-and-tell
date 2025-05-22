@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useTranslation } from "react-i18next";
 
-interface Search {
+type SearchProps = {
   filteredStories: Story[];
   searchedName: string;
-}
+};
 
-const Search: React.FC<Search> = ({ filteredStories, searchedName }) => {
+const Search = ({ filteredStories, searchedName }: SearchProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 

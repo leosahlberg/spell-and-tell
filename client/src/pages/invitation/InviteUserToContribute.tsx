@@ -15,10 +15,12 @@ import { PublicUser, Story } from "../../utils/types";
 import { fetchGetAllUsers } from "../../redux/userSlice";
 import { fetchCreateInvitation } from "../../redux/invitationSlice";
 import styles from "./inviteUserToContribute.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { fetchPublicStories } from "../../redux/storySlice";
 
 const InviteUserToContribute = () => {
+  const { id } = useParams<{ id: string }>();
   const [selectedPerson, setSelectedPerson] = useState<PublicUser | null>(null);
   const [user, setUsers] = useState<PublicUser[] | null>(null);
   const [story, setStory] = useState<Story | null>(null);
@@ -28,9 +30,10 @@ const InviteUserToContribute = () => {
   const { t } = useTranslation();
 
   const token = useSelector<RootState>((state) => state.auth.token) as string;
-  const storyData = useSelector<RootState>(
-    (state) => state.story.created
-  ) as Story | null;
+
+  const stories = useSelector(
+    (state: RootState) => state.story.stories
+  ) as Story[];
   const userData = useSelector<RootState>((state) => state.user.users) as
     | PublicUser[]
     | null;
@@ -40,10 +43,13 @@ const InviteUserToContribute = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (storyData) {
-      setStory(storyData);
+    if (id) {
+      const selectedStory = stories.find((story) => story._id === id);
+      if (selectedStory) {
+        setStory(selectedStory);
+      }
     }
-  }, [storyData]);
+  }, [id, stories]);
 
   useEffect(() => {
     if (userData) {
@@ -53,22 +59,24 @@ const InviteUserToContribute = () => {
 
   useEffect(() => {
     dispatch(fetchGetAllUsers({ token: token }));
-  }, [storyData]);
+    dispatch(fetchPublicStories(token));
+  }, [dispatch]);
 
-  function sendInvitation() {
+  async function sendInvitation() {
     if (story && selectedPerson) {
-      dispatch(
+      const actionResult = await dispatch(
         fetchCreateInvitation({
           storyId: story._id,
-          userId: selectedPerson._id,
+          userId: selectedPerson.userId,
           token: token,
         })
       );
-      setInvitationSent(true);
-      setTimeout(() => {
-        setInvitationSent(false);
-        setSelectedPerson(null);
-      }, 3000);
+      if (fetchCreateInvitation.fulfilled.match(actionResult)) {
+        setInvitationSent(true);
+        setTimeout(() => {
+          navigate("/stories");
+        }, 500);
+      }
     }
   }
 
@@ -117,14 +125,12 @@ const InviteUserToContribute = () => {
                 : t("invitation.select-person")
             }
             onClick={() => setSearchVisible((prev) => !prev)}
-            className={styles.button}
           />
 
           <Box>
             <Button
               text={t("invitation.stories")}
               onClick={() => navigate(`/stories`)}
-              className={styles.button}
             />
           </Box>
         </Box>
@@ -144,7 +150,6 @@ const InviteUserToContribute = () => {
               <Button
                 text={t("invitation.send")}
                 onClick={sendInvitation}
-                className={styles.button}
               ></Button>
             </Box>
           )}
@@ -169,7 +174,7 @@ const InviteUserToContribute = () => {
             {filteredPeople?.map((person) => (
               <ListItemButton
                 sx={{ fontSize: 20 }}
-                key={person._id}
+                key={person.userId}
                 onClick={() => {
                   setSelectedPerson(person);
                 }}

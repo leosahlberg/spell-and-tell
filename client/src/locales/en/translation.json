@@ -53,7 +53,9 @@
     "firstCome": "First come, first served!",
     "noStories": "You haven't created or contributed to any stories yet. When you do, they'll appear here.",
     "viewStory": "Click to view the story",
-    "myStoriesDescription": "Here you can see stories that you have contributed to, including those you've created yourself!"
+    "myStoriesDescription": "Here you can see stories that you have contributed to, including those you've created yourself!",
+    "title": "Title",
+    "spotsLeft": "Spots left"
   },
 
   "welcome": {
