@@ -139,7 +139,9 @@ const RuleSetList = (props: RuleSetListProps) => {
       {props.edit ? (
         <>
           <Button
-            className={styles.button}
+          style={{
+            marginLeft: 25
+          }}
             text={t("rules.editRules")}
             onClick={() => setOpenModal(true)}
           />

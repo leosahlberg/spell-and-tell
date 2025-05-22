@@ -4,15 +4,16 @@
   background: colors.$color-btn-primary;
   border: none;
   color: colors.$color-text-primary;
-  font-size: 0.5rem;
   font-weight: bold;
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px colors.$color-box-shadow;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 3px 5px 10px colors.$color-box-shadow;
   border: 2px solid colors.$color-btn-secondary;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 10px;
+
+  max-width: 230px;
+  width: "100%";
 
   h1 {
     font-size: 1.2rem;
@@ -20,14 +21,7 @@
 }
 
 .button:hover {
-  background: colors.$color-btn-secondary;
-  box-shadow: 0 8px 20px colors.$color-box-shadow;
-  transform: translateY(-2px);
-}
-
-.button:active {
-  transform: translateY(2px);
-  box-shadow: 0 3px 10px colors.$color-box-shadow;
+  box-shadow: 5px 8px 8px colors.$color-box-shadow;
 }
 
 .button:focus {

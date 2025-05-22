@@ -182,7 +182,7 @@ const Header = (props: HeaderProps) => {
             <>
               <Button
                 text={t("welcome.loggin")}
-                className={style.button}
+                style={{marginRight: 20}}
                 onClick={() => navigate("/login")}
               ></Button>
             </>
