@@ -1,5 +1,6 @@
 
 @use "../../utils/css/colors" as colors;
+@use "../../utils/css/fonts" as fonts;
 
 .terms {
   padding: 4rem 8rem;
@@ -10,20 +11,20 @@
   }
 
   .title {
-    font-size: 2.5rem;
+    font-size: fonts.$font-big;
     color: colors.$color-blue;
     margin-left: 45px;
   }
 
   .subtitle {
-    font-size: 2rem;
+    font-size: fonts.$font-big;
     font-weight: bold;
     color: colors.$color-blue;
   }
 
   .content {
     padding-bottom: 1px;
-    font-size: 1.5rem;
+    font-size: fonts.$font-medium;
     color: colors.$color-blue;
   }
 }

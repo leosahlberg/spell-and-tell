@@ -83,7 +83,7 @@ const RegistrationPage = () => {
         <Typography
           className={styles.regtitle}
           variant="h1"
-          sx={{ fontSize: "1.8rem" }}
+          sx={{ fontSize: "1.8rem", pt: 3 }}
           gutterBottom
         >
           {t("registration.createAccount")}
@@ -205,7 +205,7 @@ const RegistrationPage = () => {
           />
 
           <Typography variant="body2" sx={{ fontSize: 18, color: "purple" }}>
-            <Link to="/terms" style={{ color: "purple" }}>
+            <Link to="/terms" style={{ color: "rgb(22, 83, 56)" }}>
               ({t("registration.terms")})
             </Link>
           </Typography>

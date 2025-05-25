@@ -9,6 +9,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./terms.module.scss";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const TermsPage = () => {
   const { t } = useTranslation();
@@ -59,31 +60,34 @@ const TermsPage = () => {
             sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
             variant="body1"
           >
-            <i style={{ fontWeight: "bold" }}>1.</i> {t("terms.rule-one")}
+            <span style={{ fontWeight: "bold" }}>1.</span> {t("terms.rule-one")}
           </Typography>
           <Typography
             sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
             variant="body1"
           >
-            <i style={{ fontWeight: "bold" }}>2.</i> {t("terms.rule-two")}
+            <span style={{ fontWeight: "bold" }}>2.</span> {t("terms.rule-two")}
           </Typography>
           <Typography
             sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
             variant="body1"
           >
-            <i style={{ fontWeight: "bold" }}>3.</i> {t("terms.rule-three")}
+            <span style={{ fontWeight: "bold" }}>3.</span>{" "}
+            {t("terms.rule-three")}
           </Typography>
           <Typography
             sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
             variant="body1"
           >
-            <i style={{ fontWeight: "bold" }}>4.</i> {t("terms.rule-four")}
+            <span style={{ fontWeight: "bold" }}>4.</span>{" "}
+            {t("terms.rule-four")}
           </Typography>
           <Typography
             sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
             variant="body1"
           >
-            <i style={{ fontWeight: "bold" }}>5.</i> {t("terms.rule-five")}
+            <span style={{ fontWeight: "bold" }}>5.</span>{" "}
+            {t("terms.rule-five")}
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -101,10 +105,9 @@ const TermsPage = () => {
         <Typography
           sx={{
             fontWeight: "bold",
-            paddingBottom: 2,
-            fontSize: "2rem",
+            fontSize: "1.5rem",
             color: "rgb(12, 23, 79)",
-            marginBottom: 3,
+            marginBottom: 2,
           }}
           variant="h2"
         >
@@ -131,6 +134,14 @@ const TermsPage = () => {
         </Typography>
         <Typography className={styles.content} variant="body1">
           ✅ {t("terms.condition-seven")}
+        </Typography>
+        <Typography sx={{paddingTop: 5}}>
+          <Link
+            to="/registration"
+            style={{ color: "rgb(22, 83, 56)", fontSize: 20 }}
+          >
+            ({t("registration.back")})
+          </Link>
         </Typography>
       </Paper>
     </div>
