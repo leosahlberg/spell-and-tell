@@ -70,21 +70,20 @@ const RegistrationPage = () => {
         elevation={24}
         className={styles.form}
         sx={{
-          padding: "20px",
-
-          maxWidth: 800,
+          padding: "20px 40px",
+          maxWidth: 700,
           maxHeight: 700,
           marginBottom: 20,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "#FFFEFA",
-          marginTop: 15,
+          marginTop: 10,
           borderRadius: "8px",
         }}
       >
         <Typography
           className={styles.regtitle}
           variant="h1"
-          sx={{ fontSize: "2rem" }}
+          sx={{ fontSize: "1.8rem" }}
           gutterBottom
         >
           {t("registration.createAccount")}
@@ -104,7 +103,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 16 },
+              input: { color: "black", fontStyle: "italic", fontSize: 14 },
             }}
           />
           <label
@@ -124,7 +123,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 16 },
+              input: { color: "black", fontStyle: "italic", fontSize: 14 },
             }}
           />
 
@@ -142,7 +141,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 16 },
+              input: { color: "black", fontStyle: "italic", fontSize: 14 },
             }}
           />
 
@@ -164,7 +163,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 16 },
+              input: { color: "black", fontStyle: "italic", fontSize: 14 },
             }}
           />
 
@@ -186,7 +185,7 @@ const RegistrationPage = () => {
             sx={{
               marginBottom: 3,
               marginTop: 1,
-              input: { color: "black", fontStyle: "italic", fontSize: 16 },
+              input: { color: "black", fontStyle: "italic", fontSize: 14 },
             }}
           />
           {errorPassword != null ? (
@@ -211,7 +210,7 @@ const RegistrationPage = () => {
             </Link>
           </Typography>
 
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <div className={styles.regBtn}>
             <Button text={t("registration.createBtn")} />
           </div>
         </form>
