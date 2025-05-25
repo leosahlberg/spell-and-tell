@@ -30,57 +30,53 @@ const StartPage = () => {
   React.useEffect(() => {
     setSelectedLanguage(i18n.language);
     setSelectedFlag(i18n.language === "sv" ? swe : eng);
-  }, [i18n.language]);
-  
+  }, []);
 
   return (
-      <div className={style.container}>
-        <header>
-          <Typography className={style.header} variant="h1" gutterBottom>
-            {t("welcome.welcometext")}
-          </Typography>
-        </header>
+    <div className={style.container}>
+      <header>
+        <Typography className={style.header} variant="h1" gutterBottom>
+          {t("welcome.welcometext")}
+        </Typography>
+      </header>
+      <img
+        src={imglogo}
+        alt="Spell and Tell logotyp med en penna som symboliserar kreativt skrivande"
+        width={400}
+        height={250}
+      />
+      <Button text={t("welcome.loggin")} onClick={() => navigate("/login")} />
+      <section>
+        <Typography
+          className={style.register}
+          variant="h2"
+          gutterBottom
+        >
+          {t("welcome.noaccount")}
+          <Link className={style.link} to={"/registration"}>
+            {t("welcome.register")}
+          </Link>
+        </Typography>
+      </section>
+      <div className={style.flags}>
+        <Typography>{t("welcome.language")}</Typography>
+        <select
+          tabIndex={0}
+          className={style.flagname}
+          onChange={(e) => handleChangeLanguage(e.target.value)}
+          value={selectedLanguage}
+          aria-label={t("welcome.language")}
+        >
+          <option value="sv">Sve</option>
+          <option value="en">Eng</option>
+        </select>
         <img
-          src={imglogo}
-          alt="Spell and Tell logotyp med en penna som symboliserar kreativt skrivande"
-          width={400}
-          height={250}
+          src={selectedFlag}
+          alt={selectedLanguage === "sv" ? "Svenska" : "English"}
+          className={style.flag}
         />
-        <Button
-          text={t("welcome.loggin")}
-          onClick={() => navigate("/login")}
-        />
-        <section>
-          <Typography
-            className={style.register}
-            sx={{ fontSize: "2rem", mt: 5}}
-            variant="h2"
-            gutterBottom
-          >
-            {t("welcome.noaccount")}
-            <Link className={style.link} to={"/registration"}>
-              {t("welcome.register")}
-            </Link>
-          </Typography>
-        </section>
-        <div className={style.flags}>
-          <Typography>{t("welcome.language")}</Typography>
-          <select
-            className={style.flagname}
-            onChange={(e) => handleChangeLanguage(e.target.value)}
-            value={selectedLanguage}
-            aria-label={t("welcome.language")}
-          >
-            <option value="sv">Sve</option>
-            <option value="en">Eng</option>
-          </select>
-          <img
-            src={selectedFlag}
-            alt={selectedLanguage === "sv" ? "Svenska" : "English"}
-            className={style.flag}
-          />
-        </div>
       </div>
+    </div>
   );
 };
 

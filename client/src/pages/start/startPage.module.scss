@@ -1,4 +1,5 @@
 @use "../../utils/css/colors" as colors;
+@use "../../utils/css/fonts" as fonts;
 
 .container {
   display: flex;
@@ -12,6 +13,7 @@
 
   .header {
     margin-bottom: 10px;
+    font-size:  fonts.$font-heading-big;
   }
 
   img {
@@ -21,11 +23,16 @@
     margin: 20px 0;
   }
 
+  .register{
+    font-size: fonts.$font-medium;
+    padding-top: 3rem;
+  }
+
   .link {
     text-decoration: underline;
     color: colors.$color-orange;
     cursor: pointer;
-    font-size: 1.4rem;
+    font-size: fonts.$font-medium;
     display: inline-block;
     margin-left: 20px;
 
@@ -43,7 +50,8 @@
   }
 
   .flagname {
-    padding: 2px;
+    padding: 6px 10px 6px 2px;
+    font-size:  fonts.$font-small;
     outline: none;
     margin-left: 20px;
     background-color: colors.$color-blue;
@@ -52,29 +60,15 @@
     cursor: pointer;
   }
 
-  .flag {
-    width: 30px;
-    height: 20px;
-    margin-left: 20px;
+  .flagname:focus{
+    outline: 3px solid rgb(57, 112, 207);
+    outline-offset: 3px;
   }
 
-  @media (min-width: 481px) and (max-width: 768px) {
-    .header {
-      font-size: 5rem;
-    }
-
-    .register {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding-top: 2rem;
-    }
-
-    .link {
-      font-size: 1.5rem;
-      padding-top: 1.3rem;
-    }
+  .flag {
+    width: 40px;
+    height: 30px;
+    margin-left: 20px;
   }
 
   @media (max-width: 480px) {
@@ -84,8 +78,9 @@
 
     .button {
       padding: 5px 10px;
-      font-size: 1.5rem;
-    }
+      font-size: fonts.$font-medium;
+  }
+    
 
     .register {
       display: flex;
