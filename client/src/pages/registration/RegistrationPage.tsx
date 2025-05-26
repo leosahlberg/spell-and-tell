@@ -72,7 +72,7 @@ const RegistrationPage = () => {
         sx={{
           padding: "20px 40px",
           maxWidth: 700,
-          maxHeight: 700,
+          maxHeight: 750,
           marginBottom: 20,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "#FFFEFA",

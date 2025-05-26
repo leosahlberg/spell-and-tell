@@ -11,15 +11,15 @@
 }
 
 .regtitle {
-  color: colors.$color-blue;
+  color: colors.$color-text-primary;
   text-align: center;
   padding-bottom: 1.5rem;
 }
 
 .label {
-  font-size: fonts.$font-medium;
-  font-weight: 500;
-  color: colors.$color-blue;
+  font-size: fonts.$font-small;
+  font-weight: 200;
+  color: colors.$color-text-primary;
 }
 
 .regBtn {
@@ -43,6 +43,6 @@
   }
 
   .regBtn{
-    margin-top: 20px
+    margin-top: 20px;
   }
 }

@@ -51,7 +51,7 @@
 
   .flagname {
     padding: 6px 10px 6px 2px;
-    font-size:  fonts.$font-small;
+    font-size: fonts.$font-small;
     outline: none;
     margin-left: 20px;
     background-color: colors.$color-blue;
@@ -73,7 +73,7 @@
 
   @media (max-width: 480px) {
     .header {
-      font-size: 3rem;
+      font-size: fonts.$font-heading-big;
     }
 
     .button {
@@ -90,7 +90,7 @@
     }
 
     .link {
-      font-size: 1.3rem;
+      font-size:fonts.$font-small;
       padding-top: 1rem;
     }
   }
