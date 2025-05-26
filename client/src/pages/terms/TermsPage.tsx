@@ -140,7 +140,7 @@ const TermsPage = () => {
             to="/registration"
             style={{ color: "rgb(22, 83, 56)", fontSize: 20 }}
           >
-            ({t("registration.back")})
+            {t("registration.back")}
           </Link>
         </Typography>
       </Paper>
