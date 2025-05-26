@@ -11,7 +11,8 @@ import RouleSetList from "../../components/rouleSet/ruleSetList";
 import { useNavigate } from "react-router-dom";
 import { clearCustomRuleSet } from "../../redux/rulesetSlice";
 import { useTranslation } from "react-i18next";
-import MessageRandom from "../../components/message/MessageRandom";
+import backgroundImage from "../../assets/bookimg.jpg";
+// import MessageRandom from "../../components/message/MessageRandom";
 
 const CreateStoryPage = () => {
   const { t } = useTranslation();
@@ -104,85 +105,91 @@ const CreateStoryPage = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        padding: { xs: 2, md: 4 },
-        marginLeft: { md: 5 },
-        marginRight: { md: 5 },
-        marginTop: 5,
-      }}
-    >
-      <MessageRandom />
-      <RouleSetList ruleSet={{ ...ruleSet }} edit={true} />
+    <div style={{paddingTop:10,   backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    maxHeight: "100%",
+    width: "100%",}}>
       <Box
-        className={styles.box}
-        sx={{ flexGrow: 1, padding: 4, borderRadius: 8 }}
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          padding: { xs: 2, md: 4 },
+          marginLeft: { md: 5 },
+          marginRight: { md: 5 },
+          marginTop: 3,
+        }}
       >
-        <Box sx={{ display: "flex", flexDirection: "row" }}>
-          <Typography
-            variant="h1"
-            sx={{
-              marginBottom: 1,
-              color: "rgb(12, 23, 79)",
-              fontSize: 35,
-              marginRight: 3,
-            }}
-          >
-            {t("create.createStory")}
-          </Typography>
-        </Box>
-
-        <ImagePicker onSelectImage={handleImageSelect} />
-
-        <TextField
-          id="story-title"
-          label={t("create.title")}
-          value={title}
-          onChange={handleInputChangeTitle}
-          fullWidth
-          multiline
-          rows={1}
-          variant="outlined"
-          placeholder={t("create.titlePlaceholder")}
-          aria-labelledby="story-title-label"
-          sx={{
-            marginBottom: 2,
-            backgroundColor: "white",
-            borderRadius: 2,
-            boxShadow: 1,
-            padding: 0.5,
-          }}
-        />
-        <TextField
-          id="story-content"
-          label={t("create.story")}
-          value={text}
-          onChange={handleInputChange}
-          fullWidth
-          multiline
-          rows={15}
-          variant="outlined"
-          placeholder={t("create.storyPlaceholder")}
-          aria-labelledby="story-content-label"
-          sx={{
-            marginBottom: 2,
-            backgroundColor: "white",
-            borderRadius: 2,
-            boxShadow: 1,
-            padding: 0.5,
-          }}
-        />
-
+        {/* <MessageRandom /> */}
+        <RouleSetList ruleSet={{ ...ruleSet }} edit={true} />
         <Box
-          sx={{ display: "flex", justifyContent: "flex-end" }}
-          className={styles.buttonWrapper}
+          className={styles.box}
+          sx={{ flexGrow: 1, padding: 4, borderRadius: 8 }}
         >
-          <Button text={t("general.save")} onClick={() => createStory()} />
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Typography
+              variant="h1"
+              sx={{
+                marginBottom: 1,
+                color: "white",
+                fontSize: 25,
+                marginRight: 3,
+              }}
+            >
+              {t("create.createStory")}
+            </Typography>
+          </Box>
+
+          <ImagePicker onSelectImage={handleImageSelect} />
+
+          <TextField
+            id="story-title"
+            label={t("create.title")}
+            value={title}
+            onChange={handleInputChangeTitle}
+            fullWidth
+            multiline
+            rows={1}
+            variant="outlined"
+            placeholder={t("create.titlePlaceholder")}
+            aria-labelledby="story-title-label"
+            sx={{
+              marginBottom: 2,
+              backgroundColor: "white",
+              borderRadius: 2,
+              boxShadow: 1,
+              padding: 0.5,
+            }}
+          />
+          <TextField
+            id="story-content"
+            label={t("create.story")}
+            value={text}
+            onChange={handleInputChange}
+            fullWidth
+            multiline
+            rows={15}
+            variant="outlined"
+            placeholder={t("create.storyPlaceholder")}
+            aria-labelledby="story-content-label"
+            sx={{
+              marginBottom: 2,
+              backgroundColor: "white",
+              borderRadius: 2,
+              boxShadow: 1,
+              padding: 0.5,
+            }}
+          />
+
+          <Box
+            sx={{ display: "flex", justifyContent: "flex-end" }}
+            className={styles.buttonWrapper}
+          >
+            <Button text={t("general.save")} onClick={() => createStory()} />
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </div>
   );
 };
 
