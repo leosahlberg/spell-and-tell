@@ -13,7 +13,7 @@
 
   .header {
     margin-bottom: 10px;
-    font-size:  fonts.$font-heading-big;
+    font-size: fonts.$font-heading-big;
   }
 
   img {
@@ -23,9 +23,15 @@
     margin: 20px 0;
   }
 
-  .register{
+  .regcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5rem;
+  }
+
+  .register {
     font-size: fonts.$font-medium;
-    padding-top: 3rem;
   }
 
   .link {
@@ -34,7 +40,7 @@
     cursor: pointer;
     font-size: fonts.$font-medium;
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 30px;
 
     &:hover {
       color: colors.$color-orange-light;
@@ -60,7 +66,7 @@
     cursor: pointer;
   }
 
-  .flagname:focus{
+  .flagname:focus {
     outline: 3px solid rgb(57, 112, 207);
     outline-offset: 3px;
   }
@@ -73,24 +79,17 @@
 
   @media (max-width: 480px) {
     .header {
-      font-size: fonts.$font-heading-big;
+      font-size: fonts.$font-big;
     }
-
     .button {
       padding: 5px 10px;
       font-size: fonts.$font-medium;
-  }
-    
-
-    .register {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    }
+    .regcon {
       flex-direction: column;
     }
-
     .link {
-      font-size:fonts.$font-small;
+      font-size: fonts.$font-small;
       padding-top: 1rem;
     }
   }

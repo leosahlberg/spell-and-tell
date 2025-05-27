@@ -46,17 +46,13 @@ const StartPage = () => {
         height={250}
       />
       <Button text={t("welcome.loggin")} onClick={() => navigate("/login")} />
-      <section>
-        <Typography
-          className={style.register}
-          variant="h2"
-          gutterBottom
-        >
+      <section className={style.regcon}>
+        <Typography className={style.register} variant="h2" >
           {t("welcome.noaccount")}
-          <Link className={style.link} to={"/registration"}>
-            {t("welcome.register")}
-          </Link>
         </Typography>
+        <Link className={style.link} to={"/registration"}>
+          {t("welcome.register")}
+        </Link>
       </section>
       <div className={style.flags}>
         <Typography>{t("welcome.language")}</Typography>
