@@ -60,10 +60,6 @@ const RegistrationPage = () => {
       className={styles.registration}
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        maxHeight: "100%",
-        width: "100%",
       }}
     >
       <Paper

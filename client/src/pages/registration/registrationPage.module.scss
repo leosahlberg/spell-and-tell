@@ -8,41 +8,40 @@
   height: 100vh;
   background-size: cover;
   background-position: center;
-}
 
-.regtitle {
-  color: colors.$color-text-primary;
-  text-align: center;
-  padding-bottom: 1.5rem;
-}
-
-.label {
-  font-size: fonts.$font-small;
-  font-weight: 200;
-  color: colors.$color-text-primary;
-}
-
-.regBtn {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
   .regtitle {
-    font-size: fonts.$font-small;
+    color: colors.$color-text-primary;
+    text-align: center;
+    padding-bottom: 1.5rem;
+    font-size: fonts.$font-big;
+    padding-top: 10px;
   }
 
   .label {
     font-size: fonts.$font-small;
+    font-weight: 200;
+    color: colors.$color-text-primary;
   }
 
+  .regBtn {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .regtitle {
+    font-size: fonts.$font-xsmall;
+  }
+  .label {
+    font-size: fonts.$font-small;
+  }
   .form {
     margin-left: 80px;
     margin-right: 80px;
   }
-
-  .regBtn{
+  .regBtn {
     margin-top: 20px;
   }
 }
