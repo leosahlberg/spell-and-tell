@@ -11,7 +11,6 @@ import RouleSetList from "../../components/rouleSet/ruleSetList";
 import { useNavigate } from "react-router-dom";
 import { clearCustomRuleSet } from "../../redux/rulesetSlice";
 import { useTranslation } from "react-i18next";
-import backgroundImage from "../../assets/bookimg.jpg";
 // import MessageRandom from "../../components/message/MessageRandom";
 
 const CreateStoryPage = () => {
@@ -105,11 +104,11 @@ const CreateStoryPage = () => {
   };
 
   return (
-    <div style={{paddingTop:10,   backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    maxHeight: "100%",
-    width: "100%",}}>
+    <div
+      style={{
+        paddingTop: 10,
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -117,7 +116,7 @@ const CreateStoryPage = () => {
           padding: { xs: 2, md: 4 },
           marginLeft: { md: 5 },
           marginRight: { md: 5 },
-          marginTop: 3,
+          marginTop: 1,
         }}
       >
         {/* <MessageRandom /> */}
@@ -161,28 +160,29 @@ const CreateStoryPage = () => {
               padding: 0.5,
             }}
           />
-          <TextField
-            id="story-content"
-            label={t("create.story")}
-            value={text}
-            onChange={handleInputChange}
-            fullWidth
-            multiline
-            rows={15}
-            variant="outlined"
-            placeholder={t("create.storyPlaceholder")}
-            aria-labelledby="story-content-label"
-            sx={{
-              marginBottom: 2,
-              backgroundColor: "white",
-              borderRadius: 2,
-              boxShadow: 1,
-              padding: 0.5,
-            }}
-          />
+          <Box sx={{p:0.5, pt: 0.7, backgroundColor: "wheat", borderRadius:2}}>
+            <TextField
+              id="story-content"
+              label={t("create.story")}
+              value={text}
+              onChange={handleInputChange}
+              fullWidth
+              multiline
+              rows={15}
+              variant="outlined"
+              placeholder={t("create.storyPlaceholder")}
+              aria-labelledby="story-content-label"
+              sx={{
+                backgroundColor: "white",
+                borderRadius: 2,
+                boxShadow: 1,
+                padding: 0.5,
+              }}
+            />
+          </Box>
 
           <Box
-            sx={{ display: "flex", justifyContent: "flex-end" }}
+            sx={{ display: "flex", justifyContent: "flex-end", marginTop: 2 }}
             className={styles.buttonWrapper}
           >
             <Button text={t("general.save")} onClick={() => createStory()} />

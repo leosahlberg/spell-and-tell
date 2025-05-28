@@ -5,9 +5,14 @@
   background-color: colors.$color-background-light;
   display: flex;
   justify-content: center;
-  height: 90vh;
   align-items: center;
   flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  padding-top: 10px;
 
   .loggin {
     display: flex;
@@ -19,7 +24,7 @@
   }
 
   .label {
-    font-size:  fonts.$font-medium;
+    font-size: fonts.$font-medium;
     color: colors.$color-blue;
   }
 
@@ -28,8 +33,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    font-size:  fonts.$font-medium;
-    align-items: center;
+    font-size: fonts.$font-medium;
     padding: 20px 60px;
     color: colors.$color-white;
     border-radius: 10px;
@@ -43,7 +47,6 @@
 
   .link {
     text-decoration: underline;
-    padding-left: 0;
     padding: 5px;
     background: linear-gradient(
     90deg,
@@ -54,7 +57,7 @@
   backdrop-filter: blur(5px); 
   border: 1px solid rgba(255, 255, 255, 0.2); 
     color: colors.$color-white;
-    font-size:  fonts.$font-medium;
+    font-size: fonts.$font-medium;
     font-weight: 100;
     cursor: pointer;
     display: inline-block;
@@ -79,10 +82,6 @@
   }
 
   @media (max-width: 480px) {
-    .form {
-      margin-left: 40px;
-      margin-right: 40px;
-    }
     .register {
       margin-left: 50px;
       margin-right: 50px;

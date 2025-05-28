@@ -1,3 +1,5 @@
+@use "../../utils/css/colors" as colors;
+
 .publicstory {
   display: flex;
   justify-content: center;
@@ -6,3 +8,4 @@
   gap: 60px;
   margin-bottom: 40px;
 }
+

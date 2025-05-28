@@ -1,7 +1,6 @@
 import { Box, Typography, TextField } from "@mui/material";
 import Button from "../buttons/Button";
 import { useState } from "react";
-import styles from "./ruleSet.module.scss";
 import { RuleSet } from "../../utils/types";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -45,10 +44,12 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
         width: 600,
         height: 600,
         bgcolor: "background.paper",
-        border: "1px solid rgb(195, 158, 121)",
+        border: "2px solid  rgb(212, 202, 187)",
         p: 3,
         borderRadius: 2,
         boxShadow: 24,
+        padding: 5,
+        color:"#071145"
       }}
     >
       <Box
@@ -124,7 +125,8 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
             padding: 0.5,
           }}
         />
-        <FormControl>
+        <Box sx={{display: "flex",flexDirection: "column", justifyContent: "space-around", marginTop: 3, marginLeft:2}}>
+        <FormControl >
           <FormLabel id="spell-check-label">{t("rules.spellCheck")}</FormLabel>
           <RadioGroup
             row
@@ -149,7 +151,7 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
             />
           </RadioGroup>
         </FormControl>
-        <FormControl>
+        <FormControl >
           <FormLabel id="score-label">{t("rules.scoring")}</FormLabel>
           <RadioGroup
             row
@@ -174,7 +176,11 @@ const RuleSetModal = (props: RuleSetDialogProps) => {
             />
           </RadioGroup>
         </FormControl>
+        </Box>
+        <Box sx={{display: "flex", justifyContent: "flex-end", marginTop: 2, marginRight:1}}>
         <Button text={t("general.save")} onClick={saveRuleSet} />
+        </Box>
+      
       </Box>
     </Box>
   );

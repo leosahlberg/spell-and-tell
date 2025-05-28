@@ -29,13 +29,6 @@ const LogInPage = () => {
       className={style.container}
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        maxHeight: "100%",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
       <Paper

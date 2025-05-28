@@ -6,7 +6,6 @@ import {
   Typography,
   TextField,
   ListItemButton,
-  Collapse,
   Alert,
 } from "@mui/material";
 import Button from "../../components/buttons/Button";
@@ -18,6 +17,7 @@ import styles from "./inviteUserToContribute.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { fetchPublicStories } from "../../redux/storySlice";
+import backgroundImage from "../../assets/bookimg.jpg";
 
 const InviteUserToContribute = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,7 +25,6 @@ const InviteUserToContribute = () => {
   const [user, setUsers] = useState<PublicUser[] | null>(null);
   const [story, setStory] = useState<Story | null>(null);
   const [search, setSearch] = useState("");
-  const [searchVisible, setSearchVisible] = useState(false);
   const [invitationSent, setInvitationSent] = useState(false);
   const { t } = useTranslation();
 
@@ -39,7 +38,6 @@ const InviteUserToContribute = () => {
     | null;
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -58,7 +56,7 @@ const InviteUserToContribute = () => {
   }, [userData]);
 
   useEffect(() => {
-    dispatch(fetchGetAllUsers({ token: token }));
+    dispatch(fetchGetAllUsers({ token }));
     dispatch(fetchPublicStories(token));
   }, [dispatch]);
 
@@ -85,7 +83,13 @@ const InviteUserToContribute = () => {
   );
 
   return (
-    <Box className={styles.pageWrapper}>
+    <Box className={styles.pageWrapper} sx={{
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      maxHeight: "100%",
+      width: "100%",
+    }}>
       <Box
         sx={{
           bgcolor: "background.paper",
@@ -93,6 +97,9 @@ const InviteUserToContribute = () => {
           p: 3,
           borderRadius: 2,
           boxShadow: 24,
+          width: "90vw",
+          maxWidth: "1100px",
+          margin: "0 auto",
         }}
       >
         <Box
@@ -116,43 +123,32 @@ const InviteUserToContribute = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            mt: 3,
+            width: "100%",
           }}
         >
-          <Button
-            text={
-              searchVisible
-                ? t("invitation.hide-search")
-                : t("invitation.select-person")
-            }
-            onClick={() => setSearchVisible((prev) => !prev)}
-          />
-
-          <Box>
-            <Button
-              text={t("invitation.stories")}
-              onClick={() => navigate(`/stories`)}
-            />
-          </Box>
-        </Box>
-        <Box>
           {selectedPerson && (
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "row",
-                alignItems: "flex-start",
+                alignItems: "center",
               }}
             >
-              <Typography sx={{ mt: 4, ml: 2 }}>
-                ✅ {t("invitation.selected-person")}
+              <Typography sx={{ mr: 2 }}>
+                ✅ {t("invitation.selected-person")}{" "}
                 <strong>{selectedPerson.name}</strong>
               </Typography>
-              <Button
-                text={t("invitation.send")}
-                onClick={sendInvitation}
-              ></Button>
+              <Button text={t("invitation.send")} onClick={sendInvitation} />
             </Box>
           )}
+          
+          <Box sx={{ ml: "auto" , mr: 1}}>
+            <Button
+              text={t("invitation.stories")}
+              onClick={() => navigate("/stories")}
+            />
+          </Box>
         </Box>
 
         {invitationSent && (
@@ -160,30 +156,34 @@ const InviteUserToContribute = () => {
             {t("invitation.sent")} {selectedPerson?.name}!
           </Alert>
         )}
-
-        <Collapse in={searchVisible}>
-          <TextField
-            fullWidth
-            label="Sök..."
-            variant="outlined"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            sx={{ mb: 2, mt: 2 }}
-          />
-          <List>
-            {filteredPeople?.map((person) => (
-              <ListItemButton
-                sx={{ fontSize: 20 }}
-                key={person.userId}
-                onClick={() => {
-                  setSelectedPerson(person);
-                }}
-              >
-                {person.name}
-              </ListItemButton>
-            ))}
-          </List>
-        </Collapse>
+        
+        <TextField
+          fullWidth
+          label="Sök..."
+          variant="outlined"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          sx={{ mb: 2, mt: 4 }}
+        />
+        <List>
+          {filteredPeople?.map((person) => (
+            <ListItemButton
+              sx={{
+                fontSize: 20,
+                backgroundColor:
+                  selectedPerson?.userId === person.userId
+                    ? "rgba(0, 128, 0, 0.1)"
+                    : "transparent",
+              }}
+              key={person.userId}
+              onClick={() => {
+                setSelectedPerson(person);
+              }}
+            >
+              {person.name}
+            </ListItemButton>
+          ))}
+        </List>
       </Box>
     </Box>
   );

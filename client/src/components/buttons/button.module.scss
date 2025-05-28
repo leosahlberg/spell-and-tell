@@ -1,22 +1,28 @@
 @use "../../utils/css/colors" as colors;
+@use "../../utils/css/fonts" as fonts;
 
 .button {
-  background: colors.$color-btn-primary;
-  border: none;
-  color: colors.$color-text-primary;
-  font-weight: bold;
-  padding: 10px;
+  background: linear-gradient(
+    90deg,
+    colors.$color-orange,   
+    colors.$color-orange-light,   
+    colors.$color-btn-secondary    
+  );
+  color: colors.$color-btn-text;
+  padding: 5px 10px;
   border-radius: 6px;
   box-shadow: 3px 5px 10px colors.$color-box-shadow;
-  border: 2px solid colors.$color-btn-secondary;
+  border: 2px solid rgb(251, 237, 189);
+  
   cursor: pointer;
   transition: all 0.3s ease;
 
-  max-width: 230px;
+  max-width: 300px;
   width: "100%";
 
   h1 {
-    font-size: 1.2rem;
+    font-size: fonts.$font-medium;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
 }
 
@@ -25,6 +31,6 @@
 }
 
 .button:focus {
-  outline: 3px solid colors.$color-blue-light;
+  outline: 3px solid rgb(57, 112, 207);
   outline-offset: 3px;
 }

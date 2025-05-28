@@ -27,6 +27,7 @@ import swe from "../../assets/sweden.jpg";
 import eng from "../../assets/england.jpg";
 import NavBar from "../navbar/NavBar";
 import { User } from "../../utils/types";
+import backgroundImage from "../../assets/bookimg.jpg";
 
 type HeaderProps = {
   loggedIn: boolean;
@@ -80,15 +81,20 @@ const Header = (props: HeaderProps) => {
   React.useEffect(() => {
     setSelectedLanguage(i18n.language);
     setSelectedFlag(i18n.language === "sv" ? swe : eng);
-  }, [i18n.language]);
+  }, []);
 
   const DrawerList = (
     <Box
-      sx={{ width: 250, height: "100%" }}
+      sx={{  width: 250,
+        height: "100%",
+        backgroundImage: `linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.57), rgba(255, 255, 255, 0.05)), url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+    }}
       role="presentation"
       onClick={toggleDrawer(false)}
     >
-      <List>
+      <List style={{ background: "linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.57), rgba(255, 255, 255, 0.05))",}}>
         {NavList.map((item) => (
           <ListItem key={item.title} disablePadding>
             <ListItemButton
@@ -109,7 +115,7 @@ const Header = (props: HeaderProps) => {
         ))}
       </List>
       <Divider />
-      <ListItem disablePadding>
+      <ListItem disablePadding sx={{ background: "linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.57), rgba(255, 255, 255, 0.05))",}}>
         <ListItemButton
           onClick={() => {
             dispatch(logout());
@@ -166,6 +172,7 @@ const Header = (props: HeaderProps) => {
                   marginRight: 5,
                   cursor: "pointer",
                   outline: "none",
+                 
                 }}
                 onClick={toggleDrawer(true)}
                 onKeyDown={(event) => {

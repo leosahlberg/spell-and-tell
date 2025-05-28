@@ -14,14 +14,16 @@
 .box {
   background: linear-gradient(
     90deg,
-    #0c174f,
-    rgba(94, 131, 190, 0.7),
-    rgba(180, 207, 253, 0.95)
+    colors.$color-gradback1,
+    colors.$color-gradback2,
+    colors.$color-gradback3,
+   
   );
   margin-left: 30px;
   margin-right: 30px;
   margin-bottom: 2em;
   border: 1px solid colors.$color-orange-light;
+  max-width: 1200px;
 }
 
 

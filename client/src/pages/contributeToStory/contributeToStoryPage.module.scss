@@ -1,33 +1,44 @@
 @use "../../utils/css/colors" as colors;
+@use "../../utils/css/fonts" as fonts;
 
 .pageWrapper {
   display: flex;
   justify-content: center;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 40px;
   color: colors.$color-blue;
+  //background-image: url("../../assets/bookimg.jpg");
+  background-Size: cover;
+  background-Position: center;
+  max-Height: 100%;
+  width: 100%
 }
 
 .mainContent {
   flex-grow: 1;
-  max-width: 1200px;
+  max-width: 1000px;
   background: linear-gradient(
-    to right,
-    colors.$color-background-light 0%,
-    colors.$color-background-light 100%
+    90deg,
+    colors.$color-gradback1,
+    colors.$color-gradback2,
+    colors.$color-gradback3,
+   
   );
   padding: 30px;
-  border-radius: 8px;
+  margin-left: 20px;
+  border-radius: 15px;
   box-shadow: 0 4px 12px colors.$color-box-shadow;
   border: 1px solid colors.$color-orange-light;
 }
 
 .timerText {
-  color: colors.$color-orange;
-  font-size: 1.25rem;
-  font-weight: 600;
+  color: orange;
+  font-size: fonts.$font-small;
+  font-weight: 300;
   padding-bottom: 20px;
   padding-right: 20px;
+}
+.scoreCircle{
+  margin-left: 10px;
 }
 
 .textField {

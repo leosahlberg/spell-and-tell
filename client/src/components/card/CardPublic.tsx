@@ -72,6 +72,7 @@ const CardPublic = ({
         width: 350,
         height: 400,
         backgroundColor: "white",
+        color:"#071145"
       }}
     >
       <CardActionArea
@@ -82,6 +83,7 @@ const CardPublic = ({
           backgroundColor: "white",
           "&:hover": {
             backgroundColor: "#f1f1f1",
+            color:"#071145",
             cursor: "pointer",
           },
         }}
@@ -98,25 +100,20 @@ const CardPublic = ({
             gutterBottom
             variant="h2"
             component="h1"
-            sx={{ fontSize: "1.2rem" }}
+            sx={{ fontSize: "1.3rem", color:"#071145" }}
           >
             {title}
           </Typography>
           {renderFirstContribution()}
         </CardContent>
-      </CardActionArea>
 
       {children && (
         <Box
-          sx={{
-            marginTop: "auto",
-            textAlign: "center",
-            paddingBottom: 2,
-          }}
         >
           {children}
         </Box>
       )}
+      </CardActionArea>
       {/* <Button
           variant="contained"
           color="error"
