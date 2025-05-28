@@ -12,9 +12,9 @@
   border: 2px solid colors.$color-blue;
   background: linear-gradient(
     to right,
-    colors.$color-blue 15%,
-    colors.$color-background-xtrlight 5%,
-    colors.$color-white 100%
+    colors.$color-blue 10%,
+    colors.$color-white 10%,
+    colors.$color-blue-light-light 100%
   );
   border-radius: 20px;
   box-shadow: 0 4px 8px colors.$color-box-shadow;
@@ -35,18 +35,18 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background-color: colors.$color-white;
-  margin-left: 135px;
+  margin-left: 75px;
 }
 
 .img {
-  width: 120px;
+  width: 75px;
   height: 70px;
   background-color: colors.$color-blue;
   transition: width 0.3s ease-in-out;
 }
 
 .storyContent {
-  padding-left: 140px;
+  padding-left: 100px;
 }
 
 .storyTitle {

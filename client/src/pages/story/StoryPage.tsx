@@ -73,29 +73,25 @@ const StoryPage = () => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
               width: "100%",
             }}
           >
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: 15,
                 color: "whitesmoke",
-                marginBottom: 5,
+                marginBottom: 3,
                 alignSelf: "flex-start",
-                paddingTop: 2,
               }}
             >
-              {t("story.score")}: {story.score}
+              {t("story.score")}: {story.score} 
             </Typography>
             <Typography
               variant="h2"
               component="h2"
               className={styles.storyTitle}
               sx={{
-                fontSize: 35,
+                fontSize: 30,
                 color: "rgb(12, 23, 79)",
                 textAlign: "center",
                 width: "100%",
@@ -115,7 +111,7 @@ const StoryPage = () => {
                 <Box key={index} sx={{ marginBottom: 2 }}>
                   <Typography
                     variant="body1"
-                    sx={{ marginTop: 3, fontSize: 24 }}
+                    sx={{ marginTop: 3, fontSize: 22 }}
                   >
                     {contribution.text}
                   </Typography>
@@ -150,7 +146,7 @@ const StoryPage = () => {
             </Typography>
             {isMaxContributionsReached(story) || hasContributed() ? (
               <Typography
-                sx={{ fontSize: 25, fontWeight: "bold", color: "orange" }}
+                sx={{ fontSize: 25, fontWeight: "bold", color: "rgb(22, 83, 56)" }}
               >
                 {t("story.alreadyContributed")}
               </Typography>

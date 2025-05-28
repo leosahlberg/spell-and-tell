@@ -3,7 +3,7 @@ import styles from "./publicStorysPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { Story } from "../../utils/types";
-import { fetchDeleteStory, fetchPublicStories } from "../../redux/storySlice";
+import { fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
 import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
 import CustomTabPanel from "../../components/customTabPanel/CustomTabPanel";
@@ -59,9 +59,9 @@ const PublicStorysPage = () => {
     });
   };
 
-  const handleDelete = async (id: string) => {
-    dispatch(fetchDeleteStory({ id, token }));
-  };
+  // const handleDelete = async (id: string) => {
+  //   dispatch(fetchDeleteStory({ id, token }));
+  // };
 
   function a11yProps(index: number) {
     return {
@@ -71,7 +71,7 @@ const PublicStorysPage = () => {
   }
 
   return (
-    <>
+    <div style={{backgroundColor: "white"}}>
       <Box
         sx={{
           position: "relative",
@@ -79,12 +79,13 @@ const PublicStorysPage = () => {
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 3,
-          backgroundColor: "#F9FBFD",
+          backgroundColor: " rgba(160, 207, 293, 0.15)",
+          borderBottom: "1px solid  rgba(180, 207, 253, 0.45)",
           paddingBottom: 2,
         }}
       >
         <Box sx={{ paddingRight: 5 }}>
-          <p style={{ paddingLeft: 3 }}>
+          <p style={{ paddingLeft: 3, color: "#071145", fontSize: 20 }}>
             {t("publicStories.searchLabel")} 🖋️📚
           </p>
           <TextField
@@ -100,10 +101,12 @@ const PublicStorysPage = () => {
             }}
           />
           <Button
-            sx={{ marginLeft: 4, marginTop: 4 }}
-            variant="contained"
-            color="primary"
+            sx={{ marginLeft: 4, marginTop: 2, backgroundColor: "rgb(259, 199, 130)",
+              padding:2,
+              color: "rgb(22, 83, 56)",
+              fontWeight: "bold", }}
             onClick={handleSearch}
+            className={styles.searchbtn}
           >
             {t("publicStories.searchButton")}
           </Button>
@@ -118,16 +121,19 @@ const PublicStorysPage = () => {
         >
           <Tabs value={value} onChange={handleChange} aria-label="tabs">
             <Tab
+            sx={{fontSize: 17}}
               tabIndex={0}
               label={t("publicStories.tabAll")}
               {...a11yProps(0)}
             />
             <Tab
+             sx={{fontSize: 17}}
               tabIndex={0}
               label={t("publicStories.tabCompleted")}
               {...a11yProps(1)}
             />
             <Tab
+             sx={{fontSize: 17}}
               tabIndex={0}
               label={t("publicStories.tabInProgress")}
               {...a11yProps(2)}
@@ -146,13 +152,13 @@ const PublicStorysPage = () => {
                 title={story.title}
                 contributions={[...story.contributions]}
                 id={story._id}
-                onDelete={handleDelete}
+               
               >
                 {isMaxContributionsReached(story) ? (
                   <Typography
                     variant="h6"
                     color="error"
-                    sx={{ paddingTop: 2.5, textAlign: "center", fontSize: 15 }}
+                    sx={{ pb: 10, pt:2, textAlign: "center", fontSize: 15 }}
                   >
                     {t("publicStories.contributionsMaxed")}
                   </Typography>
@@ -160,7 +166,7 @@ const PublicStorysPage = () => {
                   <Typography
                     variant="h6"
                     color="success"
-                    sx={{ paddingTop: 2, textAlign: "center" }}
+                    sx={{ pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contribute")}
                   </Typography>
@@ -201,7 +207,7 @@ const PublicStorysPage = () => {
                   <Typography
                     variant="body2"
                     color="error"
-                    sx={{ paddingTop: 2, textAlign: "center" }}
+                    sx={{  pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contributionsMaxed")}
                   </Typography>
@@ -237,12 +243,11 @@ const PublicStorysPage = () => {
                   title={story.title}
                   contributions={[...story.contributions]}
                   id={story._id}
-                  onDelete={handleDelete}
                 >
                   <Typography
                     variant="body2"
                     color="success"
-                    sx={{ paddingTop: 2, textAlign: "center" }}
+                    sx={{  pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contribute")}
                   </Typography>
@@ -255,7 +260,7 @@ const PublicStorysPage = () => {
           )}
         </div>
       </CustomTabPanel>
-    </>
+    </div>
   );
 };
 

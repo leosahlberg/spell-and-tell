@@ -105,17 +105,8 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.profilecontainer}>
+      <h1 className={styles.title}> {t("profile.accountInfo")}</h1>
       <div className={styles.info}>
-        <img
-          src={user.imgUrl ?? "/profileimg.jpg"}
-          width={225}
-          height={225}
-          alt="Profilbild"
-          className={styles.img}
-        />
-        <h1>{user.name}</h1>
-      </div>
-      <Box sx={{ width: "100%" }}>
         <Box
           sx={{
             borderBottom: 1,
@@ -140,14 +131,25 @@ const ProfilePage = () => {
             />
           </Tabs>
         </Box>
+      </div>
+      <Box sx={{ width: "100%" }}>
         <CustomTabPanel value={value} index={0}>
           <div className={styles.container}>
+            <img
+              src={user.imgUrl ?? "/profileimg.jpg"}
+              width={175}
+              height={175}
+              alt="Profilbild"
+              className={styles.img}
+            />
+            {/* <h2>{user.name}</h2> */}
             {editMode ? (
               <>
-                <h3>
-                  {t("profile.edit")} {t("profile.accountInfo")}
-                </h3>
+                <h2 className={styles.account}>
+                  {t("profile.edit")} {t("profile.accountInfo")}:
+                </h2>
 
+                <ImagePicker onSelectImage={handleImageSelect} />
                 <div className={styles.details}>
                   <TextField
                     fullWidth
@@ -176,25 +178,24 @@ const ProfilePage = () => {
                     }
                     sx={{ mb: 2, mt: 2 }}
                   />
-                  <ImagePicker onSelectImage={handleImageSelect} />
                 </div>
-                <Button
-                  text={t("general.cancel")}
-                  onClick={() => {
-                    setEditMode(false);
-                  }}
-                />
-                <Button
-                  text={t("general.save")}
-                  onClick={() => {
-                    handleSaveProfileChanges();
-                  }}
-                />
+                <div className={styles.btns}>
+                  <Button
+                    text={t("general.cancel")}
+                    onClick={() => {
+                      setEditMode(false);
+                    }}
+                  />
+                  <Button
+                    text={t("general.save")}
+                    onClick={() => {
+                      handleSaveProfileChanges();
+                    }}
+                  />
+                </div>
               </>
             ) : (
               <>
-                <h3> {t("profile.accountInfo")}</h3>
-
                 <div className={styles.details}>
                   <p>
                     {t("profile.name")}: {user.name}
@@ -226,7 +227,7 @@ const ProfilePage = () => {
           <div className={styles.container}>
             <div>
               <h3>{t("profile.invitations")}:</h3>
-              <p>
+              <p className={styles.detailsdes}>
                 {t("profile.invitationsDescription")}
                 <br />
                 <br />
@@ -253,10 +254,10 @@ const ProfilePage = () => {
                           width={100}
                           height={100}
                         />
-                        <p>
+                        <p className={styles.details}>
                           {t("profile.title")}: {invitation.storyId.title}
                         </p>
-                        <p>
+                        <p className={styles.detailsdes}>
                           {t("profile.spotsLeft")}:{" "}
                           {invitation.storyId.numberOfContributors -
                             invitation.storyId.contributions.length}
@@ -274,15 +275,16 @@ const ProfilePage = () => {
         <CustomTabPanel value={value} index={2}>
           <div className={styles.container}>
             <div>
-              <h3>
+              <h3 className={styles.details}>
                 {t("profile.storyCount")}: {""}
                 {stories.length}
               </h3>
-              <p>{t("profile.myStoriesDescription")}</p>
+              <p  className={styles.detailsdes}>{t("profile.myStoriesDescription")}</p>
               {stories.length > 0 ? (
                 stories.map((story) => {
                   return (
                     <div
+                    
                       tabIndex={0}
                       className={styles.settings}
                       onClick={() => navigation(`/story/${story._id}`)}
@@ -295,7 +297,7 @@ const ProfilePage = () => {
                         width={100}
                         height={100}
                       />
-                      <p>{story.title}</p>
+                      <p  className={styles.details}>{story.title}</p>
                     </div>
                   );
                 })

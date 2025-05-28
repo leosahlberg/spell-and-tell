@@ -30,11 +30,12 @@ const RuleSetList = (props: RuleSetListProps) => {
         borderRadius: 8,
         boxShadow: 2,
         marginBottom: { xs: 2, md: 24 },
+        background: "linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.95))",
       }}
     >
       <Typography
         variant="h1"
-        sx={{ marginBottom: 3, paddingLeft: 3, fontSize: 30 }}
+        sx={{ marginBottom: 3, paddingLeft: 3, fontSize: 25 }}
       >
         {t("rules.title")}
       </Typography>

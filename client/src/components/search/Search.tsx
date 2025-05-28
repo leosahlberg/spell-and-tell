@@ -27,7 +27,7 @@ const Search = ({ filteredStories, searchedName }: SearchProps) => {
         style={{
           display: "flex",
           flexDirection: "row",
-          marginTop: 30,
+          marginTop: 20,
           marginLeft: 30,
           cursor: "pointer",
           width: 50,
@@ -47,7 +47,7 @@ const Search = ({ filteredStories, searchedName }: SearchProps) => {
         {searchedName && (
           <Typography
             variant="subtitle1"
-            sx={{ marginBottom: 3, fontSize: 25 }}
+            sx={{ marginBottom: 4, fontSize: 23, color:"#071145" }}
           >
             {t("search.subtitle1")} <strong>{searchedName}</strong>{" "}
             {t("search.subtitle2")} 📖
@@ -68,7 +68,7 @@ const Search = ({ filteredStories, searchedName }: SearchProps) => {
                   <Typography
                     variant="h6"
                     color="error"
-                    sx={{ paddingTop: 2.5, textAlign: "center", fontSize: 15 }}
+                    sx={{  pb: 10, pt: 2, textAlign: "center", fontSize: 15 }}
                   >
                     {t("publicStories.contributionsMaxed")}
                   </Typography>
@@ -76,7 +76,7 @@ const Search = ({ filteredStories, searchedName }: SearchProps) => {
                   <Typography
                     variant="h6"
                     color="success"
-                    sx={{ paddingTop: 2, textAlign: "center" }}
+                    sx={{ textAlign: "center" }}
                   >
                     {t("publicStories.contribute")}
                   </Typography>

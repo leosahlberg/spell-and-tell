@@ -59,8 +59,8 @@ const ImagePicker = ({ onSelectImage }: ImagePickerProps) => {
         sx={{
           width: 150,
           backgroundColor: "rgb(259, 199, 130)",
-          color: "rgb(12, 23, 79)",
-          fontWeight: "bold",
+          color: "rgb(22, 83, 56)",
+          fontWeight:"bold",
         }}
         variant="contained"
         onClick={() => setOpen(true)}

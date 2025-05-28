@@ -14,8 +14,7 @@ const HomePage = () => {
       <Paper
         elevation={4}
         sx={{
-          padding: 6,
-          marginBottom: 2,
+          padding: 4,
           width: { xs: "100%", sm: "45%" },
           margin: { xs: 1, sm: 2 },
           backgroundImage: `url(${image})`,
@@ -26,8 +25,7 @@ const HomePage = () => {
       <Paper
         elevation={4}
         sx={{
-          padding: 6,
-          marginBottom: 2,
+          padding: 4,
           width: { xs: "100%", sm: "45%" },
           margin: { xs: 1, sm: 2 },
           color: "rgb(7, 7, 58)",
@@ -42,24 +40,25 @@ const HomePage = () => {
           gutterBottom
           sx={{
             width: "fit-content",
-            fontWeight: "500",
-            fontSize: "1.8rem",
+            fontWeight: "300",
+            fontSize: "2rem",
             height: "fit-content",
+            pb:2
           }}
         >
           {t("home.findstory")}
         </Typography>
-        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.3rem" }}>
+        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.5rem" }}>
           {t("home.startnew")}
         </Typography>
-        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.2rem" }}>
+        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.5rem" }}>
           {t("home.contribute")}
         </Typography>
 
         <Typography
           variant="body1"
           gutterBottom
-          sx={{ fontSize: "1.2rem", marginTop: 5, mb:3 }}
+          sx={{ fontSize: "1.5rem", marginTop: 2, mb:5 }}
         >
           {t("home.terms")}
           <Link className={style.link} to={"/terms"}>
@@ -74,8 +73,7 @@ const HomePage = () => {
       <Paper
         elevation={4}
         sx={{
-          padding: 6,
-          marginBottom: 2,
+          padding: 4,
           width: { xs: "100%", sm: "45%" },
           margin: { xs: 1, sm: 2 },
           color: "rgb(7, 7, 58)",
@@ -89,17 +87,18 @@ const HomePage = () => {
           gutterBottom
           sx={{
             width: "fit-content",
-            fontWeight: "500",
-            fontSize: "1.8rem",
+            fontWeight: "300",
+            fontSize: "2rem",
             height: "fit-content",
+            pb:2
           }}
         >
           {t("home.work")}
         </Typography>
-        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.3rem" }}>
+        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.5rem" }}>
           {t("home.spell")}
         </Typography>
-        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.2rem", mb:3 }}>
+        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.5rem", mb:5 }}>
           {t("home.create")}
         </Typography>
 
@@ -111,8 +110,7 @@ const HomePage = () => {
       <Paper
         elevation={4}
         sx={{
-          padding: 6,
-          marginBottom: 2,
+          padding: 4,
           width: { xs: "100%", sm: "45%" },
           margin: { xs: 1, sm: 2 },
           backgroundImage: `url(${image})`,

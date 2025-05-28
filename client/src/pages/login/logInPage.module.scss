@@ -1,24 +1,30 @@
 @use "../../utils/css/colors" as colors;
+@use "../../utils/css/fonts" as fonts;
 
 .container {
   background-color: colors.$color-background-light;
   display: flex;
   justify-content: center;
-  height: 90vh;
   align-items: center;
   flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  padding-top: 10px;
 
   .loggin {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
+    font-size: fonts.$font-big;
     padding-bottom: 20px;
     color:colors.$color-blue;
   }
 
   .label {
-    font-size: 1.7rem;
+    font-size: fonts.$font-medium;
     color: colors.$color-blue;
   }
 
@@ -27,26 +33,31 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    font-size: 1.5rem;
-    align-items: center;
-    font-weight: bold;
+    font-size: fonts.$font-medium;
     padding: 20px 60px;
     color: colors.$color-white;
-    background-color: colors.$color-blue;
     border-radius: 10px;
     box-shadow: 0 1px 1px colors.$color-box-shadow;
     margin-top: 30px;
-    // width: 645px;
     margin-bottom: 60px;
     text-align: center;
     white-space: nowrap;
+    max-width: 650px;
   }
 
   .link {
     text-decoration: underline;
-    padding-left: 0;
-    color: colors.$color-orange;
-    font-size: 1.5rem;
+    padding: 5px;
+    background: linear-gradient(
+    90deg,
+    rgba(202, 152, 60, 0.3),   
+    rgba(246, 201, 147, 0.3),   
+    rgba(245, 238, 221, 0.3)    
+  );
+  backdrop-filter: blur(5px); 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+    color: colors.$color-white;
+    font-size: fonts.$font-medium;
     font-weight: 100;
     cursor: pointer;
     display: inline-block;
@@ -54,7 +65,13 @@
   }
 
   .link:hover {
-    color: colors.$color-orange-light;
+    background: linear-gradient(
+    90deg,
+    colors.$color-orange,   
+    colors.$color-orange-light,   
+    colors.$color-btn-secondary    
+  );
+  color: colors.$color-btn-text;
   }
 
   @media (max-width: 698px) {
@@ -65,17 +82,13 @@
   }
 
   @media (max-width: 480px) {
-    .form {
-      margin-left: 40px;
-      margin-right: 40px;
-    }
     .register {
       margin-left: 50px;
       margin-right: 50px;
-      font-size: 1.3rem;
+      font-size:  fonts.$font-small;
     }
     .link {
-      font-size: 1.2rem;
+      font-size:  fonts.$font-small;
     }
   }
 }

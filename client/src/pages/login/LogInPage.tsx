@@ -29,13 +29,6 @@ const LogInPage = () => {
       className={style.container}
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        maxHeight: "100%",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
       <Paper
@@ -44,9 +37,10 @@ const LogInPage = () => {
         sx={{
           padding: 6,
           maxWidth: 700,
-          maxHeight: 650,
+          maxHeight: 600,
+          borderRadius: 6 ,
           border: "2px solid rgb(195, 158, 121)",
-          backgroundColor: "#FFFEFA",
+          backgroundColor: "white",
         }}
       >
         <Typography variant="h1" gutterBottom className={style.loggin}>

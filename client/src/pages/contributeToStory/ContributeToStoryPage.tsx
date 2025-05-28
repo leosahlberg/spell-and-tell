@@ -127,7 +127,12 @@ const ContributeToStoryPage = () => {
             <Box sx={{ display: "flex", flexDirection: "row" }}>
               <Typography
                 variant="h1"
-                sx={{ paddingRight: 5, paddingLeft: 1, fontSize: "2.5rem" }}
+                sx={{
+                  paddingRight: 5,
+                  paddingLeft: 1,
+                  fontSize: "1.5rem",
+                  color: "white",
+                }}
               >
                 {t("contributeToStory.continueStory")}
               </Typography>
@@ -143,8 +148,8 @@ const ContributeToStoryPage = () => {
           <Typography
             sx={{
               fontSize: 20,
-              fontWeight: "bold",
-              color: "green",
+              fontWeight: "200",
+              color: "orange",
               paddingY: 2,
               paddingLeft: 1,
             }}
@@ -153,54 +158,40 @@ const ContributeToStoryPage = () => {
             <span className={styles.scoreCircle}>{story.score}</span>
           </Typography>
 
-          <Typography sx={{ backgroundColor: "white", padding: 4 }}>
+          <Typography
+            sx={{ backgroundColor: "white", padding: 2, borderRadius: 2 }}
+          >
             {story.contributions.map((contribution, index) => (
               <Typography
                 key={index}
                 variant="body1"
-                sx={{ marginY: 2, fontSize: 26 }}
+                sx={{ marginY: 2, fontSize: 22 }}
               >
                 {contribution.text}
-              </Typography>
-            ))}
-          </Typography>
-
-          <Typography
-            sx={{ display: "flex", flexDirection: "row", paddingBottom: 2 }}
-          >
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: "bold",
-                color: "purple",
-                marginRight: 2,
-                paddingTop: 4,
-                paddingLeft: 1,
-              }}
-            >
-              {t("contributeToStory.author")}
-            </Typography>
-            {story.contributions.map((contribution, index) => (
-              <Typography
-                key={index}
-                variant="h6"
-                sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
-              >
-                {contribution.userId.name}
               </Typography>
             ))}
           </Typography>
           {story.contributions.length + 1 == story.numberOfContributors ? (
             <Typography
               variant="h6"
-              sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
+              sx={{
+                marginBottom: 5,
+                marginLeft: 3,
+                paddingTop: 4,
+                color: "white",
+              }}
             >
               {t("contributeToStory.lastContribution")}
             </Typography>
           ) : (
             <Typography
               variant="h6"
-              sx={{ marginBottom: 5, marginLeft: 3, paddingTop: 4 }}
+              sx={{
+                marginBottom: 1,
+                marginLeft: 3,
+                paddingTop: 4,
+                color: "white",
+              }}
             >
               {t("contributeToStory.contributionNumber")}{" "}
               {story.contributions.length + 1}/{story.numberOfContributors}.
@@ -208,26 +199,56 @@ const ContributeToStoryPage = () => {
           )}
         </Box>
 
-        <TextField
-          label={t("contributeToStory.storyPlaceholder")}
-          onChange={handleInputChange}
-          value={text}
-          fullWidth
-          multiline
-          rows={12}
-          variant="outlined"
-          placeholder={t("contributeToStory.storyPlaceholder")}
-          className={styles.textField}
-          sx={{
-            marginBottom: 2,
-            backgroundColor: "white",
-            borderRadius: 2,
-            boxShadow: 1,
-            padding: 1,
-          }}
-          spellCheck={story.spellChecking}
-        />
+        <Box sx={{p: 1, backgroundColor: "wheat", borderRadius: 2}}>
+          <TextField
+            label={t("contributeToStory.storyPlaceholder")}
+            onChange={handleInputChange}
+            value={text}
+            fullWidth
+            multiline
+            rows={12}
+            variant="outlined"
+            placeholder={t("contributeToStory.storyPlaceholder")}
+            className={styles.textField}
+            sx={{
+              backgroundColor:"white",
+              borderRadius: 2,
+              
+              padding: 1,
+            }}
+            spellCheck={story.spellChecking}
+          />
+        </Box>
 
+        <Typography
+          sx={{ display: "flex", flexDirection: "row", paddingBottom: 2 }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              color: "orange",
+              marginRight: 2,
+              paddingTop: 2,
+              paddingLeft: 1,
+            }}
+          >
+            {t("contributeToStory.author")}
+          </Typography>
+          {story.contributions.map((contribution, index) => (
+            <Typography
+              key={index}
+              variant="h6"
+              sx={{
+                marginBottom: 5,
+                marginLeft: 3,
+                paddingTop: 2,
+                color: "white",
+              }}
+            >
+              {contribution.userId.name}
+            </Typography>
+          ))}
+        </Typography>
         <Box className={styles.buttonWrapper}>
           <Button text={t("general.save")} onClick={() => handlePublish()} />
         </Box>

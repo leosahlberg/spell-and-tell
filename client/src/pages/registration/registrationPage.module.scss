@@ -1,4 +1,5 @@
 @use "../../utils/css/colors" as colors;
+@use "../../utils/css/fonts" as fonts;
 
 .registration {
   display: flex;
@@ -7,33 +8,40 @@
   height: 100vh;
   background-size: cover;
   background-position: center;
-}
 
-.regtitle {
-  color: colors.$color-blue;
-  text-align: center;
-  padding-bottom: 1.5rem;
-}
-
-.label {
-  font-size: 1.7rem;
-  font-weight: 500;
-  color: colors.$color-blue;
-}
-
-@media (max-width: 768px) {
   .regtitle {
-    font-size: 0.7rem;
+    color: colors.$color-text-primary;
+    text-align: center;
+    padding-bottom: 1.5rem;
+    font-size: fonts.$font-big;
+    padding-top: 10px;
   }
 
   .label {
-    font-size: 1rem;
+    font-size: fonts.$font-small;
+    font-weight: 200;
+    color: colors.$color-text-primary;
+  }
+
+  .regBtn {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
   }
 }
 
-@media (max-width: 698px) {
+@media (max-width: 480px) {
+  .regtitle {
+    font-size: fonts.$font-xsmall;
+  }
+  .label {
+    font-size: fonts.$font-small;
+  }
   .form {
     margin-left: 80px;
     margin-right: 80px;
+  }
+  .regBtn {
+    margin-top: 20px;
   }
 }
