@@ -121,19 +121,19 @@ const PublicStorysPage = () => {
         >
           <Tabs value={value} onChange={handleChange} aria-label="tabs">
             <Tab
-            sx={{fontSize: 17}}
+            sx={{fontSize: 17, color: "#071145"}}
               tabIndex={0}
               label={t("publicStories.tabAll")}
               {...a11yProps(0)}
             />
             <Tab
-             sx={{fontSize: 17}}
+             sx={{fontSize: 17, color: "#071145" }}
               tabIndex={0}
               label={t("publicStories.tabCompleted")}
               {...a11yProps(1)}
             />
             <Tab
-             sx={{fontSize: 17}}
+             sx={{fontSize: 17, color: "#071145"}}
               tabIndex={0}
               label={t("publicStories.tabInProgress")}
               {...a11yProps(2)}

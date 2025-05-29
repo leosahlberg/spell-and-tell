@@ -85,16 +85,22 @@ const Header = (props: HeaderProps) => {
 
   const DrawerList = (
     <Box
-      sx={{  width: 250,
+      sx={{
+        width: 250,
         height: "100%",
         backgroundImage: `linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.57), rgba(255, 255, 255, 0.05)), url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-    }}
+      }}
       role="presentation"
       onClick={toggleDrawer(false)}
     >
-      <List style={{ background: "linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.57), rgba(255, 255, 255, 0.05))",}}>
+      <List
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.57), rgba(255, 255, 255, 0.05))",
+        }}
+      >
         {NavList.map((item) => (
           <ListItem key={item.title} disablePadding>
             <ListItemButton
@@ -115,7 +121,13 @@ const Header = (props: HeaderProps) => {
         ))}
       </List>
       <Divider />
-      <ListItem disablePadding sx={{ background: "linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.57), rgba(255, 255, 255, 0.05))",}}>
+      <ListItem
+        disablePadding
+        sx={{
+          background:
+            "linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.57), rgba(255, 255, 255, 0.05))",
+        }}
+      >
         <ListItemButton
           onClick={() => {
             dispatch(logout());
@@ -153,7 +165,11 @@ const Header = (props: HeaderProps) => {
             alt={selectedLanguage === "sv" ? "Svenska" : "English"}
             className={style.flag}
           />
+          <label htmlFor="language-select" className={style.flagname}>
+            Välj språk
+          </label>
           <select
+            id="language-select"
             className={style.flagname}
             onChange={(e) => handleChangeLanguage(e.target.value)}
             value={selectedLanguage}
@@ -161,18 +177,18 @@ const Header = (props: HeaderProps) => {
             <option value="sv">Sve</option>
             <option value="en">Eng</option>
           </select>
+
           {props.loggedIn ? (
             <div>
               <MenuIcon
                 className={style.menubar}
-                tabIndex={0}
+                tabIndex={-1}
                 sx={{
                   fontSize: "40px",
                   marginLeft: 20,
                   marginRight: 5,
                   cursor: "pointer",
                   outline: "none",
-                 
                 }}
                 onClick={toggleDrawer(true)}
                 onKeyDown={(event) => {
@@ -189,7 +205,7 @@ const Header = (props: HeaderProps) => {
             <>
               <Button
                 text={t("welcome.loggin")}
-                style={{marginRight: 20}}
+                style={{ marginRight: 20 }}
                 onClick={() => navigate("/login")}
               ></Button>
             </>
