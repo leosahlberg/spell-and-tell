@@ -6,10 +6,6 @@
   padding: 4rem 8rem;
   color: colors.$color-text-primary;
 
-  .list {
-    list-style-type: none;
-  }
-
   .title {
     font-size: fonts.$font-big;
     color: colors.$color-text-primary;
@@ -24,6 +20,7 @@
 
   .content {
     padding-bottom: 1px;
+    padding-bottom: 3px;
     font-size: fonts.$font-medium;
     color: colors.$color-text-primary;
   }

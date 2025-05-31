@@ -199,7 +199,7 @@ const ContributeToStoryPage = () => {
           )}
         </Box>
 
-        <Box sx={{p: 1, backgroundColor: "wheat", borderRadius: 2}}>
+        <Box sx={{ p: 1, backgroundColor: "wheat", borderRadius: 2 }}>
           <TextField
             label={t("contributeToStory.storyPlaceholder")}
             onChange={handleInputChange}
@@ -211,18 +211,16 @@ const ContributeToStoryPage = () => {
             placeholder={t("contributeToStory.storyPlaceholder")}
             className={styles.textField}
             sx={{
-              backgroundColor:"white",
+              backgroundColor: "white",
               borderRadius: 2,
-              
+
               padding: 1,
             }}
             spellCheck={story.spellChecking}
           />
         </Box>
 
-        <Typography
-          sx={{ display: "flex", flexDirection: "row", paddingBottom: 2 }}
-        >
+        <Box sx={{ display: "flex", flexDirection: "row", paddingBottom: 2 }}>
           <Typography
             variant="h6"
             sx={{
@@ -248,7 +246,7 @@ const ContributeToStoryPage = () => {
               {contribution.userId.name}
             </Typography>
           ))}
-        </Typography>
+        </Box>
         <Box className={styles.buttonWrapper}>
           <Button text={t("general.save")} onClick={() => handlePublish()} />
         </Box>
