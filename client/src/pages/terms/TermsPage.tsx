@@ -56,39 +56,13 @@ const TermsPage = () => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ color: "rgb(12, 23, 79)" }}>
-          <Typography
-            sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
-            variant="body1"
-          >
-            <span style={{ fontWeight: "bold" }}>1.</span> {t("terms.rule-one")}
-          </Typography>
-          <Typography
-            sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
-            variant="body1"
-          >
-            <span style={{ fontWeight: "bold" }}>2.</span> {t("terms.rule-two")}
-          </Typography>
-          <Typography
-            sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
-            variant="body1"
-          >
-            <span style={{ fontWeight: "bold" }}>3.</span>{" "}
-            {t("terms.rule-three")}
-          </Typography>
-          <Typography
-            sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
-            variant="body1"
-          >
-            <span style={{ fontWeight: "bold" }}>4.</span>{" "}
-            {t("terms.rule-four")}
-          </Typography>
-          <Typography
-            sx={{ paddingBottom: 1, fontSize: "1.5rem" }}
-            variant="body1"
-          >
-            <span style={{ fontWeight: "bold" }}>5.</span>{" "}
-            {t("terms.rule-five")}
-          </Typography>
+          <ol>
+            <li className={styles.content}>{t("terms.rule-one")}</li>
+            <li className={styles.content}>{t("terms.rule-two")}</li>
+            <li className={styles.content}>{t("terms.rule-three")}</li>
+            <li className={styles.content}>{t("terms.rule-four")}</li>
+            <li className={styles.content}>{t("terms.rule-five")}</li>
+          </ol>
         </AccordionDetails>
       </Accordion>
 
@@ -135,7 +109,7 @@ const TermsPage = () => {
         <Typography className={styles.content} variant="body1">
           ✅ {t("terms.condition-seven")}
         </Typography>
-        <Typography sx={{paddingTop: 5}}>
+        <Typography sx={{ paddingTop: 5 }}>
           <Link
             to="/registration"
             style={{ color: "rgb(22, 83, 56)", fontSize: 20 }}

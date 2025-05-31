@@ -35,7 +35,7 @@ const StartPage = () => {
   return (
     <div className={style.container}>
       <header>
-        <Typography className={style.header} variant="h1" gutterBottom>
+        <Typography className={style.header} component="h1" gutterBottom>
           {t("welcome.welcometext")}
         </Typography>
       </header>
@@ -47,7 +47,7 @@ const StartPage = () => {
       />
       <Button text={t("welcome.loggin")} onClick={() => navigate("/login")} />
       <section className={style.regcon}>
-        <Typography className={style.register} variant="h2" >
+        <Typography className={style.register} component="h2" >
           {t("welcome.noaccount")}
         </Typography>
         <Link className={style.link} to={"/registration"}>

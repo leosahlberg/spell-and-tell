@@ -111,7 +111,7 @@ const InviteUserToContribute = () => {
           }}
         >
           <Typography
-            variant="h1"
+            component="h1"
             sx={{ fontSize: 30, mb: 8, color: "green", mt: 2 }}
           >
             {t("invitation.title")}
@@ -135,7 +135,7 @@ const InviteUserToContribute = () => {
                 alignItems: "center",
               }}
             >
-              <Typography sx={{ mr: 2 }}>
+              <Typography sx={{ mr: 2 }} component="h2">
                 ✅ {t("invitation.selected-person")}{" "}
                 <strong>{selectedPerson.name}</strong>
               </Typography>

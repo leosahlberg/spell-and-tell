@@ -38,12 +38,12 @@ const LogInPage = () => {
           padding: 6,
           maxWidth: 700,
           maxHeight: 600,
-          borderRadius: 6 ,
+          borderRadius: 6,
           border: "2px solid rgb(195, 158, 121)",
           backgroundColor: "white",
         }}
       >
-        <Typography variant="h1" gutterBottom className={style.loggin}>
+        <Typography component="h1" gutterBottom className={style.loggin}>
           {t("loginuser.login")}
         </Typography>
         <form
@@ -116,17 +116,17 @@ const LogInPage = () => {
         </form>
       </Paper>
       <section>
-        <Typography variant="h2" gutterBottom className={style.register}>
-          {t("loginuser.noaccount")}?{" "}
-          <ArrowForwardOutlinedIcon sx={{ marginLeft: 1, marginRight: 4 }} />
-          <Link
-            className={style.link}
-            to={"/registration"}
-            aria-label="Registrera ett konto"
-          >
-            {t("loginuser.register")}
-          </Link>
+        <Typography component="h2" className={style.register}>
+          {t("loginuser.noaccount")}?
         </Typography>
+        <ArrowForwardOutlinedIcon sx={{ marginLeft: 1, marginRight: 4 }} />
+        <Link
+          className={style.link}
+          to={"/registration"}
+          aria-label="Registrera ett konto"
+        >
+          {t("loginuser.register")}
+        </Link>
       </section>
     </div>
   );
