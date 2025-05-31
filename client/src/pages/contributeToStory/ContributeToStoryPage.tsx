@@ -126,7 +126,7 @@ const ContributeToStoryPage = () => {
           ) : (
             <Box sx={{ display: "flex", flexDirection: "row" }}>
               <Typography
-                variant="h1"
+                component="h1"
                 sx={{
                   paddingRight: 5,
                   paddingLeft: 1,
