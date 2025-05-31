@@ -100,7 +100,13 @@ const CardPublic = ({
             gutterBottom
             variant="h2"
             component="h1"
-            sx={{ fontSize: "1.3rem", color:"#071145" }}
+            sx={{
+              fontSize: "1.3rem",
+              color: "#071145",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
           >
             {title}
           </Typography>
