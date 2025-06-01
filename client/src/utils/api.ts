@@ -34,7 +34,8 @@ export async function registerUser(
   name: string,
   username: string,
   email: string,
-  password: string
+  password: string,
+  imgUrl: string
 ) {
   try {
     const res = await fetch(`/user`, {
@@ -47,6 +48,7 @@ export async function registerUser(
         username,
         email,
         password,
+        imgUrl,
       }),
     });
 

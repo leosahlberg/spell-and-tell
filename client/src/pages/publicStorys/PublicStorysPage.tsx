@@ -2,14 +2,14 @@ import CardPublic from "../../components/card/CardPublic";
 import styles from "./publicStorysPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { Story } from "../../utils/types";
+import { Story, User } from "../../utils/types";
 import { fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
 import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
 import CustomTabPanel from "../../components/customTabPanel/CustomTabPanel";
 import { fetchGetAllUsers } from "../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
-import { isMaxContributionsReached } from "../../utils/helpers";
+import { isMaxContributionsReached, hasContributed } from "../../utils/helpers";
 import { useTranslation } from "react-i18next";
 
 const PublicStorysPage = () => {
@@ -24,6 +24,7 @@ const PublicStorysPage = () => {
     (state) => state.story.stories
   ) as Story[];
   const token = useSelector<RootState>((state) => state.auth.token) as string;
+  const user = useSelector<RootState>((state) => state.auth.user) as User;
 
   useEffect(() => {
     dispatch(fetchPublicStories(token));
@@ -71,7 +72,7 @@ const PublicStorysPage = () => {
   }
 
   return (
-    <div style={{backgroundColor: "white"}}>
+    <div style={{ backgroundColor: "white" }}>
       <Box
         sx={{
           position: "relative",
@@ -101,10 +102,14 @@ const PublicStorysPage = () => {
             }}
           />
           <Button
-            sx={{ marginLeft: 4, marginTop: 2, backgroundColor: "rgb(259, 199, 130)",
-              padding:2,
+            sx={{
+              marginLeft: 4,
+              marginTop: 2,
+              backgroundColor: "rgb(259, 199, 130)",
+              padding: 2,
               color: "rgb(22, 83, 56)",
-              fontWeight: "bold", }}
+              fontWeight: "bold",
+            }}
             onClick={handleSearch}
             className={styles.searchbtn}
           >
@@ -121,19 +126,19 @@ const PublicStorysPage = () => {
         >
           <Tabs value={value} onChange={handleChange} aria-label="tabs">
             <Tab
-            sx={{fontSize: 17, color: "#071145"}}
+              sx={{ fontSize: 17, color: "#071145" }}
               tabIndex={0}
               label={t("publicStories.tabAll")}
               {...a11yProps(0)}
             />
             <Tab
-             sx={{fontSize: 17, color: "#071145" }}
+              sx={{ fontSize: 17, color: "#071145" }}
               tabIndex={0}
               label={t("publicStories.tabCompleted")}
               {...a11yProps(1)}
             />
             <Tab
-             sx={{fontSize: 17, color: "#071145"}}
+              sx={{ fontSize: 17, color: "#071145" }}
               tabIndex={0}
               label={t("publicStories.tabInProgress")}
               {...a11yProps(2)}
@@ -152,24 +157,45 @@ const PublicStorysPage = () => {
                 title={story.title}
                 contributions={[...story.contributions]}
                 id={story._id}
-               
               >
                 {isMaxContributionsReached(story) ? (
                   <Typography
                     variant="h6"
                     color="error"
-                    sx={{ pb: 10, pt:2, textAlign: "center", fontSize: 15 }}
+                    sx={{ pb: 10, pt: 2, textAlign: "center", fontSize: 15 }}
                   >
                     {t("publicStories.contributionsMaxed")}
                   </Typography>
                 ) : (
-                  <Typography
-                    variant="h6"
-                    color="success"
-                    sx={{ pb: 10, pt: 2, textAlign: "center" }}
-                  >
-                    {t("publicStories.contribute")}
-                  </Typography>
+                  <>
+                    {hasContributed(story, user) ? (
+                      <Typography
+                        variant="h6"
+                        color="error"
+                        sx={{
+                          pb: 10,
+                          pt: 2,
+                          textAlign: "center",
+                          fontSize: 15,
+                        }}
+                      >
+                        {t("story.alreadyContributed")}
+                      </Typography>
+                    ) : (
+                      <Typography
+                        variant="h6"
+                        color="success"
+                        sx={{
+                          pb: 10,
+                          pt: 2,
+                          textAlign: "center",
+                          fontSize: 15,
+                        }}
+                      >
+                        {t("publicStories.contribute")}
+                      </Typography>
+                    )}
+                  </>
                 )}
               </CardPublic>
             ))
@@ -207,7 +233,7 @@ const PublicStorysPage = () => {
                   <Typography
                     variant="body2"
                     color="error"
-                    sx={{  pb: 10, pt: 2, textAlign: "center" }}
+                    sx={{ pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contributionsMaxed")}
                   </Typography>
@@ -247,7 +273,7 @@ const PublicStorysPage = () => {
                   <Typography
                     variant="body2"
                     color="success"
-                    sx={{  pb: 10, pt: 2, textAlign: "center" }}
+                    sx={{ pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contribute")}
                   </Typography>
