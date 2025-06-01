@@ -78,7 +78,7 @@ const RegistrationPage = () => {
       >
         <Typography
           className={styles.regtitle}
-          variant="h1"
+          component="h1"
           sx={{ fontSize: "1.8rem", pt: 3 }}
           gutterBottom
         >

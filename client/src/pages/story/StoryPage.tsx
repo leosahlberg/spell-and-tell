@@ -54,6 +54,7 @@ const StoryPage = () => {
   return (
     <>
       <div
+        role="button"
         tabIndex={0}
         onClick={handleNavigate}
         onKeyDown={handleKeydown}
@@ -69,7 +70,7 @@ const StoryPage = () => {
         <ArrowBackIosIcon /> <i style={{ marginTop: 4 }}>{t("story.back")}</i>
       </div>
       <Box className={styles.pageWrapper}>
-        <Typography className={styles.storyCard}>
+        <section className={styles.storyCard}>
           <Box
             sx={{
               display: "flex",
@@ -84,7 +85,7 @@ const StoryPage = () => {
                 alignSelf: "flex-start",
               }}
             >
-              {t("story.score")}: {story.score} 
+              {t("story.score")}: {story.score}
             </Typography>
             <Typography
               variant="h2"
@@ -106,47 +107,32 @@ const StoryPage = () => {
             className={styles.storyImage}
           />
           <Box className={styles.storyContent}>
-            <Typography sx={{ marginBottom: 12, color: "rgb(12, 23, 79)" }}>
-              {story.contributions.map((contribution, index) => (
-                <Box key={index} sx={{ marginBottom: 2 }}>
-                  <Typography
-                    variant="body1"
-                    sx={{ marginTop: 3, fontSize: 22 }}
-                  >
-                    {contribution.text}
-                  </Typography>
-                </Box>
-              ))}
-            </Typography>
-
-            <Typography>
-              <p
-                style={{
-                  fontSize: 22,
-                  fontWeight: "bold",
-                  color: "rgb(12, 23, 79)",
-                }}
-              >
-                {t("story.author")}:
-              </p>
-              {story.contributions.map((contribution, index) => (
-                <Box key={index}>
-                  <Typography
-                    variant="h6"
-                    component="h2"
-                    sx={{ color: "rgb(12, 23, 79)" }}
-                  >{`${contribution.userId.name}`}</Typography>
-                </Box>
-              ))}
-            </Typography>
+            {story.contributions.map((contribution) => (
+              <Box key={contribution._id} sx={{ marginBottom: 2 }}>
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: 22, marginTop: 3, color: "rgb(12, 23, 79)" }}
+                >
+                  {contribution.text}
+                </Typography>
+                <Typography variant="h6" sx={{ color: "rgb(12, 23, 79)" }}>
+                  {contribution.userId.name}
+                </Typography>
+              </Box>
+            ))}
           </Box>
+
           <Box className={styles.link}>
             <Typography>
               <img className={styles.img} src={logo} alt={t("story.logo")} />
             </Typography>
             {isMaxContributionsReached(story) || hasContributed() ? (
               <Typography
-                sx={{ fontSize: 25, fontWeight: "bold", color: "rgb(22, 83, 56)" }}
+                sx={{
+                  fontSize: 25,
+                  fontWeight: "bold",
+                  color: "rgb(22, 83, 56)",
+                }}
               >
                 {t("story.alreadyContributed")}
               </Typography>
@@ -156,7 +142,7 @@ const StoryPage = () => {
               </Link>
             )}
           </Box>
-        </Typography>
+        </section>
       </Box>
     </>
   );
