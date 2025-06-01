@@ -71,7 +71,13 @@ export const fetchRegistrateUser = createAsyncThunk<
   "user/fetchRegistrateUser",
   async ({ name, username, email, password }, { rejectWithValue }) => {
     try {
-      const response = await registerUser(name, username, email, password);
+      const response = await registerUser(
+        name,
+        username,
+        email,
+        password,
+        "/src/assets/profile_default.png"
+      );
       return (await response.json()) as RegistrationRespons;
     } catch (error) {
       const errorMessage =

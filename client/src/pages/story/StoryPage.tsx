@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Box, Typography } from "@mui/material";
 import logo from "../../assets/logoST2.png";
-import { isMaxContributionsReached } from "../../utils/helpers";
+import { isMaxContributionsReached, hasContributed } from "../../utils/helpers";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useTranslation } from "react-i18next";
 
@@ -44,12 +44,6 @@ const StoryPage = () => {
   if (!story) {
     return <Typography variant="h1">{t("story.notfound")}</Typography>;
   }
-
-  const hasContributed = () => {
-    return story?.contributions.some(
-      (contribution) => contribution.userId.userId === currentUser?.userId
-    );
-  };
 
   return (
     <>
@@ -126,20 +120,30 @@ const StoryPage = () => {
             <Typography>
               <img className={styles.img} src={logo} alt={t("story.logo")} />
             </Typography>
-            {isMaxContributionsReached(story) || hasContributed() ? (
+            {isMaxContributionsReached(story) ? (
               <Typography
-                sx={{
-                  fontSize: 25,
-                  fontWeight: "bold",
-                  color: "rgb(22, 83, 56)",
-                }}
+                variant="h6"
+                color="error"
+                sx={{ pb: 10, pt: 2, textAlign: "center", fontSize: 15 }}
               >
-                {t("story.alreadyContributed")}
+                {t("publicStories.contributionsMaxed")}
               </Typography>
             ) : (
-              <Link to={`/contribute/${id}`}>
-                <Button text={t("story.contribute")} />
-              </Link>
+              <>
+                {hasContributed(story, currentUser) ? (
+                  <Typography
+                    variant="h6"
+                    color="error"
+                    sx={{ pb: 10, pt: 2, textAlign: "center", fontSize: 15 }}
+                  >
+                    {t("story.alreadyContributed")}
+                  </Typography>
+                ) : (
+                  <Link to={`/contribute/${id}`}>
+                    <Button text={t("story.contribute")} />
+                  </Link>
+                )}
+              </>
             )}
           </Box>
         </section>

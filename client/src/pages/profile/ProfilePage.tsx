@@ -136,7 +136,9 @@ const ProfilePage = () => {
         <CustomTabPanel value={value} index={0}>
           <div className={styles.container}>
             <img
-              src={user.imgUrl ?? "/profileimg.jpg"}
+              src={
+                user.imgUrl ? user.imgUrl : "/src/assets/profile_default.png"
+              }
               width={175}
               height={175}
               alt="Profilbild"
@@ -279,12 +281,13 @@ const ProfilePage = () => {
                 {t("profile.storyCount")}: {""}
                 {stories.length}
               </h3>
-              <p  className={styles.detailsdes}>{t("profile.myStoriesDescription")}</p>
+              <p className={styles.detailsdes}>
+                {t("profile.myStoriesDescription")}
+              </p>
               {stories.length > 0 ? (
                 stories.map((story) => {
                   return (
                     <div
-                    
                       tabIndex={0}
                       className={styles.settings}
                       onClick={() => navigation(`/story/${story._id}`)}
@@ -297,7 +300,7 @@ const ProfilePage = () => {
                         width={100}
                         height={100}
                       />
-                      <p  className={styles.details}>{story.title}</p>
+                      <p className={styles.details}>{story.title}</p>
                     </div>
                   );
                 })

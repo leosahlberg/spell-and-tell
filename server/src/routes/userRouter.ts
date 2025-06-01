@@ -7,7 +7,7 @@ export function userRouter() {
 
   router.post("/", async (req: Request, res: Response) => {
     try {
-      const { name, username, email, password } = req.body;
+      const { name, username, email, password, imgUrl } = req.body;
       const hashedPassword = await encryptPassword(password);
       const newUser = await userModel.create({
         name,
