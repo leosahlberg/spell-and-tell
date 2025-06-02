@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import styles from "./navbar.module.scss";
-import profileImage from "../../assets/profile.jpg";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";

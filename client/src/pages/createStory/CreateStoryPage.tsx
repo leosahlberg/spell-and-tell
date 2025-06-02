@@ -11,7 +11,6 @@ import RouleSetList from "../../components/rouleSet/ruleSetList";
 import { useNavigate } from "react-router-dom";
 import { clearCustomRuleSet } from "../../redux/rulesetSlice";
 import { useTranslation } from "react-i18next";
-// import MessageRandom from "../../components/message/MessageRandom";
 
 const CreateStoryPage = () => {
   const { t } = useTranslation();
@@ -93,7 +92,6 @@ const CreateStoryPage = () => {
       dispatch(clearCustomRuleSet(null));
 
       if (fetchCreateStory.fulfilled.match(actionResult)) {
-        console.log(actionResult.payload);
         navigate(`/invitation/${actionResult.payload._id}`);
       }
     }
@@ -119,7 +117,6 @@ const CreateStoryPage = () => {
           marginTop: 1,
         }}
       >
-        {/* <MessageRandom /> */}
         <RouleSetList ruleSet={{ ...ruleSet }} edit={true} />
         <Box
           className={styles.box}
@@ -160,7 +157,9 @@ const CreateStoryPage = () => {
               padding: 0.5,
             }}
           />
-          <Box sx={{p:0.5, pt: 0.7, backgroundColor: "wheat", borderRadius:2}}>
+          <Box
+            sx={{ p: 0.5, pt: 0.7, backgroundColor: "wheat", borderRadius: 2 }}
+          >
             <TextField
               id="story-content"
               label={t("create.story")}

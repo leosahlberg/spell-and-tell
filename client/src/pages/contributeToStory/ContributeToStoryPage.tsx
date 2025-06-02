@@ -73,8 +73,7 @@ const ContributeToStoryPage = () => {
 
   async function handlePublish() {
     if (text.trim() && story) {
-      const score = calculateScore();
-
+      const score = story.scoring ? calculateScore() : 0;
       const actionResult = await dispatch(
         fetchUpdateStory({
           id: story._id,
