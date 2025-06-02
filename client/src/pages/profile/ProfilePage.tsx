@@ -144,7 +144,7 @@ const ProfilePage = () => {
               alt="Profilbild"
               className={styles.img}
             />
-            {/* <h2>{user.name}</h2> */}
+
             {editMode ? (
               <>
                 <h2 className={styles.account}>

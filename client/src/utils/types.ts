@@ -25,7 +25,6 @@ export type Story = {
   title: string;
   created: Date;
   score: number;
-  rouleSet: RuleSet;
   userId: PublicUser;
   imgUrl: string;
   contributions: { userId: PublicUser; text: string; _id: string }[];
