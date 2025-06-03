@@ -71,7 +71,7 @@ const ProfilePage = () => {
     if (invitations) {
       setInvitation(invitations);
     }
-  }, [invitation]);
+  }, [invitations]);
 
   useEffect(() => {
     if (storiesByUser) {
@@ -239,7 +239,7 @@ const ProfilePage = () => {
               </p>
               {invitation?.map((invitation) => {
                 return (
-                  <>
+                  <div key={invitation.storyId._id}>
                     {invitation.storyId != null ||
                     invitation.storyId != undefined ? (
                       <div
@@ -247,7 +247,6 @@ const ProfilePage = () => {
                         onClick={() =>
                           navigation(`/story/${invitation.storyId._id}`)
                         }
-                        key={invitation.storyId._id}
                       >
                         <img
                           src={invitation.storyId.imgUrl}
@@ -268,7 +267,7 @@ const ProfilePage = () => {
                     ) : (
                       <></>
                     )}
-                  </>
+                  </div>
                 );
               })}
             </div>
