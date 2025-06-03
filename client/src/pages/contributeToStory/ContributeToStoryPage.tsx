@@ -84,7 +84,11 @@ const ContributeToStoryPage = () => {
         })
       );
       if (fetchUpdateStory.fulfilled.match(actionResult)) {
-        navigate(`/invitation/${story._id}`);
+        if (story.contributions.length + 1 == story.numberOfContributors) {
+          navigate("/stories");
+        } else {
+          navigate(`/invitation/${story._id}`);
+        }
       }
     }
   }

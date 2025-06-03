@@ -261,7 +261,11 @@ const PublicStorysPage = () => {
         <div className={styles.publicstory}>
           {stories.length > 0 ? (
             stories
-              .filter((story) => !isMaxContributionsReached(story))
+              .filter(
+                (story) =>
+                  !isMaxContributionsReached(story) &&
+                  !hasContributed(story, user)
+              )
               .map((story) => (
                 <CardPublic
                   key={story._id}
