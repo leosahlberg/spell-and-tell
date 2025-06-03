@@ -109,11 +109,26 @@ const StoryPage = () => {
                 >
                   {contribution.text}
                 </Typography>
-                <Typography variant="h6" sx={{ color: "rgb(12, 23, 79)" }}>
-                  {contribution.userId.name}
-                </Typography>
               </Box>
             ))}
+            
+            <Box sx={{ marginTop: 5 }}>
+              <Typography variant="h6" sx={{ color: "rgb(12, 23, 79)" }}>
+                {t("story.author")}:
+              </Typography>
+              <ul style={{ paddingLeft: 20 }}>
+                {story.contributions.map((contribution) => (
+                  <li key={contribution._id}>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "rgb(12, 23, 79)", fontSize: 18 }}
+                    >
+                      {contribution.userId.name}
+                    </Typography>
+                  </li>
+                ))}
+              </ul>
+            </Box>
           </Box>
 
           <Box className={styles.link}>
@@ -124,7 +139,7 @@ const StoryPage = () => {
               <Typography
                 variant="h6"
                 color="error"
-                sx={{ pb: 10, pt: 2, textAlign: "center", fontSize: 15 }}
+                sx={{ pb: 10, pt: 2, textAlign: "center", fontSize: 18 }}
               >
                 {t("publicStories.contributionsMaxed")}
               </Typography>
@@ -134,7 +149,7 @@ const StoryPage = () => {
                   <Typography
                     variant="h6"
                     color="error"
-                    sx={{ pb: 10, pt: 2, textAlign: "center", fontSize: 15 }}
+                    sx={{ pb: 10, pt: 2, textAlign: "center", fontSize: 18 }}
                   >
                     {t("story.alreadyContributed")}
                   </Typography>

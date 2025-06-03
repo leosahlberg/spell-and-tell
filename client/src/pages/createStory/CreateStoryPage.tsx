@@ -105,6 +105,7 @@ const CreateStoryPage = () => {
     <div
       style={{
         paddingTop: 10,
+        paddingLeft: 80
       }}
     >
       <Box
