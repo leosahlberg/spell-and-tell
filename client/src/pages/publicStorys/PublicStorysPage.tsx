@@ -3,12 +3,12 @@ import styles from "./publicStorysPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { Story, User } from "../../utils/types";
-import { fetchPublicStories } from "../../redux/storySlice";
+import { fetchDeleteStory, fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
 import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
 import CustomTabPanel from "../../components/customTabPanel/CustomTabPanel";
 import { fetchGetAllUsers } from "../../redux/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { isMaxContributionsReached, hasContributed } from "../../utils/helpers";
 import { useTranslation } from "react-i18next";
 
@@ -25,6 +25,14 @@ const PublicStorysPage = () => {
   ) as Story[];
   const token = useSelector<RootState>((state) => state.auth.token) as string;
   const user = useSelector<RootState>((state) => state.auth.user) as User;
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.fromTab !== undefined) {
+      setValue(location.state.fromTab);
+    }
+  }, [location.state]);
 
   useEffect(() => {
     dispatch(fetchPublicStories(token));
@@ -60,9 +68,9 @@ const PublicStorysPage = () => {
     });
   };
 
-  // const handleDelete = async (id: string) => {
-  //   dispatch(fetchDeleteStory({ id, token }));
-  // };
+  const handleDelete = async (id: string) => {
+    dispatch(fetchDeleteStory({ id, token }));
+  };
 
   function a11yProps(index: number) {
     return {
@@ -157,6 +165,7 @@ const PublicStorysPage = () => {
                 title={story.title}
                 contributions={[...story.contributions]}
                 id={story._id}
+                currentTab={value}
               >
                 {isMaxContributionsReached(story) ? (
                   <Typography
@@ -229,6 +238,7 @@ const PublicStorysPage = () => {
                   title={story.title}
                   contributions={[...story.contributions]}
                   id={story._id}
+                  currentTab={value}
                 >
                   <Typography
                     variant="body2"
@@ -236,6 +246,7 @@ const PublicStorysPage = () => {
                     sx={{ pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contributionsMaxed")}
+                    <button onClick={() => handleDelete(story._id)}>re</button>
                   </Typography>
                 </CardPublic>
               ))
@@ -261,11 +272,7 @@ const PublicStorysPage = () => {
         <div className={styles.publicstory}>
           {stories.length > 0 ? (
             stories
-              .filter(
-                (story) =>
-                  !isMaxContributionsReached(story) &&
-                  !hasContributed(story, user)
-              )
+              .filter((story) => !isMaxContributionsReached(story))
               .map((story) => (
                 <CardPublic
                   key={story._id}
@@ -273,6 +280,7 @@ const PublicStorysPage = () => {
                   title={story.title}
                   contributions={[...story.contributions]}
                   id={story._id}
+                  currentTab={value}
                 >
                   <Typography
                     variant="body2"
@@ -280,6 +288,7 @@ const PublicStorysPage = () => {
                     sx={{ pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contribute")}
+                    <button onClick={() => handleDelete(story._id)}>re</button>
                   </Typography>
                 </CardPublic>
               ))

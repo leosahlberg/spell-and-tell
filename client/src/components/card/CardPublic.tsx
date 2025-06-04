@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 //import { Button } from "@mui/material";
 import { PublicUser } from "../../utils/types";
 import { Box } from "@mui/material";
@@ -21,6 +21,7 @@ type CardProps = {
   id: string;
   //onDelete?: (id: string) => void;
   children?: React.ReactNode;
+  currentTab?: number;
 };
 
 const CardPublic = ({
@@ -30,11 +31,20 @@ const CardPublic = ({
   id,
   //onDelete,
   children,
+  currentTab,
 }: CardProps) => {
+  const navigate = useNavigate();
+
   const getFirstTwoSentences = (text: string) => {
     const sentences = text.split(".");
     const firstTwo = sentences.slice(0, 2).join(".");
     return firstTwo;
+  };
+
+  const handleClick = () => {
+    navigate(`/story/${id}`, {
+      state: { fromTab: currentTab },
+    });
   };
 
   const renderFirstContribution = () => {
@@ -67,60 +77,56 @@ const CardPublic = ({
   };
 
   return (
-    <Card
-      sx={{
-        width: 350,
-        height: 400,
-        backgroundColor: "white",
-        color:"#071145"
-      }}
-    >
-      <CardActionArea
-        component={Link}
-        to={`/story/${id}`}
+    <div onClick={handleClick}>
+      <Card
         sx={{
-          textDecoration: "none",
+          width: 350,
+          height: 400,
           backgroundColor: "white",
-          "&:hover": {
-            backgroundColor: "#f1f1f1",
-            color:"#071145",
-            cursor: "pointer",
-          },
+          color: "#071145",
         }}
       >
-        <CardMedia
-          component="img"
-          height="220"
-          image={imgs}
-          alt={`Bild för berättelsen: ${title}`}
-          sx={{ transition: "none" }}
-        />
-        <CardContent>
-          <Typography
-            gutterBottom
-            variant="h2"
-            component="h1"
-            sx={{
-              fontSize: "1.3rem",
+        <CardActionArea
+          component={Link}
+          to={`/story/${id}`}
+          sx={{
+            textDecoration: "none",
+            backgroundColor: "white",
+            "&:hover": {
+              backgroundColor: "#f1f1f1",
               color: "#071145",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {title}
-          </Typography>
-          {renderFirstContribution()}
-        </CardContent>
-
-      {children && (
-        <Box
+              cursor: "pointer",
+            },
+          }}
         >
-          {children}
-        </Box>
-      )}
-      </CardActionArea>
-      {/* <Button
+          <CardMedia
+            component="img"
+            height="220"
+            image={imgs}
+            alt={`Bild för berättelsen: ${title}`}
+            sx={{ transition: "none" }}
+          />
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant="h2"
+              component="h1"
+              sx={{
+                fontSize: "1.3rem",
+                color: "#071145",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {title}
+            </Typography>
+            {renderFirstContribution()}
+          </CardContent>
+
+          {children && <Box>{children}</Box>}
+        </CardActionArea>
+        {/* <Button
           variant="contained"
           color="error"
           sx={{ margin: 2 }}
@@ -128,7 +134,8 @@ const CardPublic = ({
         >
           Ta bort
       </Button> */}
-    </Card>
+      </Card>
+    </div>
   );
 };
 

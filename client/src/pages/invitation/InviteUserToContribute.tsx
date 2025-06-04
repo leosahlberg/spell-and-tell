@@ -73,7 +73,7 @@ const InviteUserToContribute = () => {
         setInvitationSent(true);
         setTimeout(() => {
           navigate("/stories");
-        }, 500);
+        }, 2000);
       }
     }
   }
@@ -83,13 +83,16 @@ const InviteUserToContribute = () => {
   );
 
   return (
-    <Box className={styles.pageWrapper} sx={{
-      backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      maxHeight: "100%",
-      width: "100%",
-    }}>
+    <Box
+      className={styles.pageWrapper}
+      sx={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        maxHeight: "100%",
+        width: "100%",
+      }}
+    >
       <Box
         sx={{
           bgcolor: "background.paper",
@@ -112,9 +115,13 @@ const InviteUserToContribute = () => {
         >
           <Typography
             component="h1"
-            sx={{ fontSize: 30, mb: 8, color: "green", mt: 2 }}
+            sx={{ fontSize: 30, mb: 2, color: "#0c174f", mt: 2 }}
           >
             {t("invitation.title")}
+          </Typography>
+          <Typography sx={{ fontSize: 25, mb: 8, color: "#0c174f" }}>
+            {" "}
+            {t("invitation.subTitle")}
           </Typography>
         </Box>
         <Box
@@ -136,14 +143,14 @@ const InviteUserToContribute = () => {
               }}
             >
               <Typography sx={{ mr: 2 }} component="h2">
-                ✅ {t("invitation.selected-person")}{" "}
+                {t("invitation.selected-person")}{" "}
                 <strong>{selectedPerson.name}</strong>
               </Typography>
               <Button text={t("invitation.send")} onClick={sendInvitation} />
             </Box>
           )}
-          
-          <Box sx={{ ml: "auto" , mr: 1}}>
+
+          <Box sx={{ ml: "auto", mr: 1 }}>
             <Button
               text={t("invitation.stories")}
               onClick={() => navigate("/stories")}
@@ -156,7 +163,7 @@ const InviteUserToContribute = () => {
             {t("invitation.sent")} {selectedPerson?.name}!
           </Alert>
         )}
-        
+
         <TextField
           fullWidth
           label="Sök..."
