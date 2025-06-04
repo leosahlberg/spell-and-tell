@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./storyPage.module.scss";
 import Button from "../../components/buttons/Button";
 import { useEffect, useState } from "react";
@@ -21,11 +21,13 @@ const StoryPage = () => {
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromTab = location.state?.fromTab ?? 0;
 
   const handleNavigate = () => {
-    navigate("/stories");
+    navigate("/stories", { state: { fromTab } });
   };
-
+  
   const handleKeydown = (e: { key: string }) => {
     if (e.key === "Enter") {
       navigate("/stories");
@@ -111,7 +113,7 @@ const StoryPage = () => {
                 </Typography>
               </Box>
             ))}
-            
+
             <Box sx={{ marginTop: 5 }}>
               <Typography variant="h6" sx={{ color: "rgb(12, 23, 79)" }}>
                 {t("story.author")}:
