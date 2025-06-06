@@ -167,6 +167,7 @@
   },
   "invitation": {
     "title": "Send invitation to another user",
+    "subTitle": "Or go to stories, then it will be public.",
     "select-person": "Select person to invite",
     "hide-search": "Hide searchfield",
     "stories": "Go to stories",

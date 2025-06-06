@@ -166,7 +166,8 @@
     "condition-seven": "Om en spelare bryter mot reglerna kan deras inlägg tas bort eller de kan bli avstängda från spelet."
   },
   "invitation": {
-    "title": "Välj att skicka inbjudan till en vän",
+    "title": "Välj att skicka inbjudan till en vän!",
+    "subTitle": "Eller gå till berrättelser, då läggs den ut publikt.",
     "select-person": "Välj person att bjuda in",
     "hide-search": "Dölj sökfältet",
     "stories": "Gå till berättelser",
