@@ -3,7 +3,7 @@ import styles from "./publicStorysPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { Story, User } from "../../utils/types";
-import { fetchDeleteStory, fetchPublicStories } from "../../redux/storySlice";
+import { fetchPublicStories } from "../../redux/storySlice";
 import { useEffect, useState } from "react";
 import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
 import CustomTabPanel from "../../components/customTabPanel/CustomTabPanel";
@@ -68,9 +68,9 @@ const PublicStorysPage = () => {
     });
   };
 
-  const handleDelete = async (id: string) => {
-    dispatch(fetchDeleteStory({ id, token }));
-  };
+  // const handleDelete = async (id: string) => {
+  //   dispatch(fetchDeleteStory({ id, token }));
+  // };
 
   function a11yProps(index: number) {
     return {
@@ -246,7 +246,7 @@ const PublicStorysPage = () => {
                     sx={{ pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contributionsMaxed")}
-                    <button onClick={() => handleDelete(story._id)}>re</button>
+                    {/* <button onClick={() => handleDelete(story._id)}>re</button> */}
                   </Typography>
                 </CardPublic>
               ))
@@ -292,7 +292,7 @@ const PublicStorysPage = () => {
                     sx={{ pb: 10, pt: 2, textAlign: "center" }}
                   >
                     {t("publicStories.contribute")}
-                    <button onClick={() => handleDelete(story._id)}>re</button>
+                    {/* <button onClick={() => handleDelete(story._id)}>re</button> */}
                   </Typography>
                 </CardPublic>
               ))
