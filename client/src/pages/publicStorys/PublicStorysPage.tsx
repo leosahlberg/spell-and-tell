@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { Story, User } from "../../utils/types";
 import { fetchPublicStories } from "../../redux/storySlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
 import CustomTabPanel from "../../components/customTabPanel/CustomTabPanel";
 import { fetchGetAllUsers } from "../../redux/userSlice";
@@ -79,8 +79,15 @@ const PublicStorysPage = () => {
     };
   }
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    mainRef.current?.focus();
+  }, []);
+
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div style={{ backgroundColor: "white" }} ref={mainRef}
+    tabIndex={-1}>
       <Box
         sx={{
           position: "relative",

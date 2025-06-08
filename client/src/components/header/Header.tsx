@@ -173,6 +173,7 @@ const Header = (props: HeaderProps) => {
             className={style.flagname}
             onChange={(e) => handleChangeLanguage(e.target.value)}
             value={selectedLanguage}
+           
           >
             <option value="sv">Sve</option>
             <option value="en">Eng</option>
@@ -182,7 +183,7 @@ const Header = (props: HeaderProps) => {
             <div>
               <MenuIcon
                 className={style.menubar}
-                tabIndex={-1}
+                tabIndex={0}
                 sx={{
                   fontSize: "40px",
                   marginLeft: 20,

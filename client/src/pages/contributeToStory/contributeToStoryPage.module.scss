@@ -2,13 +2,14 @@
 @use "../../utils/css/fonts" as fonts;
 
 .pageWrapper {
-  flex-direction: column;
+  display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100vw;      
-  max-width: 100vw;  
-  padding: 20px;     
-  overflow-x: hidden; 
+  padding: 40px;
+  color: colors.$color-blue;
+  background-Size: cover;
+  background-Position: center;
+  max-Height: 100%;
+  width: 100%
 }
 
 

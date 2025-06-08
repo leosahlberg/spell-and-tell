@@ -1,6 +1,6 @@
 import { Box, Typography, TextField } from "@mui/material";
 import Button from "../../components/buttons/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./createStoryPage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -101,10 +101,14 @@ const CreateStoryPage = () => {
     setSelectedImage(image);
   };
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    mainRef.current?.focus();
+  }, []);
+
   return (
-    <div
-    className={styles.con}
-    >
+    <div className={styles.con} ref={mainRef} tabIndex={-1}>
       <Box
         sx={{
           display: "flex",
