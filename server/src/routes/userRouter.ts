@@ -1,6 +1,7 @@
 import Express, { Request, Response } from "express";
 import { userModel } from "../database/models/userModel";
 import { encryptPassword } from "../auth/encryptPassword";
+import { authenticateUser } from "../auth/authenticate";
 
 export function userRouter() {
   const router = Express.Router();
@@ -26,7 +27,7 @@ export function userRouter() {
     }
   });
 
-  router.get("/", async (req: Request, res: Response) => {
+  router.get("/", authenticateUser(), async (req: Request, res: Response) => {
     try {
       const users = await userModel.find({});
       if (!users) {
@@ -48,29 +49,33 @@ export function userRouter() {
     }
   });
 
-  router.put("/:id", async (req: Request, res: Response) => {
-    try {
-      const { imgUrl, name, email } = req.body;
-      const user = await userModel.findByIdAndUpdate(
-        req.params.id,
-        { $set: { imgUrl: imgUrl, name: name, email: email } },
-        { new: true }
-      );
+  router.put(
+    "/:id",
+    authenticateUser(),
+    async (req: Request, res: Response) => {
+      try {
+        const { imgUrl, name, email } = req.body;
+        const user = await userModel.findByIdAndUpdate(
+          req.params.id,
+          { $set: { imgUrl: imgUrl, name: name, email: email } },
+          { new: true }
+        );
 
-      res.status(200);
-      res.send({
-        userId: user?._id,
-        username: user?.username,
-        name: user?.name,
-        email: user?.email,
-        imgUrl: user?.imgUrl,
-      });
-    } catch (error) {
-      res.status(500).send({ message: "Not found" });
-      console.log(error);
-      res.end();
+        res.status(200);
+        res.send({
+          userId: user?._id,
+          username: user?.username,
+          name: user?.name,
+          email: user?.email,
+          imgUrl: user?.imgUrl,
+        });
+      } catch (error) {
+        res.status(500).send({ message: "Not found" });
+        console.log(error);
+        res.end();
+      }
     }
-  });
+  );
 
   return router;
 }
