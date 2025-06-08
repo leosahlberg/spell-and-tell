@@ -6,6 +6,10 @@
   padding: 4rem 8rem;
   color: colors.$color-text-primary;
 
+  .list {
+    list-style-type: none;
+  }
+
   .title {
     font-size: fonts.$font-big;
     color: colors.$color-text-primary;
@@ -20,8 +24,32 @@
 
   .content {
     padding-bottom: 1px;
-    padding-bottom: 3px;
     font-size: fonts.$font-medium;
     color: colors.$color-text-primary;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 2rem 1rem; 
+
+    .title {
+      font-size: fonts.$font-small;
+      width: 100%;
+      margin-left: 0;
+      word-break: break-word;
+    }
+
+    .boxes {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+      overflow-wrap: break-word !important;
+      word-wrap: break-word !important;
+      white-space: normal !important;
+      overflow-x: hidden !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
   }
 }

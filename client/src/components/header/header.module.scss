@@ -44,6 +44,10 @@
     cursor: pointer;
   }
 
+  .flagnametext{
+    margin-right: 10px;
+  }
+
   .flag {
     width: 30px;
     height: auto;
@@ -56,6 +60,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+ 
 
     h1 {
       font-size: fonts.$font-xlbig;
@@ -86,5 +91,12 @@
     .title p {
       display: none;
     }
+  }
+
+  
+  @media (max-width: 768px) {
+   .flagnametext{
+    display:none;
+   }
   }
 }

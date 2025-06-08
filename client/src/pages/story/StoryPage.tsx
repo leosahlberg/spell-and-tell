@@ -27,7 +27,7 @@ const StoryPage = () => {
   const handleNavigate = () => {
     navigate("/stories", { state: { fromTab } });
   };
-  
+
   const handleKeydown = (e: { key: string }) => {
     if (e.key === "Enter") {
       navigate("/stories");

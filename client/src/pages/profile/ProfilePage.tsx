@@ -114,12 +114,23 @@ const ProfilePage = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            '@media (max-width: 768px)': {
+            marginRight: 3
+            },
           }}
         >
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
+            sx={{
+              '@media (max-width: 768px)': {
+                '.MuiTabs-flexContainer': {
+                  flexDirection: 'column',
+                  alignItems: 'stretch',
+                },
+              },
+            }}
           >
             <Tab label={t("profile.accountInfo")} {...a11yProps(0)} />
             <Tab label={t("profile.invitations")} {...a11yProps(1)} />

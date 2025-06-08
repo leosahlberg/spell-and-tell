@@ -103,18 +103,13 @@ const CreateStoryPage = () => {
 
   return (
     <div
-      style={{
-        paddingTop: 10,
-        paddingLeft: 80
-      }}
+    className={styles.con}
     >
       <Box
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           padding: { xs: 2, md: 4 },
-          marginLeft: { md: 5 },
-          marginRight: { md: 5 },
           marginTop: 1,
         }}
       >

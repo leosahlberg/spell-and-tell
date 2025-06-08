@@ -165,7 +165,7 @@ const Header = (props: HeaderProps) => {
             alt={selectedLanguage === "sv" ? "Svenska" : "English"}
             className={style.flag}
           />
-          <label htmlFor="language-select" className={style.flagname}>
+          <label htmlFor="language-select" className={style.flagnametext}>
             Välj språk
           </label>
           <select

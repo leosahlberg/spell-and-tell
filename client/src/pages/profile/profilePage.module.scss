@@ -28,7 +28,7 @@
   padding-left: 50px;
 }
 
-.account{
+.account {
   margin-bottom: 1rem;
   color: colors.$color-text-primary;
 }
@@ -42,7 +42,7 @@
   color: colors.$color-text-primary;
 }
 
-.title{
+.title {
   color: colors.$color-text-primary;
   padding: 10px 0 10px 50px;
   font-size: fonts.$font-medium;
@@ -91,7 +91,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 50%;
+  max-width: 60%;
   height: auto;
   padding: 20px;
   background-color: colors.$color-orange-light;
@@ -131,12 +131,12 @@
   text-align: center;
 }
 
-.btns{
+.btns {
   display: flex;
   justify-content: center;
   align-items: center;
-  Button{
-    margin: 0 30px
+  Button {
+    margin: 0 30px;
   }
 }
 
@@ -146,7 +146,12 @@
   }
 
   .info {
-     font-size: fonts.$font-medium;
+    font-size: fonts.$font-medium;
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: column;
   }
 
   .settings {
@@ -158,5 +163,29 @@
   .button {
     font-size: fonts.$font-small;
     padding: 12px;
+  }
+
+  .profilecontainer {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings {
+    width: 350px;
+  }
+  .details {
+    margin-left: 20px;
+  }
+  .detailsdes {
+    margin-left: 20px;
+  }
+  .details p {
+    font-size: fonts.$font-small;
+  }
+  .profilecontainer {
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
