@@ -4,13 +4,21 @@ import image from "../../assets/backgroundletters.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Button from "../../components/buttons/Button";
+import { useEffect, useRef } from "react";
 
 const HomePage = () => {
   const navigation = useNavigate();
   const { t } = useTranslation();
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    mainRef.current?.focus();
+  }, []);
+
   return (
-    <div className={style.container}>
+    <div className={style.container} ref={mainRef}
+    tabIndex={-1}>
       <Paper
         elevation={4}
         sx={{
@@ -43,7 +51,7 @@ const HomePage = () => {
             fontWeight: "300",
             fontSize: "2rem",
             height: "fit-content",
-            pb:2
+            pb: 2,
           }}
         >
           {t("home.findstory")}
@@ -58,7 +66,7 @@ const HomePage = () => {
         <Typography
           variant="body1"
           gutterBottom
-          sx={{ fontSize: "1.5rem", marginTop: 2, mb:5 }}
+          sx={{ fontSize: "1.5rem", marginTop: 2, mb: 5 }}
         >
           {t("home.terms")}
           <Link className={style.link} to={"/terms"}>
@@ -90,7 +98,7 @@ const HomePage = () => {
             fontWeight: "300",
             fontSize: "2rem",
             height: "fit-content",
-            pb:2
+            pb: 2,
           }}
         >
           {t("home.work")}
@@ -98,7 +106,11 @@ const HomePage = () => {
         <Typography variant="body1" gutterBottom sx={{ fontSize: "1.5rem" }}>
           {t("home.spell")}
         </Typography>
-        <Typography variant="body1" gutterBottom sx={{ fontSize: "1.5rem", mb:5 }}>
+        <Typography
+          variant="body1"
+          gutterBottom
+          sx={{ fontSize: "1.5rem", mb: 5 }}
+        >
           {t("home.create")}
         </Typography>
 

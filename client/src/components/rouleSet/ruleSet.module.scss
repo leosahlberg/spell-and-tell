@@ -34,3 +34,17 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 480px) {
+  .title {
+    font-size: fonts.$font-small;;
+  }
+
+  .list {
+    padding: 10px 14px;
+  }
+
+  .buttonWrapper {
+    justify-content: center;
+  }
+}

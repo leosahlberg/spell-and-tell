@@ -1,6 +1,11 @@
   @use "../../utils/css/colors" as colors;
   @use "../../utils/css/fonts" as fonts;
 
+.con{
+  padding-top: 10px;
+  margin-left: 100px;
+}
+
 .list {
   display: flex;
   justify-content: space-between;
@@ -40,7 +45,6 @@
 
   .box {
     padding: 2rem;
-    margin-left: 15px;
     margin-right: 15px;
   }
 
@@ -51,4 +55,10 @@
   .buttonWrapper {
     justify-content: center;
   }
+  
+.con{
+ 
+  margin-left: 0px;
 }
+}
+

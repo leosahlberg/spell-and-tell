@@ -1,4 +1,5 @@
 @use "../../utils/css/colors" as colors;
+@use "../../utils/css/fonts" as fonts;
 
 .pageWrapper {
   height: auto;
@@ -18,7 +19,7 @@
   );
   border-radius: 20px;
   box-shadow: 0 4px 8px colors.$color-box-shadow;
-  width: 900px;
+  max-width: 900px;
   height: auto;
   overflow: hidden;
   padding: 20px;
@@ -62,4 +63,32 @@
   margin-right: 20px;
   margin-bottom: 5px;
   margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .storyCard {
+    max-width: 600px;
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+  .img{
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .storyCard {
+    max-width: 350px;
+    background: linear-gradient(
+      to right,
+      colors.$color-blue 20%,
+      colors.$color-white 10%,
+      colors.$color-blue-light-light 100%
+    );
+  }
+  .img{
+    display: none;
+    padding-right: 20px;
+  }
 }

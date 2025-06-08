@@ -6,12 +6,12 @@
   justify-content: center;
   padding: 40px;
   color: colors.$color-blue;
-  //background-image: url("../../assets/bookimg.jpg");
   background-Size: cover;
   background-Position: center;
   max-Height: 100%;
   width: 100%
 }
+
 
 .mainContent {
   flex-grow: 1;
@@ -20,8 +20,7 @@
     90deg,
     colors.$color-gradback1,
     colors.$color-gradback2,
-    colors.$color-gradback3,
-   
+    colors.$color-gradback3
   );
   padding: 30px;
   margin-left: 20px;
@@ -37,7 +36,7 @@
   padding-bottom: 20px;
   padding-right: 20px;
 }
-.scoreCircle{
+.scoreCircle {
   margin-left: 10px;
 }
 
@@ -54,4 +53,18 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .pageWrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+   max-width: 300px;
+    padding: 20px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
 }

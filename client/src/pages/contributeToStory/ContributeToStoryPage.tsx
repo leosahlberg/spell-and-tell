@@ -1,6 +1,6 @@
 import { Box, TextField, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/buttons/Button";
 import RuleSetList from "../../components/rouleSet/ruleSetList";
@@ -26,6 +26,16 @@ const ContributeToStoryPage = () => {
     (state: RootState) => state.story.stories
   ) as Story[];
   const navigate = useNavigate();
+
+  const mainRef = useRef<HTMLDivElement>(null);
+
+ 
+  useEffect(() => {
+    if (mainRef.current) {
+      
+      setTimeout(() => mainRef.current?.focus(), 50);
+    }
+  }, []);
 
   useEffect(() => {
     if (id) {
@@ -98,8 +108,9 @@ const ContributeToStoryPage = () => {
       <Typography variant="h1">{t("contributeToStory.notfound")}</Typography>
     );
 
+
   return (
-    <Box className={styles.pageWrapper}>
+    <Box component="div" className={styles.pageWrapper} ref={mainRef} tabIndex={-1}>
       <RuleSetList
         ruleSet={{
           maxNumberOfWordsPerContribution:

@@ -21,7 +21,11 @@ const TermsPage = () => {
       <Divider sx={{ marginBottom: 4, color: "rgb(158, 186, 158)" }} />
 
       <Accordion
+        className={styles.boxes}
         sx={{
+          width: "100%",
+          maxWidth: "100%",
+          boxSizing: "border-box",
           border: "1px solid rgb(195, 158, 121)",
           paddingLeft: 5,
           paddingRight: 5,
@@ -43,6 +47,7 @@ const TermsPage = () => {
       </Accordion>
 
       <Accordion
+        className={styles.boxes}
         sx={{
           marginTop: 5,
           border: "1px solid rgb(195, 158, 121)",
@@ -67,6 +72,7 @@ const TermsPage = () => {
       </Accordion>
 
       <Paper
+        className={styles.boxes}
         elevation={3}
         sx={{
           padding: 4,

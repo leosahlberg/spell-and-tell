@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { Story, User } from "../../utils/types";
 import { fetchPublicStories } from "../../redux/storySlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Button, TextField, Tab, Tabs, Typography } from "@mui/material";
 import CustomTabPanel from "../../components/customTabPanel/CustomTabPanel";
 import { fetchGetAllUsers } from "../../redux/userSlice";
@@ -79,8 +79,15 @@ const PublicStorysPage = () => {
     };
   }
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    mainRef.current?.focus();
+  }, []);
+
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div style={{ backgroundColor: "white" }} ref={mainRef}
+    tabIndex={-1}>
       <Box
         sx={{
           position: "relative",
@@ -91,9 +98,22 @@ const PublicStorysPage = () => {
           backgroundColor: " rgba(160, 207, 293, 0.15)",
           borderBottom: "1px solid  rgba(180, 207, 253, 0.45)",
           paddingBottom: 2,
+          "@media (max-width: 768px)": {
+            justifyContent: "center",
+          },
         }}
       >
-        <Box sx={{ paddingRight: 5 }}>
+        <Box
+          sx={{
+            paddingRight: 5,
+            "@media (max-width: 768px)": {
+              paddingLeft: 5,
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column"
+            },
+          }}
+        >
           <p style={{ paddingLeft: 3, color: "#071145", fontSize: 20 }}>
             {t("publicStories.searchLabel")} 🖋️📚
           </p>
@@ -117,6 +137,9 @@ const PublicStorysPage = () => {
               padding: 2,
               color: "rgb(22, 83, 56)",
               fontWeight: "bold",
+              '@media (max-width: 768px)': {
+                marginLeft: 0,
+              },
             }}
             onClick={handleSearch}
             className={styles.searchbtn}
@@ -130,6 +153,9 @@ const PublicStorysPage = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            "@media (max-width: 768px)": {
+              display: "none",
+            },
           }}
         >
           <Tabs value={value} onChange={handleChange} aria-label="tabs">

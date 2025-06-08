@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./storyPage.module.scss";
 import Button from "../../components/buttons/Button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Story } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -24,10 +24,21 @@ const StoryPage = () => {
   const location = useLocation();
   const fromTab = location.state?.fromTab ?? 0;
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      mainRef.current?.focus();
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, [location.pathname]); 
+  
+  
+
   const handleNavigate = () => {
     navigate("/stories", { state: { fromTab } });
   };
-  
+
   const handleKeydown = (e: { key: string }) => {
     if (e.key === "Enter") {
       navigate("/stories");
@@ -48,7 +59,7 @@ const StoryPage = () => {
   }
 
   return (
-    <>
+    <div ref={mainRef} tabIndex={-1}>
       <div
         role="button"
         tabIndex={0}
@@ -165,7 +176,7 @@ const StoryPage = () => {
           </Box>
         </section>
       </Box>
-    </>
+    </div>
   );
 };
 

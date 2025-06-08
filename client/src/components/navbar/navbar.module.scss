@@ -58,7 +58,15 @@
 
   @media (max-width: 800px) {
     .title {
-      font-size: fonts.$font-small;
+      font-size: fonts.$font-xsmall;
+    }
+
+    .img{
+      display: none;
+    }
+
+    .links{
+      padding-left: 20px;
     }
   }
 }

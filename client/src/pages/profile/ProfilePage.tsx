@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./profilePage.module.scss";
 import Button from "../../components/buttons/Button";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchGetInvitations } from "../../redux/invitationSlice";
 import { fetchStoriesByUserId } from "../../redux/storySlice";
 import Tabs from "@mui/material/Tabs";
@@ -103,8 +103,14 @@ const ProfilePage = () => {
     }
   };
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    mainRef.current?.focus();
+  }, []);
+
   return (
-    <div className={styles.profilecontainer}>
+    <div className={styles.profilecontainer} ref={mainRef} tabIndex={-1}>
       <h1 className={styles.title}> {t("profile.accountInfo")}</h1>
       <div className={styles.info}>
         <Box
@@ -114,12 +120,23 @@ const ProfilePage = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            "@media (max-width: 768px)": {
+              marginRight: 3,
+            },
           }}
         >
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
+            sx={{
+              "@media (max-width: 768px)": {
+                ".MuiTabs-flexContainer": {
+                  flexDirection: "column",
+                  alignItems: "stretch",
+                },
+              },
+            }}
           >
             <Tab label={t("profile.accountInfo")} {...a11yProps(0)} />
             <Tab label={t("profile.invitations")} {...a11yProps(1)} />
