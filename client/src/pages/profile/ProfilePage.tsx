@@ -103,14 +103,14 @@ const ProfilePage = () => {
     }
   };
 
-  const mainRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    mainRef.current?.focus();
+    profileRef.current?.focus();
   }, []);
 
   return (
-    <div className={styles.profilecontainer} ref={mainRef} tabIndex={-1}>
+    <div className={styles.profilecontainer} aria-label="profile-content" ref={profileRef} tabIndex={-1}>
       <h1 className={styles.title}> {t("profile.accountInfo")}</h1>
       <div className={styles.info}>
         <Box

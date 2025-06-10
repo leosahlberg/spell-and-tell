@@ -101,14 +101,14 @@ const CreateStoryPage = () => {
     setSelectedImage(image);
   };
 
-  const mainRef = useRef<HTMLDivElement>(null);
+  const createStorieRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    mainRef.current?.focus();
+    createStorieRef.current?.focus();
   }, []);
 
   return (
-    <div className={styles.con} ref={mainRef} tabIndex={-1}>
+    <div className={styles.con} aria-label="createstory-content" ref={createStorieRef} tabIndex={-1}>
       <Box
         sx={{
           display: "flex",

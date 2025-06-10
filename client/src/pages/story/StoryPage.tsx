@@ -24,11 +24,11 @@ const StoryPage = () => {
   const location = useLocation();
   const fromTab = location.state?.fromTab ?? 0;
 
-  const mainRef = useRef<HTMLDivElement>(null);
+  const storyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      mainRef.current?.focus();
+      storyRef.current?.focus();
     }, 100);
     return () => clearTimeout(timeout);
   }, [location.pathname]); 
@@ -57,9 +57,10 @@ const StoryPage = () => {
   if (!story) {
     return <Typography variant="h1">{t("story.notfound")}</Typography>;
   }
+  
 
   return (
-    <div ref={mainRef} tabIndex={-1}>
+    <div ref={storyRef} aria-label="story-content" tabIndex={-1}>
       <div
         role="button"
         tabIndex={0}

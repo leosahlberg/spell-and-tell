@@ -27,13 +27,13 @@ const ContributeToStoryPage = () => {
   ) as Story[];
   const navigate = useNavigate();
 
-  const mainRef = useRef<HTMLDivElement>(null);
+  const contributeRef = useRef<HTMLDivElement>(null);
 
  
   useEffect(() => {
-    if (mainRef.current) {
+    if (contributeRef.current) {
       
-      setTimeout(() => mainRef.current?.focus(), 50);
+      setTimeout(() => contributeRef.current?.focus(), 50);
     }
   }, []);
 
@@ -110,7 +110,7 @@ const ContributeToStoryPage = () => {
 
 
   return (
-    <Box component="div" className={styles.pageWrapper} ref={mainRef} tabIndex={-1}>
+    <Box component="div" className={styles.pageWrapper} aria-label="contribute-content" ref={contributeRef} tabIndex={-1}>
       <RuleSetList
         ruleSet={{
           maxNumberOfWordsPerContribution:

@@ -79,14 +79,14 @@ const PublicStorysPage = () => {
     };
   }
 
-  const mainRef = useRef<HTMLDivElement>(null);
+  const publicRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    mainRef.current?.focus();
+    publicRef.current?.focus();
   }, []);
 
   return (
-    <div style={{ backgroundColor: "white" }} ref={mainRef}
+    <div style={{ backgroundColor: "white" }} aria-label="public-content" ref={publicRef}
     tabIndex={-1}>
       <Box
         sx={{

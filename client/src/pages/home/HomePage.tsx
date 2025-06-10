@@ -17,8 +17,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className={style.container} ref={mainRef}
-    tabIndex={-1}>
+    <div className={style.container}aria-label="main-content" ref={mainRef} tabIndex={-1}>
       <Paper
         elevation={4}
         sx={{
